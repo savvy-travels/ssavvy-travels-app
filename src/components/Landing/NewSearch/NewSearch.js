@@ -1,34 +1,35 @@
 import React, { useState } from 'react'
-import {DateRangePicker} from 'rsuite'
 import { withRouter } from 'react-router-dom'
-import 'react-date-range/dist/theme/default.css'
+import DateRangePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import './newSearch.css'
 
 function NewSearch(props){
     const [budget, setBudget] = useState('')
-    const [dateRange, setDateRange] = useState('')
+    const [next, setNext] = useState(false)
+    const [selectedDate, setSelectedDate] = useState(null)
 
-    const selectionRange = {
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection',
+    function setNewBudget(val){
+        setBudget(val)
+        setNext(true)
     }
 
     return(
-        <form className='search-field'>
+        <span className='search-field'>
+        <h1>You tell us your budget<br></br>We'll tell you where.</h1>
         <div className='input-field'>
-            <input onChange={(e)=>setBudget(e.target.value)} className='budget-input' type='text' placeholder='Whats Your Budget?'/>
-            {budget ?
+           <input onChange={(e)=>setNewBudget(e.target.value)} className='budget-input' type='email' placeholder='Whats Your Budget?'/>
+            {next ?
             <div className='where-when-inputs'>
-                <input type='select'/>
-                <DateRangePicker className='date-range'/>
+                <input type='select' placeholder='From Where?'/>
+                <input type='date' placeholder='When?'/>
             </div>
             :
             null
             }
         </div>
         <button className='search-button'>Let's Go!</button>
-        </form>
+        </span>
 
     )
 }
