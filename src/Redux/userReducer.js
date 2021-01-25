@@ -1,4 +1,4 @@
-const intialState = {
+const initialState = {
     username: '',
     location:null,
     id:0,
