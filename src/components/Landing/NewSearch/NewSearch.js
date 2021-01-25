@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import 'react-datepicker/dist/react-datepicker.css'
 import './newSearch.css'
 
 function NewSearch(props){

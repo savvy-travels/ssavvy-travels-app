@@ -8,6 +8,7 @@ import {loginUser} from '../../Redux/userReducer'
 import Header from './Header/Header'
 import './landing.css'
 import NewSearch from './NewSearch/NewSearch'
+import heroVideo from './DevMtn-Air.mp4'
 import Signup from './Auth/Signup'
 import Login from './Auth/Login'
 
@@ -42,13 +43,18 @@ function Landing (props){
 
     return(
         <div className='landing'>
-            <Header/>
-            <div className='hero-video'>
-            <Switch>
-                <Route exact path='/' component={NewSearch} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/signup' component={Signup} />
-            </Switch>
+                <Header/>
+                <video className="video" src={heroVideo} 
+                type='video/mp4'
+                autoPlay loop muted
+                ></video>
+
+                <Switch>
+                    <Route exact path='/' component={NewSearch} />
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/signup' component={Signup} />
+                </Switch>
+        
             </div>
             <div className='triangle'>
             </div>
