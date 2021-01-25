@@ -8,12 +8,12 @@ const Apisetup = () => {
     const [places, setPlaces] = useState([])
     const [carriers, setCarriers] = useState([])
 
-    const { REACT_APP_CLIENT_ID} = process.env
+    const { REACT_APP_SKYSCANNER_KEY } = process.env
 
     useEffect(() => {
         axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/DFW-sky/anywhere/2021-02-05/2021-02-08`, {
             headers: {
-                'x-rapidapi-key': `${REACT_APP_CLIENT_ID}`
+                'x-rapidapi-key': `${REACT_APP_SKYSCANNER_KEY}`
             }
         })
         .then
