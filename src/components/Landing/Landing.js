@@ -4,7 +4,9 @@ import { withRouter } from 'react-router-dom'
 
 function Landing (){
     return(
-        <h1>Landing</h1>
+        <div>
+            
+        </div>
     )
 }
 
