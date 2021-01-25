@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.api {
+  background: #FDFFFC;
+}
+
 .flight-results {
   display: flex;
   justify-content: space-between;
@@ -25,15 +29,17 @@
 .flight-card h3 {
   margin-left: 5%;
   color: #FDFFFC;
-  text-shadow: 0 0 2px #0B3840;
+  text-shadow: 0 0 5px #0B3840;
   position: relative;
-  bottom: -5%;
+  bottom: -20%;
+  font-size: 36px;
 }
 
 .flight-card h1 {
   color: #FDFFFC;
+  font-size: 72px;
   position: relative;
-  bottom: -10%;
+  bottom: -30%;
   margin-right: 5%;
   text-shadow: 0 0 5px #0B3840;
 }
