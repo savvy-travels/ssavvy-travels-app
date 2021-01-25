@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import {DateRangePicker} from 'rsuite'
 import { withRouter } from 'react-router-dom'
-import 'react-date-range/dist/styles.css'
-import 'react-date-range/dist/theme/default.css'
+// import 'react-date-range/dist/styles.css'
+// import 'react-date-range/dist/theme/default.css'
 import './newSearch.css'
 
 function NewSearch(props){
