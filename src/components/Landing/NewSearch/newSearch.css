@@ -1,6 +1,6 @@
 .search-field {
   position: absolute;
-  top: 15vh;
+  top: 30vh;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -8,12 +8,18 @@
   width: fit-content;
   height: fit-content;
 }
+.search-field>h1{
+  color: #fcfffd;
+  letter-spacing: 3px;
+  font-weight: 100;
+}
 .input-field {
   padding: 1rem;
-  background-color: #0b3840ab;
+  background-color: #0b3840bd;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .budget-input {
   text-align: center;
@@ -34,7 +40,7 @@
   text-align: center;
   font-family: Montserrat;
   font-size: 1.5rem;
-  width: 22rem;
+  width: 48%;
   height: fit-content;
   border: 2px solid #cae00d;
   outline: none;
