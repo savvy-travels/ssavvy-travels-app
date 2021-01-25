@@ -22,10 +22,12 @@ button {
   border-radius: 5px;
 }
 .header-logo {
+  position: relative;
   margin: 0%;
   width: 60px;
   border: 1px solid #fcfffd;
   border-radius: 50%;
+  z-index: 5000;
 }
 
 .auth-button {
