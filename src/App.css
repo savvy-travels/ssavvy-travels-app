@@ -2,3 +2,45 @@
   text-align: center;
   width: 100vw;
 }
+
+.api {
+  background: #FDFFFC;
+}
+
+.flight-results {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+}
+
+.flight-card {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  background-image: url('https://images.pexels.com/photos/1004584/pexels-photo-1004584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+  background-size: cover;
+  width: 20vw;
+  height: 15vh;
+  box-shadow: 0 0 10px #0B3840;
+  border-radius: 5px;
+  margin: 1vh;
+}
+
+.flight-card h3 {
+  margin-left: 5%;
+  color: #FDFFFC;
+  text-shadow: 0 0 5px #0B3840;
+  position: relative;
+  bottom: -20%;
+  font-size: 36px;
+}
+
+.flight-card h1 {
+  color: #FDFFFC;
+  font-size: 72px;
+  position: relative;
+  bottom: -30%;
+  margin-right: 5%;
+  text-shadow: 0 0 5px #0B3840;
+}
