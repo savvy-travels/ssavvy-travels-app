@@ -1,0 +1,38 @@
+header {
+  padding: 0px 0.6rem;
+  /* background: linear-gradient(#393e41, transparent); */
+  background: #393e41;
+  margin: 0%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+button {
+  width: 8rem;
+  font-family: Montserrat;
+  margin: 0%;
+  padding: 5px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.header-logo {
+  margin: 0%;
+}
+
+.auth-button {
+  color: #fdfffc;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  border: 2px solid #fdfffc;
+  transition: all ease 0.25s;
+}
+
+.auth-button:hover {
+  padding: 0.6rem;
+  border: 2px solid #cae00d;
+  color: #cae00d;
+  cursor: pointer;
+}
