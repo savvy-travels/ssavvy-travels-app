@@ -58,7 +58,7 @@ function Landing (props){
 }
 
 function mapStateToProps (reduxState){
-
+    return
 }
 
 
