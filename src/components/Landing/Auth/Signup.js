@@ -14,8 +14,8 @@ function Signup(props){
                 <input className='register-inputs' type='text' placeholder='Preferred Airport'/>
                 <input className='register-inputs' type='password' placeholder='Password'/>
                 <input className='register-inputs' type='password' placeholder='Confirm Password'/>
-            </div>
             <button className='search-button'>Signup</button>
+            </div>
         </span>
     )
 }
