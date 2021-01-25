@@ -8,9 +8,9 @@ import Profile from './components/Profile/Profile'
 
 export default (
     <Switch>
-        <Route exact path='/' component={Landing} />
+        <Route path='/' component={Landing} />
         <Route exact path='/map' component={Map} />
-        <Route exact path='/Profile' component={Profile} />
+        <Route exact path='/profile' component={Profile} />
         <Route/>
     </Switch>
 )
