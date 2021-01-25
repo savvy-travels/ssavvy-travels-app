@@ -5,6 +5,7 @@ const massive = require('massive')
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
 const userCtrl = require('./controllers/user')
 const locationCtrl = require('./controllers/location')
+const authMiddleware = require('./middleware/verifyUser')
 const nodeMailer = require('nodemailer')
 
 
@@ -24,10 +25,8 @@ app.get('/api/auth/user', userCtrl.getUser)
 app.post('/api/auth/logout', userCtrl.logout)
 
 
-app.post('/api/save', locationCtrl.saveLocation)
-app.get('/api/locations', locationCtrl.getLocation)
-
-
+app.post('/api/save', authMiddleware.isAuthenticated, locationCtrl.saveLocation)
+app.get('/api/locations', authMiddleware.isAuthenticated, locationCtrl.getLocation)
 
 
 
