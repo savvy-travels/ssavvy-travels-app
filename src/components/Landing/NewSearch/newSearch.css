@@ -15,10 +15,11 @@
 }
 .input-field {
   padding: 1rem;
-  background-color: #0b3840ab;
+  background-color: #0b3840bd;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 .budget-input {
   text-align: center;
