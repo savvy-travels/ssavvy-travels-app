@@ -1,8 +1,12 @@
 
 import axios from 'axios'
 import React, {useEffect, useState} from 'react'
-import { withRouter } from 'react-router-dom'
 import { useIpCoords } from 'use-ipcoords'
+import {Switch, Route, withRouter } from 'react-router-dom'
+// import { connect } from 'react-redux'
+import Header from './Header/Header'
+import './landing.css'
+import NewSearch from './NewSearch/NewSearch'
 
 function Landing (){
     
@@ -12,7 +16,7 @@ function Landing (){
     const [cities, setCities] = useState([])
 
     useEffect(() =>  //gets the latitude and longitude of the user based on their IP address with an api call
-        axios.get(`http://api.ipstack.com/check?access_key=2c90293abbf7af47c07b492a4538d0fb`).then(res => {
+        axios.get(`http://api.ipstack.com/check?access_key=${REACT_APP_IPSTACK_KEY}`).then(res => {
         setLat(res.data.latitude.toFixed(6))
         setLon(res.data.longitude.toFixed(6))
         console.log(lat, lon)
@@ -27,10 +31,19 @@ function Landing (){
     //still need to find a way to get the nearest airports - there are some apis, but they are difficult to work with or cost $.  will keep researching.
 
     return(
-        <div>
-        <h1>Landing</h1>
-        <h3>Your nearest city is {metro}</h3>
+        <div className='landing'>
+            <Header/>
+            <div className='hero-video'>
+            <Switch>
+                <Route exact path='/' component={NewSearch} />
+                <Route exact path='/login' component={{}} />
+                <Route exact path='/signup' component={{}} />
+            </Switch>
+            </div>
+            <div className='triangle'>
+            </div>
         </div>
+
     )
 }
 
