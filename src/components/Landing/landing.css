@@ -1,5 +1,22 @@
 .landing {
+  position: relative;
   margin: 0%;
   height: 300vh;
   background-color: #fdfffc;
+}
+
+.hero-video {
+  height: 60vh;
+  background-color: #65b0b2;
+}
+
+.triangle {
+  margin-left: auto;
+  margin-right: auto;
+  height: 0px;
+  width: 0px;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-top: 30px solid #65b0b2;
 }
