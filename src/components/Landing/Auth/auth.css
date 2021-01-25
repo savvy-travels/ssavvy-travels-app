@@ -9,10 +9,13 @@
   height: fit-content;
   width: 25%;
   height: 20%;
+
 }
 .register-input-field {
-  padding: 1rem;
+  padding: 0px 1rem;
   background-color: #0b3840bd;
+  border: 2px solid #0b3840;
+  border-radius: 5px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -38,6 +41,7 @@
   display: flex;
   align-items: center;
   font-weight: 200;
+  margin: 0px;
 }
 .register-header > h4 > h4 {
   margin: 0px;

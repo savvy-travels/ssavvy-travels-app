@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import './auth.css'
 
 function Signup(props) {
@@ -8,7 +8,7 @@ function Signup(props) {
             <div className='register-input-field'>
                 <div className='register-header'>
                     <h2>Register</h2>
-                    <h4>Already a member?<h4>Login</h4></h4>
+                    <h4>Already a member?<h4><Link style={{ textDecoration: 'none' }} to='/login'>Login</Link></h4></h4>
                 </div>
                 <input className='register-inputs' type='email' placeholder='Email' />
                 <input className='register-inputs' type='text' placeholder='Preferred Airport' />
