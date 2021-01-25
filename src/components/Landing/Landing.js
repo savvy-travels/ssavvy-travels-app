@@ -55,10 +55,11 @@ function Landing (props){
                     <Route exact path='/signup' component={Signup} />
                 </Switch>
         
-            </div>
             <div className='triangle'>
             </div>
-        </div>
+            </div>
+       
+    
 
     )
 }
