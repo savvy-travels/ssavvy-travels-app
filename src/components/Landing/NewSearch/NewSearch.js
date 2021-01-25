@@ -1,9 +1,19 @@
 import React, { useState } from 'react'
+import {DateRangePicker} from 'rsuite'
 import { withRouter } from 'react-router-dom'
+import 'react-date-range/dist/styles.css'
+import 'react-date-range/dist/theme/default.css'
 import './newSearch.css'
 
 function NewSearch(props){
     const [budget, setBudget] = useState('')
+    const [dateRange, setDateRange] = useState('')
+
+    const selectionRange = {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+    }
 
     return(
         <form className='search-field'>
@@ -12,7 +22,7 @@ function NewSearch(props){
             {budget ?
             <div className='where-when-inputs'>
                 <input type='select'/>
-                <input type='date' placeholder='When?'/>
+                <DateRangePicker className='date-range'/>
             </div>
             :
             null

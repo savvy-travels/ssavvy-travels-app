@@ -39,6 +39,16 @@
   border: 2px solid #cae00d;
   outline: none;
 }
+
+.date-range {
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  width: 22rem;
+  height: 2.5rem;
+  border: 2px solid #cae00d;
+  outline: none;
+}
 .search-button {
   font-size: 2rem;
   margin-top: 1rem;
