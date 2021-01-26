@@ -13,7 +13,7 @@ function Signup(props) {
 
 
     function registerUser() {
-        axios.post('/api/auth/register', { email, username, password, airport }).then(res => {
+        axios.post('/api/auth/register', { email, username, password}).then(res => {
             console.log(res.data)
         }).catch(err => {
             console.log(err.response.data)
@@ -35,10 +35,10 @@ function Signup(props) {
                     className='register-inputs'
                     type='email'
                     placeholder='Username' />
-                <input onChange={(e) => setAirport(e.target.value)}
+                {/* <input onChange={(e) => setAirport(e.target.value)}
                     className='register-inputs'
                     type='text'
-                    placeholder='Preferred Airport' />
+                    placeholder='Preferred Airport' /> */}
                 <input onChange={(e) => setPassword(e.target.value)}
                     className='register-inputs'
                     type='password'

@@ -1,1 +1,1 @@
-SELECT airport_one, airport_two FROM  savvy_travels_airports WHERE users_id = $1;
+SELECT * FROM  savvy_travels_airports WHERE users_id = $1;

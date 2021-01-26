@@ -1,3 +1,4 @@
-UPDATE savvy_travels_airports
+UPDATE savvy_travels_users
 SET preferred = $2
-WHERE users_id = $1
+WHERE id = $1
+returning preferred;

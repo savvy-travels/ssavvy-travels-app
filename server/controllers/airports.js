@@ -4,9 +4,18 @@ module.exports = {
     const {id} = req.session.user
     const {airport_one, airport_two} = req.body
 
-    const savedAirports = await db.airports.saveAirport([id, airport_one, airport_two])
+    const [hasAirports] = await db.airports.getAirports(id)
 
-    res.status(200).send(savedAirports)
+    if(!hasAirports){
+        await db.airports.saveAirport([id, airport_one, airport_two])
+        return res.status(200).send([`${airport_one}, ${airport_two}`])    
+    } 
+    if(hasAirports){
+        await db.airports.updateAirport([id, airport_one, airport_two])
+        return res.status(200).send([`${airport_one}, ${airport_two}`])
+    }
+
+
     },
     getAirports: async(req,res) => {
         const db = req.app.get('db')
