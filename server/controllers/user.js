@@ -6,9 +6,15 @@ module.exports = {
         const db = req.app.get('db')
         const { email, username, password, preferred } = req.body
         const [existingUser] = await db.users.find_user([username])
-
+        const [existingEmail] = await db.savvy_travels_users.find({email})
+        if(existingUser && existingEmail){
+            return res.status(409).send('Username and Email are taken')
+        }
         if (existingUser) {
             return res.status(409).send('Username is taken')
+        }
+        if (existingEmail){
+            return res.status(409).send('Email is already in use')
         }
         try {
             const salt = bcrypt.genSaltSync(10)
@@ -23,8 +29,8 @@ module.exports = {
     },
     login: async (req, res) => {
         const db = req.app.get('db')
-        const { username, password } = req.body
-        const [existingUser] = await db.users.find_user([username])
+        const { email, password } = req.body
+        const [existingUser] = await db.users.find_user([email])
 
         if (!existingUser) {
             return res.status(404).send('User does not exist')
@@ -35,7 +41,6 @@ module.exports = {
             return res.status(403).send('Incorrect username or password')
         }
         delete existingUser.password
-        delete existingUser.email
         req.session.user = existingUser
         res.status(200).send(existingUser)
     },
