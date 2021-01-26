@@ -35,10 +35,10 @@ function Signup(props) {
                     className='register-inputs'
                     type='email'
                     placeholder='Username' />
-                {/* <input onChange={(e) => setAirport(e.target.value)}
+                <input onChange={(e) => setAirport(e.target.value)}
                     className='register-inputs'
                     type='text'
-                    placeholder='Preferred Airport' /> */}
+                    placeholder='Preferred Airport' />
                 <input onChange={(e) => setPassword(e.target.value)}
                     className='register-inputs'
                     type='password'
