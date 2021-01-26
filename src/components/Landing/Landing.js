@@ -101,8 +101,7 @@ function Landing(props) {
 function mapStateToProps(reduxState) {
   return {
     username: reduxState.username,
-    location: reduxState.location,
-    id: reduxState.id
+    preferred: reduxState.preferred
   }
 }
 
