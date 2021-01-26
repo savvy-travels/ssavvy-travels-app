@@ -23,19 +23,20 @@ app.use(session({
 
 app.post('/api/auth/register', userCtrl.register)
 app.post('/api/auth/login', userCtrl.login)
-app.get('/api/auth/user', authMiddleware.isAuthenticated, userCtrl.getUser)
 app.post('/api/auth/logout', userCtrl.logout)
 
+app.use(authMiddleware.isAuthenticated)
+app.get('/api/auth/user', userCtrl.getUser)
 
-app.post('/api/saveLocation', authMiddleware.isAuthenticated, locationCtrl.saveLocation)
-app.get('/api/locations', authMiddleware.isAuthenticated, locationCtrl.getLocation)
+app.post('/api/saveLocation', locationCtrl.saveLocation)
+app.get('/api/locations', locationCtrl.getLocation)
 
-app.post('/api/savePreferred', authMiddleware.isAuthenticated, prefAirportCtrl.savePreferred)
-app.post('/api/updatePreferred', authMiddleware.isAuthenticated, prefAirportCtrl.updatePreferred)
-app.get('/api/getPreferred', authMiddleware.isAuthenticated, prefAirportCtrl.getPreferred)
+app.post('/api/savePreferred', prefAirportCtrl.savePreferred)
+app.post('/api/updatePreferred', prefAirportCtrl.updatePreferred)
+app.get('/api/getPreferred', prefAirportCtrl.getPreferred)
 
-app.post('/api/saveAirports', authMiddleware.isAuthenticated, airportCtrl.saveAirports)
-app.get('/api/getAirports', authMiddleware.isAuthenticated, airportCtrl.getAirports)
+app.post('/api/saveAirports', airportCtrl.saveAirports)
+app.get('/api/getAirports', airportCtrl.getAirports)
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
