@@ -22,19 +22,23 @@ button {
   border-radius: 5px;
 }
 .header-logo {
+  position: relative;
   margin: 0%;
   width: 60px;
   border: 1px solid #fcfffd;
   border-radius: 50%;
+  z-index: 5000;
 }
 
 .auth-button {
+  position: relative;
   color: #fdfffc;
   font-size: 1.5rem;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
   border: 2px solid #fdfffc;
   transition: all ease 0.25s;
+  z-index: 4000;
 }
 
 .auth-button:hover {
