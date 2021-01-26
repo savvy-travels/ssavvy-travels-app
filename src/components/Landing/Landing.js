@@ -1,12 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../../Redux/userReducer";
 import Header from "./Header/Header";
 import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
-import heroVideo from "./DevMtn-Air.mp4";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 require("dotenv").config();
@@ -15,8 +14,7 @@ function Landing(props) {
   const ipstackKey = process.env.REACT_APP_IPSTACK_KEY;
   const geoDbKey = process.env.REACT_APP_GEODB_KEY;
 
-  const [cities, setCities] = useState([]);
-  const [latLong, setLatLong] = useState([]);
+  const [cities, setCities] = useState([])
   const [location, setLocation] = useState('')
 
   useEffect(() => {
@@ -76,46 +74,15 @@ function Landing(props) {
             </Switch>
 
             <div className='triangle'>
+              {metro}
             </div>
         </div>
+    )
 
-
-
-  return (
-    <div className="landing">
-      <Header />
-      <video
-        className="video"
-        src={heroVideo}
-        type="video/mp4"
-        autoPlay
-        loop
-        muted
-      ></video>
-
-      <Switch>
-        <Route exact path="/" component={NewSearch} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-      </Switch>
-
-<<<<<<< HEAD
-      <div className="triangle"></div>
-      <p>{metro}</p>
-    </div>
-  );
-=======
-function mapStateToProps(reduxState) {
-    return
->>>>>>> main
-}
+    }
 
 function mapStateToProps(reduxState) {
   return;
 }
 
-<<<<<<< HEAD
 export default withRouter(connect(mapStateToProps, { loginUser })(Landing));
-=======
-export default withRouter(connect(mapStateToProps, { loginUser })(Landing))
->>>>>>> main
