@@ -49,7 +49,7 @@ function Signup(props) {
             <div className='register-input-field'>
                 <div className='register-header'>
                     <h2>Register</h2>
-                    <h4>Already a member?<h4><Link style={{ textDecoration: 'none' }} to='/login'>Login</Link></h4></h4>
+                    <h4>Already a member?<h4><Link style={{ textDecoration: 'none', color:'#cae00d' }} to='/login'>Login</Link></h4></h4>
                 </div>
                 <input onChange={(e) => setEmail(e.target.value)}
                     className={emptyError ? 'register-error' : 'register-inputs'}
