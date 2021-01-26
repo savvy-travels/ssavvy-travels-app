@@ -4,15 +4,29 @@ import { Link, withRouter } from 'react-router-dom'
 import './auth.css'
 
 function Signup(props) {
+    //Loading//
+    const [loading, setLoading] = useState(false)
+    //Auth//
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
     const [airport, setAirport] = useState('SLC')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
-    const [loading, setLoading] = useState(false)
+    //Errors//
+    const [errorMessage, setErrorMessage] = useState('')
+    const [error, setError] = useState(false)
 
 
     function registerUser() {
+        if (email === '' || username === '' || password === '' || confirmPass === '') {
+            setError(true)
+            return setErrorMessage('Missing required fields')
+        }
+        if (password !== confirmPass) {
+            setError(true)
+            return setErrorMessage('Passwords do not match.')
+        }
+        setLoading(true)
         axios.post('/api/auth/register', { email, username, password }).then(res => {
             console.log(res.data)
         }).catch(err => {
