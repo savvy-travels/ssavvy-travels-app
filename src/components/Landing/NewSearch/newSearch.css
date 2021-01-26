@@ -53,6 +53,7 @@
 
 .slogan-container {
   color: white;
+  /* opacity: 0.5;git  */
 }
 
 @media (max-width: 700px) {
