@@ -2,11 +2,13 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, EMAIL_USER, EMAIL_PASSWORD} = process.env
 const userCtrl = require('./controllers/user')
 const locationCtrl = require('./controllers/location')
+const prefAirportCtrl = require('./controllers/preferredAirport')
+const airportCtrl = require('./controllers/airports')
 const authMiddleware = require('./middleware/verifyUser')
-const nodeMailer = require('nodemailer')
+const nodemailer = require('nodemailer')
 
 
 const app = express()
@@ -21,13 +23,27 @@ app.use(session({
 
 app.post('/api/auth/register', userCtrl.register)
 app.post('/api/auth/login', userCtrl.login)
-app.get('/api/auth/user', userCtrl.getUser)
+app.get('/api/auth/user', authMiddleware.isAuthenticated, userCtrl.getUser)
 app.post('/api/auth/logout', userCtrl.logout)
 
 
-app.post('/api/save', authMiddleware.isAuthenticated, locationCtrl.saveLocation)
+app.post('/api/saveLocation', authMiddleware.isAuthenticated, locationCtrl.saveLocation)
 app.get('/api/locations', authMiddleware.isAuthenticated, locationCtrl.getLocation)
 
+app.post('/api/savePreferred', authMiddleware.isAuthenticated, prefAirportCtrl.savePreferred)
+app.post('/api/updatePreferred', authMiddleware.isAuthenticated, prefAirportCtrl.updatePreferred)
+app.get('/api/getPreferred', authMiddleware.isAuthenticated, prefAirportCtrl.getPreferred)
+
+app.post('/api/saveAirports', authMiddleware.isAuthenticated, airportCtrl.saveAirports)
+app.get('/api/getAirports', authMiddleware.isAuthenticated, airportCtrl.getAirports)
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: EMAIL_USER,
+        pass: EMAIL_PASSWORD
+    }
+})
 
 
 
