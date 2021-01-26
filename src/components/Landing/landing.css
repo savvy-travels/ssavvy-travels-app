@@ -1,0 +1,28 @@
+.landing {
+  position: relative;
+  margin: 0%;
+  height: 400vh;
+  background-color: #fdfffc;
+}
+.video-container{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px solid  #65b0b2 ;
+}
+
+
+.video {
+  width:100%;
+}
+
+.triangle {
+  margin-left: auto;
+  margin-right: auto;
+  height: 0px;
+  width: 0px;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 30px solid transparent;
+  border-top: 30px solid #65b0b2;
+}
