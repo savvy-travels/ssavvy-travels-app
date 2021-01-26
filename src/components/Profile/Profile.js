@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, {useState, useEffect, } from 'react'
 import { withRouter } from 'react-router-dom'
+import "./profile.css"
+import Header from "../Landing/Header/Header"
 
 const Profile = (props) => {
     const [locations, setLocations] = useState([])
@@ -22,6 +24,7 @@ const Profile = (props) => {
     })
     return (
         <div>
+            <Header/>
             <p>profile</p>
             <div>
                 {locationsMapped}
