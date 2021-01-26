@@ -16,23 +16,37 @@ function Landing(props) {
 
   const [cities, setCities] = useState([])
   const [location, setLocation] = useState('')
+  const [airports, setAirports] = useState([])
+  const [lat, setLat] = useState('')
+  const [long, setLong] = useState('')
+  const [metro, setMetro] = useState('')
 
   useEffect(() => {
     async function getLocation() {
       const location = await axios.get(
         `http://api.ipstack.com/check?access_key=${ipstackKey}`
       );
-      setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`);      
+      setLat(`${location.data.latitude.toFixed(4)}`);
+      setLong(`${location.data.longitude.toFixed(4)}`)
+      setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`) 
     }
     getLocation();
   }, []);
 
   useEffect(() => {
-    if(location.length > 0) getCities(location)
+    if(location.length > 0){
+      getCities(location)
+    }
   }, [location]);
 
+  useEffect(()=> {
+    if(cities.length > 0) {
+      getAirports(cities[0])
+    }
+  }, [cities])
+
   const getCities = () => {
-    axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=500000&limit=5&offset=0&radius=100`,
+    axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=250000&limit=5&offset=0&radius=100&sort=-population`,
         {
           headers: {
             "x-rapidapi-key":
@@ -40,8 +54,18 @@ function Landing(props) {
           },
         }
       )
-      .then((res) => setCities(res.data.data))    
-  };
+      .then(res => setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city)))
+    };
+ 
+  const getAirports = (city) => {
+      axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5`,
+        { headers: {
+          'x-rapidapi-key': '293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7',
+          'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
+      }
+    }).then(res => setAirports(res.data.items))
+  }
+
 
   //Get user info//
   useEffect(() => {
@@ -55,7 +79,7 @@ function Landing(props) {
       });
   }, []);
 
-  const metro = cities.filter((place) => place.type === 'CITY').map((city) => city.city) //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
+   //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
 
     return (
         <div className='landing'>
@@ -74,7 +98,7 @@ function Landing(props) {
             </Switch>
 
             <div className='triangle'>
-              {metro}
+              
             </div>
         </div>
     )
