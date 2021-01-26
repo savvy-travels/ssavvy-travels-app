@@ -12,7 +12,7 @@ function Signup(props) {
     //Auth//
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
-    const [airport, setAirport] = useState('')
+    const [preferred, setPreferred] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
     //Errors//
@@ -34,7 +34,7 @@ function Signup(props) {
             return setErrorMessage('Passwords do not match.')
         }
         setLoading(true)
-        axios.post('/api/auth/register', { email, username, password, airport }).then(res => {
+        axios.post('/api/auth/register', { email, username, password, preferred }).then(res => {
             setLoading(false)
             setError(false)
             props.loginUser(res.data)
@@ -59,7 +59,7 @@ function Signup(props) {
                     className={emptyError ? 'register-error' : 'register-inputs'}
                     type='email'
                     placeholder='Username' />
-                <input onChange={(e) => setAirport(e.target.value)}
+                <input onChange={(e) => setPreferred(e.target.value)}
                     className={emptyError ? 'register-error' : 'register-inputs'}
                     type='text'
                     placeholder='Preferred Airport' />
