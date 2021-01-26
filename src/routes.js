@@ -10,7 +10,6 @@ export default (
     <Switch>
         <Route path='/' component={Landing} />
         <Route exact path='/map' component={Map} />
-        <Route exact path='/Profile' component={Profile} />
         <Route exact path='/profile' component={Profile} />
         <Route />
     </Switch>
