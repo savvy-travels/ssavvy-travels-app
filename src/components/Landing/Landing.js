@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../../Redux/userReducer";
@@ -16,30 +16,34 @@ function Landing(props) {
   const geoDbKey = process.env.REACT_APP_GEODB_KEY;
 
   const [cities, setCities] = useState([]);
-  const [lat,  setLat] = useState('')
-  const [lon, setLon] = useState('')
+  const [latLong, setLatLong] = useState([]);
+  const [location, setLocation] = useState('')
 
-  useEffect(
-    () => {
-      //gets the latitude and longitude of the user based on their IP address with an api call
-      async function getLoc() {
-        setLat(await axios.get(`http://api.ipstack.com/check?access_key=${ipstackKey}`)
-          .then((res) => {
-            return `${res.data.latitude.toFixed(4)}`;
-            })
-        
-    , []);
+  useEffect(() => {
+    async function getLocation() {
+      const location = await axios.get(
+        `http://api.ipstack.com/check?access_key=${ipstackKey}`
+      );
+      setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`);      
+    }
+    getLocation();
+  }, []);
 
-    const getCities = (location) => {
-        setCities(axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=500000&limit=5&offset=0&radius=100`,{
-                    headers: {
-                        "x-rapidapi-key":
-                        "293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7",
-                        },
-                    }
-                  ).then((res) => res.data)
-                )                
-            }
+  useEffect(() => {
+    if(location.length > 0) getCities(location)
+  }, [location]);
+
+  const getCities = () => {
+    axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=500000&limit=5&offset=0&radius=100`,
+        {
+          headers: {
+            "x-rapidapi-key":
+              "293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7",
+          },
+        }
+      )
+      .then((res) => setCities(res.data.data))    
+  };
 
   //Get user info//
   useEffect(() => {
@@ -53,8 +57,9 @@ function Landing(props) {
       });
   }, []);
 
+  const metro = cities.filter((place) => place.type === 'CITY').map((city) => city.city) //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
 
-  // const metro = cities.filter((place) => place.type === 'CITY').map((city) => city.city) //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
+  console.log(metro)
 
   //still need to find a way to get the nearest airports - there are some apis, but they are difficult to work with or cost $.  will keep researching.
 
@@ -77,7 +82,7 @@ function Landing(props) {
       </Switch>
 
       <div className="triangle"></div>
-      <p>{}</p>
+      <p>{metro}</p>
     </div>
   );
 }
