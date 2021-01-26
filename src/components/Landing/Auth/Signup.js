@@ -13,7 +13,7 @@ function Signup(props) {
 
 
     function registerUser() {
-        axios.post('/api/auth/register', { email, username, password, airport }).then(res => {
+        axios.post('/api/auth/register', { email, username, password }).then(res => {
             console.log(res.data)
         }).catch(err => {
             console.log(err.response.data)

@@ -15,7 +15,7 @@ function NewSearch(props) {
     return (
         <span className='search-field'>
             <div className='slogan-container'>
-            <h1>You tell us the budget.<br></br>We'll tell you where.</h1>
+                <h1>You tell us the budget.<br></br>We'll tell you where.</h1>
             </div>
 
             <div className='input-field'>
