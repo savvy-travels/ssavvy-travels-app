@@ -5,7 +5,7 @@
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  width: fit-content;
+  width: 60%;
   height: fit-content;
 }
 .search-field>h1{
@@ -25,9 +25,9 @@
   text-align: center;
   font-family: Montserrat;
   font-size: 1.5rem;
-  width: 45rem;
+  width: 98%;
   height: 3rem;
-  border: 2px solid #cae00d;
+  /* border: 2px solid #cae00d; */
   outline: none;
 }
 .where-when-inputs {
@@ -55,4 +55,15 @@
   width: 10rem;
   border: 1px solid #0b3840;
   background-color: #cae00d;
+}
+
+.slogan-container {
+  color: white;
+  /* opacity: 0.5;git  */
+}
+
+@media (max-width: 700px) {
+  .slogan-container {
+    display: none;
+  }
 }
