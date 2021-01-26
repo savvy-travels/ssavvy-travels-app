@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, EMAIL_USER, EMAIL_PASSWORD} = process.env
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, EMAIL_USER, EMAIL_PASSWORD } = process.env
 const userCtrl = require('./controllers/user')
 const locationCtrl = require('./controllers/location')
 const prefAirportCtrl = require('./controllers/preferredAirport')

@@ -35,14 +35,14 @@ function Landing(props) {
   
   //runs getCities function if the location is defined
   useEffect(() => {
-    if(location.length > 0){
+    if (location.length > 0) {
       getCities(location)
     }
   }, [location]);
 
   //gets airports if cities is defined
-  useEffect(()=> {
-    if(cities.length > 0) {
+  useEffect(() => {
+    if (cities.length > 0) {
       getAirports(cities[0])
     }
   }, [cities])
@@ -57,12 +57,12 @@ function Landing(props) {
   //Filters by cities with minimum population of 250,000 in a radius of 100 miles.
   const getCities = () => {
     axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=250000&limit=5&offset=0&radius=100&sort=-population`,
-        {
-          headers: {
-            "x-rapidapi-key":`${geoDbKey}`,
-          },
-        }
-      )
+      {
+        headers: {
+          "x-rapidapi-key": `${geoDbKey}`,
+        },
+      }
+    )
       .then(res => setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city)))
       //sets the value of cities to be only the city name, filters out results of non-cities
     };
@@ -151,8 +151,7 @@ console.log(quotes)
 function mapStateToProps(reduxState) {
   return {
     username: reduxState.username,
-    location: reduxState.location,
-    id: reduxState.id
+    preferred: reduxState.preferred
   }
 }
 
