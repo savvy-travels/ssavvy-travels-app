@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env
+const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
 const userCtrl = require('./controllers/user')
 const locationCtrl = require('./controllers/location')
 const authMiddleware = require('./middleware/verifyUser')
@@ -13,10 +13,10 @@ const app = express()
 app.use(express.json())
 
 app.use(session({
-    resave:false,
-    saveUninitialized:true,
-    secret:SESSION_SECRET,
-    cookie:{maxAge: 1000 * 60 * 60 * 24}
+    resave: false,
+    saveUninitialized: true,
+    secret: SESSION_SECRET,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }))
 
 app.post('/api/auth/register', userCtrl.register)
@@ -33,7 +33,7 @@ app.get('/api/locations', authMiddleware.isAuthenticated, locationCtrl.getLocati
 
 massive({
     connectionString: CONNECTION_STRING,
-    ssl:{
+    ssl: {
         rejectUnauthorized: false
     }
 }).then(dbInstance => {

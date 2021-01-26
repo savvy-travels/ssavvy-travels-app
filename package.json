@@ -48,5 +48,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "Proxy": "http://localhost:4050",
+  "main": "server/index.js"
 }
