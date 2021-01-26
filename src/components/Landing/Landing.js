@@ -142,6 +142,9 @@ console.log(quotes)
 
       <div className='triangle'>
       </div>
+      <div className='deals-container'>
+        {deals}
+      </div>
 
     </div>
   )
