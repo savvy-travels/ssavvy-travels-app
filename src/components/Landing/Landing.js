@@ -59,9 +59,27 @@ function Landing(props) {
 
   const metro = cities.filter((place) => place.type === 'CITY').map((city) => city.city) //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
 
-  console.log(metro)
+    return (
+        <div className='landing'>
+            <Header />
+            <video className="video" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air.mp4'
+                type='video/mp4'
+                autoPlay
+                loop
+                muted
+            ></video>
 
-  //still need to find a way to get the nearest airports - there are some apis, but they are difficult to work with or cost $.  will keep researching.
+            <Switch>
+                <Route exact path='/' component={NewSearch} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/signup' component={Signup} />
+            </Switch>
+
+            <div className='triangle'>
+            </div>
+        </div>
+
+
 
   return (
     <div className="landing">
@@ -81,14 +99,23 @@ function Landing(props) {
         <Route exact path="/signup" component={Signup} />
       </Switch>
 
+<<<<<<< HEAD
       <div className="triangle"></div>
       <p>{metro}</p>
     </div>
   );
+=======
+function mapStateToProps(reduxState) {
+    return
+>>>>>>> main
 }
 
 function mapStateToProps(reduxState) {
   return;
 }
 
+<<<<<<< HEAD
 export default withRouter(connect(mapStateToProps, { loginUser })(Landing));
+=======
+export default withRouter(connect(mapStateToProps, { loginUser })(Landing))
+>>>>>>> main
