@@ -17,9 +17,9 @@ function NewSearch(props) {
             <div className='slogan-container'>
             <h1>You tell us the budget.<br></br>We'll tell you where.</h1>
             </div>
-            
+
             <div className='input-field'>
-                <input onChange={(e) => setNewBudget(e.target.value)} className='budget-input' type='email' placeholder='Whats Your Budget?' />
+                <input onFocus={(e) => setNewBudget(e.target.value)} className='budget-input' type='email' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
                         <input type='select' placeholder='From Where?' />
