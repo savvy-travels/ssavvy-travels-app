@@ -1,6 +1,9 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import { loginUser } from '../../../Redux/userReducer'
+import { connect } from 'react-redux'
+
 import './auth.css'
 
 function Signup(props) {
@@ -9,28 +12,35 @@ function Signup(props) {
     //Auth//
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
-    const [airport, setAirport] = useState('SLC')
+    const [airport, setAirport] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
     //Errors//
     const [errorMessage, setErrorMessage] = useState('')
+    const [emptyError, setEmptyError] = useState(false)
+    const [passError, setPassError] = useState(false)
     const [error, setError] = useState(false)
 
 
     function registerUser() {
+        setPassError(false)
+        setEmptyError(false)
         if (email === '' || username === '' || password === '' || confirmPass === '') {
-            setError(true)
+            setEmptyError(true)
             return setErrorMessage('Missing required fields')
         }
         if (password !== confirmPass) {
-            setError(true)
+            setPassError(true)
             return setErrorMessage('Passwords do not match.')
         }
         setLoading(true)
         axios.post('/api/auth/register', { email, username, password }).then(res => {
-            console.log(res.data)
+            setLoading(false)
+            setError(false)
+            props.loginUser(res.data)
+            props.history.push('/')
         }).catch(err => {
-            console.log(err.response.data)
+            setErrorMessage(err.response.data)
         })
     }
 
@@ -45,10 +55,12 @@ function Signup(props) {
                     className='register-inputs'
                     type='email'
                     placeholder='Email' />
+                {emptyError && <h6 className='required-field'>*</h6>}
                 <input onChange={(e) => setUsername(e.target.value)}
                     className='register-inputs'
                     type='email'
                     placeholder='Username' />
+                {emptyError && <h6 className='required-field'>*</h6>}
                 <input onChange={(e) => setAirport(e.target.value)}
                     className='register-inputs'
                     type='text'
@@ -57,13 +69,18 @@ function Signup(props) {
                     className='register-inputs'
                     type='password'
                     placeholder='Password' />
+                {emptyError && <h6 className='required-field'>*</h6>}
+                {passError && <h6 className='required-field'>*</h6>}
                 <input onChange={(e) => setConfirmPass(e.target.value)}
                     className='register-inputs'
                     type='password'
                     placeholder='Confirm Password' />
+                {emptyError && <h6 className='required-field'>*</h6>}
+                {passError && <h6 className='required-field'>*</h6>}
+                {errorMessage && <h6 className='error-message'>{errorMessage}</h6>}
                 <button onClick={() => registerUser()} className='search-button'>Signup</button>
             </div>
         </span>
     )
 }
-export default withRouter(Signup)
+export default withRouter(connect(null, { loginUser })(Signup))
