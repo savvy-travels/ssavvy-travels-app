@@ -45,7 +45,7 @@ function Signup(props) {
     }
 
     return (
-        <span className='register-field'>
+        <form className='register-field'>
             <div className='register-input-field'>
                 <div className='register-header'>
                     <h2>Register</h2>
@@ -74,7 +74,7 @@ function Signup(props) {
                 {errorMessage && <h5 className='error-message'>{errorMessage}</h5>}
                 <button onClick={() => registerUser()} className='register-button'>Signup</button>
             </div>
-        </span>
+        </form>
     )
 }
 export default withRouter(connect(null, { loginUser })(Signup))
