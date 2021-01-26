@@ -107,3 +107,18 @@
   border-radius: 0px;
   border: 1.5px solid #fcfffd;
 }
+
+
+/*Login STYLING*/
+.login-field{
+  position: absolute;
+  top: 15vh;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  height: fit-content;
+  width: 450px;
+  height: 8.5%;
+}
