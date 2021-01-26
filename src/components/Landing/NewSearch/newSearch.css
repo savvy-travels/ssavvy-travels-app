@@ -1,3 +1,13 @@
+::placeholder{
+  color: #0b3840;
+  opacity: 1;
+}
+:-ms-input-placeholder{
+  color: #0b3840;
+}
+::-ms-input-placeholder{
+  color: #0b3840;
+}
 .search-field {
   position: absolute;
   top: 18vh;
@@ -28,7 +38,9 @@
   width: 98%;
   height: 3rem;
   /* border: 2px solid #cae00d; */
+  border-radius: 5px;
   outline: none;
+  color: #0b3840;
 }
 .where-when-inputs {
   margin-top: 0.6rem;
@@ -41,8 +53,10 @@
   font-size: 1.5rem;
   width: 48%;
   height: fit-content;
-  border: 2px solid #cae00d;
+  /* border: 2px solid #cae00d; */
+  border-radius: 5px;
   outline: none;
+  color: #0b3840
 }
 .search-button {
   font-size: 2rem;
