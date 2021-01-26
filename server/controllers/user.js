@@ -4,7 +4,7 @@ module.exports = {
     register: async (req, res) => {
         console.log(req.body)
         const db = req.app.get('db')
-        const { email, username, password } = req.body
+        const { email, username, password, preferred } = req.body
         const [existingUser] = await db.users.find_user([username])
 
         if (existingUser) {
@@ -13,7 +13,7 @@ module.exports = {
         try {
             const salt = bcrypt.genSaltSync(10)
             const hash = bcrypt.hashSync(password, salt)
-            const [newUser] = await db.users.create_user([email, username, hash])
+            const [newUser] = await db.users.create_user([email, username, hash, preferred])
             req.session.user = newUser
 
             res.status(200).send(newUser)
@@ -35,6 +35,7 @@ module.exports = {
             return res.status(403).send('Incorrect username or password')
         }
         delete existingUser.password
+        delete existingUser.email
         req.session.user = existingUser
         res.status(200).send(existingUser)
     },

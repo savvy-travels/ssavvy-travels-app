@@ -1,13 +1,4 @@
 module.exports = {
-    savePreferred: async(req, res) => {
-        const db = req.app.get('db')
-        const {id} = req.session.user
-        const {preferred} = req.body
-
-        const newPreferred = await db.airports.savePreferredAirport([id, preferred])
-
-        res.status(200).send(newPreferred)
-    },
     updatePreferred: async(req,res) => {
         const db = req.app.get('db')
         const {id} = req.session.user
