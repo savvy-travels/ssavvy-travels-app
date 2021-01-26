@@ -1,0 +1,1 @@
+SELECT preferred FROM savvy_travels_airports WHERE users_id = $1;
