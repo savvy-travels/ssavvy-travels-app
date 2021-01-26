@@ -34,7 +34,7 @@ function Signup(props) {
             return setErrorMessage('Passwords do not match.')
         }
         setLoading(true)
-        axios.post('/api/auth/register', { email, username, password }).then(res => {
+        axios.post('/api/auth/register', { email, username, password, airport }).then(res => {
             setLoading(false)
             setError(false)
             props.loginUser(res.data)
@@ -52,33 +52,27 @@ function Signup(props) {
                     <h4>Already a member?<h4><Link style={{ textDecoration: 'none' }} to='/login'>Login</Link></h4></h4>
                 </div>
                 <input onChange={(e) => setEmail(e.target.value)}
-                    className='register-inputs'
+                    className={emptyError ? 'register-error' : 'register-inputs'}
                     type='email'
                     placeholder='Email' />
-                {emptyError && <h6 className='required-field'>*</h6>}
                 <input onChange={(e) => setUsername(e.target.value)}
-                    className='register-inputs'
+                    className={emptyError ? 'register-error' : 'register-inputs'}
                     type='email'
                     placeholder='Username' />
-                {emptyError && <h6 className='required-field'>*</h6>}
                 <input onChange={(e) => setAirport(e.target.value)}
-                    className='register-inputs'
+                    className={emptyError ? 'register-error' : 'register-inputs'}
                     type='text'
                     placeholder='Preferred Airport' />
                 <input onChange={(e) => setPassword(e.target.value)}
-                    className='register-inputs'
+                    className={emptyError || passError ? 'register-error' : 'register-inputs'}
                     type='password'
                     placeholder='Password' />
-                {emptyError && <h6 className='required-field'>*</h6>}
-                {passError && <h6 className='required-field'>*</h6>}
                 <input onChange={(e) => setConfirmPass(e.target.value)}
-                    className='register-inputs'
+                    className={emptyError || passError ? 'register-error' : 'register-inputs'}
                     type='password'
                     placeholder='Confirm Password' />
-                {emptyError && <h6 className='required-field'>*</h6>}
-                {passError && <h6 className='required-field'>*</h6>}
-                {errorMessage && <h6 className='error-message'>{errorMessage}</h6>}
-                <button onClick={() => registerUser()} className='search-button'>Signup</button>
+                {errorMessage && <h5 className='error-message'>{errorMessage}</h5>}
+                <button onClick={() => registerUser()} className='register-button'>Signup</button>
             </div>
         </span>
     )

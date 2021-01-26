@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { loginUser } from "../../Redux/userReducer";
 import Header from "./Header/Header";
 import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
@@ -43,17 +42,7 @@ function Landing(props) {
       .then((res) => setCities(res.data.data))
   };
 
-  //Get user info//
-  useEffect(() => {
-    axios
-      .get("/api/auth/user")
-      .then((res) => {
-        // props.loginUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-      });
-  }, []);
+
 
   const metro = cities.filter((place) => place.type === 'CITY').map((city) => city.city) //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
 
@@ -82,7 +71,11 @@ function Landing(props) {
 }
 
 function mapStateToProps(reduxState) {
-  return;
+  return {
+    username: reduxState.username,
+    location: reduxState.location,
+    id: reduxState.id
+  }
 }
 
-export default withRouter(connect(mapStateToProps, { loginUser })(Landing));
+export default withRouter(connect(mapStateToProps)(Landing));
