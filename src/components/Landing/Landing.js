@@ -1,44 +1,63 @@
-
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { useIpCoords } from 'use-ipcoords'
-import { Switch, Route, withRouter } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { loginUser } from '../../Redux/userReducer'
-import Header from './Header/Header'
-import './landing.css'
-import NewSearch from './NewSearch/NewSearch'
-import Signup from './Auth/Signup'
-import Login from './Auth/Login'
+import axios from "axios";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { loginUser } from "../../Redux/userReducer";
+import Header from "./Header/Header";
+import "./landing.css";
+import NewSearch from "./NewSearch/NewSearch";
+import heroVideo from "./DevMtn-Air.mp4";
+import Signup from "./Auth/Signup";
+import Login from "./Auth/Login";
+require("dotenv").config();
 
 function Landing(props) {
+  const ipstackKey = process.env.REACT_APP_IPSTACK_KEY;
+  const geoDbKey = process.env.REACT_APP_GEODB_KEY;
 
-    const { REACT_APP_IPSTACK_KEY } = process.env
-    const [lat, setLat] = useState('')
-    const [lon, setLon] = useState('')
-    const [cities, setCities] = useState([])
+  const [cities, setCities] = useState([]);
+  const [latLong, setLatLong] = useState([]);
+  const [location, setLocation] = useState('')
 
-    // useEffect(() =>  //gets the latitude and longitude of the user based on their IP address with an api call
-    //     axios.get('http://api.ipstack.com/check?access_key=2c90293abbf7af47c07b492a4538d0fb').then(res => {
-    //     setLat(res.data.latitude.toFixed(6))
-    //     setLon(res.data.longitude.toFixed(6))
-    //     axios.get(`http://geodb-free-service.wirefreethought.com/v1/geo/locations/${lat}${lon}/nearbyCities?minPopulation=500000&limit=5&offset=0&radius=100`).then(res=>{
-    //     })
-    // }, [cities]))
-    //Get user info//
+  useEffect(() => {
+    async function getLocation() {
+      const location = await axios.get(
+        `http://api.ipstack.com/check?access_key=${ipstackKey}`
+      );
+      setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`);      
+    }
+    getLocation();
+  }, []);
 
-    useEffect(() => {
-        axios.get('/api/auth/user').then(res => {
-            props.loginUser(res.data)
+  useEffect(() => {
+    if(location.length > 0) getCities(location)
+  }, [location]);
+
+  const getCities = () => {
+    axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=500000&limit=5&offset=0&radius=100`,
+        {
+          headers: {
+            "x-rapidapi-key":
+              "293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7",
+          },
         }
-        ).catch(err => {
-            console.log(err.response.data)
-        })
-    }, [])
+      )
+      .then((res) => setCities(res.data.data))    
+  };
 
-    const metro = cities.filter((place) => place.type === 'CITY').map((city) => city.city) //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
+  //Get user info//
+  useEffect(() => {
+    axios
+      .get("/api/auth/user")
+      .then((res) => {
+        props.loginUser(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+      });
+  }, []);
 
-    //still need to find a way to get the nearest airports - there are some apis, but they are difficult to work with or cost $.  will keep researching.
+  const metro = cities.filter((place) => place.type === 'CITY').map((city) => city.city) //filters the results of the second useEffect to only include cities, maps those results to return the nearest city.
 
     return (
         <div className='landing'>
@@ -62,12 +81,41 @@ function Landing(props) {
 
 
 
-    )
+  return (
+    <div className="landing">
+      <Header />
+      <video
+        className="video"
+        src={heroVideo}
+        type="video/mp4"
+        autoPlay
+        loop
+        muted
+      ></video>
+
+      <Switch>
+        <Route exact path="/" component={NewSearch} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+      </Switch>
+
+<<<<<<< HEAD
+      <div className="triangle"></div>
+      <p>{metro}</p>
+    </div>
+  );
+=======
+function mapStateToProps(reduxState) {
+    return
+>>>>>>> main
 }
 
 function mapStateToProps(reduxState) {
-    return
+  return;
 }
 
-
+<<<<<<< HEAD
+export default withRouter(connect(mapStateToProps, { loginUser })(Landing));
+=======
 export default withRouter(connect(mapStateToProps, { loginUser })(Landing))
+>>>>>>> main
