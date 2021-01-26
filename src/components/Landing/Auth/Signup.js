@@ -13,11 +13,11 @@ function Signup(props) {
 
 
     function registerUser() {
-        props.history.push('/')
-        console.log(email, username, airport, password)
-        // axios.post('/api/auth/register', { email, username, password, airport }).then(res => {
-        //     console.log(res.data)
-        // })
+        axios.post('/api/auth/register', { email, username, password, airport }).then(res => {
+            console.log(res.data)
+        }).catch(err => {
+            console.log(err.response.data)
+        })
     }
 
     return (
