@@ -31,7 +31,6 @@ app.get('/api/auth/user', userCtrl.getUser)
 app.post('/api/saveLocation', locationCtrl.saveLocation)
 app.get('/api/locations', locationCtrl.getLocation)
 
-app.post('/api/savePreferred', prefAirportCtrl.savePreferred)
 app.post('/api/updatePreferred', prefAirportCtrl.updatePreferred)
 app.get('/api/getPreferred', prefAirportCtrl.getPreferred)
 

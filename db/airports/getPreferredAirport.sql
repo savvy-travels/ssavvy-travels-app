@@ -1,1 +1,1 @@
-SELECT preferred FROM savvy_travels_airports WHERE users_id = $1;
+SELECT preferred FROM savvy_travels_users WHERE id = $1;
