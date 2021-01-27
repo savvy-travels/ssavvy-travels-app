@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import "./profile.css"
 import Header from "../Landing/Header/Header"
 
+
 const Profile = (props) => {
     const [locations, setLocations] = useState([])
 
@@ -29,6 +30,7 @@ const Profile = (props) => {
             <div>
                 {locationsMapped}
             </div>
+
 
         </div>
     )
