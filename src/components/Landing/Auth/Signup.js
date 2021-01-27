@@ -57,7 +57,7 @@ function Signup(props) {
                     placeholder='Email' />
                 <input onChange={(e) => setUsername(e.target.value)}
                     className={emptyError ? 'register-error' : 'register-inputs'}
-                    type='email'
+                    type='text'
                     placeholder='Username' />
                 <input onChange={(e) => setPreferred(e.target.value)}
                     className={emptyError ? 'register-error' : 'register-inputs'}
