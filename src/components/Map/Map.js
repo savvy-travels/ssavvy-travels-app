@@ -1,11 +1,9 @@
 import React, { useState, } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, { Marker } from 'react-map-gl'
-import locIcon from './loc-icon.png'
 import './map.css'
-import Header from '../Landing/Header/Header'
 
-function Map() {
+function Map(props) {
     //Map State
     const [viewport, setViewport] = useState({
         latitude: 39.742043,
@@ -17,13 +15,12 @@ function Map() {
     const [selectedCity, setSelectedCity] = useState(null)
 
     //Search State//
-    const [budget, setBudget] = useState(undefined)
-    const [where, setWhere] = useState(undefined)
-    const [when, setWhen] = useState(undefined)
+    const [budget, setBudget] = useState(`$${props.match.params.budget}`)
+    const [where, setWhere] = useState(props.match.params.where)
+    const [when, setWhen] = useState(props.match.params.selectedDate)
 
     return (
         <div className='map-view'>
-            <Header />
             <div className='lower-map-view'>
                 <div className='controllers-container'>
                     <div className='filter-container'>
@@ -31,10 +28,10 @@ function Map() {
                     </div>
                     <div className='results-search-container'>
                         <div className='search-fields'>
-                            <input type='text' placeholder='Whats Your Budget?' />
+                            <input className='map-budget-input' contentEditable={false} onChange={(e) => setBudget(e.target.value)} value={budget} type='text' placeholder='Whats Your Budget?' />
                             <div className='where-when-map-inputs'>
-                                <input className='airport-date-inputs' type='text' placeholder='From Where?' />
-                                <input className='airport-date-inputs' type='Date' placeholder='When' />
+                                <input onChange={(e) => setWhere(e.target.value)} value={where} className='airport-date-inputs' type='text' placeholder='From Where?' />
+                                <input onChange={(e) => setWhen(e.target.value)} value={when} className='airport-date-inputs' type='Date' placeholder='When' />
                             </div>
                         </div>
                         <div className='line'></div>

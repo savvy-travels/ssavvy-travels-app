@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Header from "./Header/Header";
 import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
@@ -30,7 +29,7 @@ function Landing(props) {
     async function getLocation() {
       const location = await axios.get(
         `http://api.ipstack.com/check?access_key=${ipstackKey}`);
-      console.log(location.data)
+      // console.log(location.data)
       setLat(`${location.data.latitude.toFixed(4)}`)
       setLong(`${location.data.longitude.toFixed(4)}`)
       setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`)
@@ -109,7 +108,7 @@ function Landing(props) {
     })
   }
 
-  console.log(quotes)
+  // console.log(quotes)
 
   const flights = quotes.map((quote) => {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
@@ -133,7 +132,6 @@ function Landing(props) {
 
   return (
     <div className='landing'>
-      <Header />
       <video className="video" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air.mp4'
         type='video/mp4'
         autoPlay

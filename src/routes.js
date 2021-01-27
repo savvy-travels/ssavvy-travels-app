@@ -8,7 +8,7 @@ import Profile from './components/Profile/Profile'
 
 export default (
     <Switch>
-        <Route exact path='/map' component={Map} />
+        <Route exact path='/map/:budget/:selectedDate/:where' component={Map} />
         <Route exact path='/profile' component={Profile} />
         {/* <Route exact path='/api' component={Apisetup} /> */}
         <Route path='/' component={Landing} />
