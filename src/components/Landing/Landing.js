@@ -8,6 +8,7 @@ import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import MiniMap from './MiniMap/MiniMap'
 import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
+import { type } from "os";
 require("dotenv").config();
 
 function Landing(props) {
@@ -31,8 +32,8 @@ function Landing(props) {
       const location = await axios.get(
         `http://api.ipstack.com/check?access_key=${ipstackKey}`);
       // console.log(location.data)
-      setLat(`${location.data.latitude.toFixed(4)}`)
-      setLong(`${location.data.longitude.toFixed(4)}`)
+      setLat(location.data.latitude)
+      setLong(location.data.longitude)
       setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`)
     }
     getLocation();
@@ -122,6 +123,7 @@ function Landing(props) {
   const deals = [flightCards[0], flightCards[1], flightCards[2]]
 
   console.log(long)
+  console.log(typeof long)
 
   return (
     <div className='landing'>
@@ -139,20 +141,22 @@ function Landing(props) {
       </Switch>
 
       <div className='triangle'></div>
-      <div className='deals-container'>
-        {deals}
-      </div>
 
-      <>
+      <div className="mini-map-div">
         {long ?
             <MiniMap
             long={long}
             lat={lat}/>
         : 
         <ClipLoader color={'#cae00d'} />}
-      </>
+      </div>
 
-      <MiniMap/>
+      <div className='deals-container'>
+        {deals}
+      </div>
+
+      
+
 
       
 
