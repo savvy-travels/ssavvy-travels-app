@@ -12,7 +12,7 @@ function Signup(props) {
     //Auth//
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
-    const [airport, setAirport] = useState('')
+    const [preferred, setPreferred] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
     //Errors//
@@ -34,7 +34,7 @@ function Signup(props) {
             return setErrorMessage('Passwords do not match.')
         }
         setLoading(true)
-        axios.post('/api/auth/register', { email, username, password, airport }).then(res => {
+        axios.post('/api/auth/register', { email, username, password, preferred }).then(res => {
             setLoading(false)
             setError(false)
             props.loginUser(res.data)
@@ -45,7 +45,7 @@ function Signup(props) {
     }
 
     return (
-        <span className='register-field'>
+        <form className='register-field'>
             <div className='register-input-field'>
                 <div className='register-header'>
                     <h2>Register</h2>
@@ -57,9 +57,9 @@ function Signup(props) {
                     placeholder='Email' />
                 <input onChange={(e) => setUsername(e.target.value)}
                     className={emptyError ? 'register-error' : 'register-inputs'}
-                    type='email'
+                    type='text'
                     placeholder='Username' />
-                <input onChange={(e) => setAirport(e.target.value)}
+                <input onChange={(e) => setPreferred(e.target.value)}
                     className={emptyError ? 'register-error' : 'register-inputs'}
                     type='text'
                     placeholder='Preferred Airport' />
@@ -74,7 +74,7 @@ function Signup(props) {
                 {errorMessage && <h5 className='error-message'>{errorMessage}</h5>}
                 <button onClick={() => registerUser()} className='register-button'>Signup</button>
             </div>
-        </span>
+        </form>
     )
 }
 export default withRouter(connect(null, { loginUser })(Signup))

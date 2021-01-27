@@ -9,7 +9,6 @@ body {
   height: fit-content;
   box-sizing: border-box;
   overflow-x: hidden;
-  background-color: black;
 }
 
 body::-webkit-scrollbar {
