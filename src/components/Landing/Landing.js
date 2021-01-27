@@ -88,7 +88,7 @@ function Landing(props) {
   }
 
 
-   const getFlights = () => {
+  const getFlights = () => {
     axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
       headers: {
         'x-rapidapi-key': `${skyscannerKey}`
@@ -142,17 +142,17 @@ function Landing(props) {
         {deals}
       </div>
 
-      <>
+      {/* <>
         {long ?
-            <Map
+          <Map
             long={long}
-            lat={lat}/>
-        : 
-        <ClipLoader color={'#cae00d'} />}
-      </>
+            lat={lat} />
+          :
+          <ClipLoader color={'#cae00d'} />}
+      </> */}
 
 
-      
+
 
     </div>
   )

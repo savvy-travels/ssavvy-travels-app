@@ -15,7 +15,7 @@ function Map(props) {
     const [selectedCity, setSelectedCity] = useState(null)
 
     //Search State//
-    const [budget, setBudget] = useState(`$${props.match.params.budget}`)
+    const [budget, setBudget] = useState(props.match.params.budget)
     const [where, setWhere] = useState(props.match.params.where)
     const [when, setWhen] = useState(props.match.params.selectedDate)
 

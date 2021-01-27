@@ -22,7 +22,7 @@ export function logout() {
     }
 }
 
-export default function reducer(state = initialState, action) {
+export default function userReducer(state = initialState, action) {
     switch (action.type) {
         case LOGIN_USER:
             const { email, username, preferred } = action.payload
