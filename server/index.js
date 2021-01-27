@@ -2,13 +2,15 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
-const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, EMAIL_USER, EMAIL_PASSWORD} = process.env
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET, EMAIL_USER, EMAIL_PASSWORD, JWT_KEY, SENDGRID_API_KEY} = process.env
 const userCtrl = require('./controllers/user')
 const locationCtrl = require('./controllers/location')
 const prefAirportCtrl = require('./controllers/preferredAirport')
 const airportCtrl = require('./controllers/airports')
 const authMiddleware = require('./middleware/verifyUser')
 const nodemailer = require('nodemailer')
+// const nodemailerSendGrid = require('nodemailer-sendgrid')
+// const jwt = require('jsonwebtoken')
 
 
 const app = express()
@@ -43,7 +45,8 @@ const transporter = nodemailer.createTransport({
         user: EMAIL_USER,
         pass: EMAIL_PASSWORD
     }
-})
+});
+
 
 
 
