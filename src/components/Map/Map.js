@@ -7,8 +7,8 @@ function Map (props){
     const {lat, long} = props
     console.log(props)
     const [viewport, setViewport] = useState({
-        latitude: 39.5340,
-        longitude: -104.9373,
+        latitude: lat,
+        longitude: long,
         width: '100vw',
         height: '100vh',
         zoom: 4
