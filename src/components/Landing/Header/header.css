@@ -4,12 +4,13 @@ header {
   left: 0%;
   right: 0%;
   padding: 0px 0.6rem;
-  background: linear-gradient(black, transparent);
+  background:linear-gradient(#191a1b, transparent);
   margin: 0%;
   height: 6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 50000;
 }
 button {
   width: 8rem;
@@ -38,7 +39,7 @@ button {
   margin-left: 0.5rem;
   border: 2px solid #fdfffc;
   transition: all ease 0.25s;
-  z-index: 4000;
+  z-index: 6000;
 }
 
 .auth-button:hover {
@@ -131,6 +132,7 @@ button {
   background-color: #0b3840;
   border: 2px solid #0b3840;
   border-radius: 5px;
+  z-index: 90000;
 }
 
 .pop-menu-visible>h3{
