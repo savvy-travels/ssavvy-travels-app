@@ -7,6 +7,8 @@ import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
+import Map from '../Map/Map'
+import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
 function Landing(props) {
@@ -15,8 +17,8 @@ function Landing(props) {
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
 
   const [cities, setCities] = useState([])
-  const [lat, setLat] = useState('')
-  const [long, setLong] = useState('')
+  const [lat, setLat] = useState()
+  const [long, setLong] = useState()
   const [location, setLocation] = useState('')
   const [airports, setAirports] = useState([])
   const [quotes, setQuotes] = useState([])
@@ -150,10 +152,24 @@ console.log(quotes)
         {deals}
       </div>
 
+      <>
+        {long ?
+            <Map
+            long={long}
+            lat={lat}/>
+        : 
+        <ClipLoader color={'#cae00d'} />}
+      </>
+
+
+      
+
     </div>
   )
 
 }
+
+
 
 function mapStateToProps(reduxState) {
   return {
