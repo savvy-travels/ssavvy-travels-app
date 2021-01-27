@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, { Marker } from 'react-map-gl'
-import './map.css'
+import './minimap.css'
 
-function Map(props) {
+function MiniMap(props) {
     //Map State
+    const {lat, long} = props
     const [viewport, setViewport] = useState({
-        latitude: 39.742043,
-        longitude: -104.991531,
+        latitude: lat,
+        longitude: long,
         width: '100%',
         height: '100%',
         zoom: 4
@@ -71,4 +72,4 @@ function Map(props) {
     )
 }
 
-export default withRouter(Map)
+export default withRouter(MiniMap)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, {useState, useEffect, } from 'react'
+import React, { useState, useEffect, } from 'react'
 import { withRouter } from 'react-router-dom'
 import "./profile.css"
 import Header from "../Landing/Header/Header"
@@ -24,10 +24,11 @@ const Profile = (props) => {
             </div>
         )
     })
+    
     console.log(locations)
     return (
         <div>
-            <Header/>
+            <Header />
             <p>profile</p>
             <div>
                 {locationsMapped}

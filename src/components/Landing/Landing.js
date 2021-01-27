@@ -2,11 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import Header from "./Header/Header";
 import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
+import MiniMap from './MiniMap/MiniMap'
+import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
 function Landing(props) {
@@ -15,8 +16,8 @@ function Landing(props) {
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
 
   const [cities, setCities] = useState([])
-  const [lat, setLat] = useState('')
-  const [long, setLong] = useState('')
+  const [lat, setLat] = useState()
+  const [long, setLong] = useState()
   const [location, setLocation] = useState('')
   const [airports, setAirports] = useState([])
   const [quotes, setQuotes] = useState([])
@@ -29,6 +30,7 @@ function Landing(props) {
     async function getLocation() {
       const location = await axios.get(
         `http://api.ipstack.com/check?access_key=${ipstackKey}`);
+      // console.log(location.data)
       setLat(`${location.data.latitude.toFixed(4)}`)
       setLong(`${location.data.longitude.toFixed(4)}`)
       setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`)
@@ -98,7 +100,7 @@ function Landing(props) {
     })
   }
 
-  console.log(quotes)
+  // console.log(quotes)
 
   const flights = quotes.map((quote) => {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
@@ -122,7 +124,6 @@ function Landing(props) {
 
   return (
     <div className='landing'>
-      <Header />
       <video className="video" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air.mp4'
         type='video/mp4'
         autoPlay
@@ -136,16 +137,29 @@ function Landing(props) {
         <Route exact path='/signup' component={Signup} />
       </Switch>
 
-      <div className='triangle'>
-      </div>
+      <div className='triangle'></div>
       <div className='deals-container'>
         {deals}
       </div>
+
+      <>
+        {long ?
+            <MiniMap
+            long={long}
+            lat={lat}/>
+        : 
+        <ClipLoader color={'#cae00d'} />}
+      </>
+
+
+      
 
     </div>
   )
 
 }
+
+
 
 function mapStateToProps(reduxState) {
   return {
