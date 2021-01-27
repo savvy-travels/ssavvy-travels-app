@@ -21,6 +21,14 @@ function Signup(props) {
     const [passError, setPassError] = useState(false)
     const [error, setError] = useState(false)
 
+// Write function to pass back information here
+    const  Confirmation = () => {
+        const message = `Confirmation ${username}`
+        const title = 'Confirmation'
+        axios.post('/api/confirmation', {message, title, email}).then(() => {
+            console.log('Email Sent')
+        }).catch((err) => console.log(err))
+    }
 
     function registerUser() {
         setPassError(false)
@@ -35,6 +43,7 @@ function Signup(props) {
         }
         setLoading(true)
         axios.post('/api/auth/register', { email, username, password, preferred }).then(res => {
+            Confirmation()
             setLoading(false)
             setError(false)
             props.loginUser(res.data)
@@ -43,6 +52,7 @@ function Signup(props) {
             setErrorMessage(err.response.data)
         })
     }
+
 
     return (
         <form className='register-field'>

@@ -10,8 +10,9 @@ export default (
     <Switch>
         <Route exact path='/map/:budget/:selectedDate/:where' component={Map} />
         <Route exact path='/profile' component={Profile} />
-        {/* <Route exact path='/api' component={Apisetup} /> */}
+
         // 885e71b28d33436eb32b48ffe7e45cee91e29ef3
+
         <Route path='/' component={Landing} />
         <Route />
     </Switch>
