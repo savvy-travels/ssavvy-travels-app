@@ -1,9 +1,38 @@
-import React from 'react'
+import axios from 'axios'
+import React, {useState, useEffect, } from 'react'
 import { withRouter } from 'react-router-dom'
+import "./profile.css"
+import Header from "../Landing/Header/Header"
 
-function Profile ( ){
+
+const Profile = (props) => {
+    const [locations, setLocations] = useState([])
+
+    useEffect (()=> {
+        axios
+        .get('/api/locations/')
+        .then((res) => {
+            setLocations(res.data)
+        })
+    }, [])
+
+    const locationsMapped =  locations.map((location) => {
+        return (
+            <div className='locs-container'>
+                <p>{location.location}</p>
+            </div>
+        )
+    })
     return (
-        <h1>Profile</h1>
+        <div>
+            <Header/>
+            <p>profile</p>
+            <div>
+                {locationsMapped}
+            </div>
+
+
+        </div>
     )
 }
 
