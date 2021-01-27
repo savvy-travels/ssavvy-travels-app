@@ -5,13 +5,14 @@ import './newSearch.css'
 function NewSearch(props) {
     const [budget, setBudget] = useState('')
     const [next, setNext] = useState(false)
-    const [selectedDate, setSelectedDate] = useState(null)
+    const [selectedDate, setSelectedDate] = useState(undefined)
+    const [where, setWhere] = useState(undefined)
 
-    function setNewBudget(val) {
-        setBudget(val)
-        setNext(true)
+
+
+    function search() {
+        props.history.push(`/map/${budget}/${selectedDate}/${where}`)
     }
-
     return (
         <span className='search-field'>
             <div className='slogan-container'>
@@ -19,17 +20,17 @@ function NewSearch(props) {
             </div>
 
             <div className='input-field'>
-                <input onFocus={(e) => setNewBudget(e.target.value)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
+                <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
-                        <input type='select' placeholder='From Where?' />
-                        <input type='date' placeholder='When?' />
+                        <input onChange={(e) => setWhere(e.target.value)} type='select' placeholder='From Where?' />
+                        <input onChange={(e) => setSelectedDate(e.target.value)} type='date' placeholder='When?' />
                     </div>
                     :
                     null
                 }
             </div>
-            <button className='search-button'>Let's Go!</button>
+            <button onClick={() => search()} className='search-button'>Let's Go!</button>
         </span>
 
     )

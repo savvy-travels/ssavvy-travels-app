@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, {useState, useEffect, } from 'react'
+import React, { useState, useEffect, } from 'react'
 import { withRouter } from 'react-router-dom'
 import "./profile.css"
 import Header from "../Landing/Header/Header"
@@ -16,16 +16,18 @@ const Profile = (props) => {
     }, [])
 
     const locationsMapped =  locations.map(location => {
+
         return (
             <div className='locs-container'>
                 <p>{location.location}</p>
             </div>
         )
     })
+    
     console.log(locations)
     return (
         <div>
-            <Header/>
+            <Header />
             <p>profile</p>
             <div>
                 {locationsMapped}

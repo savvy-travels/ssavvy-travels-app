@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loginUser } from '../../../Redux/userReducer'
-import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
+import { ClipLoader } from 'react-spinners'
 
 function Login(props) {
     const [loading, setLoading] = useState(false)
