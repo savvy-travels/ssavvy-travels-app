@@ -8,10 +8,10 @@ module.exports = {
         const [existingUser] = await db.users.find_user([username])
         const [existingEmail] = await db.savvy_travels_users.find({email})
         if(existingUser && existingEmail){
-            return res.status(409).send('Username and Email are taken')
+            return res.status(409).send('Username and Email are in use')
         }
         if (existingUser) {
-            return res.status(409).send('Username is taken')
+            return res.status(409).send('Username is in use')
         }
         if (existingEmail){
             return res.status(409).send('Email is already in use')
@@ -21,7 +21,7 @@ module.exports = {
             const hash = bcrypt.hashSync(password, salt)
             const [newUser] = await db.users.create_user([email, username, hash, preferred])
             req.session.user = newUser
-            console.log(newUser)
+
             res.status(200).send(newUser)
         } catch (err) {
             console.log(err)

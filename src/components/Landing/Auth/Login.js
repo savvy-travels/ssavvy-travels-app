@@ -17,6 +17,8 @@ function Login(props) {
             props.loginUser(res.data)
             props.history.push('/')
             setLoading(false)
+        }).catch(err => {
+            console.log(err.response.data)
         })
     }
     return (

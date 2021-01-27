@@ -19,7 +19,7 @@ function NewSearch(props) {
             </div>
 
             <div className='input-field'>
-                <input onFocus={(e) => setNewBudget(e.target.value)} className='budget-input' type='email' placeholder='Whats Your Budget?' />
+                <input onFocus={(e) => setNewBudget(e.target.value)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
                         <input type='select' placeholder='From Where?' />

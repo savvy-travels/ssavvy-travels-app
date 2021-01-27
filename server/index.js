@@ -11,6 +11,7 @@ const authMiddleware = require('./middleware/verifyUser')
 const nodemailer = require('nodemailer')
 
 
+
 const app = express()
 app.use(express.json())
 
@@ -43,7 +44,8 @@ const transporter = nodemailer.createTransport({
         user: EMAIL_USER,
         pass: EMAIL_PASSWORD
     }
-})
+});
+
 
 
 
