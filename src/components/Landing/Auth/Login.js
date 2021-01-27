@@ -9,9 +9,15 @@ function Login(props) {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
 
     function userLogin() {
+        if (email === ' ' || password === '') {
+            setError(true)
+            setErrorMessage('Missing Required Fields')
+        }
         setLoading(true)
         axios.post('/api/auth/login', { email, password }).then(res => {
             props.loginUser(res.data)

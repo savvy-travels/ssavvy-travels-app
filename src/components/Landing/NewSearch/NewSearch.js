@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { newSearch } from '../../../Redux/searchReducer'
 import './newSearch.css'
 
 function NewSearch(props) {
     const [budget, setBudget] = useState('')
+    const [departureDate, setDepartureDate] = useState(undefined)
+    const [arrivalDate, setArrivalDate] = useState(undefined)
+    const [location, setLocation] = useState(undefined)
     const [next, setNext] = useState(false)
-    const [selectedDate, setSelectedDate] = useState(undefined)
-    const [where, setWhere] = useState(undefined)
 
 
 
     function search() {
-        props.history.push(`/map/${budget}/${selectedDate}/${where}`)
+        props.newSearch({ budget, location, departureDate, arrivalDate })
+        props.history.push('/map')
     }
     return (
         <span className='search-field'>
@@ -23,8 +27,9 @@ function NewSearch(props) {
                 <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
-                        <input onChange={(e) => setWhere(e.target.value)} type='select' placeholder='From Where?' />
-                        <input onChange={(e) => setSelectedDate(e.target.value)} type='date' placeholder='When?' />
+                        <input onChange={(e) => setLocation(e.target.value)} type='select' placeholder='From Where?' />
+                        <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                        <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
                     </div>
                     :
                     null
@@ -36,4 +41,4 @@ function NewSearch(props) {
     )
 }
 
-export default withRouter(NewSearch)
+export default withRouter(connect(null, { newSearch })(NewSearch))

@@ -8,7 +8,7 @@ import Profile from './components/Profile/Profile'
 
 export default (
     <Switch>
-        <Route exact path='/map/:budget/:selectedDate/:where' component={Map} />
+        <Route exact path='/map' component={Map} />
         <Route exact path='/profile' component={Profile} />
 
         // 885e71b28d33436eb32b48ffe7e45cee91e29ef3

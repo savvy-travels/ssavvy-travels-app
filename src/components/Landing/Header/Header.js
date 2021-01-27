@@ -8,8 +8,12 @@ import axios from 'axios'
 
 function Header(props) {
     const [open, setOpen] = useState(false)
+    const budget = 'Whats Your Budget?'
+    const selectedDate = 'When?'
+    const where = 'From Where?'
 
     useEffect(() => {
+        //axios.get(user)//
         setOpen(false)
     }, [])
 
@@ -39,7 +43,7 @@ function Header(props) {
             <div className={open ? 'pop-menu-visible' : 'pop-menu'} >
                 <div className='nav-items'>
                     <NavLink onClick={() => setOpen(false)} className='list-item' style={{ textDecoration: 'none', color: '#fcfffd' }} to='/profile'>View Profile</NavLink>
-                    <NavLink onClick={() => setOpen(false)} className='list-item' style={{ textDecoration: 'none', color: '#fcfffd' }} to='/map'>View Map</NavLink>
+                    <NavLink onClick={() => setOpen(false)} className='list-item' style={{ textDecoration: 'none', color: '#fcfffd' }} to={`/map/${budget}/${selectedDate}/${where}`}>View Map</NavLink>
                 </div>
                 <h3 onClick={() => userLogout()}>Logout</h3>
             </div>
@@ -49,9 +53,9 @@ function Header(props) {
 
 function mapStateToProps(reduxState) {
     return {
-        username: reduxState.username,
-        preferred: reduxState.preferred,
-        isLoggedIn: reduxState.isLoggedIn
+        username: reduxState.userReducer.username,
+        preferred: reduxState.userReducer.preferred,
+        isLoggedIn: reduxState.userReducer.isLoggedIn
     }
 }
 
