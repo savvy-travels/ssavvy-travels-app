@@ -121,6 +121,7 @@ function Landing(props) {
 
   const deals = [flightCards[0], flightCards[1], flightCards[2]]
 
+  console.log(long)
 
   return (
     <div className='landing'>
@@ -151,6 +152,7 @@ function Landing(props) {
         <ClipLoader color={'#cae00d'} />}
       </>
 
+      <MiniMap/>
 
       
 
