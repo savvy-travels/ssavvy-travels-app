@@ -17,6 +17,7 @@ export function updateLocation(location) {
     }
 }
 export function newSearch(search) {
+    console.log(search)
     return {
         type: NEW_SEARCH,
         payload: search

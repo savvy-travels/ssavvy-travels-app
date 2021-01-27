@@ -13,6 +13,7 @@ function Header(props) {
     const where = 'From Where?'
 
     useEffect(() => {
+        //axios.get(user)//
         setOpen(false)
     }, [])
 
@@ -52,9 +53,9 @@ function Header(props) {
 
 function mapStateToProps(reduxState) {
     return {
-        username: reduxState.username,
-        preferred: reduxState.preferred,
-        isLoggedIn: reduxState.isLoggedIn
+        username: reduxState.userReducer.username,
+        preferred: reduxState.userReducer.preferred,
+        isLoggedIn: reduxState.userReducer.isLoggedIn
     }
 }
 
