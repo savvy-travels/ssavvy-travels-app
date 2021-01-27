@@ -1,12 +1,14 @@
-import React, {useState, } from 'react'
+import React, {useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, {Marker} from 'react-map-gl'
 import locIcon from './loc-icon.png'
 
-function Map (){
+function Map (props){
+    const {lat, long} = props
+    console.log(props)
     const [viewport, setViewport] = useState({
-        latitude: 39.742043,
-        longitude: -104.991531,
+        latitude: 39.5340,
+        longitude: -104.9373,
         width: '100vw',
         height: '100vh',
         zoom: 4
