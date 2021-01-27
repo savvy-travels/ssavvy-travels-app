@@ -10,7 +10,7 @@ export default (
     <Switch>
         <Route exact path='/map' component={Map} />
         <Route exact path='/profile' component={Profile} />
-        <Route exact path='/api' component={Apisetup} />
+        {/* <Route exact path='/api' component={Apisetup} /> */}
         <Route path='/' component={Landing} />
         <Route />
     </Switch>
