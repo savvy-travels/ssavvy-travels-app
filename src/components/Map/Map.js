@@ -1,4 +1,4 @@
-import React, { useState, } from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import './map.css'

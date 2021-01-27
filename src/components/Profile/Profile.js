@@ -7,22 +7,23 @@ import Header from "../Landing/Header/Header"
 
 const Profile = (props) => {
     const [locations, setLocations] = useState([])
-
-    useEffect(() => {
-        axios
-            .get('/api/locations/')
-            .then((res) => {
-                setLocations(res.data)
-            })
+    
+    useEffect (()=> {
+        axios.get('/api/locations')
+        .then((res) => {
+            setLocations(res.data)
+        })
     }, [])
 
-    const locationsMapped = locations.map((location) => {
+    const locationsMapped =  locations.map((location) => {
         return (
             <div className='locs-container'>
                 <p>{location.location}</p>
             </div>
         )
     })
+    
+    console.log(locations)
     return (
         <div>
             <Header />

@@ -9,7 +9,7 @@ module.exports = {
     getLocation: async(req,res) => {
         const db = req.app.get('db')
         const {id} = req.session.user
-        const [locations] = await db.locations.get_locations(id)
+        const locations = await db.locations.get_locations(id)
         res.status(200).send(locations)
     }
 }

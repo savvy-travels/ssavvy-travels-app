@@ -6,6 +6,8 @@ import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
+import Map from '../Map/Map'
+import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
 function Landing(props) {
@@ -14,13 +16,12 @@ function Landing(props) {
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
 
   const [cities, setCities] = useState([])
-  const [lat, setLat] = useState('')
-  const [long, setLong] = useState('')
+  const [lat, setLat] = useState()
+  const [long, setLong] = useState()
   const [location, setLocation] = useState('')
   const [airports, setAirports] = useState([])
   const [quotes, setQuotes] = useState([])
   const [places, setPlaces] = useState([])
-  const [routes, setRoutes] = useState([])
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
 
@@ -86,17 +87,9 @@ function Landing(props) {
       )
   }
 
-  const getSession = () => {
-    axios.post(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/pricing/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere}`, {
-      headers: {
-        'x-rapidapi-key': `${skyscannerKey}`,
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    })
-  }
 
-  const getFlights = () => {
-    axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/anytime`, {
+   const getFlights = () => {
+    axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
       headers: {
         'x-rapidapi-key': `${skyscannerKey}`
       }
@@ -104,7 +97,6 @@ function Landing(props) {
       setQuotes(res.data.Quotes)
       setPlaces(res.data.Places)
       setCarriers(res.data.Carriers)
-      setRoutes(res.data.Routes)
     })
   }
 
@@ -150,10 +142,24 @@ function Landing(props) {
         {deals}
       </div>
 
+      <>
+        {long ?
+            <Map
+            long={long}
+            lat={lat}/>
+        : 
+        <ClipLoader color={'#cae00d'} />}
+      </>
+
+
+      
+
     </div>
   )
 
 }
+
+
 
 function mapStateToProps(reduxState) {
   return {
