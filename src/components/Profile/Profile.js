@@ -16,6 +16,9 @@ const Profile = (props) => {
         })
     }, [])
 
+    console.log(locations)
+
+
     const locationsMapped =  locations.map((location) => {
         return (
             <div className='locs-container'>
