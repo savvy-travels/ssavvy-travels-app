@@ -142,14 +142,14 @@ function Landing(props) {
         {deals}
       </div>
 
-      <>
+      {/* <>
         {long ?
             <Map
             long={long}
             lat={lat}/>
         : 
         <ClipLoader color={'#cae00d'} />}
-      </>
+      </> */}
 
 
       

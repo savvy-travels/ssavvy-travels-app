@@ -1,7 +1,7 @@
 module.exports = {
-    sendEmail: (req,res) => {
+    sendEmail: async(req,res) => {
         const {message, title, email} = req.body
-                const transporter = req.app.get('transporter')
+                const transporter = await req.app.get('transporter')
                 transporter.sendMail({
                     from: 'savvytravels11@gmail.com',
                     to: email,
