@@ -15,6 +15,8 @@ function Landing(props) {
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
 
   const [cities, setCities] = useState([])
+  const [lat, setLat] = useState('')
+  const [long, setLong] = useState('')
   const [location, setLocation] = useState('')
   const [airports, setAirports] = useState([])
   const [quotes, setQuotes] = useState([])
@@ -28,7 +30,9 @@ function Landing(props) {
     async function getLocation() {
       const location = await axios.get(
         `http://api.ipstack.com/check?access_key=${ipstackKey}`);
-      setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`) 
+         setLat(`${location.data.latitude.toFixed(4)}`)
+         setLong(`${location.data.longitude.toFixed(4)}`)
+         setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`) 
     }
     getLocation();
   }, []);
