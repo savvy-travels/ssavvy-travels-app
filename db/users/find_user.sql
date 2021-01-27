@@ -1,1 +1,1 @@
-SELECT * FROM savvy_travels_users WHERE username = $1;
+SELECT * FROM savvy_travels_users WHERE email = $1;

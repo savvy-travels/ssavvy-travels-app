@@ -25,3 +25,9 @@
   border-bottom: 30px solid transparent;
   border-top: 30px solid #65b0b2;
 }
+
+.deals-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

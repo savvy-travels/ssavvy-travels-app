@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom'
 import Landing from './components/Landing/Landing'
 import Map from './components/Map/Map'
 import Profile from './components/Profile/Profile'
-import Apisetup from './components/Apisetup'
 
 
 
