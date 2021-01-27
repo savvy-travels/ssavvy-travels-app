@@ -15,14 +15,9 @@ const Profile = (props) => {
         })
     }, [])
 
-<<<<<<< HEAD
     console.log(locations)
 
-
-    const locationsMapped =  locations.map((location) => {
-=======
     const locationsMapped =  locations.map(location => {
->>>>>>> 885e71b28d33436eb32b48ffe7e45cee91e29ef3
         return (
             <div className='locs-container'>
                 <p>{location.location}</p>
