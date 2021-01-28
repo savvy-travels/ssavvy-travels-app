@@ -9,7 +9,7 @@ const prefAirportCtrl = require('./controllers/preferredAirport')
 const airportCtrl = require('./controllers/airports')
 const authMiddleware = require('./middleware/verifyUser')
 const nodemailer = require('nodemailer')
-// const nodemailerCtrl = require('./controllers/nodemailer')
+
 
 
 const app = express()
@@ -26,7 +26,6 @@ app.post('/api/auth/register', userCtrl.register)
 app.post('/api/auth/login', userCtrl.login)
 app.post('/api/auth/logout', userCtrl.logout)
 
-// app.post('/api/confirmation', nodemailerCtrl.sendEmail)
 app.use(authMiddleware.isAuthenticated)
 app.get('/api/auth/user', userCtrl.getUser)
 
