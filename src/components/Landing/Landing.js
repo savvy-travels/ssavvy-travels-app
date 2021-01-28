@@ -29,11 +29,11 @@ function Landing(props) {
   //gets location of user based on IP address
   useEffect(() => {
     async function getLocation() {
-      const location = await axios.get(
+      const location = await axios.post(
         `https://www.googleapis.com/geolocation/v1/geolocate?key=${googleKey}`);
-      setLat(location.location.lat)
-      setLong(location.location.lng)
-      setLocation(`${location.location.lat.toFixed(4)}${location.location.lng.toFixed(4)}`)
+      setLat(location.data.location.lat)
+      setLong(location.data.location.lng)
+      setLocation(`${location.data.location.lat.toFixed(4)}${location.data.location.lng.toFixed(4)}`)
     }
     getLocation();
   }, []);
