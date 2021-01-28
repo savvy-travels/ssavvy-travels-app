@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { loginUser } from '../../../Redux/userReducer'
 import { connect } from 'react-redux'
+import { ClipLoader } from 'react-spinners'
 
 import './auth.css'
 
@@ -37,7 +38,7 @@ function Signup(props) {
         setLoading(true)
         const message = `Confirmation ${username}`
         const title = 'Confirmation'
-        // const image = 'https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png'
+
         axios.post('/api/auth/register', { email, username, password, preferred, message, title}).then(res => {
             console.log('Hit this')
             setLoading(false)
@@ -45,42 +46,52 @@ function Signup(props) {
             props.loginUser(res.data)
             props.history.push('/')
         }).catch(err => {
+            setLoading(false)
             setErrorMessage(err.response.data)
         })
     }
 
 
     return (
-        <form className='register-field'>
-            <div className='register-input-field'>
-                <div className='register-header'>
-                    <h2>Register</h2>
-                    <h4>Already a member?<h4><Link style={{ textDecoration: 'none', color: '#cae00d' }} to='/login'>Login</Link></h4></h4>
+        <>
+            {loading ?
+                <div className='login-field'>
+                    <h1 style={{ color: '#cae00d' }}>Creating your profile...</h1>
+                    <ClipLoader color={'#cae00d'} />
                 </div>
-                <input onChange={(e) => setEmail(e.target.value)}
-                    className={emptyError ? 'register-error' : 'register-inputs'}
-                    type='email'
-                    placeholder='Email' />
-                <input onChange={(e) => setUsername(e.target.value)}
-                    className={emptyError ? 'register-error' : 'register-inputs'}
-                    type='text'
-                    placeholder='Username' />
-                <input onChange={(e) => setPreferred(e.target.value)}
-                    className={emptyError ? 'register-error' : 'register-inputs'}
-                    type='text'
-                    placeholder='Preferred Airport' />
-                <input onChange={(e) => setPassword(e.target.value)}
-                    className={emptyError || passError ? 'register-error' : 'register-inputs'}
-                    type='password'
-                    placeholder='Password' />
-                <input onChange={(e) => setConfirmPass(e.target.value)}
-                    className={emptyError || passError ? 'register-error' : 'register-inputs'}
-                    type='password'
-                    placeholder='Confirm Password' />
-                {errorMessage && <h5 className='error-message'>{errorMessage}</h5>}
-                <button onClick={() => registerUser()} className='register-button'>Signup</button>
-            </div>
-        </form>
+                :
+                <form className='register-field'>
+                    <div className='register-input-field'>
+                        <div className='register-header'>
+                            <h2>Register</h2>
+                            <h4>Already a member?<h4><Link style={{ textDecoration: 'none', color: '#cae00d' }} to='/login'>Login</Link></h4></h4>
+                        </div>
+                        <input onChange={(e) => setEmail(e.target.value)}
+                            className={emptyError ? 'register-error' : 'register-inputs'}
+                            type='email'
+                            placeholder='Email' />
+                        <input onChange={(e) => setUsername(e.target.value)}
+                            className={emptyError ? 'register-error' : 'register-inputs'}
+                            type='text'
+                            placeholder='Username' />
+                        <input onChange={(e) => setPreferred(e.target.value)}
+                            className={emptyError ? 'register-error' : 'register-inputs'}
+                            type='text'
+                            placeholder='Preferred Airport' />
+                        <input onChange={(e) => setPassword(e.target.value)}
+                            className={emptyError || passError ? 'register-error' : 'register-inputs'}
+                            type='password'
+                            placeholder='Password' />
+                        <input onChange={(e) => setConfirmPass(e.target.value)}
+                            className={emptyError || passError ? 'register-error' : 'register-inputs'}
+                            type='password'
+                            placeholder='Confirm Password' />
+                        {errorMessage && <h5 className='error-message'>{errorMessage}</h5>}
+                        <button onClick={() => registerUser()} className='register-button'>Signup</button>
+                    </div>
+                </form>
+            }
+        </>
     )
 }
 export default withRouter(connect(null, { loginUser })(Signup))
