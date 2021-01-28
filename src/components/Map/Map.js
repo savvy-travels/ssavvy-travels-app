@@ -24,9 +24,9 @@ function Map(props) {
         <div className='map-view'>
             <div className='lower-map-view'>
                 <div className='controllers-container'>
-                    <div className='filter-container'>
+                    {/* <div className='filter-container'>
 
-                    </div>
+                    </div> */}
                     <div className='results-search-container'>
                         <SearchField />
                         <div className='line'></div>

@@ -24,7 +24,7 @@ function Header(props) {
     return (
         <>
             <header>
-                <Link to='/'><img className='header-logo' src='https://images.vexels.com/media/users/3/144290/isolated/preview/c48f8a4d4694861b7961c16e0ff565de-arrow-wing-travel-logo-by-vexels.png' alt='logo' /></Link>
+                <Link to='/'><img className='header-logo' src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png' alt='logo' /></Link>
                 {props.isLoggedIn ?
                     <div className='user-nav'>
                         <h1>{props.username}</h1>
