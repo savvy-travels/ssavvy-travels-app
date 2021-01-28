@@ -15,6 +15,22 @@ function MiniMap(props) {
     })
     const [selectedCity, setSelectedCity] = useState(null)
 
+    React.useEffect(() => {
+        window.addEventListener('resize', () => {
+            setViewport({
+                latitude: lat,
+                longitude: long,
+                width: '100%',
+                height: '100%',
+                zoom: 3
+            })
+        })
+
+        return () => {
+            window.removeEventListener('resize')
+        }
+    }, [])
+
     //Search State//
     // const [budget, setBudget] = useState(`$${props.match.params.budget}`)
     // const [where, setWhere] = useState(props.match.params.where)
