@@ -9,16 +9,23 @@ function Login(props) {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
 
 
     function userLogin() {
+        setErrorMessage('')
+        if (email === ' ' || password === '') {
+            return setErrorMessage('Missing Required Fields')
+        }
         setLoading(true)
         axios.post('/api/auth/login', { email, password }).then(res => {
             props.loginUser(res.data)
             props.history.push('/')
             setLoading(false)
         }).catch(err => {
-            console.log(err.response.data)
+            setLoading(false)
+            setErrorMessage(err.response.data)
         })
     }
     return (
@@ -43,6 +50,7 @@ function Login(props) {
                             className='register-inputs'
                             type='password'
                             placeholder='Password' />
+                        {errorMessage && <h5 className='error-message'>{errorMessage}</h5>}
                         <button onClick={() => userLogin()} className='register-button'>Login</button>
                     </div>
                 </form>

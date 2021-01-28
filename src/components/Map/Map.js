@@ -87,4 +87,14 @@ function Map(props) {
     )
 }
 
-export default withRouter(Map)
+function mapStateToProps(reduxState) {
+    return {
+        budget: reduxState.searchReducer.budget,
+        location: reduxState.searchReducer.location,
+        departureDate: reduxState.searchReducer.departureDate,
+        arrivalDate: reduxState.searchReducer.arrivalDate
+    }
+}
+
+
+export default withRouter(connect(mapStateToProps, { newSearch })(Map))

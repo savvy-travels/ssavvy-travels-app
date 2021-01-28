@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { newSearch } from '../../../Redux/searchReducer'
 import './newSearch.css'
 
 function NewSearch(props) {
     const [budget, setBudget] = useState('')
+    const [departureDate, setDepartureDate] = useState(undefined)
+    const [arrivalDate, setArrivalDate] = useState(undefined)
+    const [location, setLocation] = useState(undefined)
     const [next, setNext] = useState(false)
     const [selectedDate, setSelectedDate] = useState(undefined)
     const [where, setWhere] = useState(undefined)
@@ -36,4 +41,4 @@ function NewSearch(props) {
     )
 }
 
-export default withRouter(NewSearch)
+export default withRouter(connect(null, { newSearch })(NewSearch))

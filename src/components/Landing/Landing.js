@@ -15,6 +15,8 @@ function Landing(props) {
   const ipstackKey = process.env.REACT_APP_IPSTACK_KEY;
   const geoDbKey = process.env.REACT_APP_GEODB_KEY;
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
+  const googleKey = process.env.REACT_APP_GOOGLEMAPS_KEY
+  const mapQuestKey = process.env.REACT_APP_MAPQUEST_KEY
 
   const [cities, setCities] = useState([])
   const [lat, setLat] = useState()
@@ -25,6 +27,7 @@ function Landing(props) {
   const [places, setPlaces] = useState([])
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
+  // const [destinationCoords, setDestinationCoords] = useState([])
 
   //gets location of user based on IP address
   useEffect(() => {
@@ -63,19 +66,17 @@ function Landing(props) {
   //Filters by cities with minimum population of 250,000 in a radius of 100 miles.
   const getCities = () => {
     axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=250000&limit=5&offset=0&radius=100&sort=-population`,
-      {
-        headers: {
-          "x-rapidapi-key": `${geoDbKey}`,
+    {
+      headers: {
+        "x-rapidapi-key": `${geoDbKey}`,
         },
-      }
-    )
-      .then(res => setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city)))
-    //sets the value of cities to be only the city name, filters out results of non-cities
-  };
-
-  //gets airports from an api call that searches nearest the cities defined in getCities
-  const getAirports = (city) => {
-    axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5`,
+      }).then(res => setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city)))
+      //sets the value of cities to be only the city name, filters out results of non-cities
+    };
+    
+    //gets airports from an api call that searches nearest the cities defined in getCities
+    const getAirports = (city) => {
+      axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5`,
       {
         headers: {
           'x-rapidapi-key': '293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7',
@@ -84,14 +85,12 @@ function Landing(props) {
       }).then(res => {
         setAirports(res.data.items)
         setAirport(res.data.items.map(airport => airport.iata))
-      }
-      )
-  }
-
-
-   const getFlights = () => {
-    axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
-      headers: {
+      })
+    }    
+    
+    const getFlights = () => {
+      axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
+        headers: {
         'x-rapidapi-key': `${skyscannerKey}`
       }
     }).then((res) => {
@@ -103,13 +102,33 @@ function Landing(props) {
 
   // console.log(quotes)
 
+  //runs getCities function if the location is defined
+  useEffect(() => {
+    if (location.length > 0) {
+      getCities(location)
+    }
+  }, [location]);
+  
+  //gets airports if cities is defined
+  useEffect(() => {
+    if (cities.length > 0) {
+      getAirports(cities[0])
+    }
+  }, [cities])
+  
+  useEffect(() => {
+    if (airport.length > 0) {
+      getFlights(airports)
+    }
+  }, [airport]) 
+    
   const flights = quotes.map((quote) => {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-
-
+    
     return { ...quote, ...places[destinationId], ...carriers[carrierId] }
   })
+  
 
   const flightCards = flights.map((flight) => {
     return (

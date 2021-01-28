@@ -38,6 +38,8 @@ app.get('/api/getPreferred', prefAirportCtrl.getPreferred)
 app.post('/api/saveAirports', airportCtrl.saveAirports)
 app.get('/api/getAirports', airportCtrl.getAirports)
 
+
+
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -56,6 +58,7 @@ massive({
     }
 }).then(dbInstance => {
     app.set('db', dbInstance)
+    app.set('transporter', transporter)
     console.log('DB Ready')
     app.listen(SERVER_PORT, () => console.log(`Running on ${SERVER_PORT}`))
 })

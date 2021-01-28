@@ -1,0 +1,110 @@
+.search-fields{
+    padding: 1rem 0px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    height:fit-content;
+}
+.search-fields>input{
+    border: 1px solid #767776;
+    border-radius: 3px;
+    height: 2rem;
+    margin-bottom: 1rem;
+    font-family: Montserrat;
+    font-weight: 300;
+}
+.search-fields>input:hover{
+    outline: 1px solid #393e41;
+
+}
+.search-fields>input:focus{
+    outline: 2px solid #cae00d;
+}
+.search-fields>button{
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid gray;
+    transition: all ease .25s;
+    margin-bottom: 1rem;
+}
+.search-fields>button:hover{
+    background-color: #cae00d;
+    cursor: pointer;
+    border: 1px solid #cae00d;
+}
+.when-map-inputs{
+    display: flex;
+    margin-bottom: 1rem;
+}
+.when-map-inputs>input{
+    height: 1.5rem;
+    font-family: Montserrat;
+    font-weight: 300;
+}
+.when-map-inputs>input:hover{
+    outline: 1px solid #393e41;
+}
+.when-map-inputs>input:focus{
+    outline: 2px solid #cae00d;
+}
+.vert-line{
+    border: .5px solid #65b0b2;
+    margin-left: .25rem;
+    margin-right: .25rem;
+}
+
+.flight-details{
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1rem;
+}
+.round-oneWay{
+    width: 5rem;
+    height: 3rem;
+    margin: 0px;
+    margin-right: .6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: .9rem;
+    font-family: montserrat;
+    font-weight: 300;
+}
+.round-oneWay>p{
+    margin: 0px;
+    padding: 0px;
+    width: fit-content;
+}
+.round-oneWay>input{
+    margin: auto;
+
+}
+.round-oneWay>input:focus{
+    outline: 2px solid #cae00d;
+}
+.slide-bar{
+    margin-top: 3px;
+    height: 1.5rem;
+    width: 3rem;
+    border: 1px solid#393e41;
+    border-radius: 50px;
+}
+
+.slider-ball-left{
+    box-sizing: border-box;
+    margin-right: auto;
+    height: 24px;
+    width: 24px;
+    /* border: 1px solid #393e41; */
+    border-radius: 50%;
+    background-color: #65b0b2;
+}
+
+.slider-ball-right{
+    box-sizing: border-box;
+    margin-left: auto;
+    height: 24px;
+    width: 24px;
+    /* border: 1px solid #393e41; */
+    border-radius: 50%;
+    background-color: #65b0b2;
+}
