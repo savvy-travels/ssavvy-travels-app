@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
 import { withRouter } from 'react-router-dom'
 import './searchField.css'
 
 const SearchField = (props) => {
+    //Details Filter//
+    const [round, setRound] = useState(true)
+    //Search Fields//
     const [budget, setBudget] = useState(props.budget)
     const [location, setLocation] = useState(props.location)
     const [departureDate, setDepartureDate] = useState(props.departureDate)
@@ -16,6 +19,17 @@ const SearchField = (props) => {
 
     return (
         <form className='search-fields'>
+            <div className='flight-details'>
+                <div className='round-oneWay'>
+                    <h5>Round</h5>
+                    <div className='slide-bar'>
+                        <div onClick={() => setRound(!round)} className={round ? 'slider-ball-left' : 'slider-ball-right'}></div>
+                    </div>
+                    <h5>One Way</h5>
+                </div>
+                <div>Passengers</div>
+                <div>OneWay/Round</div>
+            </div>
             <input onChange={(e) => setBudget(e.target.value)}
                 className='map-budget-input'
                 value={budget}
@@ -29,18 +43,18 @@ const SearchField = (props) => {
             <div className='when-map-inputs'>
                 <input onChange={(e) => setDepartureDate(e.target.value)}
                     value={departureDate}
-                    className='airport-date-inputs'
+                    id='depart-date-input'
                     type='Date'
                     placeholder='When' />
                 <div className='vert-line'></div>
                 <input onChange={(e) => setArrivalDate(e.target.value)}
                     value={arrivalDate}
-                    className='airport-date-inputs'
+                    id='arrive-date-input'
                     type='Date'
                     placeholder='When' />
             </div>
             <button onClick={() => searchUpdate()}>Search</button>
-        </form>
+        </form >
     )
 }
 
