@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
+import {airportSearch, newSearch} from '../../Redux/searchReducer'
 import { connect } from "react-redux";
 import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
@@ -26,19 +27,20 @@ function Landing(props) {
   const [places, setPlaces] = useState([])
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
+  const [closestAirports, setClosestAirports] = useState([])
   // const [destinationCoords, setDestinationCoords] = useState([])
-
-  console.log(location, cities)
   
   //performs api call to get nearest cities to the latitude and longitude from getLocation useEffect.
   //Filters by cities with minimum population of 250,000 in a radius of 100 miles.
   const getCities = () => {
-    axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=250000&limit=5&offset=0&radius=100&sort=-population`,
+    axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=100000&limit=5&offset=0&radius=100&sort=-population`,
     {
       headers: {
         "x-rapidapi-key": `${geoDbKey}`,
         },
-      }).then(res => setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city)))
+      }).then(res => {
+        setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city))
+      })
       //sets the value of cities to be only the city name, filters out results of non-cities
     };
     
@@ -55,6 +57,16 @@ function Landing(props) {
         setAirport(res.data.items.map(airport => airport.iata))
       })
     }    
+
+    const getClosestAirports = () => {
+      console.log(cities)
+      axios.get(`/api/allAirports/${cities[0]}`).then(res => { 
+         console.log(res.data[0].airports)
+         props.airportSearch(res.data)
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
     
     const getFlights = () => {
       axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
@@ -90,6 +102,7 @@ function Landing(props) {
   useEffect(() => {
     if (cities.length > 0) {
       getAirports(cities[0])
+      getClosestAirports(cities[0])
     }
   }, [cities])
   
@@ -197,4 +210,4 @@ function mapStateToProps(reduxState) {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Landing));
+export default withRouter(connect(mapStateToProps,{airportSearch})(Landing));

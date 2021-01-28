@@ -7,6 +7,7 @@ const userCtrl = require('./controllers/user')
 const locationCtrl = require('./controllers/location')
 const prefAirportCtrl = require('./controllers/preferredAirport')
 const airportCtrl = require('./controllers/airports')
+const listCtrl = require('./controllers/airportList')
 const authMiddleware = require('./middleware/verifyUser')
 const nodemailer = require('nodemailer')
 
@@ -26,6 +27,8 @@ app.post('/api/auth/register', userCtrl.register)
 app.post('/api/auth/login', userCtrl.login)
 app.post('/api/auth/logout', userCtrl.logout)
 
+app.get('/api/allAirports/:cities', listCtrl.getAirportList)
+
 app.use(authMiddleware.isAuthenticated)
 app.get('/api/auth/user', userCtrl.getUser)
 
@@ -37,7 +40,6 @@ app.get('/api/getPreferred', prefAirportCtrl.getPreferred)
 
 app.post('/api/saveAirports', airportCtrl.saveAirports)
 app.get('/api/getAirports', airportCtrl.getAirports)
-
 
 
 const transporter = nodemailer.createTransport({
