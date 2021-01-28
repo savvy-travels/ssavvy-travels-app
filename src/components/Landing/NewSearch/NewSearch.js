@@ -10,6 +10,7 @@ function NewSearch(props) {
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
     const [next, setNext] = useState(false)
+    console.log(props.airports)
 
 
 
@@ -17,6 +18,9 @@ function NewSearch(props) {
         props.newSearch({ budget, location, departureDate, arrivalDate })
         props.history.push('/map')
     }
+
+    const airports = props.airports.map(airport => {return <option value={airport.code} >{airport.code} - {airport.name}</option>})
+    
     return (
         <span className='search-field'>
             <div className='slogan-container'>
@@ -27,7 +31,7 @@ function NewSearch(props) {
                 <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
-                        <input onChange={(e) => setLocation(e.target.value)} type='select' placeholder='From Where?' />
+                        <select type='select' onChange={(e) => setLocation(e.target.value)} placeholder='From Where?'><option value='null' unselectable >Choose your departure airport</option>{airports}</select>
                         <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
                         <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
                     </div>
@@ -41,4 +45,10 @@ function NewSearch(props) {
     )
 }
 
-export default withRouter(connect(null, { newSearch })(NewSearch))
+function mapStateToProps(reduxState){
+    return{
+        airports: reduxState.searchReducer.airports
+    }
+}
+
+export default withRouter(connect(mapStateToProps, { newSearch })(NewSearch))
