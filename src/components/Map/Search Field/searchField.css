@@ -1,5 +1,5 @@
 .search-fields{
-    padding: .6rem 0px;
+    padding: 1rem 0px 0px 0px;
     display: flex;
     flex-direction: column;
     height:fit-content;
@@ -24,6 +24,7 @@
     margin-right: auto;
     border: 1px solid gray;
     transition: all ease .25s;
+    margin-bottom: 1rem;
 }
 .search-fields>button:hover{
     background-color: #cae00d;
