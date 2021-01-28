@@ -8,14 +8,17 @@
   justify-content: center;
   width: 90%;
   height: 100%;
-  /* margin: 30px; */
 }
 
 .mini-map-side-bar {
   height: 90%;
-  width: 30%;
+  width: 40%;
   background-color: white;
   border: 1px solid #0b3840;
+  box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  z-index: 1;
 }
 
 .mini-map {
