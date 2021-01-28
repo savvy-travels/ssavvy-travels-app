@@ -14,6 +14,7 @@ function Landing(props) {
   const ipstackKey = process.env.REACT_APP_IPSTACK_KEY;
   const geoDbKey = process.env.REACT_APP_GEODB_KEY;
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
+  const googleKey = process.env.REACT_APP_GOOGLEMAPS_KEY
 
   const [cities, setCities] = useState([])
   const [lat, setLat] = useState()
@@ -29,11 +30,10 @@ function Landing(props) {
   useEffect(() => {
     async function getLocation() {
       const location = await axios.get(
-        `http://api.ipstack.com/check?access_key=${ipstackKey}`);
-      // console.log(location.data)
-      setLat(`${location.data.latitude.toFixed(4)}`)
-      setLong(`${location.data.longitude.toFixed(4)}`)
-      setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`)
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=${googleKey}`);
+      setLat(location.location.lat)
+      setLong(location.location.lng)
+      setLocation(`${location.location.lat.toFixed(4)}${location.location.lng.toFixed(4)}`)
     }
     getLocation();
   }, []);
@@ -106,7 +106,6 @@ function Landing(props) {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
 
-
     return { ...quote, ...places[destinationId], ...carriers[carrierId] }
   })
 
@@ -117,6 +116,12 @@ function Landing(props) {
         <h1>${flight.MinPrice}</h1>
       </div>
     )
+  })
+
+  const mapMarkers = flights.map((flight) => {
+    return (
+      axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=Ma3s45sFps3AVCfBEKcfOOjmVvlG1ho4&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1&location=${flight.CityName}`).then(res => console.log(res.results))
+      )
   })
 
   const deals = [flightCards[0], flightCards[1], flightCards[2]]
