@@ -19,17 +19,7 @@ const SearchField = (props) => {
 
     return (
         <form className='search-fields'>
-            <div className='flight-details'>
-                <div className='round-oneWay'>
-                    <h5>Round</h5>
-                    <div className='slide-bar'>
-                        <div onClick={() => setRound(!round)} className={round ? 'slider-ball-left' : 'slider-ball-right'}></div>
-                    </div>
-                    <h5>One Way</h5>
-                </div>
-                <div>Passengers</div>
-                <div>OneWay/Round</div>
-            </div>
+
             <input onChange={(e) => setBudget(e.target.value)}
                 className='map-budget-input'
                 value={budget}
@@ -52,6 +42,22 @@ const SearchField = (props) => {
                     id='arrive-date-input'
                     type='Date'
                     placeholder='When' />
+            </div>
+            <div className='flight-details'>
+                <div className='round-oneWay'>
+                    {round ? <p>round</p> : <p>one way</p>}
+                    <div className='slide-bar'>
+                        <div onClick={() => setRound(!round)} className={round ? 'slider-ball-left' : 'slider-ball-right'}></div>
+                    </div>
+                </div>
+                <div className='round-oneWay'>
+                    <p>direct</p>
+                    <input type='checkbox' />
+                </div>
+                <div className='round-oneWay'>
+                    <p>passengers</p>
+                    <input type='number' min='1' max='10' />
+                </div>
             </div>
             <button onClick={() => searchUpdate()}>Search</button>
         </form >
