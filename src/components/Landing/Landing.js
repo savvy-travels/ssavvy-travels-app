@@ -27,9 +27,6 @@ function Landing(props) {
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
   const [destinationCoords, setDestinationCoords] = useState([])
-  const [markers, setMarkers] = useState([])
-  const [markers2, setMarkers2] = useState([])
-  const [markers3, setMarkers3] = useState([])
   
   //performs api call to get nearest cities to the latitude and longitude from getLocation useEffect.
   //Filters by cities with minimum population of 250,000 in a radius of 100 miles.
@@ -118,31 +115,35 @@ function Landing(props) {
   
   const deals = [flightCards[0], flightCards[1], flightCards[2]]  
 
-  // setMarkers(flights.map(flight => setMarkers(flight.CityName)))
+  const markers = flights.map(flight => flight.CityName)
+  let markers2 = []
+  let markers3 = []
   
-  // if (markers.length > 100) {
-  //     setMarkers2(markers.splice(markers.length / 2))
-  //   } else if (markers.length > 200) {
-  //     setMarkers2(markers.splice(markers.length / 3))
-  //     setMarkers3(markers2.splice(markers.length / 2))
-  //   }
+  if (markers.length > 100) {
+      markers2 = (markers.splice(markers.length / 2))
+    } else if (markers.length > 200) {
+      markers2 = markers.splice(markers.length / 3)
+      markers3= markers2.splice(markers.length / 2)
+    }
     
-  // useEffect (() => {
-  //   if(markers.length > 0) {
-  //     getDestinationCoords()
-  //     console.log(destinationCoords) }
-  // }, [markers])
-  
-
-  //   const mapQuestParams = markers.map(city => `&location=${city}`)
-  //   const mapQuestParams2 = markers2.map(city => `&location=${city}`)
-  //   const mapQuestParams3 = markers3.map(city => `&location=${city}`)
+    const mapQuestParams = markers.map(city => `&location=${city}`)
+    const mapQuestParams2 = markers2.map(city => `&location=${city}`)
+    const mapQuestParams3 = markers3.map(city => `&location=${city}`)
     
-  //   const getDestinationCoords = async () => {  
-  //     await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams}`).then(res => setDestinationCoords(res.data.results))
-  //     if (mapQuestParams2.length > 0) await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams2}`).then(res => setDestinationCoords(...destinationCoords, res.data.results))
-  //     if (mapQuestParams2.length > 0) await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams3}`).then(res => setDestinationCoords(...destinationCoords, res.data.results))
-  //   }
+    const getDestinationCoords = async () => {  
+      axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams}`).then(res => setDestinationCoords(res.data))
+      // if (mapQuestParams2.length > 0) await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams2}`).then(res => setDestinationCoords(...destinationCoords, res.data.results))
+      // if (mapQuestParams2.length > 0) await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams3}`).then(res => setDestinationCoords(...destinationCoords, res.data.results))
+      console.log('test')
+    }
+    
+    useEffect ( () => {
+      if(markers.length > 0 ){
+        getDestinationCoords()
+        console.log(destinationCoords)
+      }
+    }, [markers])
+    
 
   
   return (
