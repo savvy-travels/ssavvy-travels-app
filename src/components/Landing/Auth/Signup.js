@@ -22,13 +22,13 @@ function Signup(props) {
     const [error, setError] = useState(false)
 
 // Write function to pass back information here
-    const  Confirmation = () => {
-        const message = `Confirmation ${username}`
-        const title = 'Confirmation'
-        axios.post('/api/confirmation', {message, title, email}).then(() => {
-            console.log('Email Sent')
-        }).catch((err) => console.log(err))
-    }
+    // const  Confirmation = () => {
+    //     const message = `Confirmation ${username}`
+    //     const title = 'Confirmation'
+    //     axios.post('/api/confirmation', {message, title, email}).then(() => {
+    //         console.log('Email Sent')
+    //     }).catch((err) => console.log(err))
+    // }
 
     function registerUser() {
         setPassError(false)
@@ -42,8 +42,11 @@ function Signup(props) {
             return setErrorMessage('Passwords do not match.')
         }
         setLoading(true)
-        axios.post('/api/auth/register', { email, username, password, preferred }).then(res => {
-            Confirmation()
+        const message = `Confirmation ${username}`
+        const title = 'Confirmation'
+        axios.post('/api/auth/register', { email, username, password, preferred, message, title }).then(res => {
+            console.log('Hit this')
+            // Confirmation()
             setLoading(false)
             setError(false)
             props.loginUser(res.data)

@@ -4,7 +4,7 @@ module.exports = {
     register: async (req, res) => {
         const db = req.app.get('db')
         console.log(req.body)
-        const { email, username, password, preferred } = req.body
+        const { email, username, password, preferred, message, title } = req.body
         const [existingUser] = await db.users.find_user([username])
         const [existingEmail] = await db.savvy_travels_users.find({email})
         if(existingUser && existingEmail){
@@ -21,6 +21,21 @@ module.exports = {
             const hash = bcrypt.hashSync(password, salt)
             const [newUser] = await db.users.create_user([email, username, hash, preferred])
             req.session.user = newUser
+            
+            const transporter = await req.app.get('transporter')
+            transporter.sendMail({
+                from: 'savvytravels11@gmail.com',
+                to: email,
+                subject: title,
+                text: message
+            },
+            function(err, info){
+                if(err){
+                    console.log(err)
+                }else {
+                    console.log('email sent:' + info.response)
+                }
+            })
 
             res.status(200).send(newUser)
         } catch (err) {
