@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { newSearch } from '../../Redux/searchReducer'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import './map.css'
+import SearchField from './Search Field/SearchField'
 
 function Map(props) {
     //Map State
@@ -17,10 +18,7 @@ function Map(props) {
     const [selectedCity, setSelectedCity] = useState(null)
 
     //Search State//
-    const [budget, setBudget] = useState(props.budget)
-    const [location, setLocation] = useState(props.location)
-    const [departureDate, setDepartureDate] = useState(props.departureDate)
-    const [arrivalDate, setArrivalDate] = useState(props.arrivalDate)
+
 
     return (
         <div className='map-view'>
@@ -30,14 +28,7 @@ function Map(props) {
 
                     </div>
                     <div className='results-search-container'>
-                        <div className='search-fields'>
-                            <input className='map-budget-input' contentEditable={false} onChange={(e) => setBudget(e.target.value)} value={budget} type='text' placeholder='Whats Your Budget?' />
-                            <div className='where-when-map-inputs'>
-                                <input onChange={(e) => setLocation(e.target.value)} value={location} className='airport-date-inputs' type='text' placeholder='From Where?' />
-                                <input onChange={(e) => setDepartureDate(e.target.value)} value={departureDate} className='airport-date-inputs' type='Date' placeholder='When' />
-                                <input onChange={(e) => setArrivalDate(e.target.value)} value={arrivalDate} className='airport-date-inputs' type='Date' placeholder='When' />
-                            </div>
-                        </div>
+                        <SearchField />
                         <div className='line'></div>
                         <div>
                             <h1>Mapped Results</h1>
