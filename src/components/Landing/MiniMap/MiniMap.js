@@ -24,7 +24,9 @@ function MiniMap(props) {
                 <div className='mini-map-container'>
 
                     <div className='mini-map-side-bar'>
-                        Suggested routes
+                        <div className='suggestion-title'>
+                            <h1>Suggested Trips</h1>
+                        </div>
                     </div>
                 
                     <div className='mini-map'>
@@ -33,7 +35,8 @@ function MiniMap(props) {
                             mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
                             mapStyle='mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp'
                             //allows us to drag map around and zoom in/out
-                            onViewportChange={(viewport) => { setViewport(viewport) }}>
+                            onViewportChange={(viewport) => { setViewport({...viewport}) }}
+                            >
                         </ReactMapGL>
                     </div>
                         
