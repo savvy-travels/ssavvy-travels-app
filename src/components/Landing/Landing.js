@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import "./landing.css";
@@ -27,6 +27,8 @@ function Landing(props) {
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
   // const [destinationCoords, setDestinationCoords] = useState([])
+
+  console.log(location, cities)
   
   //performs api call to get nearest cities to the latitude and longitude from getLocation useEffect.
   //Filters by cities with minimum population of 250,000 in a radius of 100 miles.
@@ -78,20 +80,20 @@ function Landing(props) {
   }, [])
 
   //runs getCities function if the location is defined
-  useCallback(() => {
+  useEffect(() => {
     if (location.length > 0) {
       getCities(location)
     }
   }, [location]);
   
   //gets airports if cities is defined
-  useCallback(() => {
+  useEffect(() => {
     if (cities.length > 0) {
       getAirports(cities[0])
     }
   }, [cities])
   
-  useCallback(() => {
+  useEffect(() => {
     if (airport.length > 0) {
       getFlights(airports)
     }
@@ -104,6 +106,7 @@ function Landing(props) {
     return { ...quote, ...places[destinationId], ...carriers[carrierId] }
   })
   
+
   const flightCards = flights.map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
@@ -137,18 +140,18 @@ function Landing(props) {
       
   //     destinationCoords =  axios.get(`/api/auth/users`).then(res => res.data)
       
-  //     // if (mapQuestParams2.length > 0) destinationCoords = (axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams2}`).then(res => ([...destinationCoords, res.data.results]))) 
+      // if (mapQuestParams2.length > 0) destinationCoords = (axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams2}`).then(res => ([...destinationCoords, res.data.results]))) 
       
-  //     // if (mapQuestParams3.length > 0) destinationCoords = axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams3}`).then(res => ([...destinationCoords, res.data.results]))
+      // if (mapQuestParams3.length > 0) destinationCoords = axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams3}`).then(res => ([...destinationCoords, res.data.results]))
   //     }
     
     
-  //   // useEffect ( () => {
-  //   //   if(flights.length > 0 ){
-  //   //     getDestinationCoords()
-  //   //     // console.log(destinationCoords)
-  //   //   }
-  //   // }, [flights])   
+    // useEffect ( () => {
+    //   if(flights.length > 0 ){
+    //     getDestinationCoords()
+        // console.log(destinationCoords)
+    //   }
+    // }, [flights])   
 
     
 
