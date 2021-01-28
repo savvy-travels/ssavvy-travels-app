@@ -15,6 +15,7 @@ function Landing(props) {
   const geoDbKey = process.env.REACT_APP_GEODB_KEY;
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
   const googleKey = process.env.REACT_APP_GOOGLEMAPS_KEY
+  const mapQuestKey = process.env.REACT_APP_MAPQUEST_KEY
 
   const [cities, setCities] = useState([])
   const [lat, setLat] = useState()
@@ -25,56 +26,26 @@ function Landing(props) {
   const [places, setPlaces] = useState([])
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
-
-  //gets location of user based on IP address
-  useEffect(() => {
-    async function getLocation() {
-      const location = await axios.post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=${googleKey}`);
-      setLat(location.data.location.lat)
-      setLong(location.data.location.lng)
-      setLocation(`${location.data.location.lat.toFixed(4)}${location.data.location.lng.toFixed(4)}`)
-    }
-    getLocation();
-  }, []);
-
-  //runs getCities function if the location is defined
-  useEffect(() => {
-    if (location.length > 0) {
-      getCities(location)
-    }
-  }, [location]);
-
-  //gets airports if cities is defined
-  useEffect(() => {
-    if (cities.length > 0) {
-      getAirports(cities[0])
-    }
-  }, [cities])
-
-  useEffect(() => {
-    if (airport.length > 0) {
-      getFlights(airports)
-    }
-  }, [airport])
-
+  const [destinationCoords, setDestinationCoords] = useState([])
+  const [markers, setMarkers] = useState([])
+  const [markers2, setMarkers2] = useState([])
+  const [markers3, setMarkers3] = useState([])
+  
   //performs api call to get nearest cities to the latitude and longitude from getLocation useEffect.
   //Filters by cities with minimum population of 250,000 in a radius of 100 miles.
   const getCities = () => {
     axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=250000&limit=5&offset=0&radius=100&sort=-population`,
-      {
-        headers: {
-          "x-rapidapi-key": `${geoDbKey}`,
+    {
+      headers: {
+        "x-rapidapi-key": `${geoDbKey}`,
         },
-      }
-    )
-      .then(res => setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city)))
-    //sets the value of cities to be only the city name, filters out results of non-cities
-  };
-
-  //gets airports from an api call that searches nearest the cities defined in getCities
-  const getAirports = (city) => {
-    axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5`,
+      }).then(res => setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city)))
+      //sets the value of cities to be only the city name, filters out results of non-cities
+    };
+    
+    //gets airports from an api call that searches nearest the cities defined in getCities
+    const getAirports = (city) => {
+      axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5`,
       {
         headers: {
           'x-rapidapi-key': '293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7',
@@ -83,14 +54,12 @@ function Landing(props) {
       }).then(res => {
         setAirports(res.data.items)
         setAirport(res.data.items.map(airport => airport.iata))
-      }
-      )
-  }
-
-
-  const getFlights = () => {
-    axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
-      headers: {
+      })
+    }    
+    
+    const getFlights = () => {
+      axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
+        headers: {
         'x-rapidapi-key': `${skyscannerKey}`
       }
     }).then((res) => {
@@ -100,15 +69,44 @@ function Landing(props) {
     })
   }
 
-  // console.log(quotes)
+  useEffect(() => {
+    async function getLocation() {
+      const location = await axios.post(
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=${googleKey}`);
+      setLat(location.data.location.lat)
+      setLong(location.data.location.lng)
+      setLocation(`${location.data.location.lat.toFixed(4)}${location.data.location.lng.toFixed(4)}`)
+    }
+    getLocation();
+  }, [])
 
+  //runs getCities function if the location is defined
+  useEffect(() => {
+    if (location.length > 0) {
+      getCities(location)
+    }
+  }, [location]);
+  
+  //gets airports if cities is defined
+  useEffect(() => {
+    if (cities.length > 0) {
+      getAirports(cities[0])
+    }
+  }, [cities])
+  
+  useEffect(() => {
+    if (airport.length > 0) {
+      getFlights(airports)
+    }
+  }, [airport]) 
+    
   const flights = quotes.map((quote) => {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-
+    
     return { ...quote, ...places[destinationId], ...carriers[carrierId] }
   })
-
+  
   const flightCards = flights.map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
@@ -116,17 +114,37 @@ function Landing(props) {
         <h1>${flight.MinPrice}</h1>
       </div>
     )
-  })
+  })  
+  
+  const deals = [flightCards[0], flightCards[1], flightCards[2]]  
 
-  const mapMarkers = flights.map((flight) => {
-    return (
-      axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=Ma3s45sFps3AVCfBEKcfOOjmVvlG1ho4&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1&location=${flight.CityName}`).then(res => console.log(res.results))
-      )
-  })
+  // setMarkers(flights.map(flight => setMarkers(flight.CityName)))
+  
+  // if (markers.length > 100) {
+  //     setMarkers2(markers.splice(markers.length / 2))
+  //   } else if (markers.length > 200) {
+  //     setMarkers2(markers.splice(markers.length / 3))
+  //     setMarkers3(markers2.splice(markers.length / 2))
+  //   }
+    
+  // useEffect (() => {
+  //   if(markers.length > 0) {
+  //     getDestinationCoords()
+  //     console.log(destinationCoords) }
+  // }, [markers])
+  
 
-  const deals = [flightCards[0], flightCards[1], flightCards[2]]
+  //   const mapQuestParams = markers.map(city => `&location=${city}`)
+  //   const mapQuestParams2 = markers2.map(city => `&location=${city}`)
+  //   const mapQuestParams3 = markers3.map(city => `&location=${city}`)
+    
+  //   const getDestinationCoords = async () => {  
+  //     await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams}`).then(res => setDestinationCoords(res.data.results))
+  //     if (mapQuestParams2.length > 0) await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams2}`).then(res => setDestinationCoords(...destinationCoords, res.data.results))
+  //     if (mapQuestParams2.length > 0) await axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams3}`).then(res => setDestinationCoords(...destinationCoords, res.data.results))
+  //   }
 
-
+  
   return (
     <div className='landing'>
       <video className="video" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air.mp4'
@@ -156,15 +174,10 @@ function Landing(props) {
           <ClipLoader color={'#cae00d'} />}
       </> */}
 
-
-
-
     </div>
   )
 
 }
-
-
 
 function mapStateToProps(reduxState) {
   return {
