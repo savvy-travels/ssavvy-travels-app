@@ -9,9 +9,9 @@ function MiniMap(props) {
     const [viewport, setViewport] = useState({
         latitude: lat,
         longitude: long,
-        width: '50vh',
-        height: '50vh',
-        zoom: 4
+        width: '100%',
+        height: '100%',
+        zoom: 3
     })
     const [selectedCity, setSelectedCity] = useState(null)
 
@@ -22,13 +22,21 @@ function MiniMap(props) {
 
     return (
                 <div className='mini-map-container'>
-                    <ReactMapGL
-                        {...viewport}
-                        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                        mapStyle='mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp'
-                        //allows us to drag map around and zoom in/out
-                        onViewportChange={(viewport) => { setViewport(viewport) }}
-                    >
+
+                    <div className='mini-map-side-bar'>
+                        Suggested routes
+                    </div>
+                
+                    <div className='mini-map'>
+                        <ReactMapGL
+                            {...viewport}
+                            mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+                            mapStyle='mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp'
+                            //allows us to drag map around and zoom in/out
+                            onViewportChange={(viewport) => { setViewport(viewport) }}>
+                        </ReactMapGL>
+                    </div>
+                        
                         {/* {apicall.map((city) => (
                 <Marker 
                 key={{}} 
@@ -44,7 +52,6 @@ function MiniMap(props) {
                     </button>
                 </Marker>
             ))} */}
-                    </ReactMapGL>
                 </div>
             
        

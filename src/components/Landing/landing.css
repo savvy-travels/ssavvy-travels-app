@@ -33,6 +33,7 @@
 }
 
 .mini-map-div {
-  width: 70%;
+  width: 100vw;
+  height: 60vh;
   margin: 30px;
 }
