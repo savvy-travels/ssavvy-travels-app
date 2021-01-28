@@ -30,7 +30,7 @@ function Landing(props) {
     async function getLocation() {
       const location = await axios.get(
         `http://api.ipstack.com/check?access_key=${ipstackKey}`);
-      // console.log(location.data)
+      console.log(location.data)
       setLat(`${location.data.latitude.toFixed(4)}`)
       setLong(`${location.data.longitude.toFixed(4)}`)
       setLocation(`${location.data.latitude.toFixed(4)}${location.data.longitude.toFixed(4)}`)

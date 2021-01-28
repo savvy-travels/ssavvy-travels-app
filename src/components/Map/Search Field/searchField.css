@@ -82,6 +82,7 @@
     outline: 2px solid #cae00d;
 }
 .slide-bar{
+    margin-top: 3px;
     height: 1.5rem;
     width: 3rem;
     border: 1px solid#393e41;
