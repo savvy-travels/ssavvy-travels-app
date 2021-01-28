@@ -1,0 +1,32 @@
+.search-fields{
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+}
+
+.search-fields>input{
+    height: 2rem;
+    margin-bottom: 1rem;
+    font-family: Montserrat;
+    font-weight: 300;
+}
+
+.search-fields>button{
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid gray;
+}
+.when-map-inputs{
+    display: flex;
+    margin-bottom: 1rem;
+}
+.when-map-inputs>input{
+    height: 1.5rem;
+    font-family: Montserrat;
+    font-weight: 300;
+}
+.vert-line{
+    border: .5px solid #65b0b2;
+    margin-left: .25rem;
+    margin-right: .25rem;
+}

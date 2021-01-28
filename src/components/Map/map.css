@@ -13,7 +13,7 @@
 
 }
 .map-container{
-    width: 70%;
+    width: 75%;
     height: inherit;
     background: url('https://origaudiopromo.com/wp-content/uploads/2019/07/space-background-website.jpeg');
     background-repeat: no-repeat;
@@ -21,7 +21,7 @@
 }
 
 .controllers-container{
-    width: 30%;
+    width: 20%;
     height: inherit;
     display: flex;
 }
@@ -36,19 +36,14 @@
     padding: 0px .6rem;
     box-sizing: border-box;
     background-color:#fdfffc;
-    width: 80%;
+    width: 100%;
     height: inherit;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-.search-fields{
-    height: 30%;
-}
 
-.map-budget-input{
-   height: 2rem;
-}
+
 .line{
     width: 100%;
     border: 1px solid #0b3840;
