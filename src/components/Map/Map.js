@@ -27,7 +27,6 @@ function Map(props) {
     const [selectedCity, setSelectedCity] = useState(null)
 
 
-
     console.log(props.lat, props.long)
     const useSetViewport = () => {
         setViewport({
