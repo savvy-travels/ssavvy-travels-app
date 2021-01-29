@@ -36,8 +36,8 @@ function Signup(props) {
             return setErrorMessage('Passwords do not match.')
         }
         setLoading(true)
-        const message = `Confirmation ${username}`
-        const title = 'Confirmation'
+        const message = `<div>Welcome ${username}, we're happy to have you in our community! From here on out you have access to my trips which allows you save and scan for trips you have saved! Please take a second to confirm your email by clicking this link!</div>`
+        const title = 'Welcome to Savvy Travels!'
         axios.post('/api/auth/register', { email, username, password, preferred, message, title}).then(res => {
             console.log('Hit this')
             setLoading(false)
