@@ -27,7 +27,17 @@ module.exports = {
                 from: 'savvytravels11@gmail.com',
                 to: email,
                 subject: title,
-                text: message
+                text: message,
+                html: `<div>${message}</div>
+                        <img src="cid:unique@nodemailer.com"/>`,
+                attachments: [
+                    {
+                        cid: 'unique@nodemailer.com',
+                        path: 'https://media.discordapp.net/attachments/801884180879376405/804760338041667605/dm-air.jpg'
+                    }
+                ]
+                    
+                
             },
             function(err, info){
                 if(err){
