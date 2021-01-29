@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import './minimap.css'
-
 function MiniMap(props) {
     //Map State
     const {lat, long} = props
@@ -14,7 +13,6 @@ function MiniMap(props) {
         zoom: 3
     })
     const [selectedCity, setSelectedCity] = useState(null)
-
     React.useEffect(() => {
         window.addEventListener('resize', () => {
             setViewport({
@@ -40,7 +38,7 @@ function MiniMap(props) {
                             <h1>Suggested Trips</h1>
                         </div>
                     </div>
-                
+
                     <div className='mini-map'>
                         <ReactMapGL
                             {...viewport}
@@ -51,7 +49,7 @@ function MiniMap(props) {
                             >
                         </ReactMapGL>
                     </div>
-                        
+
                         {/* {apicall.map((city) => (
                 <Marker 
                 key={{}} 
@@ -68,8 +66,8 @@ function MiniMap(props) {
                 </Marker>
             ))} */}
                 </div>
-            
-       
+
+
     )
 }
 export default withRouter(MiniMap)
