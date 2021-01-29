@@ -20,6 +20,30 @@ const loadOptions = (inputValue, cb) => {
         cb(filterAirports(inputValue))
     }, 1000)
 }
+//Styles
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        fontFamily: 'Montserrat',
+        fontWeight: 200
+    }),
+    control: () => ({
+        position: 'relative',
+        zIndex: 10000,
+        height: '2rem',
+        borderRadius: 3,
+        border: '2px solid transparent',
+        backgroundColor: '#fcfffd',
+        display: 'flex',
+        width: '95=8%',
+        color: '#fcfffd'
+    }),
+    singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1
+        const transition = 'opacity 300ms'
+        return { ...provided, opacity, transition }
+    }
+}
 
 
 function NewSearch(props) {
@@ -28,7 +52,7 @@ function NewSearch(props) {
     const [departureDate, setDepartureDate] = useState(undefined)
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
-    const [next, setNext] = useState(false)
+    const [next, setNext] = useState(true)
 
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {
@@ -59,11 +83,16 @@ function NewSearch(props) {
                             loadOptions={loadOptions}
                             isClearable={true}
                             onInputChange={handleInputChange}
+                            placeholder={'Select departure airport...'}
+                            styles={customStyles}
+                            theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
                             defaultValue={airports}
                             defaultOptions={input ? input : airports} />
-                        <div className='vert-line'></div>
+                        <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
                             <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                            <div className='between-arrow-left'></div>
+                            <div className='between-arrow-right'></div>
                             <input style={{ outline: 'none' }} onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
                         </div>
                     </div>
