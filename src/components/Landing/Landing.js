@@ -91,7 +91,6 @@ function Landing(props) {
   //runs getCities function if the location is defined
   useEffect(() => {
     if (location.length > 0) {
-      props.updateLocation({ long, lat })
       getCities(location)
     }
   }, [location]);
@@ -106,6 +105,7 @@ function Landing(props) {
 
   useEffect(() => {
     if (airport.length > 0) {
+      props.updateLocation({ long, lat })
       getFlights(airports)
       axios.get('/api/airports').then(res => setAllAirports(res.data))
     }
