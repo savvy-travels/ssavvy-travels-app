@@ -80,6 +80,10 @@
 .airport-select{
   width: 30rem;
   font-family: montserrat;
+  text-align: left;
+}
+.airport-select:hover{
+  cursor: text;
 }
 @media (max-width: 900px) {
   .slogan-container {

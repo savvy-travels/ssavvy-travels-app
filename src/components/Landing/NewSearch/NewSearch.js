@@ -36,12 +36,14 @@ function NewSearch(props) {
         setInput(inputValue)
     }
     function search() {
-        props.newSearch({ budget, location, departureDate, arrivalDate })
-        props.history.push('/map')
+        console.log(location)
+        // props.newSearch({ budget, location, departureDate, arrivalDate })
+        // props.history.push('/map')
     }
 
     // const airports = props.airports.map(airport => { return <option value={airport.code} key={airport.code} >{airport.code} - {airport.name}</option> })
     const airports = props.airports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+
     return (
         <span className='search-field'>
             <div className='slogan-container'>
@@ -53,10 +55,12 @@ function NewSearch(props) {
                 {next ?
                     <div className='where-when-inputs'>
                         <AsyncSelect
-                            onChange={(e) => setLocation(e.value)}
+                            onChange={(e) => !e ? null : setLocation(e.value)}
                             className='airport-select'
                             loadOptions={loadOptions}
+                            isClearable={true}
                             onInputChange={handleInputChange}
+                            defaultValue={airports[0]}
                             defaultOptions={input ? input : airports} />
                         {/* <select type='select' onChange={(e) => setLocation(e.target.value)} placeholder='From Where?'><option value='null' unselectable={true} >Choose your departure airport</option>{airports}</select> */}
                         <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
