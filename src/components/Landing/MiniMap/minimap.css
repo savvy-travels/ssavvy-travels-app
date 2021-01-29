@@ -1,3 +1,15 @@
+.mini-map-container {
+  padding: 1rem;
+  background-color: #0b3840;
+  opacity: 0.9;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100%;
+}
+
 .mini-map-side-bar {
   height: 90%;
   width: 40%;

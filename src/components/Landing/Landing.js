@@ -185,9 +185,6 @@ function Landing(props) {
       </Switch>
 
       <div className='triangle'></div>
-      <div className='deals-container'>
-        {deals}
-      </div>
 
       <div className="mini-map-div">
         {long ?
@@ -198,6 +195,11 @@ function Landing(props) {
         : 
         <ClipLoader color={'#cae00d'} />}
       </div>
+
+      <div className='deals-container'>
+        {deals}
+      </div>
+
 
     </div>
   )
