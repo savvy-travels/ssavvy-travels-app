@@ -4,15 +4,15 @@
   height: 400vh;
   background-color: #fdfffc;
 }
-.video-container{
+.video-container {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
-  border: 5px solid  #65b0b2 ;
+  border: 5px solid #65b0b2;
 }
 
 .video {
-  width:100%;
+  width: 100%;
 }
 
 .triangle {
@@ -30,4 +30,13 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.mini-map-div {
+  width: 100vw;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10vh;
 }
