@@ -28,7 +28,8 @@ function Landing(props) {
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
   const [closestAirports, setClosestAirports] = useState([])
-  // const [destinationCoords, setDestinationCoords] = useState([])
+  const [allAirports, setAllAirports] = useState([])
+
 
   //performs api call to get nearest cities to the latitude and longitude from getLocation useEffect.
   //Filters by cities with minimum population of 250,000 in a radius of 100 miles.
@@ -59,7 +60,7 @@ function Landing(props) {
   }
 
   const getClosestAirports = () => {
-    axios.get(`/api/allAirports/${cities[0]}`).then(res => {
+    axios.get(`/api/airports/${cities[0]}`).then(res => {
       props.airportSearch(res.data)
     }).catch(err => {
       console.log(err)
@@ -108,8 +109,10 @@ function Landing(props) {
   useEffect(() => {
     if (airport.length > 0) {
       getFlights(airports)
+      axios.get('/api/airports').then(res => setAllAirports(res.data))
     }
   }, [airport])
+
 
   const flights = quotes.map((quote) => {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
@@ -128,45 +131,31 @@ function Landing(props) {
     )
   })
 
+
   const deals = [flightCards[0], flightCards[1], flightCards[2]]
 
-  // const markers = flights.map(flight => flight.CityName)
-  // let markers2 = []
-  // let markers3 = []
+  const markers = flights.map((flight) => {
+    let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
 
-  // if (markers.length > 100) {
-  //     markers2 = (markers.splice(markers.length / 2))
-  //   } else if (markers.length > 200) {
-  //     markers2 = markers.splice(markers.length / 3)
-  //     markers3= markers2.splice(markers.length / 2)
-  //   }
+    return {...flight, ...allAirports[airportId]}
+  })
 
-  //   const mapQuestParams = markers.map(city => `&location=${city}`)
-  //   const mapQuestParams2 = markers2.map(city => `&location=${city}`)
-  //   const mapQuestParams3 = markers3.map(city => `&location=${city}`)
+  const geoJson = markers.map((marker) => {
+    return (
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [marker.lat, marker.lon]
+        },
+        "properties": {
+          "name": marker.city
+        }
+      }
+    )
+  })
 
-  //   let destinationCoords = []
-
-
-  //   if(markers.length > 0) {
-
-  //     destinationCoords =  axios.get(`/api/auth/users`).then(res => res.data)
-
-  // if (mapQuestParams2.length > 0) destinationCoords = (axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams2}`).then(res => ([...destinationCoords, res.data.results]))) 
-
-  // if (mapQuestParams3.length > 0) destinationCoords = axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams3}`).then(res => ([...destinationCoords, res.data.results]))
-  //     }
-
-
-  // useEffect ( () => {
-  //   if(flights.length > 0 ){
-  //     getDestinationCoords()
-  // console.log(destinationCoords)
-  //   }
-  // }, [flights])   
-
-
-
+  console.log(geoJson)
 
   return (
     <div className='landing'>
