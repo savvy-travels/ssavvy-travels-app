@@ -12,11 +12,9 @@ import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
 function Landing(props) {
-  const ipstackKey = process.env.REACT_APP_IPSTACK_KEY;
   const geoDbKey = process.env.REACT_APP_GEODB_KEY;
   const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY
   const googleKey = process.env.REACT_APP_GOOGLEMAPS_KEY
-  const mapQuestKey = process.env.REACT_APP_MAPQUEST_KEY
 
   const [cities, setCities] = useState([])
   const [lat, setLat] = useState()
@@ -27,7 +25,6 @@ function Landing(props) {
   const [places, setPlaces] = useState([])
   const [carriers, setCarriers] = useState([])
   const [airport, setAirport] = useState([])
-  const [closestAirports, setClosestAirports] = useState([])
   const [allAirports, setAllAirports] = useState([])
 
 
