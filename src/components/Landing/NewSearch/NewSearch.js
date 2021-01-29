@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
-import allAirports from './airports.json'
+import allAirports from '../../airports.json'
 import AsyncSelect from 'react-select/async'
 import './newSearch.css'
 
 //Functions used to filter through the airport results
 //First we grab all the airports from the data.json file and map them to a new variable
-const options = allAirports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+const options = allAirports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}-${airport.city}` } })
 
 //We are then able to filter through these results only loading the specified airports saving rendering time. 
 const filterAirports = (inputValue) => {
@@ -20,6 +20,30 @@ const loadOptions = (inputValue, cb) => {
         cb(filterAirports(inputValue))
     }, 1000)
 }
+//Styles
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        fontFamily: 'Montserrat',
+        fontWeight: 200
+    }),
+    control: () => ({
+        position: 'relative',
+        zIndex: 10000,
+        height: '2rem',
+        borderRadius: 3,
+        border: '2px solid transparent',
+        backgroundColor: '#fcfffd',
+        display: 'flex',
+        width: '95=8%',
+        color: '#fcfffd'
+    }),
+    singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1
+        const transition = 'opacity 300ms'
+        return { ...provided, opacity, transition }
+    }
+}
 
 
 function NewSearch(props) {
@@ -28,7 +52,7 @@ function NewSearch(props) {
     const [departureDate, setDepartureDate] = useState(undefined)
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
-    const [next, setNext] = useState(false)
+    const [next, setNext] = useState(true)
 
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {
@@ -42,6 +66,7 @@ function NewSearch(props) {
 
     // const airports = props.airports.map(airport => { return <option value={airport.code} key={airport.code} >{airport.code} - {airport.name}</option> })
     const airports = props.airports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+
     return (
         <span className='search-field'>
             <div className='slogan-container'>
@@ -53,14 +78,23 @@ function NewSearch(props) {
                 {next ?
                     <div className='where-when-inputs'>
                         <AsyncSelect
-                            onChange={(e) => setLocation(e.value)}
+                            onChange={(e) => !e ? null : setLocation(e.value)}
                             className='airport-select'
                             loadOptions={loadOptions}
+                            isClearable={true}
                             onInputChange={handleInputChange}
+                            placeholder={'Select departure airport...'}
+                            styles={customStyles}
+                            theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
+                            defaultValue={airports}
                             defaultOptions={input ? input : airports} />
-                        {/* <select type='select' onChange={(e) => setLocation(e.target.value)} placeholder='From Where?'><option value='null' unselectable={true} >Choose your departure airport</option>{airports}</select> */}
-                        <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
-                        <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                        <div className='vert-line-a'></div>
+                        <div className='depart-arrive-container'>
+                            <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                            <div className='between-arrow-left'></div>
+                            <div className='between-arrow-right'></div>
+                            <input style={{ outline: 'none' }} onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                        </div>
                     </div>
                     :
                     null
