@@ -87,7 +87,6 @@ function Signup(props) {
         setLoading(true)
         const message = `Confirmation ${username}`
         const title = 'Confirmation'
-
         axios.post('/api/auth/register', { email, username, password, preferred, message, title }).then(res => {
             console.log('Hit this')
             setLoading(false)
