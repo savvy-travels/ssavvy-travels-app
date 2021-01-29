@@ -1,10 +1,11 @@
 const bcrypt = require('bcryptjs')
+// const img = require('../../public/dm-air.jpg')
 
 module.exports = {
     register: async (req, res) => {
         const db = req.app.get('db')
         console.log(req.body)
-        const { email, username, password, preferred, message, title } = req.body
+        const { email, username, password, preferred, message, title} = req.body
         const [existingUser] = await db.users.find_user([username])
         const [existingEmail] = await db.savvy_travels_users.find({email})
         if(existingUser && existingEmail){
@@ -29,15 +30,7 @@ module.exports = {
                 subject: title,
                 text: message,
                 html: `<div>${message}</div>
-                        <img src="cid:unique@nodemailer.com"/>`,
-                attachments: [
-                    {
-                        cid: 'unique@nodemailer.com',
-                        path: 'https://media.discordapp.net/attachments/801884180879376405/804760338041667605/dm-air.jpg'
-                    }
-                ]
-                    
-                
+                        <img src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png'/>` 
             },
             function(err, info){
                 if(err){
