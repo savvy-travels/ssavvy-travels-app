@@ -59,8 +59,7 @@ function Landing(props) {
     }    
 
     const getClosestAirports = () => {
-      console.log(cities)
-      axios.get(`/api/allAirports/${cities[0]}`).then(res => { 
+      axios.get(`/api/airports/${cities[0]}`).then(res => { 
          console.log(res.data[0].airports)
          props.airportSearch(res.data)
       }).catch(err=>{

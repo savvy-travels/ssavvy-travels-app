@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { newSearch } from '../../../Redux/searchReducer'
+import { newSearch, airportSearch } from '../../../Redux/searchReducer'
+import axios from 'axios'
 import './newSearch.css'
-const allAirports = require('../server/controllers/airports.json')
+// const allAirports = require('../server/controllers/airports.json')
 
 function NewSearch(props) {
     const [budget, setBudget] = useState('')
@@ -11,17 +12,29 @@ function NewSearch(props) {
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
     const [next, setNext] = useState(false)
-    
-    console.log(props.airports)
+    const [all, setAll] = useState(false)
+    const [allAirports, setAllAirports] = useState([])
+    let airports = [] 
 
-    console.log(allAirports)
+    useEffect(()=> {
+        axios.get('/api/airports/all').then(res => setAllAirports(res.data))
+    }, [])
+
 
     function search() {
         props.newSearch({ budget, location, departureDate, arrivalDate })
         props.history.push('/map')
     }
 
-    const airports = props.airports.map(airport => {return <option value={airport.code}>{airport.code} - {airport.name}</option>})
+    const toggleAll = () => {
+        setAll(!all)
+    }
+
+    if (!all) {
+        airports = props.airports.map(airport => {return <option value={airport.code}>{airport.code} - {airport.name}</option>})
+    } else  {
+        airports = allAirports.map(airport => {return <option value={airport.code}>{airport.code} - {airport.name}</option>})
+    }
     
     return (
         <span className='search-field'>
@@ -33,6 +46,8 @@ function NewSearch(props) {
                 <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
+                        
+                        <span>All airports<input type='checkbox' onChange={toggleAll}/></span>
                         <select type='select' onChange={(e) => setLocation(e.target.value)} placeholder='From Where?'><option value='null' unselectable >Choose your departure airport</option>{airports}</select>
                         <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
                         <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />

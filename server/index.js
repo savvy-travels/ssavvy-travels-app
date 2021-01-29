@@ -27,7 +27,8 @@ app.post('/api/auth/register', userCtrl.register)
 app.post('/api/auth/login', userCtrl.login)
 app.post('/api/auth/logout', userCtrl.logout)
 
-app.get('/api/allAirports/:cities', listCtrl.getAirportList)
+app.get('/api/airports/all', listCtrl.getAllAirports)
+app.get('/api/airports/:city', listCtrl.getLocalAirports)
 
 app.use(authMiddleware.isAuthenticated)
 app.get('/api/auth/user', userCtrl.getUser)
