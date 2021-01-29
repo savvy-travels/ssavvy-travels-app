@@ -7,7 +7,7 @@ import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
-import Map from '../Map/Map'
+import MiniMap from "./MiniMap/MiniMap"
 import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
@@ -189,14 +189,15 @@ function Landing(props) {
         {deals}
       </div>
 
-      {/* <>
+      <div className="mini-map-div">
         {long ?
-          <Map
+            <MiniMap
             long={long}
-            lat={lat} />
-          :
-          <ClipLoader color={'#cae00d'} />}
-      </> */}
+            lat={lat}
+            />
+        : 
+        <ClipLoader color={'#cae00d'} />}
+      </div>
 
     </div>
   )
