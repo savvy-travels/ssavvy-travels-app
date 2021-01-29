@@ -76,6 +76,11 @@
   color: white;
   /* opacity: 0.5;  */
 }
+
+.airport-select{
+  width: 30rem;
+  font-family: montserrat;
+}
 @media (max-width: 900px) {
   .slogan-container {
     display: none;

@@ -9,15 +9,31 @@ import SearchField from './Search Field/SearchField'
 function Map(props) {
     //Map State
     const [viewport, setViewport] = useState({
-        latitude: 39.742043,
-        longitude: -104.991531,
+        latitude: props.lat,
+        longitude: props.long,
         width: '100%',
         height: '100%',
         zoom: 4
     })
     const [selectedCity, setSelectedCity] = useState(null)
 
-    //Search State//
+    console.log(props.lat, props.long)
+    const useSetViewport = () => {
+        setViewport({
+            latitude: props.lat,
+            longitude: props.long,
+            width: '100%',
+            height: '100%',
+            zoom: 3
+        })
+    }
+
+    React.useEffect(() => {
+        window.addEventListener('resize', useSetViewport)
+        return () => {
+            window.removeEventListener('resize', useSetViewport)
+        }
+    }, [])
 
 
     return (
@@ -71,7 +87,9 @@ function mapStateToProps(reduxState) {
         budget: reduxState.searchReducer.budget,
         location: reduxState.searchReducer.location,
         departureDate: reduxState.searchReducer.departureDate,
-        arrivalDate: reduxState.searchReducer.arrivalDate
+        arrivalDate: reduxState.searchReducer.arrivalDate,
+        long: +reduxState.searchReducer.long,
+        lat: +reduxState.searchReducer.lat
     }
 }
 
