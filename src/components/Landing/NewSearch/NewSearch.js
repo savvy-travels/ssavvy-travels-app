@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { newSearch, airportSearch } from '../../../Redux/searchReducer'
 import axios from 'axios'
 import './newSearch.css'
-// const allAirports = require('../server/controllers/airports.json')
+
 
 function NewSearch(props) {
     const [budget, setBudget] = useState('')

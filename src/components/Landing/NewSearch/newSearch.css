@@ -23,6 +23,7 @@
   letter-spacing: 3px;
   font-weight: 100;
 }
+
 .input-field {
   padding: 1rem;
   background-color: #0b3840bd;
@@ -46,6 +47,7 @@
   margin-top: 0.6rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .where-when-inputs > input {
   text-align: center;
@@ -57,6 +59,18 @@
   border-radius: 5px;
   outline: none;
   color: #0b3840
+}
+
+.where-when-inputs > select {
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  width: 48%;
+  height: fit-content;
+  /* border: 2px solid #cae00d; */
+  border-radius: 5px;
+  outline: none;
+  color: #0b3840;
 }
 .search-button {
   font-size: 2rem;
