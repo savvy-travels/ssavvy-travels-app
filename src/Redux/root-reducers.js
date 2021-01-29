@@ -7,7 +7,7 @@ import searchReducer from './searchReducer'
 import locationReducer from './locationReducer'
 
 const persistConfig = {
-    key: 'root',
+    key: 'state',
     storage,
     whitelist: ['locationReducer']
 }
