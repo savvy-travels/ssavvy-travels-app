@@ -30,9 +30,9 @@ const customStyles = {
     control: () => ({
         position: 'relative',
         zIndex: 10000,
-        border: '2px solid #cae00d',
-        height: '3.5rem',
-        borderRadius: 5,
+        height: '2rem',
+        borderRadius: 3,
+        border: '2px solid transparent',
         backgroundColor: '#fcfffd',
         display: 'flex',
         width: '95=8%',
@@ -52,7 +52,7 @@ function NewSearch(props) {
     const [departureDate, setDepartureDate] = useState(undefined)
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
-    const [next, setNext] = useState(false)
+    const [next, setNext] = useState(true)
 
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {
@@ -84,7 +84,7 @@ function NewSearch(props) {
                             isClearable={true}
                             onInputChange={handleInputChange}
                             placeholder={'Select departure airport...'}
-                            style={customStyles}
+                            styles={customStyles}
                             theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
                             defaultValue={airports}
                             defaultOptions={input ? input : airports} />
