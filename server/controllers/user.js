@@ -1,19 +1,12 @@
 const bcrypt = require('bcryptjs')
-// const img = require('../../public/dm-air.jpg')
 
 module.exports = {
     register: async (req, res) => {
         const db = req.app.get('db')
         console.log(req.body)
-        const { email, username, password, preferred, message, title} = req.body
-        const [existingUser] = await db.users.find_user([username])
+        const { email, username, password, preferred, message} = req.body
         const [existingEmail] = await db.savvy_travels_users.find({email})
-        if(existingUser && existingEmail){
-            return res.status(409).send('Username and Email are in use')
-        }
-        if (existingUser) {
-            return res.status(409).send('Username is in use')
-        }
+    
         if (existingEmail){
             return res.status(409).send('Email is already in use')
         }
@@ -27,10 +20,11 @@ module.exports = {
             transporter.sendMail({
                 from: 'savvytravels11@gmail.com',
                 to: email,
-                subject: title,
+                subject: 'Welcome to Savvy Travels!',
                 text: message,
-                html: `<div style="font-size: 20px; color: black; margin-left: 20px; clear: left;">${message}</div>
-                <img style="float: left;" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png'/>`
+                html: `<div style="font-size: 20px; color: black; margin-left: 250px; width: 50%;">${message}</div>
+                <div style="font-size: 20px; color: black; margin-left: 250px; width: 50%; margin-top: 100px;">Trying to test something</div>
+                <img style="width: 7%;" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png'/>`
             },
             function(err, info){
                 if(err){
