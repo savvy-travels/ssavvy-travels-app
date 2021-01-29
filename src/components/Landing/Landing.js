@@ -130,42 +130,7 @@ function Landing(props) {
 
   const deals = [flightCards[0], flightCards[1], flightCards[2]]
 
-  // const markers = flights.map(flight => flight.CityName)
-  // let markers2 = []
-  // let markers3 = []
-
-  // if (markers.length > 100) {
-  //     markers2 = (markers.splice(markers.length / 2))
-  //   } else if (markers.length > 200) {
-  //     markers2 = markers.splice(markers.length / 3)
-  //     markers3= markers2.splice(markers.length / 2)
-  //   }
-
-  //   const mapQuestParams = markers.map(city => `&location=${city}`)
-  //   const mapQuestParams2 = markers2.map(city => `&location=${city}`)
-  //   const mapQuestParams3 = markers3.map(city => `&location=${city}`)
-
-  //   let destinationCoords = []
-
-
-  //   if(markers.length > 0) {
-
-  //     destinationCoords =  axios.get(`/api/auth/users`).then(res => res.data)
-
-  // if (mapQuestParams2.length > 0) destinationCoords = (axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams2}`).then(res => ([...destinationCoords, res.data.results]))) 
-
-  // if (mapQuestParams3.length > 0) destinationCoords = axios.get(`https://www.mapquestapi.com/geocoding/v1/batch?key=${mapQuestKey}&inFormat=kvp&outFormat=json&thumbMaps=false&maxResults=1${mapQuestParams3}`).then(res => ([...destinationCoords, res.data.results]))
-  //     }
-
-
-  // useEffect ( () => {
-  //   if(flights.length > 0 ){
-  //     getDestinationCoords()
-  // console.log(destinationCoords)
-  //   }
-  // }, [flights])   
-
-
+  console.log(places)
 
 
   return (
