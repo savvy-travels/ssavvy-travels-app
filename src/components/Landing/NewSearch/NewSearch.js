@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
-import allAirports from './airports.json'
+import allAirports from '../../airports.json'
 import AsyncSelect from 'react-select/async'
 import './newSearch.css'
 
 //Functions used to filter through the airport results
 //First we grab all the airports from the data.json file and map them to a new variable
-const options = allAirports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+const options = allAirports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}-${airport.city}` } })
 
 //We are then able to filter through these results only loading the specified airports saving rendering time. 
 const filterAirports = (inputValue) => {
@@ -42,6 +42,7 @@ function NewSearch(props) {
 
     // const airports = props.airports.map(airport => { return <option value={airport.code} key={airport.code} >{airport.code} - {airport.name}</option> })
     const airports = props.airports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+
     return (
         <span className='search-field'>
             <div className='slogan-container'>
@@ -53,14 +54,18 @@ function NewSearch(props) {
                 {next ?
                     <div className='where-when-inputs'>
                         <AsyncSelect
-                            onChange={(e) => setLocation(e.value)}
+                            onChange={(e) => !e ? null : setLocation(e.value)}
                             className='airport-select'
                             loadOptions={loadOptions}
+                            isClearable={true}
                             onInputChange={handleInputChange}
+                            defaultValue={airports}
                             defaultOptions={input ? input : airports} />
-                        {/* <select type='select' onChange={(e) => setLocation(e.target.value)} placeholder='From Where?'><option value='null' unselectable={true} >Choose your departure airport</option>{airports}</select> */}
-                        <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
-                        <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                        <div className='vert-line'></div>
+                        <div className='depart-arrive-container'>
+                            <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                            <input style={{ outline: 'none' }} onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                        </div>
                     </div>
                     :
                     null

@@ -4,8 +4,51 @@ import { Link, withRouter } from 'react-router-dom'
 import { loginUser } from '../../../Redux/userReducer'
 import { connect } from 'react-redux'
 import { ClipLoader } from 'react-spinners'
-
+import AsyncSelect from 'react-select/async'
+import allAirports from '../../airports.json'
 import './auth.css'
+
+
+//Functions used to filter through the airport results
+//First we grab all the airports from the data.json file and map them to a new variable
+const options = allAirports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}-${airport.city}` } })
+
+//We are then able to filter through these results only loading the specified airports saving rendering time. 
+const filterAirports = (inputValue) => {
+    return options.filter(i => i.label.toLowerCase().includes(inputValue.toLowerCase()))
+}
+//This is the 'asynchronous' function that sets the loading. 
+const loadOptions = (inputValue, cb) => {
+    setTimeout(() => {
+        cb(filterAirports(inputValue))
+    }, 1000)
+}
+
+//Styles
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        fontFamily: 'Montserrat',
+        fontWeight: 200
+    }),
+    control: () => ({
+        position: 'relative',
+        zIndex: 10000,
+        border: '2px solid #cae00d',
+        height: '3.5rem',
+        borderRadius: 5,
+        backgroundColor: '#fcfffd',
+        display: 'flex',
+        width: '95=8%',
+        color: '#fcfffd'
+    }),
+    singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1
+        const transition = 'opacity 300ms'
+        return { ...provided, opacity, transition }
+    }
+}
+
 
 function Signup(props) {
     //Loading//
@@ -13,7 +56,6 @@ function Signup(props) {
     //Auth//
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
-    const [preferred, setPreferred] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
     //Errors//
@@ -22,7 +64,14 @@ function Signup(props) {
     const [passError, setPassError] = useState(false)
     const [error, setError] = useState(false)
 
+    //Airport Filter//
+    const [input, setInput] = useState('')
+    const [preferred, setPreferred] = useState('')
 
+    function handleInputChange(newValue) {
+        const inputValue = newValue.replace(/\W/g, '')
+        setInput(inputValue)
+    }
 
     function registerUser() {
         setPassError(false)
@@ -38,7 +87,7 @@ function Signup(props) {
         setLoading(true)
         const message = `Confirmation ${username}`
         const title = 'Confirmation'
-        axios.post('/api/auth/register', { email, username, password, preferred, message, title}).then(res => {
+        axios.post('/api/auth/register', { email, username, password, preferred, message, title }).then(res => {
             console.log('Hit this')
             setLoading(false)
             setError(false)
@@ -50,7 +99,7 @@ function Signup(props) {
         })
     }
 
-
+    const airports = props.airports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
     return (
         <>
             {loading ?
@@ -72,11 +121,18 @@ function Signup(props) {
                         <input onChange={(e) => setUsername(e.target.value)}
                             className={emptyError ? 'register-error' : 'register-inputs'}
                             type='text'
-                            placeholder='Username' />
-                        <input onChange={(e) => setPreferred(e.target.value)}
-                            className={emptyError ? 'register-error' : 'register-inputs'}
-                            type='text'
-                            placeholder='Preferred Airport' />
+                            placeholder='First Name' />
+                        <AsyncSelect
+                            styles={customStyles}
+                            onChange={(e) => !e ? null : setPreferred(e.value)}
+                            className='signup-airport-select'
+                            loadOptions={loadOptions}
+                            isClearable={true}
+                            theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
+                            placeholder={'Preferred Airport...'}
+                            onInputChange={handleInputChange}
+                            defaultOptions={input ? input : airports}
+                        />
                         <input onChange={(e) => setPassword(e.target.value)}
                             className={emptyError || passError ? 'register-error' : 'register-inputs'}
                             type='password'
@@ -93,4 +149,11 @@ function Signup(props) {
         </>
     )
 }
-export default withRouter(connect(null, { loginUser })(Signup))
+
+function mapStateToProps(reduxState) {
+    return {
+        airports: reduxState.searchReducer.airports
+    }
+}
+
+export default withRouter(connect(mapStateToProps, { loginUser })(Signup))
