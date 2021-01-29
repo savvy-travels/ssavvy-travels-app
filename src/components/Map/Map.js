@@ -26,6 +26,24 @@ function Map(props) {
     })
     const [selectedCity, setSelectedCity] = useState(null)
 
+
+    console.log(props.lat, props.long)
+    const useSetViewport = () => {
+        setViewport({
+            latitude: props.lat,
+            longitude: props.long,
+            width: '100%',
+            height: '100%',
+            zoom: 3
+        })
+    }
+
+    React.useEffect(() => {
+        window.addEventListener('resize', useSetViewport)
+        return () => {
+            window.removeEventListener('resize', useSetViewport)
+        }
+    }, [])
     //Search State//
     const {budget, location, departureDate, arrivalDate} = props
 
@@ -140,8 +158,8 @@ function mapStateToProps(reduxState) {
         location: reduxState.searchReducer.location,
         departureDate: reduxState.searchReducer.departureDate,
         arrivalDate: reduxState.searchReducer.arrivalDate,
-        long: reduxState.searchReducer.long,
-        lat: reduxState.searchReducer.lat
+        long: +reduxState.searchReducer.long,
+        lat: +reduxState.searchReducer.lat
     }
 }
 

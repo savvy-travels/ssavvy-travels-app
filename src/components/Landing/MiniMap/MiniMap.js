@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, Pop } from 'react-map-gl'
 import './minimap.css'
+
 function MiniMap(props) {
     //Map State
     const { lat, long } = props
