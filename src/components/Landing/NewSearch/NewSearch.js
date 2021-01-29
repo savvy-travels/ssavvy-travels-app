@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
 import './newSearch.css'
+const allAirports = require('../server/controllers/airports.json')
 
 function NewSearch(props) {
     const [budget, setBudget] = useState('')
@@ -10,16 +11,17 @@ function NewSearch(props) {
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
     const [next, setNext] = useState(false)
+    
     console.log(props.airports)
 
-
+    console.log(allAirports)
 
     function search() {
         props.newSearch({ budget, location, departureDate, arrivalDate })
         props.history.push('/map')
     }
 
-    const airports = props.airports.map(airport => {return <option value={airport.code} >{airport.code} - {airport.name}</option>})
+    const airports = props.airports.map(airport => {return <option value={airport.code}>{airport.code} - {airport.name}</option>})
     
     return (
         <span className='search-field'>
