@@ -75,12 +75,13 @@
   text-align: center;
   font-family: Montserrat;
   font-size: 1.5rem;
-  widows: 50%;
-  height: 2.2rem;
-  /* border-radius: 5px; */
+  width: 50%;
+  height: 2.rem;
+  border-radius: 5px;
   outline: none;
   color: #0b3840;
-  margin-right: 10px;
+  margin-left: .6rem;
+  font-size: 1rem;
 }
 .airport-select{
   width: 30rem;
@@ -88,6 +89,7 @@
   text-align: left;
   color: #0b3840;
   outline: #0b3840;
+  margin-right: .6rem;
 }
 .airport-select:focus{
   outline: none;

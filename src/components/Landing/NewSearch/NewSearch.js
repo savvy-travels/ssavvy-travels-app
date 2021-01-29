@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
-import allAirports from './airports.json'
+import allAirports from '../../airports.json'
 import AsyncSelect from 'react-select/async'
 import './newSearch.css'
 
 //Functions used to filter through the airport results
 //First we grab all the airports from the data.json file and map them to a new variable
-const options = allAirports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+const options = allAirports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}-${airport.city}` } })
 
 //We are then able to filter through these results only loading the specified airports saving rendering time. 
 const filterAirports = (inputValue) => {
@@ -36,9 +36,8 @@ function NewSearch(props) {
         setInput(inputValue)
     }
     function search() {
-        console.log(location)
-        // props.newSearch({ budget, location, departureDate, arrivalDate })
-        // props.history.push('/map')
+        props.newSearch({ budget, location, departureDate, arrivalDate })
+        props.history.push('/map')
     }
 
     // const airports = props.airports.map(airport => { return <option value={airport.code} key={airport.code} >{airport.code} - {airport.name}</option> })
@@ -60,12 +59,12 @@ function NewSearch(props) {
                             loadOptions={loadOptions}
                             isClearable={true}
                             onInputChange={handleInputChange}
-                            defaultValue={airports[0]}
+                            defaultValue={airports}
                             defaultOptions={input ? input : airports} />
                         <div className='vert-line'></div>
                         <div className='depart-arrive-container'>
-                            <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
-                            <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                            <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                            <input style={{ outline: 'none' }} onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
                         </div>
                     </div>
                     :
