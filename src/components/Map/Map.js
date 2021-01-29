@@ -9,8 +9,8 @@ import SearchField from './Search Field/SearchField'
 function Map(props) {
     //Map State
     const [viewport, setViewport] = useState({
-        latitude: 39.742043,
-        longitude: -104.991531,
+        latitude: props.lat,
+        longitude: props.long,
         width: '100%',
         height: '100%',
         zoom: 4
@@ -71,7 +71,9 @@ function mapStateToProps(reduxState) {
         budget: reduxState.searchReducer.budget,
         location: reduxState.searchReducer.location,
         departureDate: reduxState.searchReducer.departureDate,
-        arrivalDate: reduxState.searchReducer.arrivalDate
+        arrivalDate: reduxState.searchReducer.arrivalDate,
+        long: reduxState.searchReducer.long,
+        lat: reduxState.searchReducer.lat
     }
 }
 

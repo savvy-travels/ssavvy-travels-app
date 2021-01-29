@@ -53,12 +53,10 @@ function NewSearch(props) {
                 {next ?
                     <div className='where-when-inputs'>
                         <AsyncSelect
-                            onChange={(e) => console.log(e.value)}
+                            onChange={(e) => setLocation(e.value)}
                             className='airport-select'
                             loadOptions={loadOptions}
                             onInputChange={handleInputChange}
-                            className='airport-select'
-                            cacheOptions
                             defaultOptions={input ? input : airports} />
                         {/* <select type='select' onChange={(e) => setLocation(e.target.value)} placeholder='From Where?'><option value='null' unselectable={true} >Choose your departure airport</option>{airports}</select> */}
                         <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />

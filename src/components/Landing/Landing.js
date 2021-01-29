@@ -1,14 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import { airportSearch, newSearch } from '../../Redux/searchReducer'
+import { airportSearch, updateLocation } from '../../Redux/searchReducer'
 import { connect } from "react-redux";
 import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
-import Map from '../Map/Map'
-import { CircleLoader, BarLoader, ClipLoader } from 'react-spinners'
+// import Map from '../Map/Map'
 require("dotenv").config();
 
 function Landing(props) {
@@ -59,7 +58,6 @@ function Landing(props) {
   }
 
   const getClosestAirports = () => {
-    console.log(cities)
     axios.get(`/api/allAirports/${cities[0]}`).then(res => {
       props.airportSearch(res.data)
     }).catch(err => {
@@ -93,6 +91,7 @@ function Landing(props) {
   //runs getCities function if the location is defined
   useEffect(() => {
     if (location.length > 0) {
+      props.updateLocation({ long, lat })
       getCities(location)
     }
   }, [location]);
@@ -209,4 +208,4 @@ function mapStateToProps(reduxState) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { airportSearch })(Landing));
+export default withRouter(connect(mapStateToProps, { airportSearch, updateLocation })(Landing));
