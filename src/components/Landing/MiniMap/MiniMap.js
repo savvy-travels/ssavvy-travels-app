@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import ReactMapGL, { Marker, Pop } from 'react-map-gl'
+import ReactMapGL, { Marker, Pop, Source, Layer } from 'react-map-gl'
 import './minimap.css'
 
 function MiniMap(props) {
@@ -13,6 +13,23 @@ function MiniMap(props) {
         height: '100%',
         zoom: 3
     })
+
+    const geojson = {
+        type: 'FeatureCollection',
+        features: [
+          {type: 'Feature', geometry: {type: 'Point', coordinates: [long, lat]}}
+        ]
+      };
+      
+      const layerStyle = {
+        id: 'point',
+        type: 'circle',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': '#007cbf'
+        }
+      };
+
     const [selectedCity, setSelectedCity] = useState(null)
     React.useEffect(() => {
         window.addEventListener('resize', () => {
@@ -48,6 +65,10 @@ function MiniMap(props) {
                     //allows us to drag map around and zoom in/out
                     onViewportChange={(viewport) => { setViewport({ ...viewport }) }}
                 >
+
+<Source id="my-data" type="geojson" data={geojson}>
+        <Layer {...layerStyle} />
+      </Source>
                 </ReactMapGL>
             </div>
 
