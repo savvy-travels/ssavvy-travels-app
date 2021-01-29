@@ -41,9 +41,9 @@ function MiniMap(props) {
                 zoom: 3
             })
         })
-        // return () => {
-        //     window.removeEventListener('resize')
-        // }
+        return () => {
+            window.removeEventListener('resize', setViewport)
+        }
     }, [])
     //Search State//
     // const [budget, setBudget] = useState(`$${props.match.params.budget}`)
