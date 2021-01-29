@@ -67,16 +67,18 @@
   /* opacity: 0.5;  */
 }
 .depart-arrive-container{
+  padding: 0%;
   width: 30rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .depart-arrive-container>input{
   text-align: center;
   font-family: Montserrat;
   font-size: 1.5rem;
   width: 50%;
-  height: 2.rem;
+  height: 2.2rem;
   border-radius: 5px;
   outline: none;
   color: #0b3840;
@@ -93,6 +95,27 @@
 }
 .airport-select:focus{
   outline: none;
+}
+
+.between-arrow-left{
+  margin: 0%;
+  margin-left: .6rem;
+  transform: rotate(45deg);
+  width: 15px;
+  height: 14px;
+  border-left: 2px solid #cae00d;
+  border-bottom: 2px solid  #cae00d;
+}
+.between-arrow-right{
+  margin: 0%;
+  transform: rotate(45deg);
+  width: 15px;
+  height: 14px;
+  border-right: 2px solid  #cae00d;
+  border-top: 2px solid  #cae00d;
+}
+.vert-line-a{
+  border: .5px solid #cae00d;
 }
 @media (max-width: 900px) {
   .slogan-container {

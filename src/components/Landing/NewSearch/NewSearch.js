@@ -20,6 +20,30 @@ const loadOptions = (inputValue, cb) => {
         cb(filterAirports(inputValue))
     }, 1000)
 }
+//Styles
+const customStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        fontFamily: 'Montserrat',
+        fontWeight: 200
+    }),
+    control: () => ({
+        position: 'relative',
+        zIndex: 10000,
+        border: '2px solid #cae00d',
+        height: '3.5rem',
+        borderRadius: 5,
+        backgroundColor: '#fcfffd',
+        display: 'flex',
+        width: '95=8%',
+        color: '#fcfffd'
+    }),
+    singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1
+        const transition = 'opacity 300ms'
+        return { ...provided, opacity, transition }
+    }
+}
 
 
 function NewSearch(props) {
@@ -59,11 +83,16 @@ function NewSearch(props) {
                             loadOptions={loadOptions}
                             isClearable={true}
                             onInputChange={handleInputChange}
+                            placeholder={'Select departure airport...'}
+                            style={customStyles}
+                            theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
                             defaultValue={airports}
                             defaultOptions={input ? input : airports} />
-                        <div className='vert-line'></div>
+                        <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
                             <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                            <div className='between-arrow-left'></div>
+                            <div className='between-arrow-right'></div>
                             <input style={{ outline: 'none' }} onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
                         </div>
                     </div>
