@@ -5,14 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { HashRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./Redux/store";
+import { store, persistor } from './Redux/store'
+import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <HashRouter>
-        <App />
-      </HashRouter>
+      <PersistGate persistor={persistor}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

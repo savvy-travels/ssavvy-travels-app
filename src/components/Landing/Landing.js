@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import { airportSearch, updateLocation } from '../../Redux/searchReducer'
+import { airportSearch } from '../../Redux/searchReducer'
+import { updateLocation } from '../../Redux/locationReducer'
 import { connect } from "react-redux";
 import "./landing.css";
 import NewSearch from "./NewSearch/NewSearch";
@@ -134,7 +135,7 @@ function Landing(props) {
   const markers = flights.map((flight) => {
     let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
 
-    return {...flight, ...allAirports[airportId]}
+    return { ...flight, ...allAirports[airportId] }
   })
 
   const geoJson = markers.map((marker) => {
@@ -152,7 +153,7 @@ function Landing(props) {
     )
   })
 
-  console.log(geoJson)
+  // console.log(geoJson)
 
   return (
     <div className='landing'>
@@ -173,12 +174,12 @@ function Landing(props) {
 
       <div className="mini-map-div">
         {long ?
-            <MiniMap
+          <MiniMap
             long={long}
             lat={lat}
-            />
-        : 
-        <ClipLoader color={'#cae00d'} />}
+          />
+          :
+          <ClipLoader color={'#cae00d'} />}
       </div>
 
       <div className='deals-container'>

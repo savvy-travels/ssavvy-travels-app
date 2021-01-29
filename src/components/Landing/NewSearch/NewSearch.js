@@ -52,7 +52,7 @@ function NewSearch(props) {
     const [departureDate, setDepartureDate] = useState(undefined)
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
-    const [next, setNext] = useState(true)
+    const [next, setNext] = useState(false)
 
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {

@@ -4,20 +4,11 @@ const initialState = {
     airports: [],
     departureDate: '',
     arrivalDate: '',
-    long: '',
-    lat: ''
 }
 
 const NEW_SEARCH = 'NEW_SEARCH'
 const AIRPORT_SEARCH = "AIRPORT_SEARCH"
-const UPDATE_LOCATION = 'UPDATE_LOCATION'
 
-export function updateLocation(location) {
-    return {
-        type: UPDATE_LOCATION,
-        payload: location
-    }
-}
 
 export function airportSearch(search) {
     return {
@@ -36,9 +27,6 @@ export function newSearch(search) {
 
 export default function searchReducer(state = initialState, action) {
     switch (action.type) {
-        case UPDATE_LOCATION:
-            const { long, lat } = action.payload
-            return { ...state, long: long, lat: lat }
         case AIRPORT_SEARCH:
             return { ...state, airports: action.payload }
         case NEW_SEARCH:
