@@ -29,8 +29,8 @@ module.exports = {
                 to: email,
                 subject: title,
                 text: message,
-                html: `<div>${message}</div>
-                        <img src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png'/>` 
+                html: `<div style="font-size: 20px; color: black; margin-left: 20px; clear: left;">${message}</div>
+                <img style="float: left;" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png'/>`
             },
             function(err, info){
                 if(err){
