@@ -62,9 +62,11 @@ function NewSearch(props) {
                             onInputChange={handleInputChange}
                             defaultValue={airports[0]}
                             defaultOptions={input ? input : airports} />
-                        {/* <select type='select' onChange={(e) => setLocation(e.target.value)} placeholder='From Where?'><option value='null' unselectable={true} >Choose your departure airport</option>{airports}</select> */}
-                        <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
-                        <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                        <div className='vert-line'></div>
+                        <div className='depart-arrive-container'>
+                            <input onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                            <input onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                        </div>
                     </div>
                     :
                     null

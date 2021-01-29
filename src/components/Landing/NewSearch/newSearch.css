@@ -45,19 +45,9 @@
 .where-when-inputs {
   margin-top: 0.6rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
-.where-when-inputs > input {
-  text-align: center;
-  font-family: Montserrat;
-  font-size: 1.5rem;
-  width: 48%;
-  height: fit-content;
-  /* border: 2px solid #cae00d; */
-  border-radius: 5px;
-  outline: none;
-  color: #0b3840
-}
+
 .search-button {
   font-size: 2rem;
   margin-top: 1rem;
@@ -76,14 +66,31 @@
   color: white;
   /* opacity: 0.5;  */
 }
-
+.depart-arrive-container{
+  width: 30rem;
+  display: flex;
+  justify-content: space-between;
+}
+.depart-arrive-container>input{
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 1.5rem;
+  widows: 50%;
+  height: 2.2rem;
+  /* border-radius: 5px; */
+  outline: none;
+  color: #0b3840;
+  margin-right: 10px;
+}
 .airport-select{
   width: 30rem;
   font-family: montserrat;
   text-align: left;
+  color: #0b3840;
+  outline: #0b3840;
 }
-.airport-select:hover{
-  cursor: text;
+.airport-select:focus{
+  outline: none;
 }
 @media (max-width: 900px) {
   .slogan-container {
