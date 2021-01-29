@@ -1,11 +1,8 @@
-import { createStore, combineReducers } from 'redux'
-import searchReducer from './searchReducer'
-import userReducer from './userReducer'
+import { createStore } from 'redux'
+import { persistStore } from 'redux-persist';
+import rootReducer from './root-reducers'
 
-const rootReducer = combineReducers({
-    userReducer: userReducer,
-    searchReducer: searchReducer
-})
+export const store = createStore(rootReducer)
+export const persistor = persistStore(store)
 
-
-export default createStore(rootReducer)
+export default { store, persistor }
