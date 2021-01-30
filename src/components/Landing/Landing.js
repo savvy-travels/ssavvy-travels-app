@@ -141,17 +141,18 @@ function Landing(props) {
   const geoJson = markers.map((marker) => {
     return (
       {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [marker.lat, marker.lon]
-        },
-        "properties": {
-          "name": marker.city
-        }
+        type: "FeatureCollection",
+        features: [
+          {
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [marker.lat, marker.lon]}}
+            ]
+          }
+        )
       }
     )
-  })
 
   // console.log(geoJson)
 
@@ -177,6 +178,7 @@ function Landing(props) {
           <MiniMap
             long={long}
             lat={lat}
+            geoJson={geoJson}
           />
           :
           <ClipLoader color={'#cae00d'} />}

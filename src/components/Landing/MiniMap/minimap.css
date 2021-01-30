@@ -27,3 +27,11 @@
 .suggestion-title {
   border-bottom: 1px solid #0b3840;
 }
+
+.marker {
+  width: 50px;
+  color: #0b3840;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
