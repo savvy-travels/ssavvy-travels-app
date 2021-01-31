@@ -147,7 +147,7 @@ function Landing(props) {
             type: 'Feature',
             geometry: {
               type: 'Point',
-              coordinates: [marker.lat, marker.lon]}}
+              coordinates: [marker.lon, marker.lat]}}
             ]
           }
         )
