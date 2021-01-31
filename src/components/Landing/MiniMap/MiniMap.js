@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import ReactMapGL, { Marker, Pop, Source, Layer } from 'react-map-gl'
+import ReactMapGL, { Marker, Popup, Source, Layer } from 'react-map-gl'
 import './minimap.css'
 
 function MiniMap(props) {
@@ -19,18 +19,19 @@ function MiniMap(props) {
         features: [
           {type: 'Feature', geometry: {type: 'Point', coordinates: [long, lat]}}
         ]
-      };
+    };
       
-      const layerStyle = {
+    const layerStyle = {
         id: 'point',
         type: 'circle',
         paint: {
           'circle-radius': 10,
           'circle-color': '#007cbf'
         }
-      };
+    };
 
     const [selectedCity, setSelectedCity] = useState(null)
+
     React.useEffect(() => {
         window.addEventListener('resize', () => {
             setViewport({
@@ -45,6 +46,10 @@ function MiniMap(props) {
             window.removeEventListener('resize', setViewport)
         }
     }, [])
+
+
+
+
     //Search State//
     // const [budget, setBudget] = useState(`$${props.match.params.budget}`)
     // const [where, setWhere] = useState(props.match.params.where)
@@ -66,17 +71,18 @@ function MiniMap(props) {
                     onViewportChange={(viewport) => { setViewport({ ...viewport }) }}
                 >
 
-<Source id="my-data" type="geojson" data={geojson}>
-        <Layer {...layerStyle} />
-      </Source>
+                    <Source id="my-data" type="geojson" data={geojson}>
+                        <Layer {...layerStyle} />
+                    </Source>
+
                 </ReactMapGL>
             </div>
 
-            {/* {apicall.map((city) => (
+            {/* {geoJson.map((city) => (
                 <Marker 
-                key={{}} 
-                latitude={{}} 
-                longitude={{}}>
+                key={properties.name} 
+                latitude={geometry.coordinates[0]} 
+                longitude={geometry.coordinates[1]>
                     <button
                     onClick={e => {
                         e.preventDefault()
@@ -84,9 +90,27 @@ function MiniMap(props) {
                     }}
                     className='marker-btn'>
                         <img src='locIcon' alt='location-icon'/>
+                        {props.flightprice}
                     </button>
                 </Marker>
             ))} */}
+
+            {selectedCity ? (
+                // <Popup 
+                // latitude={geometry.coordinates[0]} 
+                // longitude={geometry.coordinates[1]}
+                // >
+                    <div>
+                        <img src='api reference to city'/>
+                        <h1>{selectedCity.properties.name}</h1>
+                        <h2>{props.flightMinPrice}</h2>
+                        <button>Go to Flight</button>
+                        {/* <button
+                        <img src='plus-icon'
+                        onClick= isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites</button> */}
+                    </div>
+                // </Popup>
+            ) : null}
         </div>
 
 

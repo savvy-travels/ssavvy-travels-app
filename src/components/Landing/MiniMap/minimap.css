@@ -27,3 +27,14 @@
 .suggestion-title {
   border-bottom: 1px solid #0b3840;
 }
+
+.marker-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.marker-btn img {
+  width: 20px;
+  height: 20px;
+}
