@@ -120,6 +120,7 @@ function Landing(props) {
     let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
     return { ...flight, ...allAirports[airportId] }
   })
+  console.log(flights)
 
 
   const flightCards = flights.map((flight) => {

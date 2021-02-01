@@ -35,3 +35,17 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.marker-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.popup {
+  /* position: absolute; */
+}
+
+.pop img {
+  width: 100%;
+  height: 20%;
+}
