@@ -36,16 +36,26 @@
   cursor: pointer;
 }
 
+.marker-btn {
+  width: 100%;
+}
+
 .marker-icon {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 .popup {
   /* position: absolute; */
 }
 
-.pop img {
+.popup-img {
   width: 100%;
-  height: 20%;
+  height: 20vh;
+}
+
+.price {
+  background: white;
+  width: 100%;
+  border: 1px solid #f6615c;
 }

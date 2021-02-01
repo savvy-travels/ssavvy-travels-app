@@ -8,8 +8,13 @@ id SERIAL PRIMARY KEY,
 email VARCHAR(100),
 username VARCHAR(100),
 password VARCHAR(500),
-preferred VARCHAR(50)
+preferred VARCHAR(50),
+active boolean
 );
+
+ALTER TABLE savvy_travels_users 
+ALTER COLUMN active
+SET DEFAULT false;
 
 CREATE TABLE savvy_travels_locations (
 id SERIAL PRIMARY key,

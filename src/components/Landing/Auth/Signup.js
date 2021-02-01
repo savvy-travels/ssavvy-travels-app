@@ -86,7 +86,7 @@ function Signup(props) {
         }
         setLoading(true)
 
-        const message = `<div>Welcome ${username}, we're happy to have you in our community! From here on out you have access to my trips which allows you save and scan for trips you have saved! Please take a second to confirm your email by clicking the link below!</div>`
+        const message = `<div>Welcome ${username}, we're happy to have you in our community! You now have access to my trips which allows you save and scan for trips you have saved. Please take a second to confirm your email by clicking the link below.</div>`
         axios.post('/api/auth/register', { email, username, password, preferred, message}).then(res => {
             console.log('Hit this')
             setLoading(false)
