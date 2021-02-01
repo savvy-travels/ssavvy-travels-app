@@ -167,8 +167,6 @@ function Landing(props) {
       <div className='deals-container'>
         {deals}
       </div>
-
-
     </div>
   )
 

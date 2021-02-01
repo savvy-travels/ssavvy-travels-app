@@ -36,27 +36,22 @@ function MiniMap(props) {
   const features = flights.map((place) => {
     return {
       type: "Feature",
-      // properties: {
-      //   name: place.CityName,
-      //   price: place.MinPrice
-      // },
+      properties: {
+        name: place.city,
+        price: place.MinPrice,
+      },
       geometry: {
         type: "Point",
-        coordinates: [
-          place.lat,
-          place.lon,
-        ],
-      },
+        coordinates: [place.lon, place.lat]
+      }
     }
   })
+
 
   const destinations = {
     type: "FeatureCollection",
     features: features,
   }
-
-  console.log(destinations)
-
   
 
   const [selectedCity, setSelectedCity] = useState(null)
