@@ -115,10 +115,11 @@ function Landing(props) {
   const flights = quotes.map((quote) => {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-
-    return { ...quote, ...places[destinationId], ...carriers[carrierId] }
+    let airportId = allAirports.findIndex(airport => console.log(airport))
+    return { ...quote, ...places[destinationId], ...carriers[carrierId], ...allAirports[airportId] }
   })
 
+  console.log(flights)
 
   const flightCards = flights.map((flight) => {
     return (
@@ -129,30 +130,16 @@ function Landing(props) {
     )
   })
 
-
   const deals = [flightCards[0], flightCards[1], flightCards[2]]
 
   const markers = flights.map((flight) => {
     let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
-
     return { ...flight, ...allAirports[airportId] }
   })
 
-  const geoJson = markers.map((marker) => {
-    return (
-      {
-        type: "FeatureCollection",
-        features: [
-          {
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [marker.lon, marker.lat]}}
-            ]
-          }
-        )
-      }
-    )
+
+
+  
 
   // console.log(geoJson)
 
@@ -178,7 +165,7 @@ function Landing(props) {
           <MiniMap
             long={long}
             lat={lat}
-            geoJson={geoJson}
+            // geoJson={geoJson}
           />
           :
           <ClipLoader color={'#cae00d'} />}

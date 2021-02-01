@@ -33,23 +33,25 @@ function MiniMap(props) {
     },
   }
 
-  const features = geoJson.map((place) => {
-    return {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [
-          place.features[0].geometry.coordinates[0],
-          place.features[0].geometry.coordinates[1],
-        ],
-      },
-    }
-  })
+//   const features = geoJson.map((place) => {
+//     return {
+//       type: "Feature",
+//       geometry: {
+//         type: "Point",
+//         coordinates: [
+//           place.features[0].geometry.coordinates[0],
+//           place.features[0].geometry.coordinates[1],
+//         ],
+//       },
+//     }
+//   })
 
-  const destinations = {
-    type: "FeatureCollection",
-    features: features,
-  }
+//   const destinations = {
+//     type: "FeatureCollection",
+//     features: features,
+//   }
+
+  
 
   const [selectedCity, setSelectedCity] = useState(null)
   React.useEffect(() => {
@@ -92,9 +94,9 @@ function MiniMap(props) {
             <Layer {...layerStyle} />
           </Source>
           
-          <Source id='my-data' type='geojson' data={destinations}>
+          {/* <Source id='my-data' type='geojson' data={destinations}>
             <Layer {...layerStyle} />
-          </Source>
+          </Source> */}
         </ReactMapGL>
       </div>
 
