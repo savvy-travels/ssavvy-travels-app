@@ -177,7 +177,7 @@ function Landing(props) {
           <MiniMap
             long={long}
             lat={lat}
-            flightMinPrice = {flightMinPrice}
+            // flightMinPrice = {flightMinPrice}
           />
           :
           <ClipLoader color={'#cae00d'} />}
