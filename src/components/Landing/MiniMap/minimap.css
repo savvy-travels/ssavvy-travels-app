@@ -35,3 +35,8 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.marker-icon {
+  width: 20px;
+  height: 20px;
+}

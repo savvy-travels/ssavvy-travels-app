@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import ReactMapGL, { Marker, Popup, Source, Layer } from 'react-map-gl'
+import ReactMapGL, { Marker, Popup } from 'react-map-gl'
 import './minimap.css'
 
 function MiniMap(props) {
   //Map State
   const { lat, long, flights } = props
+  const [selectedCity, setSelectedCity] = useState(null)
+  
   const [viewport, setViewport] = useState({
     latitude: lat,
     longitude: long,
@@ -14,48 +16,24 @@ function MiniMap(props) {
     zoom: 3,
   })
 
-  const geojson = {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        geometry: { type: "Point", coordinates: [long, lat] },
-      },
-    ],
-  }
+  const markers = useMemo(() => flights.map(
+    city => (
+        <div>{city.lon ? <Marker key={city.CityName} longitude={+city.lon} latitude={+city.lat} >
+             <button
+                onClick={e => {
+                    e.preventDefault()
+                    setSelectedCity(city.CityName)
+                }}
+                className='marker-btn'>
+                    <p>{city.MinPrice}</p>
+                    <img className='marker-icon' src="https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png"/>
+            </button>
+        </Marker> : null}
+        </div>
+        )
+    ), [flights]);
 
-  const layerStyle = {
-    id: "point",
-    type: "circle",
-    paint: {
-      "circle-radius": 5,
-      "circle-color": "#007cbf",
-    },
-  }
-
-  const features = flights.map((place) => {
-    return {
-      type: "Feature",
-      properties: {
-        name: place.city,
-        price: place.MinPrice,
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [place.lon, place.lat]
-      }
-    }
-  })
-
-
-  const destinations = {
-    type: "FeatureCollection",
-    features: features,
-  }
-  
-
-  const [selectedCity, setSelectedCity] = useState(null)
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", () => {
       setViewport({
         latitude: lat,
@@ -69,10 +47,7 @@ function MiniMap(props) {
       window.removeEventListener("resize", setViewport)
     }
   }, [])
-  //Search State//
-  // const [budget, setBudget] = useState(`$${props.match.params.budget}`)
-  // const [where, setWhere] = useState(props.match.params.where)
-  // const [when, setWhen] = useState(props.match.params.selectedDate)
+ 
   return (
     <div className='mini-map-container'>
       <div className='mini-map-side-bar'>
@@ -91,53 +66,36 @@ function MiniMap(props) {
             setViewport({ ...viewport })
           }}
         >
-          {/* <Source id='my-data' type='geojson' data={geojson}>
-            <Layer {...layerStyle} />
-          </Source> */}
-          
-          <Source id='my-data' type='geojson' data={destinations}>
-            <Layer {...layerStyle} />
-          </Source>
+        
+        {/* Markers */}
+        {markers}
+      
+        {/* Pop Up */}
+        {selectedCity ? (
+            <Popup 
+                latitude={selectedCity.city.lat} 
+                longitude={selectedCity.city.lon}
+            >
+                <div>
+                    {/* <img src=''/>
+                    <h1>{selectedCity.}</h1>
+                    <h2>{selectedCity.MinPrice}</h2> */}
+                    <button>Go to Flight</button>
+                    <button
+                        // onClick= {isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites}
+                    >
+                        {/* <img src='plus-icon'/> */}
+                    </button>
+                </div>
+            </Popup>
+            ) : null}
         </ReactMapGL>
       </div>
 
-      {/* {apicall.map((city) => (
-                <Marker 
-                key={city.CityName} 
-                latitude={city.lat} 
-                longitude={city.long}>
-                    <button
-                    onClick={e => {
-                        e.preventDefault()
-                        setSelectedCity(city)
-                    }}
-                    className='marker-btn'>
-                        <img src='locIcon' alt='location-icon'/>
-                        {city.CityName}
-                        {city.MinPrice}
-                        {city.Type} g
-                        {city.Duration}
-                    </button>
-                </Marker>
-            ))}
 
-            {selectedCity ? (
-                // <Popup 
-                // latitude={geometry.coordinates[0]} 
-                // longitude={geometry.coordinates[1]}
-                // >
-                    <div>
-                        <img src='api reference to city'/>
-                        <h1>{selectedCity.properties.name}</h1>
-                        <h2>{props.flightMinPrice}</h2>
-                        <button>Go to Flight</button>
-                        {/* <button
-                        <img src='plus-icon'
-                        onClick= isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites</button> */}
-                    {/* </div> */}
-                {/* // </Popup> */}
-            {/* ) : null} */}
-        </div>
+
+
+    </div>
 
 
     )
