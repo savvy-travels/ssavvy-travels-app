@@ -25,10 +25,12 @@ export function LatProvider(props) {
             .then(res => {
                 setLatLong({ lat: res.data.location.lat, long: res.data.location.lng })
                 setLocation(`${res.data.location.lat.toFixed(4)}${res.data.location.lng.toFixed(4)}`)
+                //localStorage set Item to local storage//
             }).catch(err => [
                 console.log(err)
             ])
     }, [])
+
     // runs getCities function if the location is defined
     useEffect(() => {
         if (location.length > 0) {
