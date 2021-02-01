@@ -16,13 +16,10 @@ module.exports = {
             const [newUser] = await db.users.create_user([email, username, hash, preferred])
             req.session.user = newUser
             const {id} = newUser
-            console.log(id)
             const transporter = await req.app.get('transporter')
-            console.log(newUser)
             const token = await jwt.sign({
                 'email': `${email}`
             }, process.env.JWT_SECRET_KEY, {expiresIn: '1 day'})
-            console.log(id)
             const url = `${process.env.SERVER_URL}/${id}/${token}`
             transporter.sendMail({
                 from: 'savvytravels11@gmail.com',
