@@ -140,7 +140,7 @@ function Map(props) {
             </div>
           </div>
            <div className='map-container'>
-           {/* <ReactMapGL
+           <ReactMapGL
               {...viewport}
               mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
               mapStyle='mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp'
@@ -149,11 +149,11 @@ function Map(props) {
                 setViewport(viewport)
               }}
             >
-              {/* <Source id='my-data' type='geojson' data={destinations}>
+              <Source id='my-data' type='geojson' data={destinations}>
                 <Layer {...layerStyle} />
-              </Source> */}
-
-              {/* {apicall.map((city) => (
+              </Source>
+{/* 
+               {apicall.map((city) => ( 
                 <Marker 
                 key={{}} 
                 latitude={{}} 
@@ -167,8 +167,8 @@ function Map(props) {
                         <img src='locIcon' alt='location-icon'/>
                     </button>
                 </Marker>
-            ))} */}
-            {/* </ReactMapGL> */}
+            ))}  */}
+             </ReactMapGL>
           </div> 
         </div>
       </div>

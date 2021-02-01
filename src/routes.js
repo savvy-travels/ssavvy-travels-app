@@ -11,6 +11,6 @@ export default (
         <Route exact path='/map' component={Map} />
         <Route exact path='/profile' component={Profile} />
         <Route path='/' component={Landing} />
-        <Route />
+        {/* <Route /> */}
     </Switch>
 )
