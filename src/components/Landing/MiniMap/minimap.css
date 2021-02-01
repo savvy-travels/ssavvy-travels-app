@@ -40,3 +40,12 @@
   width: 20px;
   height: 20px;
 }
+
+.popup {
+  /* position: absolute; */
+}
+
+.pop img {
+  width: 100%;
+  height: 20%;
+}
