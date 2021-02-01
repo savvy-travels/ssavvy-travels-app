@@ -5,7 +5,7 @@ import "./minimap.css"
 
 function MiniMap(props) {
   //Map State
-  const { lat, long, geoJson } = props
+  const { lat, long, flights } = props
   const [viewport, setViewport] = useState({
     latitude: lat,
     longitude: long,
@@ -33,23 +33,26 @@ function MiniMap(props) {
     },
   }
 
-  const features = geoJson.map((place) => {
+  const features = flights.map((place) => {
     return {
       type: "Feature",
+      properties: {
+        name: place.city,
+        price: place.MinPrice,
+      },
       geometry: {
         type: "Point",
-        coordinates: [
-          place.features[0].geometry.coordinates[0],
-          place.features[0].geometry.coordinates[1],
-        ],
-      },
+        coordinates: [place.lon, place.lat]
+      }
     }
   })
+
 
   const destinations = {
     type: "FeatureCollection",
     features: features,
   }
+  
 
   const [selectedCity, setSelectedCity] = useState(null)
   React.useEffect(() => {
@@ -88,9 +91,9 @@ function MiniMap(props) {
             setViewport({ ...viewport })
           }}
         >
-          <Source id='my-data' type='geojson' data={geojson}>
+          {/* <Source id='my-data' type='geojson' data={geojson}>
             <Layer {...layerStyle} />
-          </Source>
+          </Source> */}
           
           <Source id='my-data' type='geojson' data={destinations}>
             <Layer {...layerStyle} />
