@@ -28,13 +28,10 @@
   border-bottom: 1px solid #0b3840;
 }
 
-.marker-btn {
-  background: none;
-  border: none;
+.marker {
+  width: 50px;
+  color: #0b3840;
+  height: 50px;
+  border-radius: 50%;
   cursor: pointer;
-}
-
-.marker-btn img {
-  width: 20px;
-  height: 20px;
 }
