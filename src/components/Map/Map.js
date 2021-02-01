@@ -76,11 +76,13 @@ function Map(props) {
     const flights = quotes.map((quote) => {
         let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
         let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-
         return { ...quote, ...places[destinationId], ...carriers[carrierId] }
-    }).filter(flight => flight.MinPrice < budget)
+      }).map((flight) => {
+        let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
+        return { ...flight, ...allAirports[airportId] }
+      }).filter(flight => flight.MinPrice < budget)
 
-    console.log(flights)
+    
 
     const flightCards = flights.map((flight) => {
         return (
@@ -91,30 +93,20 @@ function Map(props) {
         )
     })
 
-    const markers = flights.map((flight) => {
-        let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
 
-        return { ...flight, ...allAirports[airportId] }
-    })
-
-    console.log(markers)     
-
-    const features = markers.map((marker) => {
-        return (
-            {
-                type: "FeatureCollection",
-                geometry: {
-                    type: "Point",
-                    coordinates: [marker.lat, marker.lon]
-                },
-                properties: {
-                    name: marker.city
-                }
-            }
-        )
-    })
-
-    console.log(features)
+    const features = flights.map((place) => {
+        return {
+          type: "Feature",
+          properties: {
+            name: place.city,
+            price: place.MinPrice,
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [place.lon, place.lat]
+          }
+        }
+      })
 
     const destinations = {
         type: "FeatureCollection",
@@ -140,7 +132,7 @@ function Map(props) {
             </div>
           </div>
            <div className='map-container'>
-           {/* <ReactMapGL
+           <ReactMapGL
               {...viewport}
               mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
               mapStyle='mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp'
@@ -149,9 +141,9 @@ function Map(props) {
                 setViewport(viewport)
               }}
             >
-              {/* <Source id='my-data' type='geojson' data={destinations}>
+              <Source id='my-data' type='geojson' data={destinations}>
                 <Layer {...layerStyle} />
-              </Source> */}
+              </Source>
 
               {/* {apicall.map((city) => (
                 <Marker 
@@ -168,7 +160,7 @@ function Map(props) {
                     </button>
                 </Marker>
             ))} */}
-            {/* </ReactMapGL> */}
+            </ReactMapGL>
           </div> 
         </div>
       </div>
