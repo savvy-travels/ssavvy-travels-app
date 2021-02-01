@@ -56,7 +56,11 @@ function MiniMap(props) {
         {selectedCity ? (
                 <div className='popup'>
                     <img className= 'popup-img' src='https://upload.wikimedia.org/wikipedia/commons/3/32/20190616154621%21Echo_Park_Lake_with_Downtown_Los_Angeles_Skyline.jpg'/>
-                    <button>Go to Flight</button>
+                    <h2>City: {selectedCity.CityName}</h2>
+                    <h3>Price: ${selectedCity.MinPrice}</h3>
+                    <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
+                        }</h4>
+                    <button className='search-button'>Go to Flight</button>
                     <button
                         // onClick= {isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites}
                     >
@@ -65,7 +69,6 @@ function MiniMap(props) {
                 </div>
             // </Popup>
          ) : null}
-          <h1>Suggested Trips</h1>
         </div>
       </div>
 
