@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../Redux/searchReducer'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Source, Layer } from 'react-map-gl'
 import './map.css'
 import SearchField from './Search Field/SearchField'
 import axios from 'axios'
@@ -27,7 +27,14 @@ function Map(props) {
     const [selectedCity, setSelectedCity] = useState(null)
 
 
-    console.log(props.lat, props.long)
+    const layerStyle = {
+        id: "point",
+        type: "circle",
+        paint: {
+          "circle-radius": 5,
+          "circle-color": "#007cbf",
+        },
+      }
 
     const useSetViewport = () => {
         setViewport({
@@ -61,8 +68,9 @@ function Map(props) {
         })
         axios.get('/api/airports').then(res => setAllAirports(res.data))
 
-    }, [])
+    }, [budget, location, departureDate, arrivalDate])
 
+    console.log(quotes)
 
 
     const flights = quotes.map((quote) => {
@@ -72,7 +80,7 @@ function Map(props) {
         return { ...quote, ...places[destinationId], ...carriers[carrierId] }
     }).filter(flight => flight.MinPrice < budget)
 
-    //   
+    console.log(flights)
 
     const flightCards = flights.map((flight) => {
         return (
@@ -89,49 +97,63 @@ function Map(props) {
         return { ...flight, ...allAirports[airportId] }
     })
 
-    const geoJson = markers.map((marker) => {
+    console.log(markers)     
+
+    const features = markers.map((marker) => {
         return (
             {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [marker.lat, marker.lon]
+                type: "FeatureCollection",
+                geometry: {
+                    type: "Point",
+                    coordinates: [marker.lat, marker.lon]
                 },
-                "properties": {
-                    "name": marker.city
+                properties: {
+                    name: marker.city
                 }
             }
         )
     })
 
-    console.log(geoJson)
+    console.log(features)
+
+    const destinations = {
+        type: "FeatureCollection",
+        features: features,
+      }
+
 
 
     return (
-        <div className='map-view'>
-            <div className='lower-map-view'>
-                <div className='controllers-container'>
-                    {/* <div className='filter-container'>
+      <div className='map-view'>
+        <div className='lower-map-view'>
+          <div className='controllers-container'>
+            {/* <div className='filter-container'>
 
                     </div> */}
-                    <div className='results-search-container'>
-                        <SearchField />
-                        <div className='line'></div>
-                        <div className='results'>
-                            <h1>Mapped Results</h1>
-                            <div>{flightCards}</div>
-                        </div>
-                    </div>
-                </div>
-                <div className='map-container'>
-                    <ReactMapGL
-                        {...viewport}
-                        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-                        mapStyle='mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp'
-                        //allows us to drag map around and zoom in/out
-                        onViewportChange={(viewport) => { setViewport(viewport) }}
-                    >
-                        {/* {apicall.map((city) => (
+            <div className='results-search-container'>
+              <SearchField />
+              <div className='line'></div>
+              <div className='results'>
+                <h1>Mapped Results</h1>
+                <div>{flightCards}</div>
+              </div>
+            </div>
+          </div>
+           <div className='map-container'>
+           {/* <ReactMapGL
+              {...viewport}
+              mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+              mapStyle='mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp'
+              //allows us to drag map around and zoom in/out
+              onViewportChange={(viewport) => {
+                setViewport(viewport)
+              }}
+            >
+              {/* <Source id='my-data' type='geojson' data={destinations}>
+                <Layer {...layerStyle} />
+              </Source> */}
+
+              {/* {apicall.map((city) => (
                 <Marker 
                 key={{}} 
                 latitude={{}} 
@@ -146,11 +168,10 @@ function Map(props) {
                     </button>
                 </Marker>
             ))} */}
-                    </ReactMapGL>
-                </div>
-            </div>
+            {/* </ReactMapGL> */}
+          </div> 
         </div>
-
+      </div>
     )
 }
 
