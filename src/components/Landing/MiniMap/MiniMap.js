@@ -78,11 +78,11 @@ function MiniMap(props) {
                 </ReactMapGL>
             </div>
 
-            {/* {geoJson.map((city) => (
+            {markers.map((city) => (
                 <Marker 
-                key={properties.name} 
-                latitude={geometry.coordinates[0]} 
-                longitude={geometry.coordinates[1]>
+                key={city.CityName} 
+                latitude={city.lat} 
+                longitude={city.long}>
                     <button
                     onClick={e => {
                         e.preventDefault()
@@ -90,10 +90,13 @@ function MiniMap(props) {
                     }}
                     className='marker-btn'>
                         <img src='locIcon' alt='location-icon'/>
-                        {props.flightprice}
+                        {city.CityName}
+                        {city.MinPrice}
+                        {city.Type} g
+                        {city.Duration}
                     </button>
                 </Marker>
-            ))} */}
+            ))}
 
             {selectedCity ? (
                 // <Popup 
