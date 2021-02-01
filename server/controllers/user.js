@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs')
-
+const jwt = require('jsonwebtoken')
 module.exports = {
     register: async (req, res) => {
         const db = req.app.get('db')
@@ -15,15 +15,22 @@ module.exports = {
             const hash = bcrypt.hashSync(password, salt)
             const [newUser] = await db.users.create_user([email, username, hash, preferred])
             req.session.user = newUser
-            
+            const {id} = newUser
+            console.log(id)
             const transporter = await req.app.get('transporter')
+            console.log(newUser)
+            const token = await jwt.sign({
+                'email': `${email}`
+            }, process.env.JWT_SECRET_KEY, {expiresIn: '1 day'})
+            console.log(id)
+            const url = `${process.env.SERVER_URL}/${id}/${token}`
             transporter.sendMail({
                 from: 'savvytravels11@gmail.com',
                 to: email,
                 subject: 'Welcome to Savvy Travels!',
                 text: message,
                 html: `<div style="font-size: 20px; color: black; margin-left: 250px; width: 50%;">${message}</div>
-                <div style="font-size: 20px; color: black; margin-left: 250px; width: 50%; margin-top: 100px;">Trying to test something</div>
+                <div style="font-size: 20px; color: black; margin-left: 250px; width: 50%; margin-top: 100px;"><a href=${url}>${url}</a></div>
                 <img style="width: 7%;" src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png'/>`
             },
             function(err, info){

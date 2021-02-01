@@ -145,6 +145,7 @@ function Map(props) {
                 <Layer {...layerStyle} />
               </Source>
 
+
               {/* {apicall.map((city) => (
                 <Marker 
                 key={{}} 
@@ -159,6 +160,7 @@ function Map(props) {
                         <img src='locIcon' alt='location-icon'/>
                     </button>
                 </Marker>
+
             ))} */}
             </ReactMapGL>
           </div> 

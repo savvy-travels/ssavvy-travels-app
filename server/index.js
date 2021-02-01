@@ -10,7 +10,8 @@ const airportCtrl = require('./controllers/airports')
 const listCtrl = require('./controllers/airportList')
 const authMiddleware = require('./middleware/verifyUser')
 const nodemailer = require('nodemailer')
-
+const jwt = require('jsonwebtoken')
+const activateCtrl = require('./controllers/activate')
 
 
 const app = express()
@@ -23,6 +24,7 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }))
 
+app.get(`/api/auth/verification/:id/:token`, activateCtrl.verify)
 app.post('/api/auth/register', userCtrl.register)
 app.post('/api/auth/login', userCtrl.login)
 app.post('/api/auth/logout', userCtrl.logout)
@@ -30,7 +32,7 @@ app.post('/api/auth/logout', userCtrl.logout)
 app.get('/api/airports/:city', listCtrl.getLocalAirports)
 app.get('/api/airports', listCtrl.getAllAirports)
 
-app.use(authMiddleware.isAuthenticated)
+// app.use(authMiddleware.isAuthenticated)
 app.get('/api/auth/user', userCtrl.getUser)
 
 app.post('/api/saveLocation', locationCtrl.saveLocation)
