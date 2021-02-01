@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
 import allAirports from '../../airports.json'
 import AsyncSelect from 'react-select/async'
 import './newSearch.css'
+import { Context } from '../../../context/context'
 
 //Functions used to filter through the airport results
 //First we grab all the airports from the data.json file and map them to a new variable
@@ -54,6 +55,9 @@ function NewSearch(props) {
     const [location, setLocation] = useState(undefined)
     const [next, setNext] = useState(false)
 
+    const context = useContext(Context)
+    // console.log(context)
+
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {
         const inputValue = newValue.replace(/\W/g, '')
@@ -65,7 +69,7 @@ function NewSearch(props) {
     }
 
     // const airports = props.airports.map(airport => { return <option value={airport.code} key={airport.code} >{airport.code} - {airport.name}</option> })
-    const airports = props.airports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+    const airports = context.airports.map(airport => { return { value: airport.code, label: `${airport.iata}-${airport.name}` } })
 
     return (
         <span className='search-field'>
@@ -86,7 +90,7 @@ function NewSearch(props) {
                             placeholder={'Select departure airport...'}
                             styles={customStyles}
                             theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
-                            defaultValue={airports}
+                            defaultValue={airports[0]}
                             defaultOptions={input ? input : airports} />
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
@@ -106,10 +110,6 @@ function NewSearch(props) {
     )
 }
 
-function mapStateToProps(reduxState) {
-    return {
-        airports: reduxState.searchReducer.airports
-    }
-}
 
-export default withRouter(connect(mapStateToProps, { newSearch })(NewSearch))
+
+export default withRouter(connect(null, { newSearch })(NewSearch))
