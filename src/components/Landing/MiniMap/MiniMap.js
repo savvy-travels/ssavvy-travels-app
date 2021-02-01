@@ -16,6 +16,15 @@ function MiniMap(props) {
     zoom: 3,
   })
 
+  const suggested = [flights[0], flights[1], flights[2]]
+
+  // const suggestedCards = suggested.map(flight => (
+  //   <div key={flight.QuoteId} className='flight-card'>
+  //     {/* <h3>{flight.CityName}</h3>
+  //     <h1>${flight.MinPrice}</h1> */}
+  //   </div>
+  // ))
+
   const markers = useMemo(() => flights.map(
     city => (
         <div>{city.lon ? <Marker key={city.CityName} longitude={+city.lon} latitude={+city.lat} >
@@ -69,6 +78,10 @@ function MiniMap(props) {
                 </div>
             // </Popup>
          ) : null}
+
+          <h1>Suggested Trips</h1>
+          {<div>{suggestedCards}</div>}
+
         </div>
       </div>
 
