@@ -76,11 +76,13 @@ function Map(props) {
     const flights = quotes.map((quote) => {
         let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
         let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-
         return { ...quote, ...places[destinationId], ...carriers[carrierId] }
-    }).filter(flight => flight.MinPrice < budget)
+      }).map((flight) => {
+        let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
+        return { ...flight, ...allAirports[airportId] }
+      }).filter(flight => flight.MinPrice < budget)
 
-    console.log(flights)
+    
 
     const flightCards = flights.map((flight) => {
         return (
@@ -91,30 +93,20 @@ function Map(props) {
         )
     })
 
-    const markers = flights.map((flight) => {
-        let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
 
-        return { ...flight, ...allAirports[airportId] }
-    })
-
-    console.log(markers)     
-
-    const features = markers.map((marker) => {
-        return (
-            {
-                type: "FeatureCollection",
-                geometry: {
-                    type: "Point",
-                    coordinates: [marker.lat, marker.lon]
-                },
-                properties: {
-                    name: marker.city
-                }
-            }
-        )
-    })
-
-    console.log(features)
+    const features = flights.map((place) => {
+        return {
+          type: "Feature",
+          properties: {
+            name: place.city,
+            price: place.MinPrice,
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [place.lon, place.lat]
+          }
+        }
+      })
 
     const destinations = {
         type: "FeatureCollection",
@@ -152,8 +144,9 @@ function Map(props) {
               <Source id='my-data' type='geojson' data={destinations}>
                 <Layer {...layerStyle} />
               </Source>
-{/* 
-               {apicall.map((city) => ( 
+
+
+              {/* {apicall.map((city) => (
                 <Marker 
                 key={{}} 
                 latitude={{}} 
@@ -167,8 +160,9 @@ function Map(props) {
                         <img src='locIcon' alt='location-icon'/>
                     </button>
                 </Marker>
-            ))}  */}
-             </ReactMapGL>
+
+            ))} */}
+            </ReactMapGL>
           </div> 
         </div>
       </div>
@@ -181,8 +175,8 @@ function mapStateToProps(reduxState) {
         location: reduxState.searchReducer.location,
         departureDate: reduxState.searchReducer.departureDate,
         arrivalDate: reduxState.searchReducer.arrivalDate,
-        long: reduxState.locationReducer.long,
-        lat: reduxState.locationReducer.lat
+        long: +reduxState.locationReducer.long,
+        lat: +reduxState.locationReducer.lat
     }
 }
 

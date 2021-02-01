@@ -6,7 +6,7 @@ const initialState = {
 const UPDATE_LOCATION = 'UPDATE_LOCATION'
 
 export function updateLocation(location) {
-    console.log(location)
+    // console.log(location)
     return {
         type: UPDATE_LOCATION,
         payload: location
