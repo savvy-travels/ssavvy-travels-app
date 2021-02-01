@@ -2,7 +2,7 @@ import axios from 'axios'
 import { createContext, useEffect, useState } from 'react'
 
 
-export const LatContext = createContext(null)
+export const Context = createContext(null)
 
 export function LatProvider(props) {
     const geoDbKey = process.env.REACT_APP_GEODB_KEY;
@@ -101,6 +101,6 @@ export function LatProvider(props) {
     }
 
     return (
-        <LatContext.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports }}>{props.children}</LatContext.Provider>
+        <Context.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports }}>{props.children}</Context.Provider>
     )
 }

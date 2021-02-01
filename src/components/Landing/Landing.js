@@ -5,7 +5,7 @@ import { airportSearch } from '../../Redux/searchReducer'
 import { updateLocation } from '../../Redux/locationReducer'
 import { connect } from "react-redux";
 import "./landing.css";
-import { LatContext } from '../../context/context'
+import { Context } from '../../context/context'
 import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
@@ -31,8 +31,8 @@ function Landing(props) {
   // const [airport, setAirport] = useState([])
   const [allAirports, setAllAirports] = useState([])
 
-  const latContext = useContext(LatContext)
-  console.log(latContext)
+  const context = useContext(Context)
+  console.log(context)
 
   // useEffect(() => {
   //   if (latContext.lat && latContext.long) {
@@ -134,10 +134,10 @@ function Landing(props) {
   // }, [airport])
 
 
-  const flights = latContext.quotes.map((quote) => {
-    let destinationId = latContext.places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
-    let carrierId = latContext.carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-    return { ...quote, ...latContext.places[destinationId], ...latContext.carriers[carrierId] }
+  const flights = context.quotes.map((quote) => {
+    let destinationId = context.places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
+    let carrierId = context.carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
+    return { ...quote, ...context.places[destinationId], ...context.carriers[carrierId] }
   }).map((flight) => {
     let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
     return { ...flight, ...allAirports[airportId] }
@@ -176,10 +176,10 @@ function Landing(props) {
       <div className='triangle'></div>
 
       <div className="mini-map-div">
-        {latContext.long ?
+        {context.long ?
           <MiniMap
-            long={latContext.long}
-            lat={latContext.lat}
+            long={context.long}
+            lat={context.lat}
             flights={flights}
           />
           :
