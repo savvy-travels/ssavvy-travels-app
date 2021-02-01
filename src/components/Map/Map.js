@@ -173,8 +173,8 @@ function mapStateToProps(reduxState) {
         location: reduxState.searchReducer.location,
         departureDate: reduxState.searchReducer.departureDate,
         arrivalDate: reduxState.searchReducer.arrivalDate,
-        long: reduxState.locationReducer.long,
-        lat: reduxState.locationReducer.lat
+        long: +reduxState.locationReducer.long,
+        lat: +reduxState.locationReducer.lat
     }
 }
 

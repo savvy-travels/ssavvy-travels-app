@@ -1,7 +1,7 @@
-import React, { useState } from "react"
-import { withRouter } from "react-router-dom"
-import ReactMapGL, { Source, Layer } from "react-map-gl"
-import "./minimap.css"
+import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
+import ReactMapGL, { Marker, Popup, Source, Layer } from 'react-map-gl'
+import './minimap.css'
 
 function MiniMap(props) {
   //Map State
@@ -103,9 +103,9 @@ function MiniMap(props) {
 
       {/* {apicall.map((city) => (
                 <Marker 
-                key={{}} 
-                latitude={{}} 
-                longitude={{}}>
+                key={city.CityName} 
+                latitude={city.lat} 
+                longitude={city.long}>
                     <button
                     onClick={e => {
                         e.preventDefault()
@@ -113,10 +113,33 @@ function MiniMap(props) {
                     }}
                     className='marker-btn'>
                         <img src='locIcon' alt='location-icon'/>
+                        {city.CityName}
+                        {city.MinPrice}
+                        {city.Type} g
+                        {city.Duration}
                     </button>
                 </Marker>
-            ))} */}
-    </div>
-  )
+            ))}
+
+            {selectedCity ? (
+                // <Popup 
+                // latitude={geometry.coordinates[0]} 
+                // longitude={geometry.coordinates[1]}
+                // >
+                    <div>
+                        <img src='api reference to city'/>
+                        <h1>{selectedCity.properties.name}</h1>
+                        <h2>{props.flightMinPrice}</h2>
+                        <button>Go to Flight</button>
+                        {/* <button
+                        <img src='plus-icon'
+                        onClick= isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites</button> */}
+                    {/* </div> */}
+                {/* // </Popup> */}
+            {/* ) : null} */}
+        </div>
+
+
+    )
 }
 export default withRouter(MiniMap)
