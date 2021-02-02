@@ -21,7 +21,7 @@ function MiniMap(props) {
   })
 
 
-  const suggested = [flights[0], flights[1], flights[2]]
+  const suggested = context.flights.slice(0,10)
 
 
   const suggestedCards = suggested.map(flight => (
