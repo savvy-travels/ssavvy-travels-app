@@ -89,9 +89,9 @@ function NewSearch(props) {
                                 onInputChange={handleInputChange}
                                 placeholder={'Select departure airport...'}
                                 styles={customStyles}
-                                theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
+                                theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d', primary: '#cae00d', color: '#000' } })}
                                 defaultValue={myAirport[0]}
-                                defaultOptions={input ? input : myAirport[0]} />
+                                defaultOptions={input ? input : myAirport} />
                         }
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
