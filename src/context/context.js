@@ -42,7 +42,6 @@ export function LatProvider(props) {
     useEffect(() => {
         if (cities.length > 0) {
             getAirports(cities[0])
-            getClosestAirports(cities[0])
         }
     }, [cities])
 
@@ -63,7 +62,6 @@ export function LatProvider(props) {
             }).then(res => {
                 setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city))
                 getAirports(cities[0])
-                getClosestAirports(cities[0])
             })
         //sets the value of cities to be only the city name, filters out results of non-cities
     };
@@ -80,14 +78,6 @@ export function LatProvider(props) {
                 setAirports(res.data.items)
                 setAirport(res.data.items.map(airport => airport.iata))
             })
-    }
-
-    const getClosestAirports = () => {
-        axios.get(`/api/airports/${cities[0]}`).then(res => {
-            props.airportSearch(res.data)
-        }).catch(err => {
-            console.log(err)
-        })
     }
 
     const getFlights = () => {
