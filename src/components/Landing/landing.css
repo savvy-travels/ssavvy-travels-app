@@ -73,8 +73,8 @@
   text-shadow: 0 0 5px #0B3840;
 }
 
-.suggestions {
+.suggestions-left {
   display: flex;
-  width: 100%;
+  width: 100vw;
   
 }
