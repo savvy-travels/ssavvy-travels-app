@@ -32,17 +32,17 @@ app.post('/api/auth/logout', userCtrl.logout)
 app.get('/api/airports/:city', listCtrl.getLocalAirports)
 app.get('/api/airports', listCtrl.getAllAirports)
 
-// app.use(authMiddleware.isAuthenticated)
-app.get('/api/auth/user', userCtrl.getUser)
 
-app.post('/api/saveLocation', locationCtrl.saveLocation)
-app.get('/api/locations', locationCtrl.getLocation)
+app.get('/api/auth/user', authMiddleware.isAuthenticated, userCtrl.getUser)
 
-app.post('/api/updatePreferred', prefAirportCtrl.updatePreferred)
-app.get('/api/getPreferred', prefAirportCtrl.getPreferred)
+app.post('/api/saveLocation', authMiddleware.isAuthenticated, locationCtrl.saveLocation)
+app.get('/api/locations', authMiddleware.isAuthenticated, locationCtrl.getLocation)
 
-app.post('/api/saveAirports', airportCtrl.saveAirports)
-app.get('/api/getAirports', airportCtrl.getAirports)
+app.post('/api/updatePreferred', authMiddleware.isAuthenticated, prefAirportCtrl.updatePreferred)
+app.get('/api/getPreferred', authMiddleware.isAuthenticated, prefAirportCtrl.getPreferred)
+
+app.post('/api/saveAirports', authMiddleware.isAuthenticated, airportCtrl.saveAirports)
+app.get('/api/getAirports', authMiddleware.isAuthenticated, airportCtrl.getAirports)
 
 
 const transporter = nodemailer.createTransport({
