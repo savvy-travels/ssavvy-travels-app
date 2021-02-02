@@ -56,7 +56,7 @@ function NewSearch(props) {
     const [next, setNext] = useState(false)
 
     const context = useContext(Context)
-    // console.log(context)
+    console.log(context.airport)
 
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {
@@ -68,8 +68,7 @@ function NewSearch(props) {
         props.history.push('/map')
     }
 
-    // const airports = props.airports.map(airport => { return <option value={airport.code} key={airport.code} >{airport.code} - {airport.name}</option> })
-    const airports = context.airports.map(airport => { return { value: airport.code, label: `${airport.iata}-${airport.name}` } })
+    const myAirport = allAirports.filter(airport => airport.code === context.airport.toString()).map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}-${airport.city}` } })
 
     return (
         <span className='search-field'>
@@ -81,17 +80,19 @@ function NewSearch(props) {
                 <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
-                        <AsyncSelect
-                            onChange={(e) => !e ? null : setLocation(e.value)}
-                            className='airport-select'
-                            loadOptions={loadOptions}
-                            isClearable={true}
-                            onInputChange={handleInputChange}
-                            placeholder={'Select departure airport...'}
-                            styles={customStyles}
-                            theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
-                            defaultValue={airports[0]}
-                            defaultOptions={input ? input : airports} />
+                        {!context.loading &&
+                            <AsyncSelect
+                                onChange={(e) => !e ? null : setLocation(e.value)}
+                                className='airport-select'
+                                loadOptions={loadOptions}
+                                isClearable={true}
+                                onInputChange={handleInputChange}
+                                placeholder={'Select departure airport...'}
+                                styles={customStyles}
+                                theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
+                                defaultValue={myAirport[0]}
+                                defaultOptions={input ? input : myAirport[0]} />
+                        }
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
                             <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
@@ -105,7 +106,7 @@ function NewSearch(props) {
                 }
             </div>
             <button onClick={() => search()} className='search-button'>Let's Go!</button>
-        </span>
+        </span >
 
     )
 }

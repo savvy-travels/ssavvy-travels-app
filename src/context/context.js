@@ -41,7 +41,7 @@ export function LatProvider(props) {
                                     'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
                                 }
                             }).then(res => {
-                                console.log(res.data.items.map(airport => airport.iata))
+                                console.log(res.data.items)
                                 setAirports(res.data.items)
                                 setAirport(res.data.items.map(airport => airport.iata))
                                 axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${res.data.items.map(airport => airport.iata)}-iata/anywhere/anytime/`, {
@@ -139,6 +139,6 @@ export function LatProvider(props) {
 
 
     return (
-        <Context.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports, flights, cities, loading }}>{props.children}</Context.Provider>
+        <Context.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports, airport, flights, cities, loading }}>{props.children}</Context.Provider>
     )
 }
