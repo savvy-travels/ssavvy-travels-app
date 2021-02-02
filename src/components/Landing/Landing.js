@@ -9,6 +9,7 @@ import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import MiniMap from "./MiniMap/MiniMap"
+import Work from "./Works/Works"
 import { ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
@@ -126,6 +127,7 @@ function Landing(props) {
         <div className='suggestions-right'>$800{under800}</div>
         <div className='suggestions-left'>$1000{under1000}</div>
       </div>
+      <Work />
     </div>
   )
 
