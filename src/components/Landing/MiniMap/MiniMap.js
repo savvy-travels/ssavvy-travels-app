@@ -18,12 +18,12 @@ function MiniMap(props) {
 
   const suggested = [flights[0], flights[1], flights[2]]
 
-  const suggestedCards = suggested.map(flight => (
-    <div key={flight.QuoteId} className='flight-card'>
-      <h3>{flight.CityName}</h3>
-      <h1>${flight.MinPrice}</h1>
-    </div>
-  ))
+  // const suggestedCards = suggested.map(flight => (
+  //   <div key={flight.QuoteId} className='flight-card'>
+  //     <h3>{flight.CityName}</h3>
+  //     <h1>${flight.MinPrice}</h1>
+  //   </div>
+  // ))
 
   const markers = useMemo(() => flights.map(
     city => (
@@ -80,7 +80,7 @@ function MiniMap(props) {
          ) : null}
 
           <h1>Suggested Trips</h1>
-          {<div>{suggestedCards}</div>}
+          {/* {<div>{suggestedCards}</div>} */}
 
         </div>
       </div>

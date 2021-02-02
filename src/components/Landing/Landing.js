@@ -9,6 +9,7 @@ import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import MiniMap from "./MiniMap/MiniMap"
+import Work from "./Works/Works"
 import { ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
