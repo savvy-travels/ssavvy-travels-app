@@ -19,10 +19,30 @@ function Landing(props) {
 
   const context = useContext(Context)
 
-  
+  console.log(context.allAirports)
+
+  const flights = context.quotes.map((quote) => {
+    let destinationId = context.places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
+    let carrierId = context.carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
+    return { ...quote, ...context.places[destinationId], ...context.carriers[carrierId] }
+  }).map((flight) => {
+    let airportId = context.allAirports.findIndex(airport => airport.code == flight.IataCode)
+    return { ...flight, ...context.allAirports[airportId] }
+  })
+  console.log(flights)
 
 
-  const under200 = context.flights.filter(flight => flight.MinPrice >= 100 && flight.MinPrice <= 200).map((flight) => {
+  const flightCards = flights.map((flight) => {
+    return (
+      <div key={flight.QuoteId} className='flight-card'>
+        <h3>{flight.CityName}</h3>
+        <h1>${flight.MinPrice}</h1>
+      </div>
+    )
+  })
+
+
+  const under200 = flights.filter(flight => flight.MinPrice >= 175 && flight.MinPrice <= 200).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -31,7 +51,7 @@ function Landing(props) {
     )
   }).slice(0, 7)
 
-  const under400 = context.flights.filter(flight => flight.MinPrice > 300 && flight.MinPrice <= 400).map((flight) => {
+  const under400 = flights.filter(flight => flight.MinPrice > 375 && flight.MinPrice <= 400).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -40,7 +60,7 @@ function Landing(props) {
     )
   }).slice(0, 7)
 
-  const under600 = context.flights.filter(flight => flight.MinPrice > 500 && flight.MinPrice <= 600).map((flight) => {
+  const under600 = flights.filter(flight => flight.MinPrice > 500 && flight.MinPrice <= 600).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -49,7 +69,8 @@ function Landing(props) {
     )
   }).slice(0, 7)
 
-  const under800 = context.flights.filter(flight => flight.MinPrice > 650 && flight.MinPrice <= 800).map((flight) => {
+  const under800 = flights.filter(flight => flight.MinPrice > 700 && flight.MinPrice <= 800).map((flight) => {
+
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -58,7 +79,7 @@ function Landing(props) {
     )
   }).slice(0, 7)
 
-  const under1000 = context.flights.filter(flight => flight.MinPrice > 800 & flight.MinPrice <= 1000).map((flight) => {
+  const under1000 = flights.filter(flight => flight.MinPrice > 800 & flight.MinPrice <= 1000).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -99,7 +120,7 @@ function Landing(props) {
             wait={8000}
             long={context.long}
             lat={context.lat}
-            // flights={flights}
+            flights={flights}
           />
         ) : (
           <>
