@@ -16,7 +16,7 @@ function Work() {
             </div>
             <img className='arrow' src='https://cdn.discordapp.com/attachments/801884180879376405/806242899720404992/arrow-40163_960_720.webp' alt='Arrow'/> 
             <div className='mini-container'>
-                <img src='https://lh3.googleusercontent.com/proxy/9o-3RxZTLBiewdIfGNVVpB2A60lBevC9hW7aBZJBRqGvBnpQlqa_vGsrgwrqpXiuyMIa5WmtGOr4jEVlAfI8SrWUCs0fI3xzCbMIteqh-g' alt='Plane'/>
+                <img src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Airplane_silhouette.svg' alt='Plane'/>
                 <h1>See Your Best Flights</h1>
                 <div>We will show you the cheapest flight we found from comparing thousands of flights.</div>
             </div>
