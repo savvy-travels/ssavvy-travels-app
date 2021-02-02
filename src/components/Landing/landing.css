@@ -51,12 +51,12 @@
 .flight-card h3 {
   margin-left: 5%;
   color: #FDFFFC;
-  /* font-size: 18px;git  */
+  font-size: 1vw; 
 }
 
 .flight-card h1 {
   color: #FDFFFC;
-  /* font-size: 64px; */
+  font-size: 2vw;
   margin-right: 5%;
 }
 
