@@ -31,6 +31,7 @@ function MiniMap(props) {
     </div>
   ))
   const markers = useMemo(() => context.flights.map(
+
     city => (
       <div>{city.lon ? <Marker key={city.CityName} longitude={+city.lon} latitude={+city.lat} >
         <button

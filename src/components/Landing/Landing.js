@@ -9,6 +9,7 @@ import NewSearch from "./NewSearch/NewSearch";
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import MiniMap from "./MiniMap/MiniMap"
+import Work from "./Works/Works"
 import { ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
@@ -66,7 +67,7 @@ function Landing(props) {
     )
   }).slice(0, 4)
 
-  const under800 = context.flights.filter(flight => flight.MinPrice > 725 && flight.MinPrice <= 800).map((flight) => {
+  const under800 = context.flights.filter(flight => flight.MinPrice > 700 && flight.MinPrice <= 800).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -120,12 +121,13 @@ function Landing(props) {
       </div>
 
       <div className='deals-container'>
-        <div className='suggestions'>$200{under200}</div>
-        <div className='suggestions'>$400{under400}</div>
-        <div className='suggestions'>$600{under600}</div>
-        <div className='suggestions'>$800{under800}</div>
-        <div className='suggestions'>$1000{under1000}</div>
+        <div className='suggestions-left'><h1>$200</h1>{under200}</div>
+        <div className='suggestions-right'>$400{under400}</div>
+        <div className='suggestions-left'>$600{under600}</div>
+        <div className='suggestions-right'>$800{under800}</div>
+        <div className='suggestions-left'>$1000{under1000}</div>
       </div>
+      <Work />
     </div>
   )
 
