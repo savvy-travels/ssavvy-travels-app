@@ -48,7 +48,7 @@
     flex-direction: column;
 }
 
-.flight-card {
+/* .flight-card {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -77,4 +77,4 @@
     bottom: -30%;
     margin-right: 5%;
     text-shadow: 0 0 5px #0B3840;
-  }
+  } */
