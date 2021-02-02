@@ -57,7 +57,7 @@ function NewSearch(props) {
     const [myAirportsFiltered, setMyAirportsFiltered] = useState([])
 
     const context = useContext(Context)
-    
+
 
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {
@@ -72,30 +72,30 @@ function NewSearch(props) {
 
     const myAirports = context.airports.map(airport => {
         let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
-        return {...airport, ...allAirports[airportId]}
+        return { ...airport, ...allAirports[airportId] }
     })
+    console.log(myAirports)
 
-    
     useEffect(() => {
         myAirports.forEach(airport => {
-            allAirports.forEach(ap => { 
-                if(ap.code === airport.code){
+            allAirports.forEach(ap => {
+                if (ap.code === airport.code) {
                     setMyAirportsFiltered(previousState => [...previousState, airport])
                 }
             }
             )
-        })   
-    }, []    )
-    
-    console.log(myAirportsFiltered)        
-    
+        })
+    }, [])
 
-    
+    console.log(myAirportsFiltered)
+
+
+
     const myOptions = myAirportsFiltered.map(airport => { return { value: airport.iata, label: `${airport.name} ${airport.iata}-${airport.city}` } })
-    
-    console.log(myOptions)
 
-    
+    // console.log(myOptions)
+
+
 
     return (
         <span className='search-field'>
@@ -119,7 +119,7 @@ function NewSearch(props) {
                                 theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d', primary: '#cae00d', color: '#000' } })}
                                 defaultValue={myOptions[0]}
                                 defaultOptions={input ? input : myOptions} />
-                       }
+                        }
 
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>

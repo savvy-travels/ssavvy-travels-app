@@ -95,12 +95,15 @@ function Landing(props) {
         loop
         muted
       ></video>
-
-      <Switch>
-        <Route exact path='/' component={NewSearch} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/signup' component={Signup} />
-      </Switch>
+      {!context.loading ?
+        <Switch>
+          <Route exact path='/' component={NewSearch} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/signup' component={Signup} />
+        </Switch>
+        :
+        null
+      }
 
       <div className='triangle'></div>
 

@@ -31,7 +31,7 @@ export function LatProvider(props) {
                             "x-rapidapi-key": `${geoDbKey}`,
                         },
                     }).then(res => {
-                        console.log(res.data.data)
+                        // console.log(res.data.data)
                         setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city))
                         const city = res.data.data.filter((place) => place.type === 'CITY').map((city) => city.city)
                         axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city[0]}&limit=5&withFlightInfoOnly=true`,
@@ -44,7 +44,7 @@ export function LatProvider(props) {
                                 console.log(res.data.items)
                                 setAirports(res.data.items)
                                 setAirport(res.data.items.map(airport => airport))
-                                
+
                                 axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${res.data.items[0].iata}-iata/anywhere/anytime/`, {
                                     headers: {
                                         'x-rapidapi-key': `${skyscannerKey}`
@@ -67,7 +67,7 @@ export function LatProvider(props) {
             ])
     }, [])
 
-    
+
 
     // runs getCities function if the location is defined
     // useEffect(() => {
