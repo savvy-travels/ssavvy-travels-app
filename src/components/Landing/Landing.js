@@ -127,6 +127,7 @@ function Landing(props) {
         <div className='suggestions'>$800{under800}</div>
         <div className='suggestions'>$1000{under1000}</div>
       </div>
+      <Work />
     </div>
   )
 

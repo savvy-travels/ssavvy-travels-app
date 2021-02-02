@@ -1,5 +1,19 @@
+$background-color: #f5f5f5;
+
+
+
+
 .work-container {
     display: flex;
-    position: bottom;
-    font-size: 200px;
+    font-size: 18px;
+    color: black;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: $background-color;
+    height: 14%;
+    margin-top: 100px;
+    
+    .mini-container {
+        width: 15%;
+    }
 }
