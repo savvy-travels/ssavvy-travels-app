@@ -16,7 +16,7 @@ export function LatProvider(props) {
     const [quotes, setQuotes] = useState([])
     const [places, setPlaces] = useState([])
     const [carriers, setCarriers] = useState([])
-    const [airport, setAirport] = useState([])
+    const [airport, setAirport] = useState('')
     const [allAirports, setAllAirports] = useState([])
     const [loading, setLoading] = useState(true)
 
@@ -34,7 +34,7 @@ export function LatProvider(props) {
                         console.log(res.data.data)
                         setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city))
                         const city = res.data.data.filter((place) => place.type === 'CITY').map((city) => city.city)
-                        axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city[0]}&limit=5`,
+                        axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city[0]}&limit=5&withFlightInfoOnly=true`,
                             {
                                 headers: {
                                     'x-rapidapi-key': '293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7',
@@ -43,7 +43,8 @@ export function LatProvider(props) {
                             }).then(res => {
                                 console.log(res.data.items)
                                 setAirports(res.data.items)
-                                setAirport(res.data.items.map(airport => airport.iata))
+                                setAirport(res.data.items.map(airport => airport))
+                                
                                 axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${res.data.items[0].iata}-iata/anywhere/anytime/`, {
                                     headers: {
                                         'x-rapidapi-key': `${skyscannerKey}`
@@ -65,6 +66,8 @@ export function LatProvider(props) {
                 console.log(err)
             ])
     }, [])
+
+    
 
     // runs getCities function if the location is defined
     // useEffect(() => {
