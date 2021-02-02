@@ -27,7 +27,13 @@ function MiniMap(props) {
 
   const markers = useMemo(() => flights.map(
     city => (
-        <div>{city.lon ? <Marker key={city.CityName} longitude={+city.lon} latitude={+city.lat} >
+        <div>{city.lon ? 
+        <Marker 
+        key={city.CityName} 
+        longitude={+city.lon} 
+        latitude={+city.lat} 
+        className='marker'>
+            <div className='marker-container'>
              <button
                 onClick={e => {
                     e.preventDefault()
@@ -38,6 +44,7 @@ function MiniMap(props) {
                     <p className='price'>${city.MinPrice}</p>
                     <img className='marker-icon' src="https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png"/>
             </button>
+            </div>
         </Marker> : null}
         </div>
         )

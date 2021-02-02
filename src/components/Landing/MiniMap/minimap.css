@@ -25,15 +25,25 @@
   height: 90%;
 }
 .suggestion-title {
-  border-bottom: 1px solid #0b3840;
+  /* border-bottom: 1px solid #0b3840; */
 }
 
 .marker {
-  width: 50px;
-  color: #0b3840;
-  height: 50px;
-  border-radius: 50%;
+  width: 40px;
+  transform-origin: top center;
+  /* padding: 0;
+  margin: 0; */
   cursor: pointer;
+}
+
+.marker-container {
+  transform-origin: top center;
+  display: flex;
+  width: 100%;
+}
+
+.marker-container:hover {
+  transform: scale(1.1);
 }
 
 .marker-btn {
@@ -41,7 +51,7 @@
 }
 
 .marker-icon {
-  width: 30px;
+  width: 100%;
   height: 30px;
 }
 
@@ -57,5 +67,5 @@
 .price {
   background: white;
   width: 100%;
-  border: 1px solid #f6615c;
+  border: 2px solid #f6615c;
 }
