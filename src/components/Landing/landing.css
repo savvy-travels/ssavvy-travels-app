@@ -51,12 +51,12 @@
 .flight-card h3 {
   margin-left: 5%;
   color: #FDFFFC;
-  font-size: 18px;
+  /* font-size: 18px;git  */
 }
 
 .flight-card h1 {
   color: #FDFFFC;
-  font-size: 64px;
+  /* font-size: 64px; */
   margin-right: 5%;
 }
 
@@ -72,7 +72,7 @@
 .suggestions {
   display: flex;
   width: 90%;
-  height: 30vh; 
+  height: 80%; 
   justify-content: space-evenly;
   align-items: center;
   /* border: solid 1px #0b3840; */
