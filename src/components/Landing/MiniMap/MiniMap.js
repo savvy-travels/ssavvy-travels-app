@@ -86,7 +86,7 @@ function MiniMap(props) {
           ) : null}
 
           <h1>Suggested Trips</h1>
-          {/* {<div>{suggestedCards}</div>} */}
+          {<div>{suggestedCards}</div>}
 
         </div>
       </div>

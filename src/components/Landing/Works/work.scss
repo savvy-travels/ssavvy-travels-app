@@ -1,8 +1,6 @@
 $background-color: #65b0b2;
 
 
-
-
 .work-container {
     display: flex;
     font-size: 18px;
@@ -31,20 +29,9 @@ $background-color: #65b0b2;
         width: 50%;
         filter: invert(86%) sepia(95%) saturate(3213%) hue-rotate(6deg) brightness(92%) contrast(90%);
     }
-    // .arrow {
-    //     transform: rotate(45deg);
-    //     height: 30px;
-    //     width: 30px;
-    //     border-top: 5px solid black;
-    //     border-right: 5px solid black;
-        
-
-    // }
     .arrow {
         width: 3%;
         filter: invert(87%) sepia(38%) saturate(98%) hue-rotate(74deg) brightness(110%) contrast(104%);
-        // color: #0B3840;
         transform: rotate(90deg);
-        // padding: 30px;
     }
 }
