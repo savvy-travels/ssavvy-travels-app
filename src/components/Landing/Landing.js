@@ -22,7 +22,7 @@ function Landing(props) {
   
 
 
-  const under200 = context.flights.filter(flight => flight.MinPrice >= 150 && flight.MinPrice <= 200).map((flight) => {
+  const under200 = context.flights.filter(flight => flight.MinPrice >= 100 && flight.MinPrice <= 200).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
