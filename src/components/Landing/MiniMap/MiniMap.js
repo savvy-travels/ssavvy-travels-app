@@ -1,13 +1,17 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, { Marker, Popup } from 'react-map-gl'
 import './minimap.css'
+import { Context } from '../../../context/context'
 
 function MiniMap(props) {
   //Map State
+  // console.log(props.flights)
   const { lat, long, flights } = props
   const [selectedCity, setSelectedCity] = useState(null)
-  
+
+  const context = useContext(Context)
+
   const [viewport, setViewport] = useState({
     latitude: lat,
     longitude: long,
@@ -16,7 +20,9 @@ function MiniMap(props) {
     zoom: 3,
   })
 
-  const suggested = [flights[0], flights[1], flights[2]]
+  const suggested = [context.flights[0], context.flights[1], context.flights[2]]
+
+  console.log(suggested)
 
   const suggestedCards = suggested.map(flight => (
     <div key={flight.QuoteId} className='flight-card'>
@@ -24,24 +30,23 @@ function MiniMap(props) {
       <h1>${flight.MinPrice}</h1>
     </div>
   ))
-
-  const markers = useMemo(() => flights.map(
+  const markers = useMemo(() => context.flights.map(
     city => (
-        <div>{city.lon ? <Marker key={city.CityName} longitude={+city.lon} latitude={+city.lat} >
-             <button
-                onClick={e => {
-                    e.preventDefault()
-                    setSelectedCity(city)
-                    console.log(selectedCity)
-                }}
-                className='marker-btn'>
-                    <p className='price'>${city.MinPrice}</p>
-                    <img className='marker-icon' src="https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png"/>
-            </button>
-        </Marker> : null}
-        </div>
-        )
-    ), [flights]);
+      <div>{city.lon ? <Marker key={city.CityName} longitude={+city.lon} latitude={+city.lat} >
+        <button
+          onClick={e => {
+            e.preventDefault()
+            setSelectedCity(city)
+            console.log(selectedCity)
+          }}
+          className='marker-btn'>
+          <p className='price'>${city.MinPrice}</p>
+          <img className='marker-icon' src="https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png" />
+        </button>
+      </Marker> : null}
+      </div>
+    )
+  ), [flights]);
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -57,30 +62,30 @@ function MiniMap(props) {
       window.removeEventListener("resize", setViewport)
     }
   }, [])
- 
+
   return (
     <div className='mini-map-container'>
       <div className='mini-map-side-bar'>
         <div className='suggestion-title'>
-        {selectedCity ? (
-                <div className='popup'>
-                    <img className= 'popup-img' src='https://upload.wikimedia.org/wikipedia/commons/3/32/20190616154621%21Echo_Park_Lake_with_Downtown_Los_Angeles_Skyline.jpg'/>
-                    <h2>City: {selectedCity.CityName}</h2>
-                    <h3>Price: ${selectedCity.MinPrice}</h3>
-                    <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
-                        }</h4>
-                    <button className='search-button'>Go to Flight</button>
-                    <button
-                        // onClick= {isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites}
-                    >
-                        {/* <img src='plus-icon'/> */}
-                    </button>
-                </div>
+          {selectedCity ? (
+            <div className='popup'>
+              <img className='popup-img' src='https://upload.wikimedia.org/wikipedia/commons/3/32/20190616154621%21Echo_Park_Lake_with_Downtown_Los_Angeles_Skyline.jpg' />
+              <h2>City: {selectedCity.CityName}</h2>
+              <h3>Price: ${selectedCity.MinPrice}</h3>
+              <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
+              }</h4>
+              <button className='search-button'>Go to Flight</button>
+              <button
+              // onClick= {isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites}
+              >
+                {/* <img src='plus-icon'/> */}
+              </button>
+            </div>
             // </Popup>
-         ) : null}
+          ) : null}
 
           <h1>Suggested Trips</h1>
-          {<div>{suggestedCards}</div>}
+          {/* {<div>{suggestedCards}</div>} */}
 
         </div>
       </div>
@@ -95,10 +100,10 @@ function MiniMap(props) {
             setViewport({ ...viewport })
           }}
         >
-        
-        {/* Markers */}
-        {markers}
-      
+
+          {/* Markers */}
+          {markers}
+
         </ReactMapGL>
       </div>
 
@@ -106,6 +111,6 @@ function MiniMap(props) {
     </div>
 
 
-    )
+  )
 }
 export default withRouter(MiniMap)
