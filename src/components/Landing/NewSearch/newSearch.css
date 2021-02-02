@@ -1,11 +1,11 @@
-::placeholder{
+::placeholder {
   color: #0b3840;
   opacity: 1;
 }
-:-ms-input-placeholder{
+:-ms-input-placeholder {
   color: #0b3840;
 }
-::-ms-input-placeholder{
+::-ms-input-placeholder {
   color: #0b3840;
 }
 .search-field {
@@ -60,6 +60,7 @@
   background-color: #cae00d;
   border-radius: 20px;
 }
+
 .search-button:hover {
   transform: scale(1.1);
 }
@@ -67,14 +68,14 @@
   color: white;
   /* opacity: 0.5;  */
 }
-.depart-arrive-container{
+.depart-arrive-container {
   padding: 0%;
   width: 30rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.depart-arrive-container>input{
+.depart-arrive-container > input {
   text-align: center;
   font-family: Montserrat;
   font-size: 1.5rem;
@@ -83,40 +84,40 @@
   border-radius: 5px;
   outline: none;
   color: #0b3840;
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   font-size: 1rem;
 }
-.airport-select{
+.airport-select {
   width: 30rem;
   font-family: montserrat;
   text-align: left;
   color: #0b3840;
   outline: #0b3840;
-  margin-right: .6rem;
+  margin-right: 0.6rem;
 }
-.airport-select:focus{
+.airport-select:focus {
   outline: none;
 }
 
-.between-arrow-left{
+.between-arrow-left {
   margin: 0%;
-  margin-left: .6rem;
+  margin-left: 0.6rem;
   transform: rotate(45deg);
   width: 15px;
   height: 14px;
   border-left: 2px solid #cae00d;
-  border-bottom: 2px solid  #cae00d;
+  border-bottom: 2px solid #cae00d;
 }
-.between-arrow-right{
+.between-arrow-right {
   margin: 0%;
   transform: rotate(45deg);
   width: 15px;
   height: 14px;
-  border-right: 2px solid  #cae00d;
-  border-top: 2px solid  #cae00d;
+  border-right: 2px solid #cae00d;
+  border-top: 2px solid #cae00d;
 }
-.vert-line-a{
-  border: .5px solid #cae00d;
+.vert-line-a {
+  border: 0.5px solid #cae00d;
   height: 2rem;
 }
 @media (max-width: 900px) {
