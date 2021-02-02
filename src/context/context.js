@@ -43,7 +43,7 @@ export function LatProvider(props) {
                                     'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
                                 }
                             }).then(res => {
-                                console.log(res.data.items)
+                                // console.log(res.data.items)
                                 setAirports(res.data.items)
                                 setAirport(res.data.items.map(airport => airport))
 
@@ -55,7 +55,10 @@ export function LatProvider(props) {
                                     setQuotes(res.data.Quotes)
                                     setPlaces(res.data.Places)
                                     setCarriers(res.data.Carriers)
-                                    setLoading(false)
+                                    axios.get('/api/airports').then(res => {
+                                        setLoading(false)
+                                        setAllAirports(res.data)
+                                    })
                                 })
 
                             }).catch(err => {
@@ -132,18 +135,17 @@ export function LatProvider(props) {
     //     })
     // }
 
-
-    const flights = quotes.map((quote) => {
-        let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
-        let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-        return { ...quote, ...places[destinationId], ...carriers[carrierId] }
-    }).map((flight) => {
-        let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
-        return { ...flight, ...allAirports[airportId] }
-    })
+    // const flights = quotes.map((quote) => {
+    //     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
+    //     let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
+    //     return { ...quote, ...places[destinationId], ...carriers[carrierId] }
+    // }).map((flight) => {
+    //     let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
+    //     return { ...flight, ...allAirports[airportId] }
+    // })
 
 
     return (
-        <Context.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports, airport, flights, cities, loading }}>{props.children}</Context.Provider>
+        <Context.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports, airport, cities, loading }}>{props.children}</Context.Provider>
     )
 }
