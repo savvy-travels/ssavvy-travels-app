@@ -23,7 +23,7 @@ function MiniMap(props) {
 
   const suggested = [context.flights[0], context.flights[1], context.flights[2]]
 
-  console.log(suggested)
+  // console.log(suggested)
 
   const suggestedCards = suggested.map(flight => (
     <div key={flight.QuoteId} className='flight-card'>

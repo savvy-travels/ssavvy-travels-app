@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { loginUser } from '../../../Redux/userReducer'
 import { connect } from 'react-redux'
@@ -7,6 +7,7 @@ import { ClipLoader } from 'react-spinners'
 import AsyncSelect from 'react-select/async'
 import allAirports from '../../airports.json'
 import './auth.css'
+import { Context } from '../../../context/context'
 
 
 //Functions used to filter through the airport results
@@ -67,6 +68,9 @@ function Signup(props) {
     //Airport Filter//
     const [input, setInput] = useState('')
     const [preferred, setPreferred] = useState('')
+    const [myAirportsFiltered, setMyAirportsFiltered] = useState([])
+
+    const context = useContext(Context)
 
     function handleInputChange(newValue) {
         const inputValue = newValue.replace(/\W/g, '')
@@ -87,7 +91,7 @@ function Signup(props) {
         setLoading(true)
 
         const message = `<div>Welcome ${username}, we're happy to have you in our community! You now have access to my trips which allows you save and scan for trips you have saved. Please take a second to confirm your email by clicking the link below.</div>`
-        axios.post('/api/auth/register', { email, username, password, preferred, message}).then(res => {
+        axios.post('/api/auth/register', { email, username, password, preferred, message }).then(res => {
             console.log('Hit this')
             setLoading(false)
             setError(false)
@@ -99,7 +103,27 @@ function Signup(props) {
         })
     }
 
-    const airports = props.airports.map(airport => { return { value: airport.code, label: `${airport.code}-${airport.name}` } })
+    ///Airport Filter functions////
+    const myAirports = context.airports.map(airport => {
+        let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
+        return { ...airport, ...allAirports[airportId] }
+    })
+    console.log(myAirports)
+
+    useEffect(() => {
+        myAirports.forEach(airport => {
+            allAirports.forEach(ap => {
+                if (ap.code === airport.code) {
+                    setMyAirportsFiltered(previousState => [...previousState, airport])
+                }
+            }
+            )
+        })
+    }, [])
+
+    const myOptions = myAirportsFiltered.map(airport => { return { value: airport.iata, label: `${airport.name} ${airport.iata}-${airport.city}` } })
+    //////////
+
     return (
         <>
             {loading ?
@@ -131,7 +155,8 @@ function Signup(props) {
                             theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
                             placeholder={'Preferred Airport...'}
                             onInputChange={handleInputChange}
-                            defaultOptions={input ? input : airports}
+                            defaultValue={myOptions[0]}
+                            defaultOptions={input ? input : myOptions}
                         />
                         <input onChange={(e) => setPassword(e.target.value)}
                             className={emptyError || passError ? 'register-error' : 'register-inputs'}
