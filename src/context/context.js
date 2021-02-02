@@ -25,6 +25,8 @@ export function LatProvider(props) {
         axios.post(`https://www.googleapis.com/geolocation/v1/geolocate?key=${googleKey}`)
             .then(res => {
                 setLatLong({ lat: res.data.location.lat, long: res.data.location.lng })
+                localStorage.setItem('lat', res.data.location.lat)
+                localStorage.setItem('long', res.data.location.lng)
                 axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${res.data.location.lat.toFixed(4)}${res.data.location.lng.toFixed(4)}/nearbyCities?minPopulation=100000&limit=5&offset=0&radius=100&sort=-population`,
                     {
                         headers: {
