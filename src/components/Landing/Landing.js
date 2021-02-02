@@ -22,7 +22,7 @@ function Landing(props) {
   
 
 
-  const under200 = context.flights.filter(flight => flight.MinPrice >= 100 && flight.MinPrice <= 200).map((flight) => {
+  const under200 = context.flights.filter(flight => flight.MinPrice >= 150 && flight.MinPrice <= 200).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -31,7 +31,7 @@ function Landing(props) {
     )
   }).slice(0, 7)
 
-  const under400 = context.flights.filter(flight => flight.MinPrice > 250 && flight.MinPrice <= 400).map((flight) => {
+  const under400 = context.flights.filter(flight => flight.MinPrice > 300 && flight.MinPrice <= 400).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -40,7 +40,7 @@ function Landing(props) {
     )
   }).slice(0, 7)
 
-  const under600 = context.flights.filter(flight => flight.MinPrice > 450 && flight.MinPrice <= 600).map((flight) => {
+  const under600 = context.flights.filter(flight => flight.MinPrice > 500 && flight.MinPrice <= 600).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -49,7 +49,7 @@ function Landing(props) {
     )
   }).slice(0, 7)
 
-  const under800 = context.flights.filter(flight => flight.MinPrice > 700 && flight.MinPrice <= 800).map((flight) => {
+  const under800 = context.flights.filter(flight => flight.MinPrice > 650 && flight.MinPrice <= 800).map((flight) => {
     return (
       <div key={flight.QuoteId} className='flight-card'>
         <h3>{flight.CityName}</h3>
@@ -106,7 +106,7 @@ function Landing(props) {
       </div>
 
       <div className='deals-container'>
-        <div className='suggestions-left'>
+        <div className='suggestions'>
           <div className='banner'>
             <h1 className='banner-price'>$200</h1>
             <div className='banner-flight'> {under200[0]}</div>
@@ -120,23 +120,23 @@ function Landing(props) {
       </div>
 
       <div className='deals-container'>
-        <div className='suggestions-left'>
-          <div className='banner'>
-            <h1 className='banner-price'>$200</h1>
-            <div className='banner-flight'> {under400[0]}</div>
-          </div>
+        <div className='suggestions'>
           <div className='flights'>
             <div className='flights-1'>{under400.slice(1, 3)}</div>
             <div className='flights-1'>{under400.slice(3, 5)}</div>
             <div className='flights-1'>{under400.slice(5, 7)}</div>
           </div>
+          <div className='banner'>
+            <h1 className='banner-price'>$400</h1>
+            <div className='banner-flight'> {under400[0]}</div>
+          </div>
         </div>
       </div>
 
       <div className='deals-container'>
-        <div className='suggestions-left'>
+        <div className='suggestions'>
           <div className='banner'>
-            <h1 className='banner-price'>$200</h1>
+            <h1 className='banner-price'>$600</h1>
             <div className='banner-flight'> {under600[0]}</div>
           </div>
           <div className='flights'>
@@ -148,23 +148,23 @@ function Landing(props) {
       </div>
 
       <div className='deals-container'>
-        <div className='suggestions-left'>
-          <div className='banner'>
-            <h1 className='banner-price'>$200</h1>
-            <div className='banner-flight'> {under800[0]}</div>
-          </div>
+        <div className='suggestions'>
           <div className='flights'>
             <div className='flights-1'>{under800.slice(1, 3)}</div>
             <div className='flights-1'>{under800.slice(3, 5)}</div>
             <div className='flights-1'>{under800.slice(5, 7)}</div>
           </div>
+          <div className='banner'>
+            <h1 className='banner-price'>$800</h1>
+            <div className='banner-flight'> {under800[0]}</div>
+          </div>
         </div>
       </div>
 
       <div className='deals-container'>
-        <div className='suggestions-left'>
+        <div className='suggestions'>
           <div className='banner'>
-            <h1 className='banner-price'>$200</h1>
+            <h1 className='banner-price'>$1000</h1>
             <div className='banner-flight'> {under1000[0]}</div>
           </div>
           <div className='flights'>
