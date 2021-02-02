@@ -102,7 +102,9 @@ function Landing(props) {
           <Route exact path='/signup' component={Signup} />
         </Switch>
         :
-        null
+        <div className='search-field'>
+          <h1>Welcome to Savvy Travels</h1>
+        </div>
       }
 
       <div className='triangle'></div>

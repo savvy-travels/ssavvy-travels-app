@@ -107,19 +107,17 @@ function NewSearch(props) {
                 <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
-                        {!context.loading &&
-                            <AsyncSelect
-                                onChange={(e) => !e ? null : setLocation(e.value)}
-                                className='airport-select'
-                                loadOptions={loadOptions}
-                                isClearable={true}
-                                onInputChange={handleInputChange}
-                                placeholder={'Select departure airport...'}
-                                styles={customStyles}
-                                theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d', primary: '#cae00d', color: '#000' } })}
-                                defaultValue={myOptions[0]}
-                                defaultOptions={input ? input : myOptions} />
-                        }
+                        <AsyncSelect
+                            onChange={(e) => !e ? null : setLocation(e.value)}
+                            className='airport-select'
+                            loadOptions={loadOptions}
+                            isClearable={true}
+                            onInputChange={handleInputChange}
+                            placeholder={'Select departure airport...'}
+                            styles={customStyles}
+                            theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d', primary: '#cae00d', color: '#000' } })}
+                            defaultValue={myOptions[0]}
+                            defaultOptions={input ? input : myOptions} />
 
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
