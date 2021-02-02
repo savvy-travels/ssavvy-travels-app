@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
@@ -54,9 +54,10 @@ function NewSearch(props) {
     const [arrivalDate, setArrivalDate] = useState(undefined)
     const [location, setLocation] = useState(undefined)
     const [next, setNext] = useState(false)
+    const [myAirportsFiltered, setMyAirportsFiltered] = useState([])
 
     const context = useContext(Context)
-    // console.log(context)
+    
 
     //This function handles the input change that is used in the filter function above. //
     function handleInputChange(newValue) {
@@ -68,8 +69,33 @@ function NewSearch(props) {
         props.history.push('/map')
     }
 
-    // const airports = props.airports.map(airport => { return <option value={airport.code} key={airport.code} >{airport.code} - {airport.name}</option> })
-    const airports = context.airports.map(airport => { return { value: airport.code, label: `${airport.iata}-${airport.name}` } })
+
+    const myAirports = context.airports.map(airport => {
+        let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
+        return {...airport, ...allAirports[airportId]}
+    })
+
+    
+    useEffect(() => {
+        myAirports.forEach(airport => {
+            allAirports.forEach(ap => { 
+                if(ap.code === airport.code){
+                    setMyAirportsFiltered(previousState => [...previousState, airport])
+                }
+            }
+            )
+        })   
+    }, []    )
+    
+    console.log(myAirportsFiltered)        
+    
+
+    
+    const myOptions = myAirportsFiltered.map(airport => { return { value: airport.iata, label: `${airport.name} ${airport.iata}-${airport.city}` } })
+    
+    console.log(myOptions)
+
+    
 
     return (
         <span className='search-field'>
@@ -81,17 +107,20 @@ function NewSearch(props) {
                 <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?
                     <div className='where-when-inputs'>
-                        <AsyncSelect
-                            onChange={(e) => !e ? null : setLocation(e.value)}
-                            className='airport-select'
-                            loadOptions={loadOptions}
-                            isClearable={true}
-                            onInputChange={handleInputChange}
-                            placeholder={'Select departure airport...'}
-                            styles={customStyles}
-                            theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d' } })}
-                            defaultValue={airports[0]}
-                            defaultOptions={input ? input : airports} />
+                        {!context.loading &&
+                            <AsyncSelect
+                                onChange={(e) => !e ? null : setLocation(e.value)}
+                                className='airport-select'
+                                loadOptions={loadOptions}
+                                isClearable={true}
+                                onInputChange={handleInputChange}
+                                placeholder={'Select departure airport...'}
+                                styles={customStyles}
+                                theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d', primary: '#cae00d', color: '#000' } })}
+                                defaultValue={myOptions[0]}
+                                defaultOptions={input ? input : myOptions} />
+                       }
+
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
                             <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
@@ -105,7 +134,7 @@ function NewSearch(props) {
                 }
             </div>
             <button onClick={() => search()} className='search-button'>Let's Go!</button>
-        </span>
+        </span >
 
     )
 }

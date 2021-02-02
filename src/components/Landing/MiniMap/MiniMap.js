@@ -1,13 +1,17 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, { Marker} from 'react-map-gl'
 import './minimap.css'
+import { Context } from '../../../context/context'
 
 function MiniMap(props) {
   //Map State
+  // console.log(props.flights)
   const { lat, long, flights } = props
   const [selectedCity, setSelectedCity] = useState(null)
-  
+
+  const context = useContext(Context)
+
   const [viewport, setViewport] = useState({
     latitude: lat,
     longitude: long,
@@ -16,16 +20,18 @@ function MiniMap(props) {
     zoom: 3,
   })
 
-//   const suggested = [flights[0], flights[1], flights[2]]
 
-//   const suggestedCards = suggested.map(flight => (
-//     <div key={flight.QuoteId} className='flight-card'>
-//       <h3>{flight.CityName}</h3>
-//       <h1>${flight.MinPrice}</h1>
-//     </div>
-//   ))
+  const suggested = [context.flights[0], context.flights[1], context.flights[2]]
 
-  const markers = useMemo(() => flights.map(
+  console.log(suggested)
+
+  const suggestedCards = suggested.map(flight => (
+    <div key={flight.QuoteId} className='flight-card'>
+      <h3>{flight.CityName}</h3>
+      <h1>${flight.MinPrice}</h1>
+    </div>
+  ))
+  const markers = useMemo(() => context.flights.map(
     city => (
         <div>{city.lon ? 
         <Marker
@@ -64,18 +70,11 @@ function MiniMap(props) {
       window.removeEventListener("resize", setViewport)
     }
   }, [])
- 
+
   return (
     <div className='mini-map-container'>
       <div className='mini-map-side-bar'>
         <div className='suggestion-title'>
-            {/* {flights.QuoteId ? 
-                <div>
-                <h1>Suggested Trips</h1>
-                {<div>{suggestedCards}</div>}
-                <h5 className='map-click'>Click on the map icons to see details</h5>
-                </div>
-                : null} */}
 
             {selectedCity ? (
                 <div className='popup'>
@@ -92,6 +91,9 @@ function MiniMap(props) {
                     <button className='search-button'>Go to Flight</button>
                 </div>
             ) : null}
+
+          <h1>Suggested Trips</h1>
+          {<div>{suggestedCards}</div>}
 
         </div>
       </div>
@@ -115,6 +117,6 @@ function MiniMap(props) {
     </div>
 
 
-    )
+  )
 }
 export default withRouter(MiniMap)
