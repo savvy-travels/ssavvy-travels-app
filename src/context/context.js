@@ -34,7 +34,7 @@ export function LatProvider(props) {
                         console.log(res.data.data)
                         setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city))
                         const city = res.data.data.filter((place) => place.type === 'CITY').map((city) => city.city)
-                        axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5`,
+                        axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city[0]}&limit=5`,
                             {
                                 headers: {
                                     'x-rapidapi-key': '293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7',
@@ -44,7 +44,7 @@ export function LatProvider(props) {
                                 console.log(res.data.items)
                                 setAirports(res.data.items)
                                 setAirport(res.data.items.map(airport => airport.iata))
-                                axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${res.data.items.map(airport => airport.iata)}-iata/anywhere/anytime/`, {
+                                axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${res.data.items[0].iata}-iata/anywhere/anytime/`, {
                                     headers: {
                                         'x-rapidapi-key': `${skyscannerKey}`
                                     }
