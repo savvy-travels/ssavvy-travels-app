@@ -155,7 +155,7 @@ function Map(props) {
             <SearchField />
             <div className='line'></div>
             <div className='results'>
-            <div className='suggested-header'>Trips in your Budget</div>
+            <div className='suggested-header'>Trips in Your Budget</div>
           {selectedCity ? (
             <div>
           <div key={selectedCity.QuoteId} className='miniMap-flight-card'
