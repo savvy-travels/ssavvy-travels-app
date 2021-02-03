@@ -39,21 +39,32 @@ const Profile = (props) => {
     })
 
     return (
-        <div>
-            <div>
+        <div className='background-container'>
+                <h1 className='profile'>My Profile</h1>
+            <div className='profile-container'>
+                <div className='sidebar-container'>
                 <div className='user-container'>
                     <h1>{email}</h1>
                     <h2>{preferred}</h2>
                 </div>
-                <div className='locations-container'>
-                    {locationsMapped}
-                </div>
                 <div className='suggested-container'>
-
+                    <h3>View Map</h3>
+                    <h3>Home</h3>
+                    <div className='line'></div>
+                    <h3>Suggested Trips</h3>
+                </div>
+                </div>
+                <div className='locations-container'>
+                    <div className='input-container'>
+                        <input placeholder='Search My Trips'/>
+                        <input className='price' placeholder='Filter by Price'/>
+                    </div>
+                        <div>
+                            <h1>I'm Here</h1>
+                            {locationsMapped}
+                        </div>
                 </div>
             </div>
-
-
         </div>
     )
 }
