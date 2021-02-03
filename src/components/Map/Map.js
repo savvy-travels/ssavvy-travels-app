@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useMemo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../Redux/searchReducer'
-import ReactMapGL, { Source, Layer } from 'react-map-gl'
+import ReactMapGL, { Marker } from 'react-map-gl'
 import './map.css'
 import SearchField from './Search Field/SearchField'
 import axios from 'axios'
@@ -41,31 +41,22 @@ function Map(props) {
     },
   }
 
-  // const useSetViewport = () => {
-  //   setViewport({
-  //     latitude: +localStorage.getItem('lat'),
-  //     longitude: +localStorage.getItem('long'),
-  //     width: '100%',
-  //     height: '100%',
-  //     zoom: 3
-  //   })
-  // }
-
-  useEffect(() => {
-    window.addEventListener("resize", () => {
-      setViewport({
-        latitude: +localStorage.getItem('lat'),
-        longitude: +localStorage.getItem('long'),
-        width: "100%",
-        height: "100%",
-        zoom: 3,
-      })
+  const useSetViewport = () => {
+    setViewport({
+      latitude: props.lat,
+      longitude: props.long,
+      width: '100%',
+      height: '100%',
+      zoom: 3
     })
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('resize', useSetViewport)
     return () => {
-      window.removeEventListener("resize", setViewport)
+      window.removeEventListener('resize', useSetViewport)
     }
   }, [])
-
   //Search State//
 
   const { budget, location, departureDate, arrivalDate } = props
@@ -127,6 +118,31 @@ function Map(props) {
     features: features,
   }
 
+  const markers = useMemo(() => flights.map(
+    city => (
+      <div>{city.lon ?
+        <Marker
+          key={city.CityName}
+          longitude={+city.lon}
+          latitude={+city.lat}
+          className='marker'>
+          <div className='marker-container'>
+            <button
+              onClick={e => {
+                e.preventDefault()
+                setSelectedCity(city)
+                console.log(selectedCity)
+              }}
+              className='marker-btn'>
+              <p className='price'>${city.MinPrice}</p>
+              <img className='marker-icon' src="https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png" />
+            </button>
+          </div>
+        </Marker> : null}
+      </div>
+    )
+  ), [flights]);
+
 
 
   return (
@@ -155,27 +171,7 @@ function Map(props) {
               setViewport(viewport)
             }}
           >
-            <Source id='my-data' type='geojson' data={destinations}>
-              <Layer {...layerStyle} />
-            </Source>
-
-
-            {/* {apicall.map((city) => (
-                <Marker 
-                key={{}} 
-                latitude={{}} 
-                longitude={{}}>
-                    <button
-                    onClick={e => {
-                        e.preventDefault()
-                        setSelectedCity(city)
-                    }}
-                    className='marker-btn'>
-                        <img src='locIcon' alt='location-icon'/>
-                    </button>
-                </Marker>
-
-            ))} */}
+         {markers}
           </ReactMapGL>
         </div>
       </div>
