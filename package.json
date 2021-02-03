@@ -16,6 +16,7 @@
     "iplocation": "^7.2.0",
     "jsonwebtoken": "^8.5.1",
     "massive": "^6.6.4",
+    "moment": "^2.29.1",
     "node-sass": "^4.14.1",
     "nodemailer": "^6.4.17",
     "react": "^17.0.1",

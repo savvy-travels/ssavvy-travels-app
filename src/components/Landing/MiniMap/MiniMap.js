@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
 import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl'
+import moment from 'moment'
 import './minimap.css'
 import { Context } from '../../../context/context'
 
@@ -22,12 +23,21 @@ function MiniMap(props) {
 
 
   const suggested = flights.slice(0, 10)
-
+  console.log(suggested)
 
   const suggestedCards = suggested.map(flight => (
-    <div key={flight.QuoteId} className='flight-card'>
-      <h3>{flight.CityName}</h3>
-      <h1>${flight.MinPrice}</h1>
+    <div key={flight.QuoteId} className='miniMap-flight-card'>
+      <span className='image-container'>
+        <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
+      </span>
+      <span className='info-container'>
+        <span>
+          <h1>{flight.CityName}</h1>
+          <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+        </span>
+        <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+        <h1><h6>From</h6> ${flight.MinPrice}</h1>
+      </span>
     </div>
   ))
   const markers = useMemo(() => flights.map(
@@ -70,7 +80,7 @@ function MiniMap(props) {
     }
   }, [])
 
-  const geolocateControlStyle= {
+  const geolocateControlStyle = {
     right: 10,
     top: 10
   };
@@ -87,18 +97,11 @@ function MiniMap(props) {
               <h3>Price: ${selectedCity.MinPrice}</h3>
               <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
               }</h4>
-              <button
-              // onClick= {isLoggedIn ? saveLocation to profile : Link to register page>Add to favorites}
-              >
-                {/* <img src='plus-icon'/> */}
-              </button>
               <button className='search-button'>Go to Flight</button>
             </div>
           ) : null}
-
-          <h1>Suggested Trips</h1>
+          <h1 className='suggested-header'>Suggested Trips</h1>
           {<div>{suggestedCards}</div>}
-
         </div>
       </div>
 
@@ -116,11 +119,11 @@ function MiniMap(props) {
           {markers}
 
           <GeolocateControl
-        style={geolocateControlStyle}
-        positionOptions={{enableHighAccuracy: true}}
-        trackUserLocation={true}
-        auto
-      />
+            style={geolocateControlStyle}
+            positionOptions={{ enableHighAccuracy: true }}
+            trackUserLocation={true}
+            auto
+          />
 
         </ReactMapGL>
       </div>
