@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect, useContext } from 'react'
 import { withRouter } from 'react-router-dom'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl'
 import './minimap.css'
 import { Context } from '../../../context/context'
 
@@ -70,6 +70,11 @@ function MiniMap(props) {
     }
   }, [])
 
+  const geolocateControlStyle= {
+    right: 10,
+    top: 10
+  };
+
   return (
     <div className='mini-map-container'>
       <div className='mini-map-side-bar'>
@@ -109,6 +114,13 @@ function MiniMap(props) {
         >
           {/* Markers */}
           {markers}
+
+          <GeolocateControl
+        style={geolocateControlStyle}
+        positionOptions={{enableHighAccuracy: true}}
+        trackUserLocation={true}
+        auto
+      />
 
         </ReactMapGL>
       </div>
