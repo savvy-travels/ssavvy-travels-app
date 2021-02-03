@@ -1,15 +1,30 @@
 import React, { useState } from 'react'
+import Carousel, { Dots } from '@brainhubeu/react-carousel'
+import '@brainhubeu/react-carousel/lib/style.css'
 import './carousel.css'
 
 
-function Carousel(props) {
+function CarouselComp(props) {
     const [component, setComponent] = useState(1)
-
+    const [value, setValue] = useState(0)
 
 
     const { flights } = props
 
+    function onChange(value) {
+        setValue(value)
+    }
+    function setNegativeValue() {
+        if (value > 0) {
+            setValue(value - 1)
+        }
+    }
 
+    function setPositiveValue() {
+        if (value < 4) {
+            setValue(value + 1)
+        }
+    }
     const under200 = flights.filter(flight => flight.MinPrice >= 175 && flight.MinPrice <= 200).map((flight) => {
         return (
             <div key={flight.QuoteId} className='flight-card'>
@@ -69,9 +84,9 @@ function Carousel(props) {
     return (
         <div className='carousel-view'>
             <div className='arrow-container'>
-                <div className={'carousel-arrow left'}></div>
+                {value === 0 ? null : <div onClick={() => setNegativeValue()} className={'carousel-arrow left'}></div>}
             </div>
-            <div className='carousel'>
+            <Carousel value={value} onChange={onChange} >
                 <div className='suggestions'>
                     <div className='banner'>
                         <h1 className='banner-price'>Flights under $200</h1>
@@ -122,12 +137,14 @@ function Carousel(props) {
                         <div className='flights-1'>{under1000.slice(4, 7)}</div>
                     </div>
                 </div>
-            </div>
+            </Carousel>
+            <Dots value={value} onChange={onChange}></Dots>
             <div className='arrow-container'>
-                <div className='carousel-arrow'></div>
+
+                {value === 4 ? null : <div onClick={() => setPositiveValue()} className='carousel-arrow'></div>}
             </div>
         </div >
     )
 }
 
-export default Carousel
+export default CarouselComp

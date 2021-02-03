@@ -9,7 +9,7 @@ import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import MiniMap from "./MiniMap/MiniMap"
 import Work from "./Works/Works"
-import Carousel from "./Carousel/Carousel";
+import CarouselComp from "./Carousel/Carousel";
 import { ClipLoader } from 'react-spinners'
 require("dotenv").config();
 
@@ -86,7 +86,7 @@ function Landing(props) {
           )}
       </div>
       <div className='landing-line'></div>
-      <Carousel flights={flights} />
+      <CarouselComp flights={flights} />
       <div className='landing-line'></div>
       <Work />
     </div>
