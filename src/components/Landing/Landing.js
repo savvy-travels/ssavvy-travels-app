@@ -11,7 +11,9 @@ import MiniMap from "./MiniMap/MiniMap"
 import Work from "./Works/Works"
 import CarouselComp from "./Carousel/Carousel";
 import { ClipLoader } from 'react-spinners'
+import axios from "axios";
 require("dotenv").config();
+const async = require('async')
 
 
 
@@ -19,7 +21,7 @@ function Landing(props) {
 
   const context = useContext(Context)
 
-  console.log(context.allAirports)
+  // console.log(context.allAirports)
 
   const flights = context.quotes.map((quote) => {
     let destinationId = context.places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
@@ -29,17 +31,34 @@ function Landing(props) {
     let airportId = context.allAirports.findIndex(airport => airport.code == flight.IataCode)
     return { ...flight, ...context.allAirports[airportId] }
   })
-  console.log(flights)
+  // console.log(flights)
 
 
-  const flightCards = flights.map((flight) => {
-    return (
-      <div key={flight.QuoteId} className='flight-card'>
-        <h3>{flight.CityName}</h3>
-        <h1>${flight.MinPrice}</h1>
-      </div>
-    )
-  })
+  const places = flights.map(flight => flight.CityName)
+
+ 
+  let data = []
+ 
+  async function getImageUrl(city) {
+    return await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages|pageterms&piprop=thumbnail&pithumbsize=600&origin=*&titles=${city}`).then(res => res.data)
+  }  
+
+  const getData = async () => {
+      data = Promise.all(places.map(place => getImageUrl(place)))
+  }  
+
+  getData()
+
+  console.log(data)
+
+
+
+  
+
+  // const images = data.map(place => place.query.pages[0].thumbnail.source)
+  // console.log(images)
+
+  
 
   return (
     <div className='landing'>
