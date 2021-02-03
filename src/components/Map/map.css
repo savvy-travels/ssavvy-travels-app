@@ -1,51 +1,55 @@
-.map-view{
-    background-color: #fdfffc;
-    width: 100vw;
-    height: 100vh;
+.map-view {
+  background-color: #fdfffc;
+  width: 100vw;
+  height: 100vh;
 }
 
-.lower-map-view{
-    position: absolute;
-    top:9.8vh;
-    height: 85vh;
-    width: 100vw;
-    display: flex;
-
+.lower-map-view {
+  position: absolute;
+  top: 9.8vh;
+  height: 85vh;
+  width: 100vw;
+  display: flex;
+  margin: 20px;
 }
-.map-container{
-    width: 80%;
-    height: inherit;
-    background: url('https://origaudiopromo.com/wp-content/uploads/2019/07/space-background-website.jpeg');
-    background-repeat: no-repeat;
-    background-size:fill;
-}
-
-.controllers-container{
-    width: 20%;
-    height: inherit;
-    display: flex;
+.map-container {
+  width: 80%;
+  height: inherit;
+  background: url("https://origaudiopromo.com/wp-content/uploads/2019/07/space-background-website.jpeg");
+  background-repeat: no-repeat;
+  background-size: fill;
 }
 
-
-.results-search-container{
-    box-sizing: border-box;
-    background-color:#fdfffc;
-    width: 100%;
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.controllers-container {
+  width: 30%;
+  height: inherit;
+  display: flex;
+  border: 1px solid #0b3840;
+  box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  z-index: 1;
 }
 
+.results-search-container {
+  box-sizing: border-box;
+  background-color: #fdfffc;
+  width: 100%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
 
-.line{
-    width: 100%;
-    border: 1px solid #0b3840;
+.line {
+  width: 100%;
+  border: 1px solid #0b3840;
 }
 
 .results {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 /* .flight-card {
