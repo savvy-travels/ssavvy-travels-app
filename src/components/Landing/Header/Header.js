@@ -24,19 +24,20 @@ function Header(props) {
     return (
         <>
             <header>
-            
-                <Link to='/'><img className='header-logo' src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png' alt='logo' /></Link>
-                {props.isLoggedIn ?
-                    <div className='user-nav'>
-                        <h1>{props.username}</h1>
-                        <div onClick={() => setOpen(!open)} className={open ? 'up-triangle' : 'down-triangle'}></div>
-                    </div>
-                    :
-                    <span>
-                        <Link to='/signup'><button className=' auth-button'>signup</button></Link>
-                        <Link to='/login'><button className='auth-button'>login</button></Link>
-                    </span>
-                }
+                <nav className='nav-container'>
+                    <Link to='/'><img className='header-logo' src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png' alt='logo' /></Link>
+                    {props.isLoggedIn ?
+                        <div className='user-nav'>
+                            <h1>{props.username}</h1>
+                            <div onClick={() => setOpen(!open)} className={open ? 'up-triangle' : 'down-triangle'}></div>
+                        </div>
+                        :
+                        <span>
+                            <Link to='/signup'><button className=' auth-button'>signup</button></Link>
+                            <Link to='/login'><button className='auth-button'>login</button></Link>
+                        </span>
+                    }
+                </nav>
             </header>
             <div className={open ? 'pop-menu-visible' : 'pop-menu'} >
                 <div className='nav-items'>

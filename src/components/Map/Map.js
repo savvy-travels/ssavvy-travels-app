@@ -71,7 +71,7 @@ function Map(props) {
   const { budget, location, departureDate, arrivalDate } = props
 
   useEffect(() => {
-    axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${location}-iata/anywhere/${departureDate}/${arrivalDate}`, {
+    axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${location}-iata/anywhere/${departureDate ? departureDate : 'anytime'}/${arrivalDate ? arrivalDate : 'anytime'}`, {
       headers: {
         'x-rapidapi-key': `${skyscannerKey}`
       }

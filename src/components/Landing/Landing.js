@@ -25,6 +25,7 @@ function Landing(props) {
 
   // Find Flights based off of your airport location 
   const flights = context.quotes.map((quote) => {
+    quote['saved'] = false
     let destinationId = context.places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = context.carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
     return { ...quote, ...context.places[destinationId], ...context.carriers[carrierId] }
@@ -35,16 +36,16 @@ function Landing(props) {
   // console.log(flights)
 
 
-  
 
 
 
-  
+
+
 
   // const images = data.map(place => place.query.pages[0].thumbnail.source)
   // console.log(images)
 
-  
+
 
   return (
     <div className='landing'>

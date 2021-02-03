@@ -142,6 +142,7 @@ button.marker-btn img:hover {
   font-size: 1.25rem;
   font-weight: 450;
   color: #0b3840;
+  display: flex;
 }
 
 .info-container>span>h4{
@@ -166,6 +167,16 @@ justify-content: flex-end;
   font-weight: 300;
   color: #0b3840;
   margin-right: 3px;
+}
+.heart-icon{
+  width: 40px;
+  margin-left: auto;
+  filter: invert(86%) sepia(1%) saturate(0%) hue-rotate(272deg) brightness(97%) contrast(83%);
+}
+.heart-icon-clicked{
+  width: 40px;
+  margin-left: auto;
+  filter: invert(86%) sepia(95%) saturate(3213%) hue-rotate(6deg) brightness(92%) contrast(90%);
 }
 .info-container>h4{
   margin: 0px;

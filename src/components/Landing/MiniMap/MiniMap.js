@@ -6,13 +6,11 @@ import './minimap.css'
 import { Context } from '../../../context/context'
 
 function MiniMap(props) {
-  //Map State
-  // console.log(props.flights)
-  const { lat, long, flights } = props
-  const [selectedCity, setSelectedCity] = useState(null)
-
   const context = useContext(Context)
 
+  //Map State
+  const { lat, long, flights } = props
+  const [selectedCity, setSelectedCity] = useState(null)
   const [viewport, setViewport] = useState({
     latitude: context.lat,
     longitude: context.long,
@@ -21,25 +19,30 @@ function MiniMap(props) {
     zoom: 3,
   })
 
+  //Liked Trip//
+
+
 
   const suggested = flights.slice(0, 10)
-  console.log(suggested)
 
-  const suggestedCards = suggested.map(flight => (
-    <div key={flight.QuoteId} className='miniMap-flight-card'>
-      <span className='image-container'>
-        <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
-      </span>
-      <span className='info-container'>
-        <span>
-          <h1>{flight.CityName}</h1>
-          <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+  const suggestedCards = suggested.map(flight => {
+
+    return (
+      <div key={flight.QuoteId} className='miniMap-flight-card'>
+        <span className='image-container'>
+          <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
         </span>
-        <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
-        <h1><h6>From</h6> ${flight.MinPrice}</h1>
-      </span>
-    </div>
-  ))
+        <span className='info-container'>
+          <span>
+            <h1>{flight.CityName}</h1>
+            <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+          </span>
+          <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+          <h1><h6>From</h6> ${flight.MinPrice}</h1>
+        </span>
+      </div>
+    )
+  })
   const markers = useMemo(() => flights.map(
     city => (
       <div>{city.lon ?
