@@ -4,7 +4,7 @@ function Work() {
     return (
         <div className='work-container'>
             <div className='mini-container'>
-                <img className='budget'src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Budget_thing.png' alt='Budget' />
+                <img className='budget' src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Budget_thing.png' alt='Budget' />
                 <h1>Give Us Your Budget</h1>
                 <div>Tell us how much you want to spend and customize your departure and arrival dates.</div>
             </div>

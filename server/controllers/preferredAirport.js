@@ -14,6 +14,7 @@ module.exports = {
         
         const grabPreferred = await db.airports.getPreferredAirport(id)
         
+        
         res.status(200).send(grabPreferred)
     }
 }
