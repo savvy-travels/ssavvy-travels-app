@@ -4,13 +4,13 @@ function Work() {
     return (
         <div className='work-container'>
             <div className='mini-container'>
-                <img src='https://abcsofsellingonline.com/wp-content/uploads/2020/06/give-money.png' alt='Budget' />
+                <img className='budget'src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Budget_thing.png' alt='Budget' />
                 <h1>Give Us Your Budget</h1>
                 <div>Tell us how much you want to spend and customize your departure and arrival dates.</div>
             </div>
             <img className='arrow' src='https://cdn.discordapp.com/attachments/801884180879376405/806242899720404992/arrow-40163_960_720.webp' alt='Arrow'/> 
             <div className='mini-container'>
-                <img src='https://img2.pngio.com/free-road-map-png-free-road-mappng-transparent-images-22681-road-map-icon-png-980_998.png' alt='Map'/>
+                <img src='https://colab-image-assets.s3-us-west-1.amazonaws.com/map.png' alt='Map'/>
                 <h1>Explore the Map & Destinations</h1>
                 <div>Look at our map and you will be surprised how far your budget can take you.</div>
             </div>
@@ -22,7 +22,7 @@ function Work() {
             </div>
             <img className='arrow' src='https://cdn.discordapp.com/attachments/801884180879376405/806242899720404992/arrow-40163_960_720.webp' alt='Arrow'/> 
             <div className='mini-container'>
-                <img src='https://image.flaticon.com/icons/png/512/85/85536.png' alt='Book'/>
+                <img src='https://colab-image-assets.s3-us-west-1.amazonaws.com/book.png' alt='Book'/>
                 <h1>Book the Lowest Prices</h1>
                 <div>Book your flight! We guarantee to get you the cheapest possible flight.</div>
             </div>
