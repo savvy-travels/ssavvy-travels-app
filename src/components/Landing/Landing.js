@@ -19,8 +19,8 @@ function Landing(props) {
 
   const context = useContext(Context)
 
-  console.log(context.allAirports)
 
+  // Find Flights based off of your airport location 
   const flights = context.quotes.map((quote) => {
     let destinationId = context.places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = context.carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
