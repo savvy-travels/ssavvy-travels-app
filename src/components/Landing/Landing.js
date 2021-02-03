@@ -41,10 +41,6 @@ function Landing(props) {
     )
   })
 
-
-
-
-
   return (
     <div className='landing'>
       <video
