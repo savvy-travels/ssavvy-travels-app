@@ -109,7 +109,7 @@ function CarouselComp(props) {
                 </div>
                 <div className='suggestions'>
                     <div className='banner'>
-                        <h1 className='banner-price'>$600</h1>
+                        <h1 className='banner-price'>Flights under $600</h1>
                         {under600[0]}
                     </div>
                     <div className='flights'>
@@ -123,13 +123,13 @@ function CarouselComp(props) {
                         <div className='flights-1'>{under800.slice(4, 7)}</div>
                     </div>
                     <div className='banner'>
-                        <h1 className='banner-price'>$800</h1>
+                        <h1 className='banner-price'>Flights under $800</h1>
                         {under800[0]}
                     </div>
                 </div>
                 <div className='suggestions'>
                     <div className='banner'>
-                        <h1 className='banner-price'>$1000</h1>
+                        <h1 className='banner-price'>Flights under $1000</h1>
                         {under1000[0]}
                     </div>
                     <div className='flights'>
@@ -139,7 +139,7 @@ function CarouselComp(props) {
                 </div>
             </Carousel>
             <Dots value={value} onChange={onChange}></Dots>
-            <div className='arrow-container'>
+            <div className='arrow-container right'>
 
                 {value === 4 ? null : <div onClick={() => setPositiveValue()} className='carousel-arrow'></div>}
             </div>

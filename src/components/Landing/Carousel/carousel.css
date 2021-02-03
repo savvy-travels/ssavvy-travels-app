@@ -26,6 +26,7 @@
 
 
 .suggestions {
+    margin: 1rem 0px;
     padding: 1rem;
     height: 50vh;
     width: 90%;
@@ -84,6 +85,11 @@
 
 .arrow-container{
   width: 100px;
+  margin-left: 2rem;
+}
+.right{
+  margin: 0px;
+  margin-right: 2rem;
 }
   .carousel-arrow{
     transform: rotate(45deg);
