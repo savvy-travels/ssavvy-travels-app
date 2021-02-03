@@ -6,7 +6,7 @@ import "./profile.css"
 
 const Profile = (props) => {
     const [locations, setLocations] = useState([])
-    
+    // const []
     useEffect (()=> {
         axios.get('/api/locations')
         .then((res) => {

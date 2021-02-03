@@ -23,6 +23,7 @@ function Landing(props) {
 
   // console.log(context.allAirports)
 
+  // Find Flights based off of your airport location 
   const flights = context.quotes.map((quote) => {
     let destinationId = context.places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = context.carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
@@ -34,22 +35,7 @@ function Landing(props) {
   // console.log(flights)
 
 
-  // const places = flights.map(flight => flight.CityName)
-
- 
-  // let data = []
- 
-  // async function getImageUrl(city) {
-  //   return await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages|pageterms&piprop=thumbnail&pithumbsize=600&origin=*&titles=${city}`).then(res => res.data)
-  // }  
-
-  // const getData = async () => {
-  //     data = Promise.all(places.map(place => getImageUrl(place)))
-  // }  
-
-  // getData()
-
-  // console.log(data)
+  
 
 
 
@@ -64,7 +50,7 @@ function Landing(props) {
     <div className='landing'>
       <video
         className='video'
-        src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air.mp4'
+        src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air-New.mp4'
         type='video/mp4'
         autoPlay
         loop

@@ -85,69 +85,66 @@ function CarouselComp(props) {
   
 
     return (
-        <div className='carousel-view'>
-            <div className='arrow-container'>
-                {value === 0 ? null : <div onClick={() => setNegativeValue()} className={'carousel-arrow left'}></div>}
-            </div>
-            <Carousel value={value} onChange={onChange} >
-            <div className='suggestions'>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $100</h1>
-                        {under100[0]}
-                    </div>
-                    <div className='flights'>
-                        <div className='flights-1'>{under100.slice(1, 4)}</div>
-                        <div className='flights-1'>{under100.slice(4, 7)}</div>
-                    </div>
+        <>
+            <div className='carousel-view'>
+                <div className='arrow-container'>
+                    {value === 0 ? null : <div onClick={() => setNegativeValue()} className={'carousel-arrow left'}></div>}
                 </div>
-                <div className='suggestions'>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $200</h1>
-                        {under200[0]}
+                <Carousel value={value} onChange={onChange} >
+                    <div className='suggestions'>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $200</h1>
+                            {under200[0]}
+                        </div>
+                        <div className='flights'>
+                            <div className='flights-1'>{under200.slice(1, 4)}</div>
+                            <div className='flights-1'>{under200.slice(4, 7)}</div>
+                        </div>
                     </div>
-                    <div className='flights'>
-                        <div className='flights-1'>{under200.slice(1, 4)}</div>
-                        <div className='flights-1'>{under200.slice(4, 7)}</div>
+                    <div className='suggestions'>
+                        <div className='flights'>
+                            <div className='flights-1'>{under400.slice(1, 4)}</div>
+                            <div className='flights-1'>{under400.slice(4, 7)}</div>
+                        </div>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $400</h1>
+                            {under400[0]}
+                        </div>
                     </div>
-                </div>
-                <div className='suggestions'>
-                    <div className='flights'>
-                        <div className='flights-1'>{under400.slice(1, 4)}</div>
-                        <div className='flights-1'>{under400.slice(4, 7)}</div>
+                    <div className='suggestions'>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $600</h1>
+                            {under600[0]}
+                        </div>
+                        <div className='flights'>
+                            <div className='flights-1'>{under600.slice(1, 4)}</div>
+                            <div className='flights-1'>{under600.slice(4, 7)}</div>
+                        </div>
                     </div>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $400</h1>
-                        {under400[0]}
+                    <div className='suggestions'>
+                        <div className='flights'>
+                            <div className='flights-1'>{under800.slice(1, 4)}</div>
+                            <div className='flights-1'>{under800.slice(4, 7)}</div>
+                        </div>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $800</h1>
+                            {under800[0]}
+                        </div>
                     </div>
-                </div>
-                <div className='suggestions'>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $600</h1>
-                        {under600[0]}
-                    </div>
-                    <div className='flights'>
-                        <div className='flights-1'>{under600.slice(1, 4)}</div>
-                        <div className='flights-1'>{under600.slice(4, 7)}</div>
-                    </div>
-                </div>
-                <div className='suggestions'>
-                    <div className='flights'>
-                        <div className='flights-1'>{under800.slice(1, 4)}</div>
-                        <div className='flights-1'>{under800.slice(4, 7)}</div>
-                    </div>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $800</h1>
-                        {under800[0]}
-                    </div>
-                </div>
-                
-            </Carousel>
-            <Dots value={value} onChange={onChange}></Dots>
-            <div className='arrow-container right'>
+                </Carousel>
 
-                {value === 4 ? null : <div onClick={() => setPositiveValue()} className='carousel-arrow'></div>}
-            </div>
-        </div >
+                <div className='arrow-container right'>
+                    {value === 4 ? null : <div onClick={() => setPositiveValue()} className='carousel-arrow'></div>}
+                </div>
+            </div >
+            <Dots className='dots' value={value} onChange={onChange} thumbnails={[
+                (<div className='thumbnail' key={0}></div>),
+                (<div className='thumbnail' key={1}></div>),
+                (<div className='thumbnail' key={2}></div>),
+                (<div className='thumbnail' key={3}></div>),
+                (<div className='thumbnail' key={4}></div>),
+            ]}></Dots>
+        </>
     )
 }
 
