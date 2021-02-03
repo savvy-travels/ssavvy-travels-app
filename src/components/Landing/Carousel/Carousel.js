@@ -25,7 +25,19 @@ function CarouselComp(props) {
             setValue(value + 1)
         }
     }
-    const under200 = flights.filter(flight => flight.MinPrice >= 175 && flight.MinPrice <= 200).map((flight) => {
+
+    const under100 = flights.filter(flight => flight.MinPrice <= 100).map((flight) => {
+        return (
+            <div key={flight.QuoteId} className='flight-card'>
+                <div className='name-price-container'>
+                    <h2>{flight.CityName}</h2>
+                    <h1>${flight.MinPrice}</h1>
+                </div>
+            </div>
+        )
+    }).reverse().slice(0, 7)
+
+    const under200 = flights.filter(flight => flight.MinPrice >= 100 && flight.MinPrice <= 200).map((flight) => {
         return (
             <div key={flight.QuoteId} className='flight-card'>
                 <div className='name-price-container'>
@@ -36,7 +48,7 @@ function CarouselComp(props) {
         )
     }).slice(0, 7)
 
-    const under400 = flights.filter(flight => flight.MinPrice > 375 && flight.MinPrice <= 400).map((flight) => {
+    const under400 = flights.filter(flight => flight.MinPrice > 200 && flight.MinPrice <= 400).map((flight) => {
         return (
             <div key={flight.QuoteId} className='flight-card'>
                 <div className='name-price-container'>
@@ -45,9 +57,9 @@ function CarouselComp(props) {
                 </div>
             </div>
         )
-    }).slice(0, 7)
+    }).reverse().slice(0, 7)
 
-    const under600 = flights.filter(flight => flight.MinPrice > 500 && flight.MinPrice <= 600).map((flight) => {
+    const under600 = flights.filter(flight => flight.MinPrice > 400 && flight.MinPrice <= 600).map((flight) => {
         return (
             <div key={flight.QuoteId} className='flight-card'>
                 <div className='name-price-container'>
@@ -56,9 +68,9 @@ function CarouselComp(props) {
                 </div>
             </div>
         )
-    }).slice(0, 7)
+    }).reverse().slice(0, 7)
 
-    const under800 = flights.filter(flight => flight.MinPrice > 700 && flight.MinPrice <= 800).map((flight) => {
+    const under800 = flights.filter(flight => flight.MinPrice > 600 && flight.MinPrice <= 800).map((flight) => {
 
         return (
             <div key={flight.QuoteId} className='flight-card'>
@@ -68,18 +80,9 @@ function CarouselComp(props) {
                 </div>
             </div>
         )
-    }).slice(0, 7)
+    }).reverse().slice(0, 7)
 
-    const under1000 = flights.filter(flight => flight.MinPrice > 800 & flight.MinPrice <= 1000).map((flight) => {
-        return (
-            <div key={flight.QuoteId} className='flight-card'>
-                <div className='name-price-container'>
-                    <h2>{flight.CityName}</h2>
-                    <h1>${flight.MinPrice}</h1>
-                </div>
-            </div>
-        )
-    }).slice(0, 7)
+  
 
     return (
         <>
@@ -88,6 +91,16 @@ function CarouselComp(props) {
                     {value === 0 ? null : <div onClick={() => setNegativeValue()} className={'carousel-arrow left'}></div>}
                 </div>
                 <Carousel value={value} onChange={onChange} >
+                <div className='suggestions'>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $100</h1>
+                            {under100[0]}
+                        </div>
+                        <div className='flights'>
+                            <div className='flights-1'>{under100.slice(1, 4)}</div>
+                            <div className='flights-1'>{under100.slice(4, 7)}</div>
+                        </div>
+                    </div>
                     <div className='suggestions'>
                         <div className='banner'>
                             <h1 className='banner-price'>Flights under $200</h1>
@@ -126,16 +139,6 @@ function CarouselComp(props) {
                         <div className='banner'>
                             <h1 className='banner-price'>Flights under $800</h1>
                             {under800[0]}
-                        </div>
-                    </div>
-                    <div className='suggestions'>
-                        <div className='banner'>
-                            <h1 className='banner-price'>Flights under $1000</h1>
-                            {under1000[0]}
-                        </div>
-                        <div className='flights'>
-                            <div className='flights-1'>{under1000.slice(1, 4)}</div>
-                            <div className='flights-1'>{under1000.slice(4, 7)}</div>
                         </div>
                     </div>
                 </Carousel>

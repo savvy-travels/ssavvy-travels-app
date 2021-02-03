@@ -11,7 +11,9 @@ import MiniMap from "./MiniMap/MiniMap"
 import Work from "./Works/Works"
 import CarouselComp from "./Carousel/Carousel";
 import { ClipLoader } from 'react-spinners'
+import axios from "axios";
 require("dotenv").config();
+const async = require('async')
 
 
 
@@ -19,6 +21,7 @@ function Landing(props) {
 
   const context = useContext(Context)
 
+  // console.log(context.allAirports)
 
   // Find Flights based off of your airport location 
   const flights = context.quotes.map((quote) => {
@@ -29,17 +32,19 @@ function Landing(props) {
     let airportId = context.allAirports.findIndex(airport => airport.code == flight.IataCode)
     return { ...flight, ...context.allAirports[airportId] }
   })
-  console.log(flights)
+  // console.log(flights)
 
 
-  const flightCards = flights.map((flight) => {
-    return (
-      <div key={flight.QuoteId} className='flight-card'>
-        <h3>{flight.CityName}</h3>
-        <h1>${flight.MinPrice}</h1>
-      </div>
-    )
-  })
+  
+
+
+
+  
+
+  // const images = data.map(place => place.query.pages[0].thumbnail.source)
+  // console.log(images)
+
+  
 
   return (
     <div className='landing'>

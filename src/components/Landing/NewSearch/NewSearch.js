@@ -74,7 +74,7 @@ function NewSearch(props) {
         let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
         return { ...airport, ...allAirports[airportId] }
     })
-    console.log(myAirports)
+    // console.log(myAirports)
 
     useEffect(() => {
         myAirports.forEach(airport => {
@@ -87,7 +87,7 @@ function NewSearch(props) {
         })
     }, [])
 
-    console.log(myAirportsFiltered)
+    // console.log(myAirportsFiltered)
 
 
 
