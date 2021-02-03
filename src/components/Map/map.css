@@ -8,9 +8,10 @@
   position: absolute;
   top: 9.8vh;
   height: 85vh;
-  width: 100vw;
+  width: 97vw;
   display: flex;
   margin: 20px;
+  border: 1px solid black;
 }
 .map-container {
   width: 80%;
