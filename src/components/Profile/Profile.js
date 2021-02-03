@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect, } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import "./profile.css"
 
 
@@ -33,7 +33,7 @@ const Profile = (props) => {
     const locationsMapped =  locations.map(location => {
         return (
             <div className='locs-container'>
-                <p>{location.location}</p>
+                <p className='locations'>{location.location}</p>
             </div>
         )
     })
@@ -48,8 +48,12 @@ const Profile = (props) => {
                     <h2>{preferred}</h2>
                 </div>
                 <div className='suggested-container'>
-                    <h3>View Map</h3>
-                    <h3>Home</h3>
+                    <Link to='/map'>
+                        <h3>View Map</h3>
+                    </Link>
+                    <Link to='/'>
+                        <h3 className='home'>Home</h3>
+                    </Link>
                     <div className='line'></div>
                     <h3>Suggested Trips</h3>
                 </div>
@@ -60,7 +64,6 @@ const Profile = (props) => {
                         <input className='price' placeholder='Filter by Price'/>
                     </div>
                         <div>
-                            <h1>I'm Here</h1>
                             {locationsMapped}
                         </div>
                 </div>
