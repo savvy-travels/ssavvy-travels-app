@@ -34,22 +34,22 @@ function Landing(props) {
   // console.log(flights)
 
 
-  const places = flights.map(flight => flight.CityName)
+  // const places = flights.map(flight => flight.CityName)
 
  
-  let data = []
+  // let data = []
  
-  async function getImageUrl(city) {
-    return await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages|pageterms&piprop=thumbnail&pithumbsize=600&origin=*&titles=${city}`).then(res => res.data)
-  }  
+  // async function getImageUrl(city) {
+  //   return await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages|pageterms&piprop=thumbnail&pithumbsize=600&origin=*&titles=${city}`).then(res => res.data)
+  // }  
 
-  const getData = async () => {
-      data = Promise.all(places.map(place => getImageUrl(place)))
-  }  
+  // const getData = async () => {
+  //     data = Promise.all(places.map(place => getImageUrl(place)))
+  // }  
 
-  getData()
+  // getData()
 
-  console.log(data)
+  // console.log(data)
 
 
 
