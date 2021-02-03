@@ -45,7 +45,7 @@ function Landing(props) {
     <div className='landing'>
       <video
         className='video'
-        src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air.mp4'
+        src='https://colab-image-assets.s3-us-west-1.amazonaws.com/DevMtn-Air-New.mp4'
         type='video/mp4'
         autoPlay
         loop
