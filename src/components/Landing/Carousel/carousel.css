@@ -7,6 +7,17 @@
   /* padding: 1rem 0px; */
 }
 
+.dots{
+  margin-top: 10px;
+}
+.thumbnail{
+  margin-left: auto;
+  margin-right: auto;
+  height: 30px;
+  width:30px;
+  border-radius: 50%;
+  background-color: #66b0b3;
+}
 /*.carousel{
     padding: 2rem 3rem;
     width: 100%;

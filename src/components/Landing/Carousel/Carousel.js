@@ -82,68 +82,76 @@ function CarouselComp(props) {
     }).slice(0, 7)
 
     return (
-        <div className='carousel-view'>
-            <div className='arrow-container'>
-                {value === 0 ? null : <div onClick={() => setNegativeValue()} className={'carousel-arrow left'}></div>}
-            </div>
-            <Carousel value={value} onChange={onChange} >
-                <div className='suggestions'>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $200</h1>
-                        {under200[0]}
-                    </div>
-                    <div className='flights'>
-                        <div className='flights-1'>{under200.slice(1, 4)}</div>
-                        <div className='flights-1'>{under200.slice(4, 7)}</div>
-                    </div>
+        <>
+            <div className='carousel-view'>
+                <div className='arrow-container'>
+                    {value === 0 ? null : <div onClick={() => setNegativeValue()} className={'carousel-arrow left'}></div>}
                 </div>
-                <div className='suggestions'>
-                    <div className='flights'>
-                        <div className='flights-1'>{under400.slice(1, 4)}</div>
-                        <div className='flights-1'>{under400.slice(4, 7)}</div>
+                <Carousel value={value} onChange={onChange} >
+                    <div className='suggestions'>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $200</h1>
+                            {under200[0]}
+                        </div>
+                        <div className='flights'>
+                            <div className='flights-1'>{under200.slice(1, 4)}</div>
+                            <div className='flights-1'>{under200.slice(4, 7)}</div>
+                        </div>
                     </div>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $400</h1>
-                        {under400[0]}
+                    <div className='suggestions'>
+                        <div className='flights'>
+                            <div className='flights-1'>{under400.slice(1, 4)}</div>
+                            <div className='flights-1'>{under400.slice(4, 7)}</div>
+                        </div>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $400</h1>
+                            {under400[0]}
+                        </div>
                     </div>
-                </div>
-                <div className='suggestions'>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $600</h1>
-                        {under600[0]}
+                    <div className='suggestions'>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $600</h1>
+                            {under600[0]}
+                        </div>
+                        <div className='flights'>
+                            <div className='flights-1'>{under600.slice(1, 4)}</div>
+                            <div className='flights-1'>{under600.slice(4, 7)}</div>
+                        </div>
                     </div>
-                    <div className='flights'>
-                        <div className='flights-1'>{under600.slice(1, 4)}</div>
-                        <div className='flights-1'>{under600.slice(4, 7)}</div>
+                    <div className='suggestions'>
+                        <div className='flights'>
+                            <div className='flights-1'>{under800.slice(1, 4)}</div>
+                            <div className='flights-1'>{under800.slice(4, 7)}</div>
+                        </div>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $800</h1>
+                            {under800[0]}
+                        </div>
                     </div>
-                </div>
-                <div className='suggestions'>
-                    <div className='flights'>
-                        <div className='flights-1'>{under800.slice(1, 4)}</div>
-                        <div className='flights-1'>{under800.slice(4, 7)}</div>
+                    <div className='suggestions'>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $1000</h1>
+                            {under1000[0]}
+                        </div>
+                        <div className='flights'>
+                            <div className='flights-1'>{under1000.slice(1, 4)}</div>
+                            <div className='flights-1'>{under1000.slice(4, 7)}</div>
+                        </div>
                     </div>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $800</h1>
-                        {under800[0]}
-                    </div>
-                </div>
-                <div className='suggestions'>
-                    <div className='banner'>
-                        <h1 className='banner-price'>Flights under $1000</h1>
-                        {under1000[0]}
-                    </div>
-                    <div className='flights'>
-                        <div className='flights-1'>{under1000.slice(1, 4)}</div>
-                        <div className='flights-1'>{under1000.slice(4, 7)}</div>
-                    </div>
-                </div>
-            </Carousel>
-            <Dots value={value} onChange={onChange}></Dots>
-            <div className='arrow-container right'>
+                </Carousel>
 
-                {value === 4 ? null : <div onClick={() => setPositiveValue()} className='carousel-arrow'></div>}
-            </div>
-        </div >
+                <div className='arrow-container right'>
+                    {value === 4 ? null : <div onClick={() => setPositiveValue()} className='carousel-arrow'></div>}
+                </div>
+            </div >
+            <Dots className='dots' value={value} onChange={onChange} thumbnails={[
+                (<h1 className='thumbnail' key={0}>$200</h1>),
+                (<h1 className='thumbnail' key={1}>$400</h1>),
+                (<h1 className='thumbnail' key={2}>$600</h1>),
+                (<h1 className='thumbnail' key={3}>$800</h1>),
+                (<h1 className='thumbnail' key={4}>$1000</h1>),
+            ]}></Dots>
+        </>
     )
 }
 
