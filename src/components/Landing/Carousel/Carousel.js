@@ -35,7 +35,7 @@ function CarouselComp(props) {
                 </div>
             </div>
         )
-    }).slice(0, 7)
+    }).reverse().slice(0, 7)
 
     const under200 = flights.filter(flight => flight.MinPrice >= 100 && flight.MinPrice <= 200).map((flight) => {
         return (
@@ -91,6 +91,16 @@ function CarouselComp(props) {
                     {value === 0 ? null : <div onClick={() => setNegativeValue()} className={'carousel-arrow left'}></div>}
                 </div>
                 <Carousel value={value} onChange={onChange} >
+                <div className='suggestions'>
+                        <div className='banner'>
+                            <h1 className='banner-price'>Flights under $100</h1>
+                            {under100[0]}
+                        </div>
+                        <div className='flights'>
+                            <div className='flights-1'>{under100.slice(1, 4)}</div>
+                            <div className='flights-1'>{under100.slice(4, 7)}</div>
+                        </div>
+                    </div>
                     <div className='suggestions'>
                         <div className='banner'>
                             <h1 className='banner-price'>Flights under $200</h1>
