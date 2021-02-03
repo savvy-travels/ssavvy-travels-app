@@ -145,11 +145,11 @@ function CarouselComp(props) {
                 </div>
             </div >
             <Dots className='dots' value={value} onChange={onChange} thumbnails={[
-                (<h1 className='thumbnail' key={0}>$200</h1>),
-                (<h1 className='thumbnail' key={1}>$400</h1>),
-                (<h1 className='thumbnail' key={2}>$600</h1>),
-                (<h1 className='thumbnail' key={3}>$800</h1>),
-                (<h1 className='thumbnail' key={4}>$1000</h1>),
+                (<div className='thumbnail' key={0}></div>),
+                (<div className='thumbnail' key={1}></div>),
+                (<div className='thumbnail' key={2}></div>),
+                (<div className='thumbnail' key={3}></div>),
+                (<div className='thumbnail' key={4}></div>),
             ]}></Dots>
         </>
     )
