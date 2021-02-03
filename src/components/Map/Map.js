@@ -41,22 +41,31 @@ function Map(props) {
     },
   }
 
-  const useSetViewport = () => {
-    setViewport({
-      latitude: props.lat,
-      longitude: props.long,
-      width: '100%',
-      height: '100%',
-      zoom: 3
-    })
-  }
+  // const useSetViewport = () => {
+  //   setViewport({
+  //     latitude: +localStorage.getItem('lat'),
+  //     longitude: +localStorage.getItem('long'),
+  //     width: '100%',
+  //     height: '100%',
+  //     zoom: 3
+  //   })
+  // }
 
-  React.useEffect(() => {
-    window.addEventListener('resize', useSetViewport)
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setViewport({
+        latitude: +localStorage.getItem('lat'),
+        longitude: +localStorage.getItem('long'),
+        width: "100%",
+        height: "100%",
+        zoom: 3,
+      })
+    })
     return () => {
-      window.removeEventListener('resize', useSetViewport)
+      window.removeEventListener("resize", setViewport)
     }
   }, [])
+
   //Search State//
 
   const { budget, location, departureDate, arrivalDate } = props
