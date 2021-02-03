@@ -5,6 +5,7 @@ import { newSearch } from '../../Redux/searchReducer'
 import ReactMapGL, { Marker } from 'react-map-gl'
 import './map.css'
 import SearchField from './Search Field/SearchField'
+import moment from 'moment'
 import axios from 'axios'
 import { Context } from '../../context/context'
 
@@ -31,20 +32,10 @@ function Map(props) {
   })
   const [selectedCity, setSelectedCity] = useState(null)
 
-
-  const layerStyle = {
-    id: "point",
-    type: "circle",
-    paint: {
-      "circle-radius": 5,
-      "circle-color": "#007cbf",
-    },
-  }
-
   const useSetViewport = () => {
     setViewport({
-      latitude: props.lat,
-      longitude: props.long,
+      latitude: +localStorage.getItem('lat'),
+      longitude: +localStorage.getItem('long'),
       width: '100%',
       height: '100%',
       zoom: 3
@@ -89,14 +80,22 @@ function Map(props) {
 
 
 
-  const flightCards = flights.map((flight) => {
-    return (
-      <div key={flight.QuoteId} className='flight-card'>
-        <h3>{flight.CityName}</h3>
-        <h1>${flight.MinPrice}</h1>
-      </div>
-    )
-  })
+  const flightCards = flights.map
+  (flight => (
+    <div key={flight.QuoteId} className='miniMap-flight-card'>
+      <span className='image-container'>
+        <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
+      </span>
+      <span className='info-container'>
+        <span>
+          <h1>{flight.CityName}</h1>
+          <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+        </span>
+        <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+        <h1><h6>From</h6> ${flight.MinPrice}</h1>
+      </span>
+    </div>
+  ))
 
 
   const features = flights.map((place) => {
@@ -156,7 +155,17 @@ function Map(props) {
             <SearchField />
             <div className='line'></div>
             <div className='results'>
-              <h1>Mapped Results</h1>
+              <div className='suggested-header'>Trips in your Budget</div>
+              {selectedCity ? (
+            <div className='popup'>
+              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg'/>
+              <h2>City: {selectedCity.CityName}</h2>
+              <h3>Price: ${selectedCity.MinPrice}</h3>
+              <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
+              }</h4>
+              <button className='search-button'>Go to Flight</button>
+            </div>
+          ) : null}
               <div>{flightCards}</div>
             </div>
           </div>
