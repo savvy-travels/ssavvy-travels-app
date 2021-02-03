@@ -8,7 +8,7 @@ const Profile = (props) => {
     const [locations, setLocations] = useState([])
     const [email, setEmail] = useState('')
     const [preferred, setPreferred] = useState('')
-    
+
     useEffect(() => {
         axios.get('/api/auth/user')
         .then((res) => {
@@ -23,25 +23,34 @@ const Profile = (props) => {
             setLocations(res.data)
         })
     }, [])
+
+    function updatePreferred(id, preferred) {
+        axios.post('/api/updatePreferred')
+        .then(axios.get('/api/getPreferred'))
+        .catch(err => console.log(err))
+    }
     
     const locationsMapped =  locations.map(location => {
-
         return (
             <div className='locs-container'>
                 <p>{location.location}</p>
             </div>
         )
     })
-    console.log(preferred)
-    console.log(locations)
+
     return (
         <div>
-            <p>profile</p>
-            
             <div>
-                <h1>{email}</h1>
-                <h2>{preferred}</h2>
-                {locationsMapped}
+                <div className='user-container'>
+                    <h1>{email}</h1>
+                    <h2>{preferred}</h2>
+                </div>
+                <div className='locations-container'>
+                    {locationsMapped}
+                </div>
+                <div className='suggested-container'>
+
+                </div>
             </div>
 
 
