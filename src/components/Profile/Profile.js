@@ -6,14 +6,24 @@ import "./profile.css"
 
 const Profile = (props) => {
     const [locations, setLocations] = useState([])
-    // const []
+    const [email, setEmail] = useState('')
+    const [preferred, setPreferred] = useState('')
+    
+    useEffect(() => {
+        axios.get('/api/auth/user')
+        .then((res) => {
+            setPreferred(res.data.preferred)
+            setEmail(res.data.email)
+        })
+    }, [])
+ 
     useEffect (()=> {
         axios.get('/api/locations')
         .then((res) => {
             setLocations(res.data)
         })
     }, [])
-
+    
     const locationsMapped =  locations.map(location => {
 
         return (
@@ -22,12 +32,15 @@ const Profile = (props) => {
             </div>
         )
     })
-    
+    console.log(preferred)
     console.log(locations)
     return (
         <div>
             <p>profile</p>
+            
             <div>
+                <h1>{email}</h1>
+                <h2>{preferred}</h2>
                 {locationsMapped}
             </div>
 
