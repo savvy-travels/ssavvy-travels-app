@@ -80,10 +80,10 @@ function MiniMap(props) {
     }
   }, [])
 
-  const geolocateControlStyle = {
-    right: 10,
-    top: 10
-  };
+  // const geolocateControlStyle = {
+  //   right: 10,
+  //   top: 10
+  // };
 
   return (
     <div className='mini-map-container'>
@@ -92,7 +92,7 @@ function MiniMap(props) {
 
           {selectedCity ? (
             <div className='popup'>
-              <img className='popup-img' src='https://upload.wikimedia.org/wikipedia/commons/3/32/20190616154621%21Echo_Park_Lake_with_Downtown_Los_Angeles_Skyline.jpg' />
+              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg'/>
               <h2>City: {selectedCity.CityName}</h2>
               <h3>Price: ${selectedCity.MinPrice}</h3>
               <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
@@ -118,12 +118,12 @@ function MiniMap(props) {
           {/* Markers */}
           {markers}
 
-          <GeolocateControl
+          {/* <GeolocateControl
             style={geolocateControlStyle}
             positionOptions={{ enableHighAccuracy: true }}
             trackUserLocation={true}
             auto
-          />
+          /> */}
 
         </ReactMapGL>
       </div>
