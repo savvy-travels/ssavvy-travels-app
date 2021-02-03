@@ -1,17 +1,14 @@
-* {
+/* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* height: 100vh; */
 }
 .background-container {
     display: flex;
     flex-direction: column;
     z-index: -1;
-    /* height: 100vh; */
     justify-content: center;
     align-items: center;
-    /* background-color: #65b0b3; */
 }
 .profile-container {
     display: flex;
@@ -114,7 +111,6 @@ input {
 }
 .locations {
     display: flex;
-    /* position: fixed; */
     margin-bottom: 35px;
     height: 300px;
 }
@@ -127,4 +123,4 @@ h3 {
 }
 a:link{
     text-decoration: none;
-}
+} */
