@@ -37,8 +37,8 @@ useEffect(()=>{
       <span className='image-container'>
         <img className='flight-card-image' src={flight.photo} alt='preview'/>
       </span>
-      <span className='info-container'>
-        <div>
+      <span className='mini-info-container'>
+        <div className='mini-info-div'>
           <h1>{flight.CityName}</h1>
           <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
