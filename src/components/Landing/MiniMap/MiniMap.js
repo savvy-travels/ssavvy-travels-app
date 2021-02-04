@@ -95,7 +95,7 @@ function MiniMap(props) {
 
           {selectedCity ? (
             <div className='popup'>
-              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg'/>
+              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg' />
               <h2>City: {selectedCity.CityName}</h2>
               <h3>Price: ${selectedCity.MinPrice}</h3>
               <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
