@@ -90,20 +90,6 @@ function Map(props) {
   }).filter(flight => budget ? flight.MinPrice < budget : flight.MinPrice < Infinity)
 
 
-  function goToCarrier(){
-    switch(carriers.Name){
-      case 'Gulf Air':
-        window.location.href = 'https://www.gulfair.com/'
-        break;
-      case 'Frontier Airlines': 
-        window.location.href = 'https://www.flyfrontier.com/'
-        break;
-      default:
-        window.location.href = 'https://www.kayak.com/'
-    }
-  }
-
-
 
 
   const flightCards = flights.map(flight => {
@@ -178,7 +164,7 @@ function Map(props) {
                       <div key={selectedCity.QuoteId} className='miniMap-flight-card'
                         style={{ border: "solid 5px #f6615c" }}>
                         <span className='image-container'>
-                          <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
+                          <img className='flight-card-image' src={photos[Math.floor(Math.random() * photos.length)].url} alt='preview' />
                         </span>
                         <span className='info-container'>
                           <span>
@@ -187,6 +173,7 @@ function Map(props) {
                           </span>
                           <h4>{`${selectedCity.Direct ? 'Nonstop' : 'Multiple Stops'} - ${selectedCity.name}`}</h4>
                           <h1><h6>From</h6> ${selectedCity.MinPrice}</h1>
+                          <button onClick={()=> context.goToCarrier(selectedCity.Name)}>Book Flight</button>
                         </span>
                       </div>
                       <div className='line' style={{ marginBottom: '20px', marginTop: '20px' }}></div>
