@@ -1,5 +1,4 @@
 DROP TABLE IF EXISTS savvy_travels_locations;
-DROP TABLE IF EXISTS savvy_travels_airports;
 DROP TABLE IF EXISTS savvy_travels_users;
 
 
@@ -14,17 +13,13 @@ active boolean
 
 ALTER TABLE savvy_travels_users 
 ALTER COLUMN active
-SET DEFAULT false;
+SET DEFAULT FALSE;
 
 CREATE TABLE savvy_travels_locations (
 id SERIAL PRIMARY key,
 users_id INTEGER references savvy_travels_users(id),
-location text
-);
-
-CREATE TABLE savvy_travels_airports (
-id SERIAL PRIMARY KEY,
-users_id INTEGER references savvy_travels_users(id),
-airport_one VARCHAR(50),
-airport_two VARCHAR(50)
+location TEXT,
+airport TEXT,
+dates TEXT,
+created timestamptz default now()
 );

@@ -39,8 +39,6 @@ app.get('/api/locations', authMiddleware.isAuthenticated, locationCtrl.getLocati
 app.post('/api/updatePreferred', authMiddleware.isAuthenticated, prefAirportCtrl.updatePreferred)
 app.get('/api/getPreferred', authMiddleware.isAuthenticated, prefAirportCtrl.getPreferred)
 
-app.post('/api/saveAirports', authMiddleware.isAuthenticated, airportCtrl.saveAirports)
-app.get('/api/getAirports', authMiddleware.isAuthenticated, airportCtrl.getAirports)
 
 
 const transporter = nodemailer.createTransport({
