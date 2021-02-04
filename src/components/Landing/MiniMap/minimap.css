@@ -141,6 +141,7 @@ button.marker-btn img:hover {
   font-size: 1.25rem;
   font-weight: 450;
   color: #0b3840;
+  display: flex;
 }
 
 .info-container > span > h4 {
@@ -166,6 +167,7 @@ button.marker-btn img:hover {
   color: #0b3840;
   margin-right: 3px;
 }
+
 .info-container > h4 {
   margin: 0px;
   font-weight: 200;

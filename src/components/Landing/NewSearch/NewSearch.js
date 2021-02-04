@@ -48,15 +48,17 @@ const customStyles = {
 
 
 function NewSearch(props) {
+    const context = useContext(Context)
+    console.log(context.airport)
+
     const [input, setInput] = useState('')
     const [budget, setBudget] = useState('')
     const [departureDate, setDepartureDate] = useState(undefined)
     const [arrivalDate, setArrivalDate] = useState(undefined)
-    const [location, setLocation] = useState(undefined)
+    const [location, setLocation] = useState(`${context.airport.iata}-${context.airport.name}`)
     const [next, setNext] = useState(false)
     const [myAirportsFiltered, setMyAirportsFiltered] = useState([])
 
-    const context = useContext(Context)
 
 
     //This function handles the input change that is used in the filter function above. //
@@ -116,7 +118,6 @@ function NewSearch(props) {
                             placeholder={'Select departure airport...'}
                             styles={customStyles}
                             theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d', primary: '#cae00d', color: '#000' } })}
-                            defaultValue={myOptions[0]}
                             defaultOptions={input ? input : myOptions} />
 
                         <div className='vert-line-a'></div>
