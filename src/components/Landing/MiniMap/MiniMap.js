@@ -100,100 +100,100 @@ useEffect(()=>{
   const goToCarrier = (carrier) => {
     switch(carrier) {
       case 'Gulf Air':
-        window.location.href='https://www.gulfair.com/'
+        window.open ('https://www.gulfair.com/', "_blank")
       break;
       case 'Oman Air':
-        window.location.href='https://www.omanair.com/cn/en'
+        window.open ('https://www.omanair.com/cn/en', "_blank")
       break;
       case 'Qatar Airways':
-        window.location.href='https://www.qatarairways.com/en-us/homepage.html'
+        window.open ('https://www.qatarairways.com/en-us/homepage.html', "_blank")
       break;
       case 'Sun Country Airlines':
-        window.location.href='https://suncountry.com/'
+        window.open ('https://suncountry.com/', "_blank")
       break;
       case 'Qantas':
-        window.location.href='https://www.qantas.com/us/en.html'
+        window.open ('https://www.qantas.com/us/en.html', "_blank")
       break;
       case 'Volaris':
-        window.location.href='https://www.volaris.com/'
+        window.open ('https://www.volaris.com/', "_blank")
       break;
       case 'French Bee':
-        window.location.href='https://www.frenchbee.com/'
+        window.open ('https://www.frenchbee.com/', "_blank")
       break;
       case 'GOL Linhas Aéreas':
-        window.location.href='https://www.voegol.com.br/en'
+        window.open ('https://www.voegol.com.br/en', "_blank")
       break;
       case 'Spirit Airlines':
-        window.location.href='https://www.spirit.com/'
+        window.open ('https://www.spirit.com/', "_blank")
       break;
       case 'Alaska Airlines':
-        window.location.href='https://www.alaskaair.com/'
+        window.open ('https://www.alaskaair.com/', "_blank")
       break;
       case 'Lufthansa':
-        window.location.href='https://www.lufthansa.com/us/en/homepage'
+        window.open ('https://www.lufthansa.com/us/en/homepage', "_blank")
       break;
       case 'Avianca':
-        window.location.href='https://www.avianca.com/us/en/'
+        window.open ('https://www.avianca.com/us/en/', "_blank")
       break;
       case 'Emirates':
-        window.location.href='https://www.emirates.com/us/english/'
+        window.open ('https://www.emirates.com/us/english/', "_blank")
       break;
       case 'Aeromexico':
-        window.location.href='https://aeromexico.com/en-us'
+        window.open ('https://aeromexico.com/en-us', "_blank")
       break;
       case 'SAS':
-        window.location.href='https://www.flysas.com/us-en/'
+        window.open ('https://www.flysas.com/us-en/', "_blank")
       break;
       case 'Iberia':
-        window.location.href='https://www.iberia.com/us/'
+        window.open ('https://www.iberia.com/us/', "_blank")
       break;
       case 'Brussels Airlines':
-        window.location.href='https://www.brusselsairlines.com/'
+        window.open ('https://www.brusselsairlines.com/', "_blank")
       break;
       case 'British Airways':
-        window.location.href='https://www.britishairways.com/travel/home/public/en_us'
+        window.open ('https://www.britishairways.com/travel/home/public/en_us', "_blank")
       break;
       case 'Frontier Airlines':
-        window.location.href='https://www.flyfrontier.com/'
+        window.open ('https://www.flyfrontier.com/', "_blank")
       break;
       case 'United':
-        window.location.href='https://www.united.com/en/us'
+        window.open ('https://www.united.com/en/us', "_blank")
       break;
       case 'jetBlue':
-        window.location.href='https://www.jetblue.com/'
+        window.open ('https://www.jetblue.com/', "_blank")
       break;
       case 'Turkish Airlines':
-        window.location.href='https://www.turkishairlines.com/'
+        window.open ('https://www.turkishairlines.com/', "_blank")
       break;
       case 'Air Canada':
-        window.location.href='https://www.aircanada.com/us/en/aco/home.html'
+        window.open ('https://www.aircanada.com/us/en/aco/home.html', "_blank")
       break;
       case 'Japan Airlines':
-        window.location.href='https://www.jal.co.jp/ar/en/'
+        window.open ('https://www.jal.co.jp/ar/en/', "_blank")
       break;
       case 'China Air':
-        window.location.href='https://www.china-airlines.com/us/en'
+        window.open ('https://www.china-airlines.com/us/en', "_blank")
       break;
       case 'Finnair':
-        window.location.href='https://www.finnair.com/'
+        window.open ('https://www.finnair.com/', "_blank")
       break;
       case 'Korean Air':
-        window.location.href='https://www.koreanair.com/us/en'
+        window.open ('https://www.koreanair.com/us/en', "_blank")
       break;
       case 'Air France':
-        window.location.href='https://www.airfrance.com/indexCom_en.html'
+        window.open ('https://www.airfrance.com/indexCom_en.html', "_blank")
       break; 
       case 'Ethiopian Airlines':
-        window.location.href='https://www.ethiopianairlines.com/us'
+        window.open ('https://www.ethiopianairlines.com/us', "_blank")
       break; 
       case 'Copa':
-        window.location.href='https://www.copaair.com/en/web/us'
+        window.open ('https://www.copaair.com/en/web/us', "_blank")
       break; 
       case 'Iceland Air':
-        window.location.href='https://www.icelandair.com/'
+        window.open ('https://www.icelandair.com/', "_blank")
       break; 
       default:
-       window.location.href='/'
+       window.location.href = '/'
     }
   }
 
