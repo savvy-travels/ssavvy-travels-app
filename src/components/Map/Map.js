@@ -137,7 +137,6 @@ function Map(props) {
               onClick={e => {
                 e.preventDefault()
                 setSelectedCity(city)
-                console.log(selectedCity)
               }}
               className='marker-btn'>
               <p className='price'>${city.MinPrice}</p>

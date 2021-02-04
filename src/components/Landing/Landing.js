@@ -17,7 +17,7 @@ require("dotenv").config()
 function Landing(props) {
   const context = useContext(Context)
 
-  console.log(context.carriers)
+
 
 
   // Find Flights based off of your airport location
@@ -31,7 +31,7 @@ function Landing(props) {
       let airportId = context.allAirports.findIndex((airport) => airport.code == flight.IataCode)
       return { ...flight, ...context.allAirports[airportId] }})
 
-  console.log(flights)
+  
 
 
   return (

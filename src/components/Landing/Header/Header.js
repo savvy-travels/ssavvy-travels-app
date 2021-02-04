@@ -19,7 +19,7 @@ function Header(props) {
     return (
         <>
             <header>
-                    <Link to='/'><img className='header-logo' src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png' alt='logo' /></Link>
+                    <Link className='header-brand' to='/'><img className='header-logo' src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png' alt='logo' /><img className='header-name' src='https://colab-image-assets.s3-us-west-1.amazonaws.com/Logo-text.png'/></Link>
                     {props.isLoggedIn ?
                         <div className='user-nav'>
                             <h1>{props.username}</h1>

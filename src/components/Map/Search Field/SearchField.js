@@ -82,14 +82,12 @@ const SearchField = (props) => {
 
     function searchUpdate() {
         props.newSearch({ budget, location, departureDate, returnDate })
-        console.log(budget, location, departureDate, returnDate)
     }
 
     const myAirports = context.airports.map(airport => {
         let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
         return { ...airport, ...allAirports[airportId] }
     })
-    // console.log(myAirports)
 
     useEffect(() => {
         myAirports.forEach(airport => {

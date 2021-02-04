@@ -27,7 +27,7 @@ const [suggestedCards, setSuggestedCards] = useState([])
 
   const suggested = flights.slice(0, 10)
 
-  // console.log(photos[Math.floor(Math.random() * photos.length)])
+
   
 useEffect(()=>{
   setSuggestedCards(suggested.map(flight => {
@@ -65,7 +65,6 @@ useEffect(()=>{
               onClick={e => {
                 e.preventDefault()
                 setSelectedCity(city)
-                console.log(selectedCity)
               }}
               className='marker-btn'>
               <p className='price'>${city.MinPrice}</p>
