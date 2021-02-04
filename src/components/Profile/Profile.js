@@ -73,7 +73,7 @@ const Profile = (props) => {
                     </Link>
                     <div className='line'></div>
                     <h3>Suggested Trips</h3>
-                </div>
+                </div> 
                 </div>
                 <div className='locations-container'>
                     <div className='input-container'>
