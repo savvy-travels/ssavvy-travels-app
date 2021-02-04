@@ -47,9 +47,12 @@ function MiniMap(props) {
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
           <h1><h6>From</h6> ${flight.MinPrice}</h1>
         </span>
-      </div>
+        </span>
+  
+    </div>
     )
-  })
+  )
+  
   const markers = useMemo(() => flights.map(
     city => (
       <div>{city.lon ?
