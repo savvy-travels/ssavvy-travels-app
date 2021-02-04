@@ -11,7 +11,6 @@
   width: 97vw;
   display: flex;
   margin: 20px;
-  border: 1px solid black;
 }
 .map-container {
   width: 80%;
@@ -19,16 +18,21 @@
   background: url("https://origaudiopromo.com/wp-content/uploads/2019/07/space-background-website.jpeg");
   background-repeat: no-repeat;
   background-size: fill;
+  border-top: 1px solid #0b3840;
+  border-bottom: 1px solid #0b3840;
+  border-right: 1px solid #0b3840;
 }
 
 .controllers-container {
   width: 30%;
   height: inherit;
   display: flex;
-  border: 1px solid #0b3840;
-  box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  border-left: 1px solid #0b3840;
+  border-top: 1px solid #0b3840;
+  border-bottom: 1px solid #0b3840;
+  /* box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75); */
   z-index: 1;
 }
 
@@ -36,7 +40,7 @@
   box-sizing: border-box;
   background-color: #fdfffc;
   width: 100%;
-  height: inherit;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,6 +52,12 @@
   border: 1px solid #0b3840;
 }
 
+.map-side-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
 .results {
   width: 100%;
   height: stretch;
@@ -72,13 +82,23 @@
   text-align: left;
   padding-left: 1.5rem;
 }
-.map-flight-card {
+.map-flight-card-selected {
   overflow: hidden;
   display: flex;
   justify-content: space-between;
   font-family: Montserrat;
   margin: 0.6rem;
+  border: 3px solid #cae00d;
+  border-radius: 10px 0px 0px 10px;
+  box-shadow: 2px 2px 5px #b3b3b3;
+}
+.map-flight-card {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  font-family: Montserrat;
   border: 1px solid #393e41;
+  margin: 0.6rem;
   border-radius: 10px 0px 0px 10px;
   box-shadow: 2px 2px 5px #b3b3b3;
 }
@@ -130,6 +150,7 @@
   font-weight: 450;
   color: #0b3840;
   display: flex;
+  text-align: right;
 }
 
 .map-info-div > h4 {
@@ -137,4 +158,26 @@
   font-weight: 300;
   margin: 0px;
   margin-left: 1px;
+}
+.map-line {
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  border: 0.5px solid #65b0b2;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+.selected-map-info-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
+}
+.selected-map-info-div > h1 {
+  margin: 0px;
+  font-size: 1.25rem;
+  font-weight: 450;
+  color: #0b3840;
+  display: flex;
+  text-align: right;
 }
