@@ -19,11 +19,6 @@ function Map(props) {
   const [places, setPlaces] = useState([])
   const [allAirports, setAllAirports] = useState([])
   const [carriers, setCarriers] = useState([])
-  
-  const context = useContext(Context)
-  console.log(context.carriers)
-
-  console.log(context)
   const [loading, setLoading] = useState(true)
 
   //Map State
@@ -100,17 +95,11 @@ function Map(props) {
     }
   }
 
-  const flightCards = flights.map
-    (flight => (
+  const flightCards = flights.map(flight => (
       <div key={flight.QuoteId} className='miniMap-flight-card'>
         <span className='image-container'>
           <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
         </span>
-        <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
-        <h1><h6>From</h6> ${flight.MinPrice}</h1>
-      </span>
-    </div>
-  ))
         <span className='info-container'>
           <span>
             <h1>{flight.CityName}</h1>
@@ -118,9 +107,11 @@ function Map(props) {
           </span>
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
           <h1><h6>From</h6> ${flight.MinPrice}</h1>
-        </span>
-      </div>
-    ))
+      </span>
+    </div>
+  ))
+
+
 
 
   const features = flights.map((place) => {
