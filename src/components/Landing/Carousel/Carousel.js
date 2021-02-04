@@ -46,7 +46,7 @@ function CarouselComp(props) {
         )
     }).reverse().slice(0, 7)
 
-    const under200 = flights.filter(flight => flight.MinPrice >= 100 && flight.MinPrice <= 200).map((flight) => {
+    const under200 = flights.filter(flight => flight.MinPrice > 100 && flight.MinPrice <= 200).map((flight) => {
         return (
             <div key={flight.QuoteId} 
             className='flight-card' 
@@ -55,14 +55,14 @@ function CarouselComp(props) {
                 backgroundSize: 'cover'
             }}
             >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
-                    <img src={photos[Math.floor(Math.random() * photos.length)].url} alt='preview'/>
                 </div>
             </div>
         )
-    }).slice(0, 7)
+    }).reverse().slice(0, 7)
 
     const under400 = flights.filter(flight => flight.MinPrice > 200 && flight.MinPrice <= 400).map((flight) => {
         return (
@@ -73,10 +73,10 @@ function CarouselComp(props) {
                 backgroundSize: 'cover'
             }}
             >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
-                    <img src={photos[Math.floor(Math.random() * photos.length)].url} alt='preview'/>
                 </div>
             </div>
         )
@@ -91,17 +91,16 @@ function CarouselComp(props) {
                 backgroundSize: 'cover'
             }}
             >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
-                    <img src={photos[Math.floor(Math.random() * photos.length)].url} alt='preview'/>
                 </div>
             </div>
         )
     }).reverse().slice(0, 7)
 
     const under800 = flights.filter(flight => flight.MinPrice > 600 && flight.MinPrice <= 800).map((flight) => {
-
         return (
             <div key={flight.QuoteId} 
             className='flight-card' 
@@ -110,10 +109,10 @@ function CarouselComp(props) {
                 backgroundSize: 'cover'
             }}
             >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
-                    <img src={photos[Math.floor(Math.random() * photos.length)].url} alt='preview'/>
                 </div>
             </div>
         )
