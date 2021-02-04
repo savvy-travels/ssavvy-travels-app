@@ -113,7 +113,7 @@ input {
 
 .locs-container {
     display: flex;
-    height: 200px;
+    height: 300px;
     margin-bottom: 40px;
     justify-content: space-between;
 }

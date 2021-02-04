@@ -2,12 +2,17 @@ import axios from 'axios'
 import React, { useState, useEffect, } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import "./profile.css"
+import moment from 'moment'
+const photos = require('../../photos.json')
 
 
 const Profile = (props) => {
     const [locations, setLocations] = useState([])
     const [email, setEmail] = useState('')
     const [preferred, setPreferred] = useState('')
+    const [suggestedCards, setSuggestedCards] = useState([])
+    const {flights} = props
+    const suggested = flights.slice(0, 10)
 
     useEffect(() => {
         axios.get('/api/auth/user')
@@ -24,6 +29,29 @@ const Profile = (props) => {
         })
     }, [])
 
+    useEffect(()=>{
+        setSuggestedCards(suggested.map(flight => {
+          flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
+          return (
+          <div key={flight.QuoteId} className='miniMap-flight-card'>
+            <span className='image-container'>
+              <img className='flight-card-image' src={flight.photo} alt='preview'/>
+            </span>
+            <span className='info-container'>
+              <div>
+                <h1>{flight.CityName}</h1>
+                <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+                <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+                <h4>{flight.Name}</h4>
+              </div>
+                <h1><h6>From</h6> ${flight.MinPrice}</h1>
+              </span>
+            </div>
+           )
+          }
+        )
+      )},[flights])
+
     function updatePreferred(id, preferred) {
         axios.post('/api/updatePreferred')
         .then(axios.get('/api/getPreferred'))
@@ -32,7 +60,13 @@ const Profile = (props) => {
     
     const locationsMapped =  locations.map(location => {
         return (
-            <div className='locs-container'>
+            <div className='locs-container'
+            style={{
+                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
+                backgroundSize: '50%',
+                backgroundRepeat: 'no-repeat'
+                
+            }}>
                     <h1 className='locations'>{location.location}</h1>
                 <div className='information-container'>
                     <h2 className='airport'>{location.airport}</h2>
