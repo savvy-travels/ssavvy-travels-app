@@ -8,6 +8,7 @@ const photos = require('../../../photos.json')
 
 function MiniMap(props) {
   const context = useContext(Context)
+  
 const [suggestedCards, setSuggestedCards] = useState([])
   //Map State
   const { lat, long, flights } = props
