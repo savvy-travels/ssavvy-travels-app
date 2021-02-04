@@ -65,8 +65,8 @@ const Profile = (props) => {
                 </div>
                 <div className='locations-container'>
                     <div className='input-container'>
-                        <input placeholder='Search My Trips'/>
-                        <input className='price' placeholder='Filter by Price'/>
+                        <input className='search-trips-input' placeholder='Search My Trips'/>
+                        <input className='filter-price' placeholder='Filter by Price'/>
                     </div>
                         <div>
                             {locationsMapped}
