@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { useState, useEffect, } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import "./profile.css"
+import moment from 'moment'
+const photos = require('../../photos.json')
 
 
 const Profile = (props) => {
@@ -24,6 +26,7 @@ const Profile = (props) => {
         })
     }, [])
 
+
     function updatePreferred(id, preferred) {
         axios.post('/api/updatePreferred')
         .then(axios.get('/api/getPreferred'))
@@ -32,12 +35,18 @@ const Profile = (props) => {
     
     const locationsMapped =  locations.map(location => {
         return (
-            <div className='locs-container'>
+            <div className='locs-container'
+            style={{
+                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat'
+                
+            }}>
                     <h1 className='locations'>{location.location}</h1>
                 <div className='information-container'>
                     <h2 className='airport'>{location.airport}</h2>
                     <h2>{location.dates}</h2>              
-                    <h3>{location.created}</h3>
+                    <h3>{moment(location.created).fromNow()}</h3>
                 </div>
             </div>
         )
@@ -49,8 +58,11 @@ const Profile = (props) => {
             <div className='profile-container'>
                 <div className='sidebar-container'>
                 <div className='user-container'>
-                    <h1>{email}</h1>
-                    <h2>{preferred}</h2>
+                    <div className='pro-container'>
+                    <h1>Profile</h1>
+                    </div>
+                    <h2><h2 className='email'>Email:</h2>{email}</h2>
+                    <h2><h2 className='pref'>Preferred Airport:</h2>{preferred}</h2>
                 </div>
                 <div className='suggested-container'>
                     <Link to='/map'>
@@ -61,12 +73,11 @@ const Profile = (props) => {
                     </Link>
                     <div className='line'></div>
                     <h3>Suggested Trips</h3>
-                </div>
+                </div> 
                 </div>
                 <div className='locations-container'>
                     <div className='input-container'>
                         <input className='search-trips-input' placeholder='Search My Trips'/>
-                        <input className='filter-price' placeholder='Filter by Price'/>
                     </div>
                         <div>
                             {locationsMapped}
