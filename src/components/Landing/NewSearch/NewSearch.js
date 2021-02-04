@@ -181,10 +181,14 @@ function NewSearch(props) {
 
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
-                            <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} min={today} max={returnDate} type='date' placeholder='When?' />
+                            <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} min={today} max={returnDate}
+                               type='date'  
+                               placeholder='When?' />
                             <div className='between-arrow-left'></div>
                             <div className='between-arrow-right'></div>
-                            <input style={{ outline: 'none' }} onChange={(e) => setReturnDate(e.target.value)} min={departureDate} type='date' placeholder='When?' />
+                            <input style={{ outline: 'none' }} onChange={(e) => setReturnDate(e.target.value)} min={departureDate} 
+                              type='date' 
+                              placeholder='When?' />
                         </div>
                     </div>
                     :
