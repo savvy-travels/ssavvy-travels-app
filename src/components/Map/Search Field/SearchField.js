@@ -67,7 +67,7 @@ const SearchField = (props) => {
     const [budget, setBudget] = useState(props.budget)
     const [location, setLocation] = useState(props.location)
     const [departureDate, setDepartureDate] = useState(props.departureDate)
-    const [arrivalDate, setArrivalDate] = useState(props.arrivalDate)
+    const [arrivalDate, setArrivalDate] = useState(props.returnDate)
 
     //Airport Filter//
     const [input, setInput] = useState('')
@@ -162,7 +162,7 @@ function mapStateToProps(reduxState) {
         budget: reduxState.searchReducer.budget,
         location: reduxState.searchReducer.location,
         departureDate: reduxState.searchReducer.departureDate,
-        arrivalDate: reduxState.searchReducer.arrivalDate
+        returnDate: reduxState.searchReducer.returnDate
     }
 }
 

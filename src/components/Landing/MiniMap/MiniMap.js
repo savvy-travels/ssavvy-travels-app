@@ -7,13 +7,11 @@ import { Context } from '../../../context/context'
 const photos = require('../../../photos.json')
 
 function MiniMap(props) {
-  //Map State
-  // console.log(props.flights)
-  const { lat, long, flights } = props
-  const [selectedCity, setSelectedCity] = useState(null)
-
   const context = useContext(Context)
 
+  //Map State
+  const { lat, long, flights } = props
+  const [selectedCity, setSelectedCity] = useState(null)
   const [viewport, setViewport] = useState({
     latitude: context.lat,
     longitude: context.long,
@@ -22,8 +20,12 @@ function MiniMap(props) {
     zoom: 3,
   })
 
+  //Liked Trip//
+
+
 
   const suggested = flights.slice(0, 10)
+
   console.log(photos[Math.floor(Math.random() * photos.length)])
 
   const suggestedCards = suggested.map(flight => (
@@ -35,12 +37,19 @@ function MiniMap(props) {
         <span>
           <h1>{flight.CityName}</h1>
           <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+
         </span>
-        <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
-        <h1><h6>From</h6> ${flight.MinPrice}</h1>
-      </span>
-    </div>
-  ))
+        <span className='info-container'>
+          <span>
+            <h1>{flight.CityName}</h1>
+            <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+          </span>
+          <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+          <h1><h6>From</h6> ${flight.MinPrice}</h1>
+        </span>
+      </div>
+    )
+  })
   const markers = useMemo(() => flights.map(
     city => (
       <div>{city.lon ?
@@ -93,7 +102,9 @@ function MiniMap(props) {
 
           {selectedCity ? (
             <div className='popup'>
-              <img className='popup-img' src={photos[Math.floor(Math.random() * photos.length)].url}/>
+
+              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg' />
+
               <h2>City: {selectedCity.CityName}</h2>
               <h3>Price: ${selectedCity.MinPrice}</h3>
               <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'

@@ -18,6 +18,7 @@ const async = require("async")
 function Landing(props) {
   const context = useContext(Context)
 
+
   // Find Flights based off of your airport location
   const flights = context.quotes
     .map((quote) => {
@@ -41,6 +42,7 @@ function Landing(props) {
     })
 
   console.log(flights)
+
 
   return (
     <div className='landing'>
