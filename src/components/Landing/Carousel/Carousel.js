@@ -37,10 +37,11 @@ function CarouselComp(props) {
                 backgroundSize: 'cover'
             }}
             >
-
+                <div className='carrier-container'>
+                    <h2>{flight.Name}</h2>
+                </div>
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
-                    <h2>{flight.Name}</h2>
                     <h1>${flight.MinPrice}</h1>
                 </div>
             </div>
@@ -57,9 +58,11 @@ function CarouselComp(props) {
             }}
             >
 
+                <div className='carrier-container'>
+                    <h2>{flight.Name}</h2>
+                </div>
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
-                    <h2>{flight.Name}</h2>
                     <h1>${flight.MinPrice}</h1>
                 </div>
             </div>
@@ -76,9 +79,11 @@ function CarouselComp(props) {
             }}
             >
 
+                <div className='carrier-container'>
+                    <h2>{flight.Name}</h2>
+                </div>
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
-                    <h2>{flight.Name}</h2>
                     <h1>${flight.MinPrice}</h1>
                 </div>
             </div>
@@ -95,9 +100,11 @@ function CarouselComp(props) {
             }}
             >
 
+                <div className='carrier-container'>
+                    <h2>{flight.Name}</h2>
+                </div>
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
-                    <h2>{flight.Name}</h2>
                     <h1>${flight.MinPrice}</h1>
                 </div>
             </div>
@@ -113,10 +120,11 @@ function CarouselComp(props) {
                 backgroundSize: 'cover'
             }}
             >
-
+                <div className='carrier-container'>
+                    <h2>{flight.Name}</h2>
+                </div>
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
-                    <h2>{flight.Name}</h2>
                     <h1>${flight.MinPrice}</h1>
                 </div>
             </div>

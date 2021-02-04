@@ -140,7 +140,8 @@ const SearchField = (props) => {
                 <div className='round-oneWay'>
                     {round ? <p>round</p> : <p>one way</p>}
                     <div className='slide-bar'>
-                        <div onClick={() => setRound(!round)} className={round ? 'slider-ball-left' : 'slider-ball-right'}></div>
+                        <div onClick={() => setRound(!round)} 
+                        className={round ? 'slider-ball-left' : 'slider-ball-right'}></div>
                     </div>
                 </div>
                 <div className='round-oneWay'>
