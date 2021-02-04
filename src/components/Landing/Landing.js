@@ -21,7 +21,6 @@ function Landing(props) {
 
   const context = useContext(Context)
 
-  // console.log(context.allAirports)
 
   // Find Flights based off of your airport location 
   const flights = context.quotes.map((quote) => {
@@ -32,18 +31,9 @@ function Landing(props) {
     let airportId = context.allAirports.findIndex(airport => airport.code == flight.IataCode)
     return { ...flight, ...context.allAirports[airportId] }
   })
-  // console.log(flights)
 
-
+  console.log(flights)
   
-
-
-
-  
-
-  // const images = data.map(place => place.query.pages[0].thumbnail.source)
-  // console.log(images)
-
   
 
   return (
