@@ -27,11 +27,11 @@ const Profile = (props) => {
     }, [])
 
 
-    function updatePreferred(id, preferred) {
-        axios.post('/api/updatePreferred')
-        .then(axios.get('/api/getPreferred'))
-        .catch(err => console.log(err))
-    }
+    // function updatePreferred(id, preferred) {
+    //     axios.post('/api/updatePreferred')
+    //     .then(axios.get('/api/getPreferred'))
+    //     .catch(err => console.log(err))
+    // }
     
     const locationsMapped =  locations.map(location => {
         return (
@@ -46,7 +46,7 @@ const Profile = (props) => {
                 <div className='information-container'>
                     <h2 className='airport'>{location.airport}</h2>
                     <h2>{location.dates}</h2>              
-                    <h3>{moment(location.created).fromNow()}</h3>
+                    <h3>Saved: {moment(location.created).fromNow()}</h3>
                 </div>
             </div>
         )
@@ -54,7 +54,7 @@ const Profile = (props) => {
 
     return (
         <div className='background-container'>
-                <h1 className='profile'>My Profile</h1>
+                {/* <h1 className='profile'>My Trips</h1> */}
             <div className='profile-container'>
                 <div className='sidebar-container'>
                 <div className='user-container'>
@@ -66,7 +66,7 @@ const Profile = (props) => {
                 </div>
                 <div className='suggested-container'>
                     <Link to='/map'>
-                        <h3>View Map</h3>
+                        <h3 className='links-profile'>View Map</h3>
                     </Link>
                     <Link to='/'>
                         <h3 className='home'>Home</h3>
@@ -77,9 +77,10 @@ const Profile = (props) => {
                 </div>
                 <div className='locations-container'>
                     <div className='input-container'>
-                        <input className='search-trips-input' placeholder='Search My Trips'/>
+                        <h1>My Trips</h1>
+                        {/* <input className='search-trips-input' placeholder='Search My Trips'/> */}
                     </div>
-                        <div>
+                        <div className='locations-mapped'>
                             {locationsMapped}
                         </div>
                 </div>
