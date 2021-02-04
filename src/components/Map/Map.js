@@ -20,6 +20,8 @@ function Map(props) {
   const [places, setPlaces] = useState([])
   const [allAirports, setAllAirports] = useState([])
   const [carriers, setCarriers] = useState([])
+  const [passengers, setPassengers] = useState(1)
+  const [filterNonStop, setFilterNonStop] = useState(false)
  
 
   const [loading, setLoading] = useState(true)
@@ -85,7 +87,8 @@ function Map(props) {
   }).map((flight) => {
     let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
     return { ...flight, ...allAirports[airportId] }
-  }).filter(flight => flight.MinPrice < budget)
+  }).filter(flight => budget ? flight.MinPrice < budget : flight.MinPrice < Infinity)
+
 
   function goToCarrier(){
     switch(carriers.Name){
@@ -104,6 +107,7 @@ function Map(props) {
 
 
   const flightCards = flights.map(flight => {
+    const totalPrice = flight.MinPrice * passengers
     flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
     return (
       <div key={flight.QuoteId} className='miniMap-flight-card'>
@@ -116,8 +120,7 @@ function Map(props) {
           <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
           <h4>{flight.Name}</h4>
-        </div>
-          <h1><h6>From</h6> ${flight.MinPrice}</h1>
+          <h1><h6>From</h6>${totalPrice}</h1>
         </span>
       </div>
   )})
@@ -159,7 +162,7 @@ function Map(props) {
 
                     </div> */}
           <div className='results-search-container'>
-            <SearchField />
+            <SearchField passengers={passengers} setPassengers={setPassengers} setFilterNonStop={setFilterNonStop} />
             <div className='line'></div>
             <div className='results'>
               {loading ?
