@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, useMemo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../Redux/searchReducer'
-import ReactMapGL, { Marker } from 'react-map-gl'
+import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl'
 import './map.css'
 import SearchField from './Search Field/SearchField'
 import moment from 'moment'
@@ -42,6 +42,10 @@ function Map(props) {
       zoom: 3
     })
   }
+  const geolocateControlStyle = {
+    right: 10,
+    top: 10
+  };
 
   React.useEffect(() => {
     window.addEventListener('resize', useSetViewport)
@@ -205,6 +209,13 @@ function Map(props) {
             }}
           >
          {markers}
+         <GeolocateControl
+            style={geolocateControlStyle}
+            positionOptions={{ enableHighAccuracy: true }}
+            trackUserLocation={true}
+            fitBoundsOptions= {{linear: true, maxZoom: 3}}
+            auto
+          />
           </ReactMapGL>
         </div>
       </div>
