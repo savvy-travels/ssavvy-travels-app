@@ -204,3 +204,9 @@
     transform: translateY(-15px);
   }
 }
+
+@media (max-width: 1200px) {
+  .downArrow {
+    display: none;
+  }
+}

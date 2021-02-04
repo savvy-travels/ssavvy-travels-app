@@ -62,7 +62,7 @@ const customStyles = {
 
 const SearchField = (props) => {
     //Details Filter//
-    const [round, setRound] = useState(true)
+    const [nonstop, setNonstop] = useState(false)
     //Search Fields//
     const [budget, setBudget] = useState(props.budget)
     const [location, setLocation] = useState(props.location)
@@ -72,6 +72,7 @@ const SearchField = (props) => {
     //Airport Filter//
     const [input, setInput] = useState('')
     const [myAirportsFiltered, setMyAirportsFiltered] = useState([])
+    const [passengers, setPassengers] = useState(1)
 
     const context = useContext(Context)
 
@@ -136,19 +137,14 @@ const SearchField = (props) => {
             </div>
             <div className='flight-details'>
                 <div className='round-oneWay'>
-                    {round ? <p>round</p> : <p>one way</p>}
+                    <p className={nonstop ? 'nonstop' : 'non' }>Nonstop</p>
                     <div className='slide-bar'>
-                        <div onClick={() => setRound(!round)} 
-                        className={round ? 'slider-ball-left' : 'slider-ball-right'}></div>
+                        <div onClick={() => setNonstop(!nonstop)} className={nonstop ? 'slider-ball-left' : 'slider-ball-right'}></div>
                     </div>
                 </div>
                 <div className='round-oneWay'>
-                    <p>direct</p>
-                    <input type='checkbox' />
-                </div>
-                <div className='round-oneWay'>
                     <p>passengers</p>
-                    <input type='number' min='1' max='10' />
+                    <input onChange={(e)=>props.setPassengers(e.target.value)} value={props.passengers} type='number' min='1' max='10' />
                 </div>
             </div>
             <button onClick={() => searchUpdate()}>Search</button>
