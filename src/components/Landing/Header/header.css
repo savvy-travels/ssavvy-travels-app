@@ -13,7 +13,7 @@ header {
   left: 0%;
   right: 0%;
   padding: 0px 0.6rem;
-  background:linear-gradient(#191a1b, transparent);
+  background: linear-gradient(#191a1b, transparent);
   margin: 0%;
   height: 6rem;
   display: flex;
@@ -58,27 +58,26 @@ button {
   cursor: pointer;
 }
 
-
-.user-nav{
+.user-nav {
   display: flex;
   color: #fcfffd;
   align-items: center;
   margin-right: 1rem;
 }
-.user-nav>h1{
+.user-nav > h1 {
   margin: 0px;
   display: flex;
   align-items: center;
   color: #d6dbd9;
   font-weight: 300;
 }
-.user-nav:hover{
+.user-nav:hover {
   color: #fcfffd;
 }
-.down-triangle{
+.down-triangle {
   position: relative;
   margin: 0px;
-  margin-bottom:-15px ;
+  margin-bottom: -15px;
   margin-left: 5px;
   height: 0px;
   width: 0px;
@@ -87,17 +86,17 @@ button {
   border-bottom: 10px solid transparent;
   border-top: 15px solid #c1c3c2;
   z-index: 2000;
-  transition: all ease .25s;
+  transition: all ease 0.25s;
 }
-.down-triangle:hover{
+.down-triangle:hover {
   cursor: pointer;
-  border-top:15px solid #fcfffd;
+  border-top: 15px solid #fcfffd;
 }
 
-.up-triangle{
+.up-triangle {
   position: relative;
   margin: 0px;
-  margin-top:-10px ;
+  margin-top: -10px;
   margin-left: 5px;
   height: 0px;
   width: 0px;
@@ -106,12 +105,12 @@ button {
   border-bottom: 15px solid #fcfffd;
   border-top: 10px solid transparent;
   z-index: 4000;
-  transition: all ease .25s;
+  transition: all ease 0.25s;
 }
-.up-triangle:hover{
+.up-triangle:hover {
   cursor: pointer;
 }
-.pop-menu{
+.pop-menu {
   display: flex;
   flex-direction: column;
   justify-content: left;
@@ -120,22 +119,22 @@ button {
   overflow: hidden;
   position: absolute;
   top: 6rem;
-  right:.6rem;
+  right: 0.6rem;
   width: 10rem;
   background-color: #0b3840;
   border-radius: 5px;
 }
-.pop-menu-visible{
-  padding: .6rem;
+.pop-menu-visible {
+  padding: 0.6rem;
   display: flex;
   flex-direction: column;
   text-align: left;
   color: #fcfffd;
-  height:fit-content;
+  height: fit-content;
   overflow: hidden;
   position: absolute;
   top: 6rem;
-  right:.6rem;
+  right: 0.6rem;
   width: 10rem;
   background-color: #0b3840;
   border: 2px solid #0b3840;
@@ -143,35 +142,35 @@ button {
   z-index: 90000;
 }
 
-.pop-menu-visible>h3{
+.pop-menu-visible > h3 {
   position: relative;
   font-weight: 100;
   font-family: Montserrat;
   z-index: 5000;
 }
-.pop-menu-visible>h3:hover{
+.pop-menu-visible > h3:hover {
   cursor: pointer;
   color: #cae00d;
 }
 
-.nav-items{
-  padding: .6rem 0px;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
+.nav-items {
+  padding: 0.6rem 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-.list-item{
+.list-item {
   box-sizing: border-box;
   position: relative;
-  margin: 1rem .6rem 1rem .6rem;
-  margin-top: .5rem;
+  margin: 1rem 0.6rem 1rem 0.6rem;
+  margin-top: 0.5rem;
   font-size: 1.2rem;
   font-weight: 400;
   font-family: Montserrat;
   z-index: 40000;
 }
-.list-item:hover{
+.list-item:hover {
   box-sizing: border-box;
   color: #cae00d;
   border-bottom: 1px solid #cae00d;

@@ -8,7 +8,7 @@ const photos = require('../../../photos.json')
 
 function MiniMap(props) {
   const context = useContext(Context)
-
+const [suggestedCards, setSuggestedCards] = useState([])
   //Map State
   const { lat, long, flights } = props
   const [selectedCity, setSelectedCity] = useState(null)
@@ -26,12 +26,15 @@ function MiniMap(props) {
 
   const suggested = flights.slice(0, 10)
 
-  console.log(photos[Math.floor(Math.random() * photos.length)])
-
-  const suggestedCards = suggested.map(flight => (
+  // console.log(photos[Math.floor(Math.random() * photos.length)])
+  
+useEffect(()=>{
+  setSuggestedCards(suggested.map(flight => {
+    flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
+    return (
     <div key={flight.QuoteId} className='miniMap-flight-card'>
       <span className='image-container'>
-        <img className='flight-card-image' src={photos[Math.floor(Math.random() * photos.length)].url} alt='preview'/>
+        <img className='flight-card-image' src={flight.photo} alt='preview'/>
       </span>
       <span className='info-container'>
         <span>
@@ -41,11 +44,10 @@ function MiniMap(props) {
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
           <h4>{flight.Name}</h4>
           <h1><h6>From</h6> ${flight.MinPrice}</h1>
-          
-        </span> 
-    </div>
-    )
+     )
+    }
   )
+)},[flights])
 
   const markers = useMemo(() => flights.map(
     city => (
@@ -87,10 +89,10 @@ function MiniMap(props) {
     }
   }, [])
 
-  // const geolocateControlStyle = {
-  //   right: 10,
-  //   top: 10
-  // };
+  const geolocateControlStyle = {
+    right: 10,
+    top: 10
+  };
 
   return (
     <div className='mini-map-container'>
@@ -127,12 +129,13 @@ function MiniMap(props) {
           {/* Markers */}
           {markers}
 
-          {/* <GeolocateControl
+          <GeolocateControl
             style={geolocateControlStyle}
             positionOptions={{ enableHighAccuracy: true }}
             trackUserLocation={true}
+            fitBoundsOptions= {{linear: true, maxZoom: 3}}
             auto
-          /> */}
+          />
 
         </ReactMapGL>
       </div>
