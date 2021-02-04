@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState, useMemo } from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../Redux/searchReducer'
+import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl'
 import { ClipLoader } from 'react-spinners'
-import ReactMapGL, { Marker } from 'react-map-gl'
 import './map.css'
 import SearchField from './Search Field/SearchField'
 import moment from 'moment'
@@ -19,8 +19,12 @@ function Map(props) {
   const [places, setPlaces] = useState([])
   const [allAirports, setAllAirports] = useState([])
   const [carriers, setCarriers] = useState([])
-  const [loading, setLoading] = useState(true)
+  
+  const context = useContext(Context)
+  console.log(context.carriers)
 
+  console.log(context)
+  const [loading, setLoading] = useState(true)
 
   //Map State
   const [viewport, setViewport] = useState({
@@ -41,6 +45,10 @@ function Map(props) {
       zoom: 3
     })
   }
+  const geolocateControlStyle = {
+    right: 10,
+    top: 10
+  };
 
   React.useEffect(() => {
     window.addEventListener('resize', useSetViewport)
@@ -79,7 +87,18 @@ function Map(props) {
     return { ...flight, ...allAirports[airportId] }
   }).filter(flight => flight.MinPrice < budget)
 
-
+  function goToCarrier(){
+    switch(carriers.Name){
+      case 'Gulf Air':
+        window.location.href = 'https://www.gulfair.com/'
+        break;
+      case 'Frontier Airlines': 
+        window.location.href = 'https://www.flyfrontier.com/'
+        break;
+      default:
+        window.location.href = 'https://www.kayak.com/'
+    }
+  }
 
   const flightCards = flights.map
     (flight => (
@@ -87,6 +106,11 @@ function Map(props) {
         <span className='image-container'>
           <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
         </span>
+        <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+        <h1><h6>From</h6> ${flight.MinPrice}</h1>
+      </span>
+    </div>
+  ))
         <span className='info-container'>
           <span>
             <h1>{flight.CityName}</h1>
@@ -200,7 +224,14 @@ function Map(props) {
               setViewport(viewport)
             }}
           >
-            {markers}
+         {markers}
+         <GeolocateControl
+            style={geolocateControlStyle}
+            positionOptions={{ enableHighAccuracy: true }}
+            trackUserLocation={true}
+            fitBoundsOptions= {{linear: true, maxZoom: 3}}
+            auto
+          />
           </ReactMapGL>
         </div>
       </div>
