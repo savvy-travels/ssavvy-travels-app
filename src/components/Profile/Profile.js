@@ -77,7 +77,7 @@ const Profile = (props) => {
                 </div>
                 <div className='locations-container'>
                     <div className='input-container'>
-                        <input placeholder='Search My Trips'/>
+                        <input className='search-trips-input' placeholder='Search My Trips'/>
                     </div>
                         <div>
                             {locationsMapped}

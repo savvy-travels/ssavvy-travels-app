@@ -1,41 +1,55 @@
 $background-color: #65b0b2;
 
-
 .work-container {
-    display: flex;
-    font-size: 18px;
-    color: #0B3840;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: $background-color;
-    border-top: 1px solid #0B3840;
-    height: 20%;
-    padding: 2rem 0px;
+  display: flex;
+  font-size: 18px;
+  color: #0b3840;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: $background-color;
+  border-top: 1px solid #0b3840;
+  height: 20%;
+  padding: 2rem 0px;
 
-    
-    .mini-container {
-        width: 15%;
-        padding: 0;
+  .mini-container {
+    width: 15%;
+    padding: 0;
 
-        div {
-            font-family: montserrat;
-        }
+    div {
+      font-family: montserrat;
     }
-    h1 {
-        margin: 0px;
-        font-weight: 500;
-        font-family: playfair;
+  }
+  h1 {
+    margin: 0px;
+    font-weight: 500;
+    font-family: playfair;
+  }
+  .budget {
+    width: 100%;
+  }
+  img {
+    width: 50%;
+    filter: invert(86%) sepia(95%) saturate(3213%) hue-rotate(6deg)
+      brightness(92%) contrast(90%);
+  }
+  .arrow {
+    width: 3%;
+    filter: invert(87%) sepia(38%) saturate(98%) hue-rotate(74deg)
+      brightness(110%) contrast(104%);
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 1000px) {
+  .mini-container {
+    div {
+      display: none;
     }
-    .budget{
-        width: 100%;
-    }
-    img {
-        width: 50%;
-        filter: invert(86%) sepia(95%) saturate(3213%) hue-rotate(6deg) brightness(92%) contrast(90%);
-    }
-    .arrow {
-        width: 3%;
-        filter: invert(87%) sepia(38%) saturate(98%) hue-rotate(74deg) brightness(110%) contrast(104%);
-        transform: rotate(90deg);
-    }
+  }
+}
+
+@media (max-width: 900px) {
+  h1 {
+    display: none;
+  }
 }

@@ -92,7 +92,6 @@ function Signup(props) {
 
         const message = `<div>Welcome ${username}, we're happy to have you in our community! You now have access to my trips which allows you save and scan for trips you have saved. Please take a second to confirm your email by clicking the link below.</div>`
         axios.post('/api/auth/register', { email, username, password, preferred, message }).then(res => {
-            console.log('Hit this')
             setLoading(false)
             setError(false)
             props.loginUser(res.data)
@@ -108,7 +107,7 @@ function Signup(props) {
         let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
         return { ...airport, ...allAirports[airportId] }
     })
-    console.log(myAirports)
+ 
 
     useEffect(() => {
         myAirports.forEach(airport => {

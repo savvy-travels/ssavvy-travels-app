@@ -76,7 +76,7 @@ function NewSearch(props) {
         let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
         return { ...airport, ...allAirports[airportId] }
     })
-    // console.log(myAirports)
+
 
     useEffect(() => {
         myAirports.forEach(airport => {
@@ -89,13 +89,12 @@ function NewSearch(props) {
         })
     }, [])
 
-    // console.log(myAirportsFiltered)
 
 
 
     const myOptions = myAirportsFiltered.map(airport => { return { value: airport.iata, label: `${airport.name} ${airport.iata}-${airport.city}` } })
 
-    // console.log(myOptions)
+
 
     const today = moment().format().replace(/T.*$/, "")
 

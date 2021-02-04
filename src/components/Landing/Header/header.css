@@ -21,6 +21,7 @@ header {
   justify-content: space-between;
   z-index: 50000;
 }
+
 button {
   width: 8rem;
   font-family: Montserrat;
@@ -31,12 +32,24 @@ button {
   outline: none;
   border-radius: 5px;
 }
-.header-logo {
+.header-brand {
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
   margin: 0%;
   width: 70px;
   border-radius: 50%;
   z-index: 5000;
+}
+
+.header-logo{
+  height: 100%;
+}
+
+.header-name {
+  height: 200%;
+
 }
 
 .auth-button {

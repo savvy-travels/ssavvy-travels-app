@@ -10,7 +10,7 @@
 }
 .search-field {
   position: absolute;
-  top: 18vh;
+  top: 30vh;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -202,5 +202,11 @@
     -ms-transform: translateY(-15px);
     -webkit-transform: translateY(-15px);
     transform: translateY(-15px);
+  }
+}
+
+@media (max-width: 1200px) {
+  .downArrow {
+    display: none;
   }
 }

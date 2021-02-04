@@ -27,7 +27,7 @@ const [suggestedCards, setSuggestedCards] = useState([])
 
   const suggested = flights.slice(0, 10)
 
-  // console.log(photos[Math.floor(Math.random() * photos.length)])
+
   
 useEffect(()=>{
   setSuggestedCards(suggested.map(flight => {
@@ -37,8 +37,8 @@ useEffect(()=>{
       <span className='image-container'>
         <img className='flight-card-image' src={flight.photo} alt='preview'/>
       </span>
-      <span className='info-container'>
-        <div>
+      <span className='mini-info-container'>
+        <div className='mini-info-div'>
           <h1>{flight.CityName}</h1>
           <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
@@ -65,7 +65,6 @@ useEffect(()=>{
               onClick={e => {
                 e.preventDefault()
                 setSelectedCity(city)
-                console.log(selectedCity)
               }}
               className='marker-btn'>
               <p className='price'>${city.MinPrice}</p>
@@ -101,7 +100,6 @@ useEffect(()=>{
     <div className='mini-map-container'>
       <div className='mini-map-side-bar'>
         <div className='suggestion-title'>
-
           {selectedCity ? (
             <div className='popup'>
 
