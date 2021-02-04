@@ -68,6 +68,9 @@ function Map(props) {
       setPlaces(res.data.Places)
       setCarriers(res.data.Carriers)
       setLoading(false)
+    }).catch(err=>{
+      setLoading(false)
+      console.log(err)
     })
     axios.get('/api/airports').then(res => setAllAirports(res.data))
 
@@ -97,6 +100,7 @@ function Map(props) {
         window.location.href = 'https://www.kayak.com/'
     }
   }
+
 
   console.log(flights)
 
