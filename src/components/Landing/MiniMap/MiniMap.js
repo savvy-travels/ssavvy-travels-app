@@ -100,7 +100,6 @@ useEffect(()=>{
     <div className='mini-map-container'>
       <div className='mini-map-side-bar'>
         <div className='suggestion-title'>
-
           {selectedCity ? (
             <div className='popup'>
 
