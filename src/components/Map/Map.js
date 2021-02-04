@@ -45,6 +45,7 @@ function Map(props) {
       zoom: 3
     })
   }
+
   const geolocateControlStyle = {
     right: 10,
     top: 10
@@ -78,9 +79,7 @@ function Map(props) {
 
   }, [budget, location, departureDate, returnDate])
 
-  console.log(quotes)
-
-
+  
   const flights = quotes.map((quote) => {
     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
     let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0])
@@ -105,21 +104,20 @@ function Map(props) {
   }
 
 
-  console.log(flights)
+
 
   const flightCards = flights.map(flight => {
     const totalPrice = flight.MinPrice * passengers
     flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
     return (
-    <div key={flight.QuoteId} className='miniMap-flight-card'>
+      <div key={flight.QuoteId} className='miniMap-flight-card'>
       <span className='image-container'>
         <img className='flight-card-image' src={flight.photo} alt='preview'/>
       </span>
       <span className='info-container'>
-        <span>
+        <div>
           <h1>{flight.CityName}</h1>
           <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
-        </span>
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
           <h4>{flight.Name}</h4>
           <h1><h6>From</h6>${totalPrice}</h1>
@@ -128,24 +126,6 @@ function Map(props) {
   )})
 
 
-  const features = flights.map((place) => {
-    return {
-      type: "Feature",
-      properties: {
-        name: place.city,
-        price: place.MinPrice,
-      },
-      geometry: {
-        type: "Point",
-        coordinates: [place.lon, place.lat]
-      }
-    }
-  })
-
-  const destinations = {
-    type: "FeatureCollection",
-    features: features,
-  }
 
   const markers = useMemo(() => flights.map(
     city => (

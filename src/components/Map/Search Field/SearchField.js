@@ -67,11 +67,10 @@ const SearchField = (props) => {
     const [budget, setBudget] = useState(props.budget)
     const [location, setLocation] = useState(props.location)
     const [departureDate, setDepartureDate] = useState(props.departureDate)
-    const [arrivalDate, setArrivalDate] = useState(props.returnDate)
+    const [returnDate, setReturnDate] = useState(props.returnDate)
 
     //Airport Filter//
     const [input, setInput] = useState('')
-    const [preferred, setPreferred] = useState('')
     const [myAirportsFiltered, setMyAirportsFiltered] = useState([])
     const [passengers, setPassengers] = useState(1)
 
@@ -83,14 +82,15 @@ const SearchField = (props) => {
     }
 
     function searchUpdate() {
-        props.newSearch({ budget, location, departureDate, arrivalDate })
+        props.newSearch({ budget, location, departureDate, returnDate })
+        console.log(budget, location, departureDate, returnDate)
     }
 
     const myAirports = context.airports.map(airport => {
         let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
         return { ...airport, ...allAirports[airportId] }
     })
-    console.log(myAirports)
+    // console.log(myAirports)
 
     useEffect(() => {
         myAirports.forEach(airport => {
@@ -114,7 +114,7 @@ const SearchField = (props) => {
                 type='text'
                 placeholder='Whats Your Budget?' />
             <AsyncSelect
-                onChange={(e) => !e ? null : setPreferred(e.value)}
+                onChange={(e) => !e ? null : setLocation(e.value)}
                 className='airport-select'
                 loadOptions={loadOptions}
                 isClearable={true}
@@ -131,8 +131,8 @@ const SearchField = (props) => {
                     type='Date'
                     placeholder='When' />
                 <div className='vert-line'></div>
-                <input onChange={(e) => setArrivalDate(e.target.value)}
-                    value={arrivalDate}
+                <input onChange={(e) => setReturnDate(e.target.value)}
+                    value={returnDate}
                     id='arrive-date-input'
                     type='Date'
                     placeholder='When' />
