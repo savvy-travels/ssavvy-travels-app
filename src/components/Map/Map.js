@@ -17,8 +17,9 @@ function Map(props) {
   const [places, setPlaces] = useState([])
   const [allAirports, setAllAirports] = useState([])
   const [carriers, setCarriers] = useState([])
-
+  
   const context = useContext(Context)
+  console.log(context.carriers)
 
   console.log(context)
 
@@ -142,6 +143,19 @@ function Map(props) {
     )
   ), [flights]);
 
+  function goToCarrier(){
+    switch(selectedCity.carriers.Name){
+      case 'Gulf Air':
+        window.location.href = 'https://www.gulfair.com/'
+        break;
+      case 'Frontier Airlines': 
+        window.location.href = 'https://www.flyfrontier.com/'
+        break;
+      default:
+        window.location.href = 'https://www.kayak.com/'
+    }
+  }
+
 
 
   return (
@@ -165,6 +179,7 @@ function Map(props) {
             </span>
             <span className='info-container'>
               <span>
+              <button onClick={goToCarrier}>Go to flight</button>
                 <h1>{selectedCity.CityName}</h1>
                 <h4>{moment(selectedCity.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
               </span>
