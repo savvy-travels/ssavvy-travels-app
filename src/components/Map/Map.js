@@ -67,6 +67,9 @@ function Map(props) {
       setPlaces(res.data.Places)
       setCarriers(res.data.Carriers)
       setLoading(false)
+    }).catch(err=>{
+      setLoading(false)
+      console.log(err)
     })
     axios.get('/api/airports').then(res => setAllAirports(res.data))
 
@@ -104,8 +107,6 @@ function Map(props) {
         </span>
         <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
         <h1><h6>From</h6> ${flight.MinPrice}</h1>      
-    
-  
       <span className='info-container'>
         <span>
           <h1>{flight.CityName}</h1>
