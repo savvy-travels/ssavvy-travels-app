@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
+import moment from 'moment'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { newSearch } from '../../../Redux/searchReducer'
@@ -49,13 +50,12 @@ const customStyles = {
 
 function NewSearch(props) {
     const context = useContext(Context)
-    console.log(context.airport)
 
     const [input, setInput] = useState('')
     const [budget, setBudget] = useState('')
     const [departureDate, setDepartureDate] = useState(undefined)
-    const [arrivalDate, setArrivalDate] = useState(undefined)
-    const [location, setLocation] = useState(`${context.airport.iata}-${context.airport.name}`)
+    const [returnDate, setReturnDate] = useState(undefined)
+    const [location, setLocation] = useState(context.airport.iata)
     const [next, setNext] = useState(false)
     const [myAirportsFiltered, setMyAirportsFiltered] = useState([])
 
@@ -67,7 +67,7 @@ function NewSearch(props) {
         setInput(inputValue)
     }
     function search() {
-        props.newSearch({ budget, location, departureDate, arrivalDate })
+        props.newSearch({ budget, location, departureDate, returnDate })
         props.history.push('/map')
     }
 
@@ -97,7 +97,7 @@ function NewSearch(props) {
 
     // console.log(myOptions)
 
-
+    const today = moment().format().replace(/T.*$/, "")
 
     return (
         <span className='search-field'>
@@ -118,14 +118,15 @@ function NewSearch(props) {
                             placeholder={'Select departure airport...'}
                             styles={customStyles}
                             theme={theme => ({ ...theme, colors: { ...theme.colors, primary25: '#cae00d', primary: '#cae00d', color: '#000' } })}
+                            defaultValue={location}
                             defaultOptions={input ? input : myOptions} />
 
                         <div className='vert-line-a'></div>
                         <div className='depart-arrive-container'>
-                            <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} type='date' placeholder='When?' />
+                            <input style={{ outline: 'none' }} onChange={(e) => setDepartureDate(e.target.value)} min={today} max={returnDate} type='date' placeholder='When?' />
                             <div className='between-arrow-left'></div>
                             <div className='between-arrow-right'></div>
-                            <input style={{ outline: 'none' }} onChange={(e) => setArrivalDate(e.target.value)} type='date' placeholder='When?' />
+                            <input style={{ outline: 'none' }} onChange={(e) => setReturnDate(e.target.value)} min={departureDate} type='date' placeholder='When?' />
                         </div>
                     </div>
                     :
