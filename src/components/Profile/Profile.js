@@ -10,9 +10,6 @@ const Profile = (props) => {
     const [locations, setLocations] = useState([])
     const [email, setEmail] = useState('')
     const [preferred, setPreferred] = useState('')
-    const [suggestedCards, setSuggestedCards] = useState([])
-    const {flights} = props
-    const suggested = flights.slice(0, 10)
 
     useEffect(() => {
         axios.get('/api/auth/user')
@@ -29,28 +26,6 @@ const Profile = (props) => {
         })
     }, [])
 
-    useEffect(()=>{
-        setSuggestedCards(suggested.map(flight => {
-          flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
-          return (
-          <div key={flight.QuoteId} className='miniMap-flight-card'>
-            <span className='image-container'>
-              <img className='flight-card-image' src={flight.photo} alt='preview'/>
-            </span>
-            <span className='info-container'>
-              <div>
-                <h1>{flight.CityName}</h1>
-                <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
-                <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
-                <h4>{flight.Name}</h4>
-              </div>
-                <h1><h6>From</h6> ${flight.MinPrice}</h1>
-              </span>
-            </div>
-           )
-          }
-        )
-      )},[flights])
 
     function updatePreferred(id, preferred) {
         axios.post('/api/updatePreferred')
@@ -63,7 +38,7 @@ const Profile = (props) => {
             <div className='locs-container'
             style={{
                 backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
-                backgroundSize: '50%',
+                backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
                 
             }}>
@@ -71,7 +46,7 @@ const Profile = (props) => {
                 <div className='information-container'>
                     <h2 className='airport'>{location.airport}</h2>
                     <h2>{location.dates}</h2>              
-                    <h3>{location.created}</h3>
+                    <h3>{moment(location.created).fromNow()}</h3>
                 </div>
             </div>
         )
@@ -83,8 +58,11 @@ const Profile = (props) => {
             <div className='profile-container'>
                 <div className='sidebar-container'>
                 <div className='user-container'>
-                    <h1>{email}</h1>
-                    <h2>{preferred}</h2>
+                    <div className='pro-container'>
+                    <h1>Profile</h1>
+                    </div>
+                    <h2><h2 className='email'>Email:</h2>{email}</h2>
+                    <h2><h2 className='pref'>Preferred Airport:</h2>{preferred}</h2>
                 </div>
                 <div className='suggested-container'>
                     <Link to='/map'>
@@ -100,7 +78,6 @@ const Profile = (props) => {
                 <div className='locations-container'>
                     <div className='input-container'>
                         <input placeholder='Search My Trips'/>
-                        <input className='price' placeholder='Filter by Price'/>
                     </div>
                         <div>
                             {locationsMapped}
