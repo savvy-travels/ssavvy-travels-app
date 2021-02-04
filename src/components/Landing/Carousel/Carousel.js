@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Carousel, { Dots } from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
 import './carousel.css'
+import { CanvasOverlay } from 'react-map-gl'
+const photos = require('../../../photos.json')
 
 
 function CarouselComp(props) {
@@ -28,7 +30,14 @@ function CarouselComp(props) {
 
     const under100 = flights.filter(flight => flight.MinPrice <= 100).map((flight) => {
         return (
-            <div key={flight.QuoteId} className='flight-card'>
+            <div key={flight.QuoteId} 
+            className='flight-card' 
+            style={{
+                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
+                backgroundSize: 'cover'
+            }}
+            >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
@@ -37,20 +46,34 @@ function CarouselComp(props) {
         )
     }).reverse().slice(0, 7)
 
-    const under200 = flights.filter(flight => flight.MinPrice >= 100 && flight.MinPrice <= 200).map((flight) => {
+    const under200 = flights.filter(flight => flight.MinPrice > 100 && flight.MinPrice <= 200).map((flight) => {
         return (
-            <div key={flight.QuoteId} className='flight-card'>
+            <div key={flight.QuoteId} 
+            className='flight-card' 
+            style={{
+                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
+                backgroundSize: 'cover'
+            }}
+            >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
                 </div>
             </div>
         )
-    }).slice(0, 7)
+    }).reverse().slice(0, 7)
 
     const under400 = flights.filter(flight => flight.MinPrice > 200 && flight.MinPrice <= 400).map((flight) => {
         return (
-            <div key={flight.QuoteId} className='flight-card'>
+            <div key={flight.QuoteId} 
+            className='flight-card' 
+            style={{
+                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
+                backgroundSize: 'cover'
+            }}
+            >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
@@ -61,7 +84,14 @@ function CarouselComp(props) {
 
     const under600 = flights.filter(flight => flight.MinPrice > 400 && flight.MinPrice <= 600).map((flight) => {
         return (
-            <div key={flight.QuoteId} className='flight-card'>
+            <div key={flight.QuoteId} 
+            className='flight-card' 
+            style={{
+                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
+                backgroundSize: 'cover'
+            }}
+            >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>
@@ -71,9 +101,15 @@ function CarouselComp(props) {
     }).reverse().slice(0, 7)
 
     const under800 = flights.filter(flight => flight.MinPrice > 600 && flight.MinPrice <= 800).map((flight) => {
-
         return (
-            <div key={flight.QuoteId} className='flight-card'>
+            <div key={flight.QuoteId} 
+            className='flight-card' 
+            style={{
+                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
+                backgroundSize: 'cover'
+            }}
+            >
+
                 <div className='name-price-container'>
                     <h2>{flight.CityName}</h2>
                     <h1>${flight.MinPrice}</h1>

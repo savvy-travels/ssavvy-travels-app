@@ -4,15 +4,14 @@ import ReactMapGL, { Marker, GeolocateControl } from 'react-map-gl'
 import moment from 'moment'
 import './minimap.css'
 import { Context } from '../../../context/context'
+const photos = require('../../../photos.json')
 
 function MiniMap(props) {
+  const context = useContext(Context)
+const [suggestedCards, setSuggestedCards] = useState([])
   //Map State
-  // console.log(props.flights)
   const { lat, long, flights } = props
   const [selectedCity, setSelectedCity] = useState(null)
-
-  const context = useContext(Context)
-
   const [viewport, setViewport] = useState({
     latitude: context.lat,
     longitude: context.long,
@@ -21,25 +20,45 @@ function MiniMap(props) {
     zoom: 3,
   })
 
+  //Liked Trip//
+
+
 
   const suggested = flights.slice(0, 10)
-  console.log(suggested)
 
-  const suggestedCards = suggested.map(flight => (
+  // console.log(photos[Math.floor(Math.random() * photos.length)])
+  
+useEffect(()=>{
+  setSuggestedCards(suggested.map(flight => {
+    flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
+    return (
     <div key={flight.QuoteId} className='miniMap-flight-card'>
       <span className='image-container'>
-        <img className='flight-card-image' src='https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg' />
+        <img className='flight-card-image' src={flight.photo} alt='preview'/>
       </span>
       <span className='info-container'>
         <span>
           <h1>{flight.CityName}</h1>
           <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+
         </span>
-        <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
-        <h1><h6>From</h6> ${flight.MinPrice}</h1>
-      </span>
-    </div>
-  ))
+        <span className='info-container'>
+          <span>
+            <h1>{flight.CityName}</h1>
+            <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
+          </span>
+          <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+          <h1><h6>From</h6> ${flight.MinPrice}</h1>
+        </span>
+        </span>
+      </div>
+    )
+  }
+  )
+  )
+},[flights])
+
+
   const markers = useMemo(() => flights.map(
     city => (
       <div>{city.lon ?
@@ -57,7 +76,7 @@ function MiniMap(props) {
               }}
               className='marker-btn'>
               <p className='price'>${city.MinPrice}</p>
-              <img className='marker-icon' src="https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png" />
+              <img className='marker-icon' src='https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png'/>
             </button>
           </div>
         </Marker> : null}
@@ -92,7 +111,9 @@ function MiniMap(props) {
 
           {selectedCity ? (
             <div className='popup'>
-              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg'/>
+
+              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg' />
+
               <h2>City: {selectedCity.CityName}</h2>
               <h3>Price: ${selectedCity.MinPrice}</h3>
               <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
