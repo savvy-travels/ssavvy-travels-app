@@ -107,7 +107,7 @@ function NewSearch(props) {
           </h1>
         </div>
 
-        <div className='input-field'>
+        {/* <div className='input-field'>
           <input
             onChange={(e) => setBudget(e.target.value)}
             onFocus={() => setNext(true)}
@@ -161,7 +161,7 @@ function NewSearch(props) {
         </div>
         <button onClick={() => search()} className='search-button'>
           Let's Go!
-        </button>
+        </button> */}
              <div className='input-field'>
                 <input onChange={(e) => setBudget(e.target.value)} onFocus={() => setNext(true)} className='budget-input' type='text' placeholder='Whats Your Budget?' />
                 {next ?

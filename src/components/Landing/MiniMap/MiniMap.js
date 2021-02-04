@@ -8,7 +8,7 @@ const photos = require('../../../photos.json')
 
 function MiniMap(props) {
   const context = useContext(Context)
-
+const [suggestedCards, setSuggestedCards] = useState([])
   //Map State
   const { lat, long, flights } = props
   const [selectedCity, setSelectedCity] = useState(null)
@@ -26,12 +26,15 @@ function MiniMap(props) {
 
   const suggested = flights.slice(0, 10)
 
-  console.log(photos[Math.floor(Math.random() * photos.length)])
-
-  const suggestedCards = suggested.map(flight => (
+  // console.log(photos[Math.floor(Math.random() * photos.length)])
+  
+useEffect(()=>{
+  setSuggestedCards(suggested.map(flight => {
+    flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
+    return (
     <div key={flight.QuoteId} className='miniMap-flight-card'>
       <span className='image-container'>
-        <img className='flight-card-image' src={photos[Math.floor(Math.random() * photos.length)].url} alt='preview'/>
+        <img className='flight-card-image' src={flight.photo} alt='preview'/>
       </span>
       <span className='info-container'>
         <span>
@@ -47,9 +50,14 @@ function MiniMap(props) {
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
           <h1><h6>From</h6> ${flight.MinPrice}</h1>
         </span>
+        </span>
       </div>
     )
-  })
+  }
+  )
+  )
+},[flights])
+
   const markers = useMemo(() => flights.map(
     city => (
       <div>{city.lon ?
