@@ -99,10 +99,10 @@ useEffect(()=>{
     }
   }, [])
 
-  // const geolocateControlStyle = {
-  //   right: 10,
-  //   top: 10
-  // };
+  const geolocateControlStyle = {
+    right: 10,
+    top: 10
+  };
 
   return (
     <div className='mini-map-container'>
@@ -139,12 +139,13 @@ useEffect(()=>{
           {/* Markers */}
           {markers}
 
-          {/* <GeolocateControl
+          <GeolocateControl
             style={geolocateControlStyle}
             positionOptions={{ enableHighAccuracy: true }}
             trackUserLocation={true}
+            fitBoundsOptions= {{linear: true, maxZoom: 3}}
             auto
-          /> */}
+          />
 
         </ReactMapGL>
       </div>
