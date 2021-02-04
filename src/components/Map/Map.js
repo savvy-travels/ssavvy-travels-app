@@ -110,7 +110,7 @@ function Map(props) {
     const totalPrice = flight.MinPrice * passengers
     flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
     return (
-    <div key={flight.QuoteId} className='miniMap-flight-card'>
+      <div key={flight.QuoteId} className='miniMap-flight-card'>
       <span className='image-container'>
         <img className='flight-card-image' src={flight.photo} alt='preview'/>
       </span>
@@ -120,10 +120,10 @@ function Map(props) {
           <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
           <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
           <h4>{flight.Name}</h4>
-          <h1><h6>From</h6>${totalPrice}</h1>
         </div>
-      </span>
-    </div>
+          <h1><h6>From</h6> ${flight.MinPrice}</h1>
+        </span>
+      </div>
   )})
 
 
