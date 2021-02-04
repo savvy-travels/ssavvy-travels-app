@@ -9,11 +9,6 @@ import axios from 'axios'
 function Header(props) {
     const [open, setOpen] = useState(false)
 
-    useEffect(() => {
-        //axios.get(user)//
-        setOpen(false)
-    }, [])
-
     function userLogout() {
         axios.post('/api/auth/logout').then(() => {
             setOpen(false)
@@ -39,7 +34,7 @@ function Header(props) {
             </header>
             <div className={open ? 'pop-menu-visible' : 'pop-menu'} >
                 <div className='nav-items'>
-                    {/* <NavLink onClick={() => setOpen(false)} className='list-item' style={{ textDecoration: 'none', color: '#fcfffd' }} to='/profile'>View Profile</NavLink> */}
+                    <NavLink onClick={() => setOpen(false)} className='list-item' style={{ textDecoration: 'none', color: '#fcfffd' }} to='/profile'>View Profile</NavLink>
                     <NavLink onClick={() => setOpen(false)} className='list-item' style={{ textDecoration: 'none', color: '#fcfffd' }} to={'/map'}>View Map</NavLink>
                 </div>
                 <h3 onClick={() => userLogout()}>Logout</h3>
