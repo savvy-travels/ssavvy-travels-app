@@ -150,7 +150,7 @@ function NewSearch(props) {
                 <div className='between-arrow-right'></div>
                 <input
                   style={{ outline: "none" }}
-                  onChange={(e) => setArrivalDate(e.target.value)}
+                  // onChange={(e) => setArrivalDate(e.target.value)}
                   type='date'
                   placeholder='When?'
                 />
@@ -159,6 +159,7 @@ function NewSearch(props) {
 
           ) : null}
         </div>
+
         <button onClick={() => search()} className='search-button'>
           Let's Go!
         </button> */}

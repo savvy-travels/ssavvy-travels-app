@@ -11,35 +11,25 @@ import MiniMap from "./MiniMap/MiniMap"
 import Work from "./Works/Works"
 import CarouselComp from "./Carousel/Carousel"
 import { ClipLoader } from "react-spinners"
-import axios from "axios"
 require("dotenv").config()
-const async = require("async")
+
 
 function Landing(props) {
   const context = useContext(Context)
+
+  console.log(context.carriers)
 
 
   // Find Flights based off of your airport location
   const flights = context.quotes
     .map((quote) => {
-      let destinationId = context.places.findIndex(
-        (place) => place.PlaceId === quote.OutboundLeg.DestinationId
-      )
-      let carrierId = context.carriers.findIndex(
-        (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds
-      )
-      return {
-        ...quote,
-        ...context.places[destinationId],
-        ...context.carriers[carrierId],
-      }
+      let destinationId = context.places.findIndex((place) => place.PlaceId === quote.OutboundLeg.DestinationId)
+      let carrierId = context.carriers.findIndex((carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0])
+      return {...quote, ...context.places[destinationId], ...context.carriers[carrierId]}
     })
     .map((flight) => {
-      let airportId = context.allAirports.findIndex(
-        (airport) => airport.code == flight.IataCode
-      )
-      return { ...flight, ...context.allAirports[airportId] }
-    })
+      let airportId = context.allAirports.findIndex((airport) => airport.code == flight.IataCode)
+      return { ...flight, ...context.allAirports[airportId] }})
 
   console.log(flights)
 
