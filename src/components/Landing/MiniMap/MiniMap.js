@@ -58,7 +58,7 @@ function MiniMap(props) {
               }}
               className='marker-btn'>
               <p className='price'>${city.MinPrice}</p>
-              <img className='marker-icon' src={photos[Math.floor(Math.random() * photos.length)].url} />
+              <img className='marker-icon' src='https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png'/>
             </button>
           </div>
         </Marker> : null}
