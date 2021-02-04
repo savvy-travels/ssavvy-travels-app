@@ -79,7 +79,18 @@ function Map(props) {
     return { ...flight, ...allAirports[airportId] }
   }).filter(flight => flight.MinPrice < budget)
 
-
+  function goToCarrier(){
+    switch(carriers.Name){
+      case 'Gulf Air':
+        window.location.href = 'https://www.gulfair.com/'
+        break;
+      case 'Frontier Airlines': 
+        window.location.href = 'https://www.flyfrontier.com/'
+        break;
+      default:
+        window.location.href = 'https://www.kayak.com/'
+    }
+  }
 
   const flightCards = flights.map
   (flight => (
@@ -94,6 +105,7 @@ function Map(props) {
         </span>
         <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
         <h1><h6>From</h6> ${flight.MinPrice}</h1>
+        <button onClick={goToCarrier}>Go to flight</button>
       </span>
     </div>
   ))
@@ -143,19 +155,6 @@ function Map(props) {
     )
   ), [flights]);
 
-  function goToCarrier(){
-    switch(selectedCity.carriers.Name){
-      case 'Gulf Air':
-        window.location.href = 'https://www.gulfair.com/'
-        break;
-      case 'Frontier Airlines': 
-        window.location.href = 'https://www.flyfrontier.com/'
-        break;
-      default:
-        window.location.href = 'https://www.kayak.com/'
-    }
-  }
-
 
 
   return (
@@ -179,7 +178,6 @@ function Map(props) {
             </span>
             <span className='info-container'>
               <span>
-              <button onClick={goToCarrier}>Go to flight</button>
                 <h1>{selectedCity.CityName}</h1>
                 <h4>{moment(selectedCity.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
               </span>
