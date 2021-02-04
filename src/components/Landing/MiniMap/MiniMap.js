@@ -58,6 +58,7 @@ useEffect(()=>{
   )
 },[flights])
 
+
   const markers = useMemo(() => flights.map(
     city => (
       <div>{city.lon ?
