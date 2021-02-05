@@ -106,7 +106,7 @@ button.marker-btn img:hover {
   padding: 0.6rem 0px;
 }
 .miniMap-flight-card {
-  overflow: hidden;
+  overflow-y: hidden;
   display: flex;
   justify-content: space-between;
   font-family: Montserrat;
