@@ -74,78 +74,106 @@ export function LatProvider(props) {
 
 
 
-    // runs getCities function if the location is defined
-    // useEffect(() => {
-    //     if (location.length > 0) {
-    //         getCities(location)
-    //     }
-    // }, [location]);
-
-    // //gets airports if cities is defined
-    // useEffect(() => {
-    //     if (cities.length > 0) {
-    //         getAirports(cities[0])
-    //     }
-    // }, [cities])
-
-    // useEffect(() => {
-    //     if (airport.length > 0) {
-    //         getFlights(airports)
-    //         axios.get('/api/airports').then(res => setAllAirports(res.data))
-    //     }
-    // }, [airport])
-
-
-    // const getCities = () => {
-    //     axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${location}/nearbyCities?minPopulation=100000&limit=5&offset=0&radius=100&sort=-population`,
-    //         {
-    //             headers: {
-    //                 "x-rapidapi-key": `${geoDbKey}`,
-    //             },
-    //         }).then(res => {
-    // setCities((res.data.data).filter((place) => place.type === 'CITY').map((city) => city.city))
-    //             getAirports(cities[0])
-    //         })
-    //     //sets the value of cities to be only the city name, filters out results of non-cities
-    // };
-
-    //gets airports from an api call that searches nearest the cities defined in getCities
-    // const getAirports = (city) => {
-    //     axios.get(`https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5`,
-    //         {
-    //             headers: {
-    //                 'x-rapidapi-key': '293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7',
-    //                 'x-rapidapi-host': 'aerodatabox.p.rapidapi.com'
-    //             }
-    //         }).then(res => {
-    //             setAirports(res.data.items)
-    //             setAirport(res.data.items.map(airport => airport.iata))
-    //         })
-    // }
-
-    // const getFlights = () => {
-    //     axios.get(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport[0]}-iata/anywhere/anytime/`, {
-    //         headers: {
-    //             'x-rapidapi-key': `${skyscannerKey}`
-    //         }
-    //     }).then((res) => {
-    //         setQuotes(res.data.Quotes)
-    //         setPlaces(res.data.Places)
-    //         setCarriers(res.data.Carriers)
-    //     })
-    // }
-
-    // const flights = quotes.map((quote) => {
-    //     let destinationId = places.findIndex(place => place.PlaceId === quote.OutboundLeg.DestinationId)
-    //     let carrierId = carriers.findIndex(carrier => carrier.CarrierId === quote.OutboundLeg.CarrierIds)
-    //     return { ...quote, ...places[destinationId], ...carriers[carrierId] }
-    // }).map((flight) => {
-    //     let airportId = allAirports.findIndex(airport => airport.code == flight.IataCode)
-    //     return { ...flight, ...allAirports[airportId] }
-    // })
-
-
+    const goToCarrier = (carrier) => {
+        switch(carrier) {
+          case 'Gulf Air':
+            window.open ('https://www.gulfair.com/', "_blank")
+          break;
+          case 'Oman Air':
+            window.open ('https://www.omanair.com/cn/en', "_blank")
+          break;
+          case 'Qatar Airways':
+            window.open ('https://www.qatarairways.com/en-us/homepage.html', "_blank")
+          break;
+          case 'Sun Country Airlines':
+            window.open ('https://suncountry.com/', "_blank")
+          break;
+          case 'Qantas':
+            window.open ('https://www.qantas.com/us/en.html', "_blank")
+          break;
+          case 'Volaris':
+            window.open ('https://www.volaris.com/', "_blank")
+          break;
+          case 'French Bee':
+            window.open ('https://www.frenchbee.com/', "_blank")
+          break;
+          case 'GOL Linhas Aéreas':
+            window.open ('https://www.voegol.com.br/en', "_blank")
+          break;
+          case 'Spirit Airlines':
+            window.open ('https://www.spirit.com/', "_blank")
+          break;
+          case 'Alaska Airlines':
+            window.open ('https://www.alaskaair.com/', "_blank")
+          break;
+          case 'Lufthansa':
+            window.open ('https://www.lufthansa.com/us/en/homepage', "_blank")
+          break;
+          case 'Avianca':
+            window.open ('https://www.avianca.com/us/en/', "_blank")
+          break;
+          case 'Emirates':
+            window.open ('https://www.emirates.com/us/english/', "_blank")
+          break;
+          case 'Aeromexico':
+            window.open ('https://aeromexico.com/en-us', "_blank")
+          break;
+          case 'SAS':
+            window.open ('https://www.flysas.com/us-en/', "_blank")
+          break;
+          case 'Iberia':
+            window.open ('https://www.iberia.com/us/', "_blank")
+          break;
+          case 'Brussels Airlines':
+            window.open ('https://www.brusselsairlines.com/', "_blank")
+          break;
+          case 'British Airways':
+            window.open ('https://www.britishairways.com/travel/home/public/en_us', "_blank")
+          break;
+          case 'Frontier Airlines':
+            window.open ('https://www.flyfrontier.com/', "_blank")
+          break;
+          case 'United':
+            window.open ('https://www.united.com/en/us', "_blank")
+          break;
+          case 'jetBlue':
+            window.open ('https://www.jetblue.com/', "_blank")
+          break;
+          case 'Turkish Airlines':
+            window.open ('https://www.turkishairlines.com/', "_blank")
+          break;
+          case 'Air Canada':
+            window.open ('https://www.aircanada.com/us/en/aco/home.html', "_blank")
+          break;
+          case 'Japan Airlines':
+            window.open ('https://www.jal.co.jp/ar/en/', "_blank")
+          break;
+          case 'China Air':
+            window.open ('https://www.china-airlines.com/us/en', "_blank")
+          break;
+          case 'Finnair':
+            window.open ('https://www.finnair.com/', "_blank")
+          break;
+          case 'Korean Air':
+            window.open ('https://www.koreanair.com/us/en', "_blank")
+          break;
+          case 'Air France':
+            window.open ('https://www.airfrance.com/indexCom_en.html', "_blank")
+          break; 
+          case 'Ethiopian Airlines':
+            window.open ('https://www.ethiopianairlines.com/us', "_blank")
+          break; 
+          case 'Copa':
+            window.open ('https://www.copaair.com/en/web/us', "_blank")
+          break; 
+          case 'Iceland Air':
+            window.open ('https://www.icelandair.com/', "_blank")
+          break; 
+          default:
+           window.location.href = '/'
+        }
+      }
     return (
-        <Context.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports, airport, cities, loading }}>{props.children}</Context.Provider>
+        <Context.Provider value={{ ...latLong, location, quotes, places, carriers, airports, allAirports, airport, cities, loading, goToCarrier }}>{props.children}</Context.Provider>
     )
 }
