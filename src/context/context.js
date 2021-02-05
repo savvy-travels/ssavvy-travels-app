@@ -168,7 +168,9 @@ export function LatProvider(props) {
           break; 
           case 'Iceland Air':
             window.open ('https://www.icelandair.com/', "_blank")
-          break; 
+          break;
+          case 'Viva Aerobus':
+            window.open('https://www.vivaaerobus.com/en')
           default:
            window.location.href = '/'
         }

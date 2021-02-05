@@ -88,17 +88,26 @@ function Map(props) {
     axios.get("/api/airports").then((res) => setAllAirports(res.data));
   }, [budget, location, departureDate, returnDate]);
 
-  let flights = quotes
-    .map((quote) => {let destinationId = places.findIndex((place) => place.PlaceId === quote.OutboundLeg.DestinationId);
-      let carrierId = carriers.findIndex((carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]);
-      return { ...quote, ...places[destinationId], ...carriers[carrierId] }})
+  const flights = context.quotes
+    .map((quote) => {
+      let destinationId = context.places.findIndex(
+        (place) => place.PlaceId === quote.OutboundLeg.DestinationId
+      );
+      let carrierId = context.carriers.findIndex(
+        (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]
+      );
+      return {
+        ...quote,
+        ...context.places[destinationId],
+        ...context.carriers[carrierId],
+      };
+    })
     .map((flight) => {
-      let airportId = allAirports.findIndex(
-        (airport) => airport.code == flight.IataCode);
-      return { ...flight, ...allAirports[airportId] };
-    }).filter((flight) =>
-      budget ? flight.MinPrice < budget : flight.MinPrice < Infinity
-    );
+      let airportId = context.allAirports.findIndex(
+        (airport) => airport.code == flight.IataCode
+      );
+      return { ...flight, ...context.allAirports[airportId] };
+    });
 
   const directFlights = flights.filter((flight) => flight.Direct);
 
@@ -195,6 +204,8 @@ function Map(props) {
       )),
     [flights]
   );
+
+  console.log(selectedCity)
 
   return (
     <div className="map-view">

@@ -98,19 +98,18 @@ useEffect(()=>{
   };
 
 
-  
+  console.log(selectedCity)
 
   return (
     <div className='mini-map-container'>
       <div className='mini-map-side-bar'>
         <div className='suggestion-title'>
           {selectedCity ? (
-            <di>
+            <div>
             <div className='sticky-marker'>
               <div
                 key={selectedCity.QuoteId}
-                className="map-flight-card-selected"
-              >
+                className="map-flight-card-selected">
                 <span className="map-image-container">
                   <img
                     className="map-flight-card-image"
@@ -136,7 +135,7 @@ useEffect(()=>{
               </div>
             </div>
             <div className="mini-map-line"></div>
-          </di>
+          </div>
           ) : null}
           <h1 className='suggested-header'>Suggested Trips</h1>
           {<div>{suggestedCards}</div>}
