@@ -13,10 +13,7 @@ const Profile = (props) => {
     const [locations, setLocations] = useState([])
     const [email, setEmail] = useState('')
     const [preferred, setPreferred] = useState('')
-    // const [suggestedCards, setSuggestedCards] = useState([])
 
-
-    
     useEffect(() => {
         axios.get('/api/auth/user')
         .then((res) => {
@@ -42,7 +39,7 @@ const Profile = (props) => {
       let airportId = context.allAirports.findIndex((airport) => airport.code == flight.IataCode)
       return { ...flight, ...context.allAirports[airportId] }})
     
-      const suggested = flights.slice(0, 10)
+    const suggested = flights.slice(0, 10)
     
     const suggestedCards = suggested.map(flight => {
         flight['photo'] = photos[Math.floor(Math.random() * photos.length)].url
@@ -92,7 +89,6 @@ const Profile = (props) => {
 
     return (
         <div className='background-container'>
-                {/* <h1 className='profile'>My Trips</h1> */}
             <div className='profile-container'>
                 <div className='sidebar-container'>
                 <div className='user-container'>
