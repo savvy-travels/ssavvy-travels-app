@@ -82,6 +82,7 @@ function Signup(props) {
         setEmptyError(false)
         if (email === '' || username === '' || password === '' || confirmPass === '') {
             setEmptyError(true)
+            
             return setErrorMessage('Missing required fields')
         }
         if (password !== confirmPass) {
@@ -96,6 +97,7 @@ function Signup(props) {
             setError(false)
             props.loginUser(res.data)
             props.history.push('/')
+            console.log(error)
         }).catch(err => {
             setLoading(false)
             setErrorMessage(err.response.data)
@@ -104,7 +106,7 @@ function Signup(props) {
 
     ///Airport Filter functions////
     const myAirports = context.airports.map(airport => {
-        let airportId = allAirports.findIndex(ap => ap.code == airport.iata)
+        let airportId = allAirports.findIndex(ap => ap.code.toLocaleLowerCase === airport.iata.toLowerCase)
         return { ...airport, ...allAirports[airportId] }
     })
  
@@ -118,7 +120,7 @@ function Signup(props) {
             }
             )
         })
-    }, [])
+    }, )
 
     const myOptions = myAirportsFiltered.map(airport => { return { value: airport.iata, label: `${airport.name} ${airport.iata}-${airport.city}` } })
     //////////

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../Redux/userReducer";
@@ -28,6 +28,7 @@ function Header2(props) {
           <img
             className="header-name"
             src="https://colab-image-assets.s3-us-west-1.amazonaws.com/Logo-text.png"
+            alt='logo-name'
           />
         </Link>
         {props.isLoggedIn ? (

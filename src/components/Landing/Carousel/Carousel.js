@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import Carousel, { Dots } from '@brainhubeu/react-carousel'
 import '@brainhubeu/react-carousel/lib/style.css'
 import './carousel.css'
-import { CanvasOverlay } from 'react-map-gl'
 const photos = require('../../../photos.json')
 
 
 function CarouselComp(props) {
-    const [component, setComponent] = useState(1)
+    // const [component, setComponent] = useState(1)
     const [value, setValue] = useState(0)
 
 

@@ -34,7 +34,7 @@ function Landing(props) {
     })
     .map((flight) => {
       let airportId = context.allAirports.findIndex(
-        (airport) => airport.code == flight.IataCode
+        (airport) => airport.code.toLowerCase === flight.IataCode.toLowerCase
       );
       return { ...flight, ...context.allAirports[airportId] };
     });

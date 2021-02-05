@@ -9,7 +9,7 @@ function Login(props) {
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState(false)
+    // const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
 

@@ -27,6 +27,7 @@ function Header(props) {
           <img
             className="header-name"
             src="https://colab-image-assets.s3-us-west-1.amazonaws.com/Logo-text.png"
+            alt='logo name'
           />
         </Link>
         {props.isLoggedIn ? (
