@@ -22,6 +22,7 @@
   color: #fcfffd;
   letter-spacing: 3px;
   font-weight: 100;
+  overflow: hidden;
 }
 .input-field {
   padding: 1rem;
