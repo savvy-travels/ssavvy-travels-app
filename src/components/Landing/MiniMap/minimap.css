@@ -37,7 +37,7 @@
   width: 40px;
 }
 
-.marker ::hover {
+.marker:hover {
   cursor: pointer;
 }
 
@@ -158,37 +158,37 @@ button.marker-btn img:hover {
 /* Marker Colors ----------------------------------------- */
 .hun-price {
   background: white;
-  width: fit-content;
+  width: 3rem;
   border: 2px solid #fa5e58;
 }
 .two-price {
   background: white;
-  width: fit-content;
+  width: 3rem;
   border: 2px solid #cae00d;
 }
 .four-price {
   background: white;
-  width: fit-content;
+  width: 3rem;
   border: 2px solid #99a810;
 }
 .six-price {
   background: white;
-  width: fit-content;
+  width: 3rem;
   border: 2px solid #7a8326;
 }
 .eight-price {
   background: white;
-  width: fit-content;
+  width: 3rem;
   border: 2px solid #5cf6d0;
 }
 .thou-price {
   background: white;
-  width: fit-content;
+  width: 3rem;
   border: 2px solid #785cf6;
 }
 .high-price {
   background: white;
-  width: fit-content;
+  width: 3rem;
   border: 2px solid #f6005e;
 }
 

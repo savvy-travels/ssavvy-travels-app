@@ -9,6 +9,7 @@ import SearchField from "./Search Field/SearchField";
 import moment from "moment";
 import axios from "axios";
 import { Context } from "../../context/context";
+import Header2 from "../Landing/Header/Header2";
 const photos = require("../../photos.json");
 
 function Map(props) {
@@ -210,6 +211,7 @@ function Map(props) {
 
   return (
     <div className="map-view">
+      <Header2 />
       <div className="lower-map-view">
         <div className="controllers-container">
           {/* <div className='filter-container'>

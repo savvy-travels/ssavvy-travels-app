@@ -2,13 +2,14 @@
   background-color: #fdfffc;
   width: 100vw;
   height: 100vh;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .lower-map-view {
   position: absolute;
   top: 9.8vh;
   height: 85vh;
-  width: 97vw;
+  width: 97.8vw;
   display: flex;
   margin: 20px;
 }
@@ -18,22 +19,23 @@
   background: url("https://origaudiopromo.com/wp-content/uploads/2019/07/space-background-website.jpeg");
   background-repeat: no-repeat;
   background-size: fill;
-  border-top: 1px solid #0b3840;
-  border-bottom: 1px solid #0b3840;
-  border-right: 1px solid #0b3840;
+  border: 1px solid #0b3840;
+  border-left: none;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .controllers-container {
   width: 30%;
   height: inherit;
   display: flex;
-  border-left: 1px solid #0b3840;
-  border-top: 1px solid #0b3840;
-  border-bottom: 1px solid #0b3840;
+  border: 1px solid #0b3840;
+  border-right: none;
+  border-radius: 10px 0px 0px 10px;
   /* box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 4px 2px 5px 0px rgba(0, 0, 0, 0.75); */
   z-index: 1;
+  border: 3px black inset;
 }
 
 .results-search-container {
@@ -45,6 +47,7 @@
   flex-direction: column;
   align-items: center;
   padding: 10px;
+  border-radius: 10px 0px 0px 10px;
 }
 
 .line {
