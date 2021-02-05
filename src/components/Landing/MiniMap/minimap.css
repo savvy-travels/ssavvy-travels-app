@@ -113,8 +113,7 @@ button.marker-btn img:hover {
   height: 10rem;
   text-align: left;
   display: flex;
-  /* flex-direction: column; */
-  align-items: flex-end;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 .mini-info-div {
@@ -130,6 +129,7 @@ button.marker-btn img:hover {
   font-weight: 450;
   color: #0b3840;
   display: flex;
+  justify-content: space-between;
 }
 
 .mini-info-div > h4 {
@@ -170,12 +170,12 @@ button.marker-btn img:hover {
 .four-price {
   background: white;
   width: 3rem;
-  border: 2px solid #99a810;
+  border: 2px solid #fcab15;
 }
 .six-price {
   background: white;
   width: 3rem;
-  border: 2px solid #7a8326;
+  border: 2px solid #63f140;
 }
 .eight-price {
   background: white;
@@ -185,7 +185,7 @@ button.marker-btn img:hover {
 .thou-price {
   background: white;
   width: 3rem;
-  border: 2px solid #785cf6;
+  border: 2px solid #5b38f8;
 }
 .high-price {
   background: white;
@@ -194,7 +194,7 @@ button.marker-btn img:hover {
 }
 
 .book-button {
-  font-size: 1rem;
+  font-size: 0.7rem;
   cursor: pointer;
   /* margin-top: 1rem; */
   /* margin-left: auto; */
@@ -203,9 +203,15 @@ button.marker-btn img:hover {
   /* width: 75%; */
   /* border: 3px solid #0b3840; */
   background-color: #cae00d;
-  border-radius: 10px;
+  border-radius: 5px;
+  width: 6rem;
+  height: fit-content;
 }
-
+.mini-price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .mini-price > h1 {
   margin-left: 0px;
   text-align: right;
@@ -213,12 +219,16 @@ button.marker-btn img:hover {
   color: #0b3840;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 }
 
-.mini-price > h6 {
+.mini-price > h1 > h6 {
   margin-right: 0px;
   font-weight: 300;
   color: #0b3840;
   margin-right: 3px;
+}
+.price {
+  background: white;
+  width: 3rem;
+  border: 2px solid #f6005e;
 }

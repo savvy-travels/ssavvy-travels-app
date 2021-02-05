@@ -4,12 +4,12 @@
   padding: 0;
 }
 .background-container {
-    display: flex;
-    flex-direction: column;
-    z-index: -1;
-    justify-content: center;
-    align-items: center;
-    background-image: linear-gradient(#65b0b2, #fdfffc );
+  display: flex;
+  flex-direction: column;
+  z-index: -1;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(#65b0b2, #fdfffc);
 }
 .profile-container {
   display: flex;
@@ -41,20 +41,20 @@
 }
 
 .user-container {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 5px;
-    z-index: 1;
-    background-color: #fcfffd;
-    height: 225px;
-    justify-content: space-evenly;
-    width: 345px;
-    font-size: smaller;
-    -webkit-box-shadow: 1px 5px 12px 0px #000000; 
-    box-shadow: 1px 5px 12px 0px #000000;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  border-radius: 5px;
+  z-index: 1;
+  background-color: #fcfffd;
+  height: 225px;
+  justify-content: space-evenly;
+  width: 345px;
+  font-size: smaller;
+  -webkit-box-shadow: 1px 5px 12px 0px #000000;
+  box-shadow: 1px 5px 12px 0px #000000;
+  text-align: left;
 }
 
 .suggested-container {
@@ -75,7 +75,7 @@
 }
 
 .suggested-container > h3 {
-    color: black;
+  color: black;
 }
 
 .suggested-container::-webkit-scrollbar {
@@ -83,25 +83,25 @@
 }
 
 .profile-flight-card {
-    display: flex;
-    justify-content: space-between;
-    font-family: Montserrat;
-    margin: 0.6rem;
-    border: 1px solid #393e41;
-    border-radius: 10px 0px 0px 10px;
-    box-shadow: 2px 2px 5px #b3b3b3;
+  display: flex;
+  justify-content: space-between;
+  font-family: Montserrat;
+  margin: 0.6rem;
+  border: 1px solid #393e41;
+  border-radius: 10px 0px 0px 10px;
+  box-shadow: 2px 2px 5px #b3b3b3;
 }
 
 .profile-image-container {
-    /* width: 50%; */
-    height: 10rem;
+  /* width: 50%; */
+  height: 10rem;
 }
 
 .profile-card-image {
-    margin: 0px;
-    max-width: 100%;
-    height: inherit;
-    border-radius: 5px 0px 0px 5px;
+  margin: 0px;
+  max-width: 100%;
+  height: inherit;
+  border-radius: 5px 0px 0px 5px;
 }
 
 .locations-container {
@@ -121,60 +121,58 @@
 }
 
 .input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    width: 1014px;
-    height: 62px;
-    background-color: #0b3840;
-    z-index: 2;
-    text-shadow: 0 0 10px #000;
-    color: #fcfffd;
-    margin-bottom: 100px;
-    border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 1014px;
+  height: 62px;
+  background-color: #0b3840;
+  z-index: 2;
+  text-shadow: 0 0 10px #000;
+  color: #fcfffd;
+  margin-bottom: 100px;
+  border-radius: 2px;
 }
 
 .locations-mapped {
-    margin-top: 6%;
+  margin-top: 6%;
 }
 
-
 .locs-container {
-    display: flex;
-    height: 300px;
-    border-bottom: 3px solid #0b3840;
-    justify-content: space-between;
-    padding: 1rem;
+  display: flex;
+  height: 300px;
+  border-bottom: 3px solid #0b3840;
+  justify-content: space-between;
+  padding: 1rem;
 }
 
 .locations {
-    display: flex;
-    height: 40px;
-    text-shadow: 0 0 10px #000;
-    color: #fcfffd;
+  display: flex;
+  height: 40px;
+  text-shadow: 0 0 10px #000;
+  color: #fcfffd;
 }
 
 .information-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    text-shadow: 0 0 10px #000;
-    color: #fcfffd;
-    padding: 1rem;
-    margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-shadow: 0 0 10px #000;
+  color: #fcfffd;
+  padding: 1rem;
+  margin-top: 50px;
 }
 
 .information-container > h3 {
-   text-shadow: 0 0 10px #000;
-   color: #fcfffd;
+  text-shadow: 0 0 10px #000;
+  color: #fcfffd;
   display: flex;
   height: 200px;
   margin-bottom: 40px;
   justify-content: space-between;
 }
-
 
 .airport {
   display: flex;
@@ -196,54 +194,54 @@
 
 .home {
   margin-bottom: 10px;
-  color: black
+  color: black;
 }
 .links-profile {
-    color: black;
+  color: black;
 }
 
-a:link{
-    text-decoration: none;
+a:link {
+  text-decoration: none;
 }
 
 .email {
-    display: flex;
-    color: #79a8aa;
-    font-size: smaller;
-    text-decoration: underline;
-    margin-left: 20px;
+  display: flex;
+  color: #79a8aa;
+  font-size: smaller;
+  text-decoration: underline;
+  margin-left: 20px;
 }
 
 .pref {
-    display: flex;
-    color: #79a8aa;
-    font-size: smaller;
-    text-decoration: underline;
-    margin-left: 20px;
+  display: flex;
+  color: #79a8aa;
+  font-size: smaller;
+  text-decoration: underline;
+  margin-left: 20px;
 }
 
-.user-container > h2{
-    display: flex;
-    margin-right: 6px;
+.user-container > h2 {
+  display: flex;
+  margin-right: 6px;
 }
 
 .user-container > h2 > h2 {
-    display: flex;
-    margin-right: 6px;
+  display: flex;
+  margin-right: 6px;
 }
 
 .pro-container {
-    display: flex;
-    position: relative;
-    background-color: #0b3840;
-    height: 30%;
-    top: -28px;
-    border-radius: 2px;
-    justify-content: center;
-    align-items: center;
-    color: #fcfffd;
+  display: flex;
+  position: relative;
+  background-color: #0b3840;
+  height: 30%;
+  top: -28px;
+  border-radius: 2px;
+  justify-content: center;
+  align-items: center;
+  color: #fcfffd;
 }
 
-.profile-from{
+.profile-from {
   text-align: right;
 }
