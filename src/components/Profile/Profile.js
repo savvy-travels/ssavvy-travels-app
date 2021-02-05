@@ -55,10 +55,14 @@ const Profile = (props) => {
             <div className='mini-info-div'>
               <h1>{flight.CityName}</h1>
               <h4>{moment(flight.OutboundLeg.DepartureDate).format('MMM Do YYYY')}</h4>
-              <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4>
+              {/* <h4>{`${flight.Direct ? 'Nonstop' : 'Multiple Stops'} - ${flight.name}`}</h4> */}
               <h4>{flight.Name}</h4>
+              <button onClick={()=> context.goToCarrier(flight.Name)} className='book-button'>Book Flight</button>
             </div>
-              <h1><h6>From</h6> ${flight.MinPrice}</h1>
+            <div className='mini-price'>
+              <h6 className='profile-from'>From</h6>
+              <h1> ${flight.MinPrice}</h1>
+            </div>
             </span>
           </div>
          )

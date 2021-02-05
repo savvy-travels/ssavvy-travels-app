@@ -94,13 +94,13 @@
 }
 
 .profile-image-container {
-    width: 50%;
+    /* width: 50%; */
     height: 10rem;
 }
 
 .profile-card-image {
     margin: 0px;
-    width: 100%;
+    max-width: 100%;
     height: inherit;
     border-radius: 5px 0px 0px 5px;
 }
@@ -249,4 +249,8 @@ a:link{
     justify-content: center;
     align-items: center;
     color: #fcfffd;
+}
+
+.profile-from{
+  text-align: right;
 }
