@@ -122,43 +122,45 @@ function MiniMap(props) {
     top: 10,
   };
 
+
+  console.log(selectedCity)
+
   return (
     <div className="mini-map-container">
       <div className="mini-map-side-bar">
         <div className="suggestion-title">
           {selectedCity ? (
-            <di>
-              <div className="sticky-marker">
-                <div
-                  key={selectedCity.QuoteId}
-                  className="map-flight-card-selected"
-                >
-                  <span className="map-image-container">
-                    <img
-                      className="map-flight-card-image"
-                      src="https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg"
-                    />
-                  </span>
-                  <span className="map-info-container">
-                    <div className="selected-map-info-div">
-                      <h1>{selectedCity.CityName}</h1>
-                      <h4>
-                        {moment(selectedCity.OutboundLeg.DepartureDate).format(
-                          "MMM Do YYYY"
-                        )}
-                      </h4>
-                      <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
-                        selectedCity.name
-                      }`}</h4>
-                    </div>
-                    <h1>
-                      <h6>From</h6> ${selectedCity.MinPrice}
-                    </h1>
-                  </span>
-                </div>
+            <div>
+            <div className='sticky-marker'>
+              <div
+                key={selectedCity.QuoteId}
+                className="map-flight-card-selected">
+                <span className="map-image-container">
+                  <img
+                    className="map-flight-card-image"
+                    src="https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg"
+                  />
+                </span>
+                <span className="map-info-container">
+                  <div className="selected-map-info-div">
+                    <h1>{selectedCity.CityName}</h1>
+                    <h4>
+                      {moment(
+                        selectedCity.OutboundLeg.DepartureDate
+                      ).format("MMM Do YYYY")}
+                    </h4>
+                    <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
+                      selectedCity.name
+                    }`}</h4>
+                  </div>
+                  <h1>
+                    <h6>From</h6> ${selectedCity.MinPrice}
+                  </h1>
+                </span>
               </div>
-              <div className="mini-map-line"></div>
-            </di>
+            </div>
+            <div className="mini-map-line"></div>
+          </div>
           ) : null}
           <h1 className="suggested-header">Suggested Trips</h1>
           {<div>{suggestedCards}</div>}
