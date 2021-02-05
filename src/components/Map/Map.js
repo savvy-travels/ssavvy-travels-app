@@ -248,6 +248,7 @@ function Map(props) {
                           <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
                             selectedCity.name
                           }`}</h4>
+                          <h4>{selectedCity.Name}</h4>
                         </div>
                         <h1>
                           <h6>From</h6> ${selectedCity.MinPrice}
