@@ -1,7 +1,7 @@
 .landing {
   position: relative;
   margin: 0%;
-  height:fit-content;
+  height: fit-content;
   background-color: #fdfffc;
 }
 .video-container {
@@ -26,7 +26,6 @@
   border-top: 30px solid #65b0b2;
 }
 
-
 .mini-map-div {
   width: 100vw;
   display: flex;
@@ -35,17 +34,26 @@
   margin-bottom: 5vh;
 }
 
-
-
-.landing-line{
+.landing-line {
   margin: 0px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5vh;
   margin-bottom: 5vh;
   width: 95vw;
-  border: .25px solid #0b384052;
+  border: 0.25px solid #0b384052;
 }
 
-
-
+.landing-welcome-message {
+  position: absolute;
+  top: 20rem;
+  left: 0rem;
+  right: 0rem;
+}
+.landing-welcome-message > h1 {
+  color: #fcfffd;
+  font-family: montserrat;
+  font-size: 6rem;
+  font-weight: 300;
+  text-shadow: 0px 6px 10px black;
+}

@@ -62,8 +62,12 @@ function Landing(props) {
           <Route exact path="/signup" component={Signup} />
         </Switch>
       ) : (
-        <div className="search-field">
+        <div className="landing-welcome-message">
           <h1>Welcome to Savvy Travels</h1>
+          <img
+            src="https://colab-image-assets.s3-us-west-1.amazonaws.com/Savvy-Travels-logo.png"
+            alt="logo"
+          />
         </div>
       )}
 

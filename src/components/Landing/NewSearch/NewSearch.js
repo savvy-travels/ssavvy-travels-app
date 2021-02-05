@@ -106,63 +106,6 @@ function NewSearch(props) {
           You tell us the budget.<br></br>We'll tell you where.
         </h1>
       </div>
-
-      {/* <div className='input-field'>
-          <input
-            onChange={(e) => setBudget(e.target.value)}
-            onFocus={() => setNext(true)}
-            className='budget-input'
-            type='text'
-            placeholder='Whats Your Budget?'
-          />
-          {next ? (
-            <div className='where-when-inputs'>
-              <AsyncSelect
-                onChange={(e) => (!e ? null : setLocation(e.value))}
-                className='airport-select'
-                loadOptions={loadOptions}
-                isClearable={true}
-                onInputChange={handleInputChange}
-                placeholder={"Select departure airport..."}
-                styles={customStyles}
-                theme={(theme) => ({
-                  ...theme,
-                  colors: {
-                    ...theme.colors,
-                    primary25: "#cae00d",
-                    primary: "#cae00d",
-                    color: "#000",
-                  },
-                })}
-                defaultValue={myOptions[0]}
-                defaultOptions={input ? input : myOptions}
-              />
-
-              <div className='vert-line-a'></div>
-              <div className='depart-arrive-container'>
-                <input
-                  style={{ outline: "none" }}
-                  onChange={(e) => setDepartureDate(e.target.value)}
-                  type='date'
-                  placeholder='When?'
-                />
-                <div className='between-arrow-left'></div>
-                <div className='between-arrow-right'></div>
-                <input
-                  style={{ outline: "none" }}
-                  // onChange={(e) => setArrivalDate(e.target.value)}
-                  type='date'
-                  placeholder='When?'
-                />
-              </div>
-            </div>
-
-          ) : null}
-        </div>
-
-        <button onClick={() => search()} className='search-button'>
-          Let's Go!
-        </button> */}
       <div className="input-field">
         <input
           onChange={(e) => setBudget(e.target.value)}
