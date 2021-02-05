@@ -128,6 +128,7 @@ useEffect(()=>{
                     <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
                       selectedCity.name
                     }`}</h4>
+                    <button onClick={()=> context.goToCarrier(selectedCity.Name)} className='book-button'>Book Flight</button>
                   </div>
                   <h1>
                     <h6>From</h6> ${selectedCity.MinPrice}

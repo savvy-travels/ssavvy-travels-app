@@ -83,6 +83,7 @@ button.marker-btn img:hover {
   background-color: #fdfffc;
   margin: 0px;
   padding: 0.6rem 0px;
+  z-index: 50000;
 }
 .miniMap-flight-card {
   overflow-y: hidden;
