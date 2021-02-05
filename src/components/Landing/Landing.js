@@ -31,6 +31,8 @@ function Landing(props) {
       let airportId = context.allAirports.findIndex((airport) => airport.code == flight.IataCode)
       return { ...flight, ...context.allAirports[airportId] }})
 
+      console.log(context.carriers)
+
   
 
 

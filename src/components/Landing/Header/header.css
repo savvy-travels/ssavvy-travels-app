@@ -1,4 +1,4 @@
-.nav-container{
+.nav-container {
   width: 60vw;
   margin-left: auto;
   margin-right: auto;
@@ -20,6 +20,7 @@ header {
   align-items: center;
   justify-content: space-between;
   z-index: 50000;
+  overflow: hidden;
 }
 
 button {
@@ -43,13 +44,12 @@ button {
   z-index: 5000;
 }
 
-.header-logo{
+.header-logo {
   height: 100%;
 }
 
 .header-name {
   height: 200%;
-
 }
 
 .auth-button {
