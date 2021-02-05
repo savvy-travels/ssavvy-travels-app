@@ -190,3 +190,18 @@ button.marker-btn img:hover {
   width: 3rem;
   border: 2px solid #f6005e;
 }
+.mini-map-line {
+  position: sticky;
+  top: 40rem;
+  width: 90%;
+  border: 0.5px solid #65b0b2;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.sticky-marker {
+  position: sticky;
+  top: 0;
+  z-index: 500000;
+  background-color: white;
+}
