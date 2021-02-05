@@ -32,29 +32,14 @@
   width: 100%;
   height: 100%;
 }
-.suggestion-title {
-  /* border-bottom: 1px solid #0b3840; */
-}
 
 .marker {
   width: 40px;
-  /* transform: translate(-50%, -50%); */
-  /* padding: 0;
-  margin: 0; */
 }
 
 .marker ::hover {
   cursor: pointer;
 }
-
-/* .marker-container {
-  transform: translate(-50%, -100%);
-  width: 100%;
-} */
-
-/* .marker-container:hover {
-  transform: scale(1.1);
-} */
 
 button.marker-btn {
   transform: translate(-50%, -100%);
@@ -75,19 +60,13 @@ button.marker-btn img:hover {
   height: 30px;
 }
 
-.popup {
-  /* position: absolute; */
-}
+/* .popup {
+  position: absolute;
+} */
 
 .popup-img {
   width: 100%;
   height: 20vh;
-}
-
-.price {
-  background: white;
-  width: 100%;
-  border: 2px solid #f6615c;
 }
 
 .map-click {
@@ -173,4 +152,41 @@ button.marker-btn img:hover {
   font-weight: 300;
   color: #0b3840;
   margin-right: 3px;
+}
+
+/* Marker Colors ----------------------------------------- */
+.hun-price {
+  background: white;
+  width: fit-content;
+  border: 2px solid #fa5e58;
+}
+.two-price {
+  background: white;
+  width: fit-content;
+  border: 2px solid #cae00d;
+}
+.four-price {
+  background: white;
+  width: fit-content;
+  border: 2px solid #99a810;
+}
+.six-price {
+  background: white;
+  width: fit-content;
+  border: 2px solid #7a8326;
+}
+.eight-price {
+  background: white;
+  width: fit-content;
+  border: 2px solid #5cf6d0;
+}
+.thou-price {
+  background: white;
+  width: fit-content;
+  border: 2px solid #785cf6;
+}
+.high-price {
+  background: white;
+  width: fit-content;
+  border: 2px solid #f6005e;
 }

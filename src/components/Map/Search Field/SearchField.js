@@ -162,7 +162,7 @@ const SearchField = (props) => {
       </div>
       <div className="flight-details">
         <div className="round-oneWay">
-          <p className={props.filterNonStop ? "nonstop" : "non"}>Nonstop</p>
+          <p className={props.filterNonStop ? "nonstop" : "non"}>direct</p>
           <div className="slide-bar">
             <div
               onClick={() => setNonStop()}

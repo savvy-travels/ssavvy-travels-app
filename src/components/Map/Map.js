@@ -140,9 +140,7 @@ function Map(props) {
               <h4>
                 {moment(flight.OutboundLeg.DepartureDate).format("MMM Do YYYY")}
               </h4>
-              <h4>{`${flight.Direct ? "Nonstop" : "Multiple Stops"} - ${
-                flight.name
-              }`}</h4>
+              <h4>{`${flight.Direct ? "Direct - " : ""}${flight.name}`}</h4>
               <h4>{flight.Name}</h4>
             </div>
             <h1>
@@ -156,14 +154,14 @@ function Map(props) {
 
   const markers = useMemo(
     () =>
-      flights.map((city) => (
+      (filterNonStop ? directFlights : flights).map((city) => (
         <div>
           {city.lon ? (
             <Marker
               key={city.CityName}
               longitude={+city.lon}
               latitude={+city.lat}
-              className="marker"
+              className={"marker"}
             >
               <div className="marker-container">
                 <button
@@ -173,7 +171,27 @@ function Map(props) {
                   }}
                   className="marker-btn"
                 >
-                  <p className="price">${city.MinPrice}</p>
+                  <p
+                    className={
+                      city.MinPrice <= 100
+                        ? "hun-price"
+                        : city.MinPrice > 100 && city.MinPrice < 200
+                        ? "two-price"
+                        : city.MinPrice > 200 && city.MinPrice < 400
+                        ? "four-price"
+                        : city.MinPrice > 400 && city.MinPrice < 600
+                        ? "six-price"
+                        : city.MinPrice > 600 && city.MinPrice < 800
+                        ? "eight-price"
+                        : city.MinPrice > 800 && city.MinPrice < 1000
+                        ? "thou-price"
+                        : city.MinPrice > 1000
+                        ? "high-price"
+                        : "price"
+                    }
+                  >
+                    ${city.MinPrice}
+                  </p>
                   <img
                     className="marker-icon"
                     src="https://cdn4.iconfinder.com/data/icons/basic-ui-pack-flat-s94-1/64/Basic_UI_Icon_Pack_-_Flat_map_pointer-512.png"
@@ -224,9 +242,9 @@ function Map(props) {
                               selectedCity.OutboundLeg.DepartureDate
                             ).format("MMM Do YYYY")}
                           </h4>
-                          <h4>{`${
-                            selectedCity.Direct ? "Nonstop" : "Multiple Stops"
-                          } - ${selectedCity.name}`}</h4>
+                          <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
+                            selectedCity.name
+                          }`}</h4>
                         </div>
                         <h1>
                           <h6>From</h6> ${selectedCity.MinPrice}
