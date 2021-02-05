@@ -205,7 +205,7 @@ function Map(props) {
     [flights]
   );
 
-  console.log(selectedCity)
+  // console.log(selectedCity)
 
   return (
     <div className="map-view">

@@ -6,7 +6,7 @@ import "./header2.css";
 import axios from "axios";
 
 function Header2(props) {
-  console.log(props);
+  // console.log(props);
   const [open, setOpen] = useState(false);
 
   const userLogout = () => {
