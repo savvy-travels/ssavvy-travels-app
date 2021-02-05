@@ -40,22 +40,22 @@ function MiniMap(props) {
             </span>
             <span className="mini-info-container">
               <div className="mini-info-div">
-                <h1>{flight.CityName}</h1>
+                <h1>
+                  {flight.CityName}{" "}
+                  <button
+                    onClick={() => context.goToCarrier(flight.Name)}
+                    className="book-button"
+                  >
+                    Book Flight
+                  </button>
+                </h1>
                 <h4>
                   {moment(flight.OutboundLeg.DepartureDate).format(
                     "MMM Do YYYY"
                   )}
                 </h4>
-                <h4>{`${flight.Direct ? "Nonstop" : "Multiple Stops"} - ${
-                  flight.name
-                }`}</h4>
+                <h4>{`${flight.Direct ? "Direct - " : ""}${flight.name}`}</h4>
                 <h4>{flight.Name}</h4>
-                <button
-                  onClick={() => context.goToCarrier(flight.Name)}
-                  className="book-button"
-                >
-                  Book Flight
-                </button>
               </div>
               <div className="mini-price">
                 <h1>
