@@ -55,7 +55,6 @@
     -webkit-box-shadow: 1px 5px 12px 0px #000000; 
     box-shadow: 1px 5px 12px 0px #000000;
     text-align: left;
-    /* padding: 15px; */
 }
 
 .suggested-container {
@@ -71,7 +70,7 @@
   margin-top: 20px;
   -webkit-box-shadow: 1px 5px 12px 0px #000000;
   box-shadow: 1px 5px 12px 0px #000000;
-  overflow: scroll;
+  overflow-y: scroll;
   color: black;
 }
 
@@ -81,6 +80,29 @@
 
 .suggested-container::-webkit-scrollbar {
   display: none;
+}
+
+.profile-flight-card {
+    /* overflow-y: hidden; */
+    display: flex;
+    justify-content: space-between;
+    font-family: Montserrat;
+    margin: 0.6rem;
+    border: 1px solid #393e41;
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: 2px 2px 5px #b3b3b3;
+}
+
+.profile-image-container {
+    width: 50%;
+    height: 10rem;
+}
+
+.profile-card-image {
+    margin: 0px;
+    width: 100%;
+    height: inherit;
+    border-radius: 5px 0px 0px 5px;
 }
 
 .locations-container {
