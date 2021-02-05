@@ -121,7 +121,7 @@
   height: 10rem;
   text-align: left;
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 .map-info-container > h1 {
@@ -153,6 +153,7 @@
   font-weight: 450;
   color: #0b3840;
   display: flex;
+  justify-content: space-between;
   text-align: right;
 }
 

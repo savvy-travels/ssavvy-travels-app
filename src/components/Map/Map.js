@@ -111,8 +111,6 @@ function Map(props) {
 
   const directFlights = flights.filter((flight) => flight.Direct);
 
-
-
   const flightCards = (filterNonStop ? directFlights : flights).map(
     (flight) => {
       const totalPrice = flight.MinPrice * passengers;
@@ -128,18 +126,20 @@ function Map(props) {
           </span>
           <span className="map-info-container">
             <div className="map-info-div">
-              <h1>{flight.CityName}</h1>
+              <h1>
+                {flight.CityName}{" "}
+                <button
+                  onClick={() => context.goToCarrier(flight.Name)}
+                  className="book-button"
+                >
+                  Book Flight
+                </button>
+              </h1>
               <h4>
                 {moment(flight.OutboundLeg.DepartureDate).format("MMM Do YYYY")}
               </h4>
               <h4>{`${flight.Direct ? "Direct - " : ""}${flight.name}`}</h4>
               <h4>{flight.Name}</h4>
-              <button
-                onClick={() => context.goToCarrier(flight.Name)}
-                className="book-button"
-              >
-                Book Flight
-              </button>
             </div>
             <div className="mini-price">
               <h1>
@@ -205,7 +205,7 @@ function Map(props) {
     [flights]
   );
 
-  console.log(selectedCity)
+  console.log(selectedCity);
 
   return (
     <div className="map-view">
