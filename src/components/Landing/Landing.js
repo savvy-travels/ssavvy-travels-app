@@ -39,7 +39,7 @@ function Landing(props) {
       return { ...flight, ...context.allAirports[airportId] };
     });
 
-  console.log(context.carriers);
+  // console.log(context.carriers);
 
   return (
     <div className="landing">

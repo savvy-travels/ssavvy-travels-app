@@ -123,7 +123,7 @@ function MiniMap(props) {
   };
 
 
-  console.log(selectedCity)
+  // console.log(selectedCity)
 
   return (
     <div className="mini-map-container">
