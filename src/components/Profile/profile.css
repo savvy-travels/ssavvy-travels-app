@@ -13,7 +13,6 @@
 }
 .profile-container {
   display: flex;
-  align-content: center;
   z-index: 1;
   margin-top: 100px;
 }
