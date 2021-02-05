@@ -1,0 +1,49 @@
+.map-key {
+  position: absolute;
+  height: fit-content;
+  z-index: 500000;
+  right: 0rem;
+  bottom: 0rem;
+  background-color: #063840c2;
+  border: 0.5px solid #0b0b0b;
+}
+
+.map-key > ul {
+  height: fit-content;
+  display: flex;
+  list-style: none;
+}
+.map-key > ul > li {
+  color: #fcfffd;
+  display: flex;
+  align-items: center;
+  margin: 1rem;
+}
+
+.map-key > ul > li > div {
+  margin-left: 0.6rem;
+  height: fit-content;
+  width: fit-content;
+}
+
+.hun {
+  border: 8px solid #1aa102;
+}
+.two {
+  border: 8px solid #e5ff00;
+}
+.four {
+  border: 8px solid #ff941b;
+}
+.six {
+  border: 8px solid #662683;
+}
+.eight {
+  border: 8px solid #5cf6d0;
+}
+.thou {
+  border: 8px solid #0051ff;
+}
+.over {
+  border: 8px solid #f60000;
+}

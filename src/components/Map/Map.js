@@ -10,6 +10,7 @@ import moment from "moment";
 import axios from "axios";
 import { Context } from "../../context/context";
 import Header2 from "../Landing/Header/Header2";
+import MapKey from "./MapKey/MapKey";
 const photos = require("../../photos.json");
 
 function Map(props) {
@@ -282,7 +283,7 @@ function Map(props) {
             </div>
           </div>
         </div>
-
+        <MapKey />
         <div className="map-container">
           <ReactMapGL
             {...viewport}
