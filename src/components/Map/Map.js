@@ -91,17 +91,13 @@ function Map(props) {
   let flights = quotes
     .map((quote) => {
       let destinationId = places.findIndex(
-        (place) => place.PlaceId === quote.OutboundLeg.DestinationId
-      );
+        (place) => place.PlaceId === quote.OutboundLeg.DestinationId);
       let carrierId = carriers.findIndex(
-        (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]
-      );
-      return { ...quote, ...places[destinationId], ...carriers[carrierId] };
-    })
+        (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]);
+      return { ...quote, ...places[destinationId], ...carriers[carrierId] }})
     .map((flight) => {
       let airportId = allAirports.findIndex(
-        (airport) => airport.code == flight.IataCode
-      );
+        (airport) => airport.code == flight.IataCode);
       return { ...flight, ...allAirports[airportId] };
     })
     .filter((flight) =>
@@ -110,18 +106,7 @@ function Map(props) {
 
   const directFlights = flights.filter((flight) => flight.Direct);
 
-  function goToCarrier() {
-    switch (carriers.Name) {
-      case "Gulf Air":
-        window.location.href = "https://www.gulfair.com/";
-        break;
-      case "Frontier Airlines":
-        window.location.href = "https://www.flyfrontier.com/";
-        break;
-      default:
-        window.location.href = "https://www.kayak.com/";
-    }
-  }
+
 
   const flightCards = (filterNonStop ? directFlights : flights).map(
     (flight) => {
