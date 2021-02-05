@@ -6,6 +6,7 @@ import "./header2.css";
 import axios from "axios";
 
 function Header2(props) {
+  console.log(props);
   const [open, setOpen] = useState(false);
 
   const userLogout = () => {
@@ -72,5 +73,11 @@ function Header2(props) {
     </>
   );
 }
-
-export default Header2;
+function mapStateToProps(reduxState) {
+  return {
+    username: reduxState.userReducer.username,
+    preferred: reduxState.userReducer.preferred,
+    isLoggedIn: reduxState.userReducer.isLoggedIn,
+  };
+}
+export default withRouter(connect(mapStateToProps, { logout })(Header2));
