@@ -7,13 +7,12 @@
   align-items: center;
 }
 
-.header-one {
+.header-two {
   position: absolute;
   top: 0%;
   left: 0%;
   right: 0%;
   padding: 0px 0.6rem;
-  background: linear-gradient(#191a1b, transparent);
   margin: 0%;
   height: 6rem;
   display: flex;
@@ -52,22 +51,22 @@ button {
   height: 200%;
 }
 
-.auth-button {
+.auth-button-two {
   position: relative;
-  color: #fdfffc;
+  color: #65b0b6;
   font-size: 1.5rem;
   margin-right: 0.5rem;
   margin-left: 0.5rem;
-  border: 2px solid #fdfffc;
+  border: 2px solid #65b0b6;
   transition: all ease 0.25s;
   z-index: 6000;
 }
 
-.auth-button:hover {
+.auth-button-two:hover {
   border-radius: 0px;
   padding: 0.6rem;
-  border: 2px solid #cae00d;
-  color: #cae00d;
+  border: 2px solid #65b0b6;
+  color: #0b0b0b;
   cursor: pointer;
 }
 

@@ -2,22 +2,22 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../Redux/userReducer";
-import "./header.css";
+import "./header2.css";
 import axios from "axios";
 
-function Header(props) {
+function Header2(props) {
   const [open, setOpen] = useState(false);
 
-  function userLogout() {
+  const userLogout = () => {
     axios.post("/api/auth/logout").then(() => {
       setOpen(false);
       props.logout();
       props.history.push("/");
     });
-  }
+  };
   return (
     <>
-      <header className="header-one">
+      <header className="header-two">
         <Link className="header-brand" to="/">
           <img
             className="header-logo"
@@ -40,10 +40,10 @@ function Header(props) {
         ) : (
           <span>
             <Link to="/signup">
-              <button className=" auth-button">signup</button>
+              <button className=" auth-button-two">signup</button>
             </Link>
             <Link to="/login">
-              <button className="auth-button">login</button>
+              <button className="auth-button-two">login</button>
             </Link>
           </span>
         )}
@@ -73,12 +73,4 @@ function Header(props) {
   );
 }
 
-function mapStateToProps(reduxState) {
-  return {
-    username: reduxState.userReducer.username,
-    preferred: reduxState.userReducer.preferred,
-    isLoggedIn: reduxState.userReducer.isLoggedIn,
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { logout })(Header));
+export default Header2;
