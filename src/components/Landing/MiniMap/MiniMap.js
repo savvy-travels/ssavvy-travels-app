@@ -105,7 +105,7 @@ useEffect(()=>{
       <div className='mini-map-side-bar'>
         <div className='suggestion-title'>
           {selectedCity ? (
-            <>
+            <di>
             <div className='sticky-marker'>
               <div
                 key={selectedCity.QuoteId}
@@ -128,7 +128,6 @@ useEffect(()=>{
                     <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
                       selectedCity.name
                     }`}</h4>
-                    <button onClick={()=> context.goToCarrier(selectedCity.Name)} className='book-button'>Book Flight</button>
                   </div>
                   <h1>
                     <h6>From</h6> ${selectedCity.MinPrice}
@@ -137,7 +136,7 @@ useEffect(()=>{
               </div>
             </div>
             <div className="mini-map-line"></div>
-          </>
+          </di>
           ) : null}
           <h1 className='suggested-header'>Suggested Trips</h1>
           {<div>{suggestedCards}</div>}
