@@ -85,7 +85,7 @@ button.marker-btn img:hover {
   padding: 0.6rem 0px;
 }
 .miniMap-flight-card {
-  overflow: hidden;
+  overflow-y: hidden;
   display: flex;
   justify-content: space-between;
   font-family: Montserrat;
@@ -112,7 +112,8 @@ button.marker-btn img:hover {
   height: 10rem;
   text-align: left;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
+  align-items: flex-end;
   justify-content: space-evenly;
 }
 .mini-info-div {
@@ -190,18 +191,33 @@ button.marker-btn img:hover {
   width: 3rem;
   border: 2px solid #f6005e;
 }
-.mini-map-line {
-  position: sticky;
-  top: 40rem;
-  width: 90%;
-  border: 0.5px solid #65b0b2;
-  margin-top: 0.6rem;
-  margin-bottom: 0.6rem;
+
+.book-button {
+  font-size: 1rem;
+  cursor: pointer;
+  /* margin-top: 1rem; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+  z-index: 3000;
+  /* width: 75%; */
+  /* border: 3px solid #0b3840; */
+  background-color: #cae00d;
+  border-radius: 10px;
 }
 
-.sticky-marker {
-  position: sticky;
-  top: 0;
-  z-index: 500000;
-  background-color: white;
+.mini-price > h1 {
+  margin-left: 0px;
+  text-align: right;
+  font-weight: 600;
+  color: #0b3840;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.mini-price > h6 {
+  margin-right: 0px;
+  font-weight: 300;
+  color: #0b3840;
+  margin-right: 3px;
 }
