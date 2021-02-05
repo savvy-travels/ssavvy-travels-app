@@ -67,6 +67,7 @@ const customStyles = {
 };
 
 const SearchField = (props) => {
+  console.log(props.location);
   //Search Fields//
   const [budget, setBudget] = useState(props.budget);
   const [location, setLocation] = useState(props.location);
@@ -129,7 +130,7 @@ const SearchField = (props) => {
         loadOptions={loadOptions}
         isClearable={true}
         onInputChange={handleInputChange}
-        placeholder={"Select departure airport..."}
+        placeholder={location}
         styles={customStyles}
         theme={(theme) => ({
           ...theme,
