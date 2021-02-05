@@ -1,12 +1,11 @@
-import axios from 'axios'
-import React, { useState, useEffect, useContext } from 'react'
-import { withRouter, Link } from 'react-router-dom'
-import "./profile.css"
-import moment from 'moment'
-import { Context } from '../../context/context'
-const photos = require('../../photos.json')
-
-
+import axios from "axios";
+import React, { useState, useEffect, useContext } from "react";
+import { withRouter, Link } from "react-router-dom";
+import "./profile.css";
+import moment from "moment";
+import { Context } from "../../context/context";
+import Header from "../Landing/Header/Header";
+const photos = require("../../photos.json");
 
 const Profile = (props) => {
     const context = useContext(Context)
@@ -29,13 +28,22 @@ const Profile = (props) => {
         })
     }, [])
 
-    const flights = context.quotes
+  const flights = context.quotes
     .map((quote) => {
-      let destinationId = context.places.findIndex((place) => place.PlaceId === quote.OutboundLeg.DestinationId)
-      let carrierId = context.carriers.findIndex((carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0])
-      return {...quote, ...context.places[destinationId], ...context.carriers[carrierId]}
+      let destinationId = context.places.findIndex(
+        (place) => place.PlaceId === quote.OutboundLeg.DestinationId
+      );
+      let carrierId = context.carriers.findIndex(
+        (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]
+      );
+      return {
+        ...quote,
+        ...context.places[destinationId],
+        ...context.carriers[carrierId],
+      };
     })
     .map((flight) => {
+
       let airportId = context.allAirports.findIndex((airport) => airport.code == flight.IataCode)
       return { ...flight, ...context.allAirports[airportId] }})
     
@@ -62,37 +70,45 @@ const Profile = (props) => {
             </div>
             </span>
           </div>
-         )
-        }
-      )
+          <h1>
+            <h6>From</h6> ${flight.MinPrice}
+          </h1>
+        </span>
+      </div>
+    );
+  });
 
-    // function updatePreferred(id, preferred) {
-    //     axios.post('/api/updatePreferred')
-    //     .then(axios.get('/api/getPreferred'))
-    //     .catch(err => console.log(err))
-    // }
-    
-    const locationsMapped =  locations.map(location => {
-        return (
-            <div className='locs-container'
-            style={{
-                backgroundImage: `url(${photos[Math.floor(Math.random() * photos.length)].url})`,
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat'
-                
-            }}>
-                    <h1 className='locations'>{location.location}</h1>
-                <div className='information-container'>
-                    <h2 className='airport'>{location.airport}</h2>
-                    <h2>{location.dates}</h2>              
-                    <h3>Saved: {moment(location.created).fromNow()}</h3>
-                </div>
-            </div>
-        )
-    })
+  // function updatePreferred(id, preferred) {
+  //     axios.post('/api/updatePreferred')
+  //     .then(axios.get('/api/getPreferred'))
+  //     .catch(err => console.log(err))
+  // }
 
+  const locationsMapped = locations.map((location) => {
     return (
-        <div className='background-container'>
+      <div
+        className="locs-container"
+        style={{
+          backgroundImage: `url(${
+            photos[Math.floor(Math.random() * photos.length)].url
+          })`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <h1 className="locations">{location.location}</h1>
+        <div className="information-container">
+          <h2 className="airport">{location.airport}</h2>
+          <h2>{location.dates}</h2>
+          <h3>Saved: {moment(location.created).fromNow()}</h3>
+        </div>
+      </div>
+    );
+  });
+
+  return (
+    <div className="background-container">
+      <Header />
             <div className='profile-container'>
                 <div className='sidebar-container'>
                 <div className='user-container'>
@@ -124,8 +140,37 @@ const Profile = (props) => {
                         </div>
                 </div>
             </div>
+            <h2>
+              <h2 className="email">Email:</h2>
+              {email}
+            </h2>
+            <h2>
+              <h2 className="pref">Preferred Airport:</h2>
+              {preferred}
+            </h2>
+          </div>
+          <div className="suggested-container">
+            <Link to="/map">
+              <h3 className="links-profile">View Map</h3>
+            </Link>
+            <Link to="/">
+              <h3 className="home">Home</h3>
+            </Link>
+            <div className="line"></div>
+            <h3>Suggested Trips</h3>
+            {suggestedCards}
+          </div>
         </div>
-    )
-}
+        <div className="locations-container">
+          <div className="input-container">
+            <h1>My Trips</h1>
+            {/* <input className='search-trips-input' placeholder='Search My Trips'/> */}
+          </div>
+          <div className="locations-mapped">{locationsMapped}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default withRouter(Profile)
+export default withRouter(Profile);
