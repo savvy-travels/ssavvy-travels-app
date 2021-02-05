@@ -202,16 +202,38 @@ useEffect(()=>{
       <div className='mini-map-side-bar'>
         <div className='suggestion-title'>
           {selectedCity ? (
-            <div className='popup'>
-
-              <img className='popup-img' src='https://assets.cairo360.com/app/uploads/2019/01/getty_583734066_335273.jpg' alt='' />
-
-              <h2>City: {selectedCity.CityName}</h2>
-              <h3>Price: ${selectedCity.MinPrice}</h3>
-              <h4>{(selectedCity.Direct) ? 'Direct' : 'Multiple-stops'
-              }</h4>
-              <button className='search-button' onClick={() => goToCarrier(selectedCity.Name)}>Go to Flight</button>
+            <>
+            <div className='sticky-marker'>
+              <div
+                key={selectedCity.QuoteId}
+                className="map-flight-card-selected"
+              >
+                <span className="map-image-container">
+                  <img
+                    className="map-flight-card-image"
+                    src="https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg"
+                  />
+                </span>
+                <span className="map-info-container">
+                  <div className="selected-map-info-div">
+                    <h1>{selectedCity.CityName}</h1>
+                    <h4>
+                      {moment(
+                        selectedCity.OutboundLeg.DepartureDate
+                      ).format("MMM Do YYYY")}
+                    </h4>
+                    <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
+                      selectedCity.name
+                    }`}</h4>
+                  </div>
+                  <h1>
+                    <h6>From</h6> ${selectedCity.MinPrice}
+                  </h1>
+                </span>
+              </div>
             </div>
+            <div className="mini-map-line"></div>
+          </>
           ) : null}
           <h1 className='suggested-header'>Suggested Trips</h1>
           {<div>{suggestedCards}</div>}
