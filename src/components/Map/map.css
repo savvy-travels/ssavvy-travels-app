@@ -95,7 +95,7 @@
 .map-flight-card {
   overflow: hidden;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-family: Montserrat;
   border: 1px solid #393e41;
   margin: 0.6rem;
@@ -118,7 +118,7 @@
   height: 10rem;
   text-align: left;
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
   justify-content: space-evenly;
 }
 .map-info-container > h1 {
