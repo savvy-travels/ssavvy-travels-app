@@ -83,7 +83,7 @@ button.marker-btn img:hover {
   background-color: #fdfffc;
   margin: 0px;
   padding: 0.6rem 0px;
-  z-index: 50000;
+  z-index: 3000000;
 }
 .miniMap-flight-card {
   overflow-y: hidden;
@@ -160,37 +160,37 @@ button.marker-btn img:hover {
 .hun-price {
   background: white;
   width: 3rem;
-  border: 2px solid #fa5e58;
+  border: 3px solid #1aa102;
 }
 .two-price {
   background: white;
   width: 3rem;
-  border: 2px solid #cae00d;
+  border: 3px solid #e5ff00;
 }
 .four-price {
   background: white;
   width: 3rem;
-  border: 2px solid #fcab15;
+  border: 3px solid #ff941b;
 }
 .six-price {
   background: white;
   width: 3rem;
-  border: 2px solid #63f140;
+  border: 3px solid #662683;
 }
 .eight-price {
   background: white;
   width: 3rem;
-  border: 2px solid #5cf6d0;
+  border: 3px solid #5cf6d0;
 }
 .thou-price {
   background: white;
   width: 3rem;
-  border: 2px solid #5b38f8;
+  border: 3px solid #0051ff;
 }
 .high-price {
   background: white;
   width: 3rem;
-  border: 2px solid #f6005e;
+  border: 3px solid #f60000;
 }
 
 .book-button {
