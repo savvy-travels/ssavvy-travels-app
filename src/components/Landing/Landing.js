@@ -41,7 +41,7 @@ function Landing(props) {
       }
     })
     .map((flight) => {
-      let airportId = = allAirports.findIndex(
+      let airportId = allAirports.findIndex(
         (airport) => airport.code.toLowerCase === flight.IataCode.toLowerCase
       )
       return { ...flight, ...context.allAirports[airportId] }
