@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { airportSearch } from "../../Redux/searchReducer";
 import { connect } from "react-redux";
@@ -16,6 +16,13 @@ require("dotenv").config();
 
 function Landing(props) {
   const context = useContext(Context);
+
+  // //About Project Modal State and Functions//
+  // const [modal, setModal] = useState(false);
+
+  // const selectModal = (info) => {
+  //   setModal(!modal);
+  // };
 
   // Find Flights based off of your airport location
   const flights = context.quotes

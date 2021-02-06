@@ -204,6 +204,13 @@ export function LatProvider(props) {
         window.location.href = "/";
     }
   };
+
+  //Modal Logic and state//
+  const [modal, setModal] = useState(false);
+
+  const selectModal = (info) => {
+    setModal(!modal);
+  };
   return (
     <Context.Provider
       value={{
@@ -218,6 +225,8 @@ export function LatProvider(props) {
         cities,
         loading,
         goToCarrier,
+        modal,
+        selectModal,
       }}
     >
       {props.children}
