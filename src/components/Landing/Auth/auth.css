@@ -20,7 +20,7 @@
   /* width: fit-content;
   height: fit-content; */
   width: 450px;
-  height: 70%;
+  height: 20%;
   z-index: 40000;
 }
 .register-input-field {
@@ -143,5 +143,5 @@
   margin-left: auto;
   margin-right: auto;
   width: 450px;
-  height: 40%;
+  height: 12%;
 }

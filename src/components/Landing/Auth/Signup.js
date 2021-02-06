@@ -151,7 +151,7 @@ function Signup(props) {
   //////////
 
   return (
-    <div className="auth-view">
+    <>
       {loading ? (
         <div className="login-field">
           <h1 style={{ color: "#cae00d" }}>Creating your profile...</h1>
@@ -224,7 +224,7 @@ function Signup(props) {
           </div>
         </form>
       )}
-    </div>
+    </>
   );
 }
 

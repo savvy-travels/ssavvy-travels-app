@@ -31,7 +31,7 @@ function Login(props) {
       });
   }
   return (
-    <div className="auth-view">
+    <>
       {loading ? (
         <div className="login-field">
           <h1 style={{ color: "#cae00d" }}>Fetching your profile...</h1>
@@ -73,7 +73,7 @@ function Login(props) {
           </div>
         </form>
       )}
-    </div>
+    </>
   );
 }
 
