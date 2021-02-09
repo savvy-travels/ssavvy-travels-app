@@ -19,6 +19,7 @@ export function LatProvider(props) {
   const [allAirports, setAllAirports] = useState([]);
   const [loading, setLoading] = useState(true);
 
+
   useEffect(() => {
     axios
       .post(
@@ -80,7 +81,7 @@ export function LatProvider(props) {
                     setQuotes(res.data.Quotes);
                     setPlaces(res.data.Places);
                     setCarriers(res.data.Carriers);
-                    axios.get("/api/airports").then((res) => {
+                    axios.get('airports.json').then((res) => {
                       setLoading(false);
                       setAllAirports(res.data);
                     });
