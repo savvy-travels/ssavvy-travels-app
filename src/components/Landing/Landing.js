@@ -24,6 +24,8 @@ function Landing(props) {
   //   setModal(!modal);
   // };
 
+  const allAirports = context.allAirports
+
   // Find Flights based off of your airport location
   const flights = context.quotes
     .map((quote) => {
@@ -40,10 +42,10 @@ function Landing(props) {
       };
     })
     .map((flight) => {
-      let airportId = context.allAirports.findIndex(
+      let airportId = allAirports.findIndex(
         (airport) => airport.code.toLowerCase === flight.IataCode.toLowerCase
       );
-      return { ...flight, ...context.allAirports[airportId] };
+      return { ...flight, ...allAirports[airportId] };
     });
 
   // console.log(context.carriers);
