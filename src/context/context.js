@@ -4,12 +4,7 @@ import { createContext, useEffect, useState } from "react";
 export const Context = createContext(null);
 
 export function LatProvider(props) {
-  // const geoDbKey = process.env.REACT_APP_GEODB_KEY;
-  // const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY;
-  // const googleKey = process.env.REACT_APP_GOOGLEMAPS_KEY;
-
   const [latLong, setLatLong] = useState({ lat: undefined, long: undefined });
-  const [location, setLocation] = useState("");
   const [cities, setCities] = useState([]);
   const [airports, setAirports] = useState([]);
   const [quotes, setQuotes] = useState([]);
@@ -40,15 +35,16 @@ export function LatProvider(props) {
               .then((res) => {
                 const { items } = res.data;
                 const airport = items[0].iata;
+                setAirport(airport);
                 setAirports(items);
                 axios
                   .get(`/api/skyscanner/${airport}`)
                   .then((res) => {
                     console.log(res);
-                    const { Quotes } = res.data;
+                    const { Quotes, Places, Carriers } = res.data;
                     setQuotes(Quotes);
-                    setPlaces(res.data.Places);
-                    setCarriers(res.data.Carriers);
+                    setPlaces(Places);
+                    setCarriers(Carriers);
                     axios.get("airports.json").then((res) => {
                       setLoading(false);
                       setAllAirports(res.data);
@@ -69,73 +65,6 @@ export function LatProvider(props) {
       .catch((err) => {
         console.log(err);
       });
-    //     axios
-    //       .get(
-    //         `https://wft-geo-db.p.rapidapi.com/v1/geo/locations/${res.data.location.lat.toFixed(
-    //           4
-    //         )}${res.data.location.lng.toFixed(
-    //           4
-    //         )}/nearbyCities?minPopulation=100000&limit=5&offset=0&radius=100&sort=-population`,
-    //         {
-    //           headers: {
-    //             "x-rapidapi-key": `${geoDbKey}`,
-    //           },
-    //         }
-    //       )
-    //       .then((res) => {
-    //         // console.log(res.data.data)
-    //         setCities(
-    //           res.data.data
-    //             .filter((place) => place.type === "CITY")
-    //             .map((city) => city.city)
-    //         );
-    //         const city = res.data.data
-    //           .filter((place) => place.type === "CITY")
-    //           .map((city) => city.city);
-    //         axios
-    //           .get(
-    //             `https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city[0]}&limit=5&withFlightInfoOnly=true`,
-    //             {
-    //               headers: {
-    // "x-rapidapi-key":
-    //   "293c8f1306mshd1179b84f5495fdp1624a6jsn253fcf20a6a7",
-    // "x-rapidapi-host": "aerodatabox.p.rapidapi.com",
-    //               },
-    //             }
-    //           )
-    //           .then((res) => {
-    //             // console.log(res.data.items)
-    //             setAirports(res.data.items);
-    //             setAirport(res.data.items.map((airport) => airport));
-
-    //             axios
-    //               .get(
-    //                 `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${res.data.items[0].iata}-iata/anywhere/anytime/`,
-    //                 {
-    //                   headers: {
-    //                     "x-rapidapi-key": `${skyscannerKey}`,
-    //                   },
-    //                 }
-    //               )
-    //               .then((res) => {
-    // setQuotes(res.data.Quotes);
-    // setPlaces(res.data.Places);
-    // setCarriers(res.data.Carriers);
-    // axios.get("airports.json").then((res) => {
-    //   setLoading(false);
-    //   setAllAirports(res.data);
-    // });
-    //               });
-    //           })
-    //           .catch((err) => {
-    //             console.log(err);
-    //           });
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   })
-    //   .catch((err) => [console.log(err)]);
   }, []);
 
   const goToCarrier = (carrier) => {
@@ -256,7 +185,6 @@ export function LatProvider(props) {
     <Context.Provider
       value={{
         ...latLong,
-        location,
         quotes,
         places,
         carriers,

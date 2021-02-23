@@ -7,6 +7,7 @@ const {
 } = process.env;
 
 module.exports = {
+  //Gets Lat and Long of User
   location: async (req, res) => {
     const location_url = `https://www.googleapis.com/geolocation/v1/geolocate?key=${REACT_APP_GOOGLEMAPS_KEY}`;
     const fetch_location = await fetch(location_url, {
@@ -19,6 +20,7 @@ module.exports = {
     res.send(myLocationJson);
   },
 
+  //Uses users Lat and Long to find nearest major Metros
   city: async (req, res) => {
     const latLong = req.params.latLong.split(",");
     const lat = +latLong[0];
@@ -37,6 +39,7 @@ module.exports = {
     res.send(cityFilter);
   },
 
+  //Uses users major metro to find nearest Int Airports
   airport: async (req, res) => {
     const { city } = req.params;
     const airport_url = `https://aerodatabox.p.rapidapi.com/airports/search/term?q=${city}&limit=5&withFlightInfoOnly=true`;
@@ -50,6 +53,7 @@ module.exports = {
     res.send(myAirportJson);
   },
 
+  //Uses the users airport to find all flights from that Airport
   skyScanner: async (req, res) => {
     const { airport } = req.params;
     console.log(req.params);
