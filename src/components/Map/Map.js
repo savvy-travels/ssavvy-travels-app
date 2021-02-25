@@ -67,16 +67,12 @@ function Map(props) {
     setLoading(true);
     axios
       .get(
-        `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsequotes/v1.0/US/USD/en-US/${location}-iata/anywhere/${
+        `/api/skyscanner/${location}/anywhere/${
           departureDate ? departureDate : "anytime"
-        }/${returnDate ? returnDate : "anytime"}`,
-        {
-          headers: {
-            "x-rapidapi-key": `${skyscannerKey}`,
-          },
-        }
+        }/${returnDate ? returnDate : "anytime"}`
       )
       .then((res) => {
+        console.log(res);
         setQuotes(res.data.Quotes);
         setPlaces(res.data.Places);
         setCarriers(res.data.Carriers);
@@ -91,6 +87,7 @@ function Map(props) {
 
   const flights = context.quotes
     .map((quote) => {
+      console.log(quote);
       let destinationId = context.places.findIndex(
         (place) => place.PlaceId === quote.OutboundLeg.DestinationId
       );

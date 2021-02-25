@@ -55,9 +55,9 @@ module.exports = {
 
   //Uses the users airport to find all flights from that Airport
   skyScanner: async (req, res) => {
-    const { airport } = req.params;
     console.log(req.params);
-    const sky_url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport}-iata/anywhere/anytime/`;
+    const { airport, from, depart_date, return_date } = req.params;
+    const sky_url = `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/${airport}-iata/${from}/${depart_date}/`;
     const fetch_flights = await fetch(sky_url, {
       headers: {
         "x-rapidapi-key": REACT_APP_SKYSCANNER_KEY,

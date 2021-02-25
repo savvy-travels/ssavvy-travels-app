@@ -37,7 +37,11 @@ app.use(
 app.post("/api/location", api.location);
 app.get("/api/city/:latLong", api.city);
 app.get("/api/landing/airport/:city", api.airport);
-app.get("/api/skyscanner/:airport", api.skyScanner);
+app.get(
+  "/api/skyscanner/:airport/:from/:depart_date/:return_date",
+  api.skyScanner
+);
+
 app.get(`/api/auth/verification/:id/:token`, activateCtrl.verify);
 
 app.post("/api/auth/register", userCtrl.register);

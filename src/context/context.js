@@ -38,7 +38,7 @@ export function LatProvider(props) {
                 setAirport(airport);
                 setAirports(items);
                 axios
-                  .get(`/api/skyscanner/${airport}`)
+                  .get(`/api/skyscanner/${airport}/anywhere/anytime/anytime`)
                   .then((res) => {
                     console.log(res);
                     const { Quotes, Places, Carriers } = res.data;
