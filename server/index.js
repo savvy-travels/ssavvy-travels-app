@@ -17,6 +17,8 @@ const app = express()
 app.use(express.json())
 const path = require('path')
 
+app.use(express.static(path.join(__dirname, '/build')))
+
 app.use(session({
     resave: false,
     saveUninitialized: true,
