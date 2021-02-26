@@ -1,9 +1,14 @@
 .modal-info {
+  position: relative;
+  z-index: 4000000;
   flex-grow: 2;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.modal-content {
+  height: fit-content;
 }
 .modal-content > h2 {
   text-align: left;
@@ -21,7 +26,8 @@
 }
 
 .modal-info > div > h2 {
-  font-weight: 300;
+  color: #65b0b6;
+  font-weight: 500;
 }
 
 .modal-header-info > h2 {
@@ -31,5 +37,9 @@
   font-style: normal;
 }
 .modal-header-info > p {
+  margin: 0%;
   text-align: center;
+}
+hr {
+  margin: 1rem;
 }
