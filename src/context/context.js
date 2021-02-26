@@ -21,7 +21,7 @@ export function LatProvider(props) {
 
   useEffect(() => {
     axios
-      .post(
+      .get(
         `https://www.googleapis.com/geolocation/v1/geolocate?key=${googleKey}`
       )
       .then((res) => {
