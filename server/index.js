@@ -15,6 +15,7 @@ const activateCtrl = require('./controllers/activate')
 
 const app = express()
 app.use(express.json())
+const path = require('path')
 
 app.use(session({
     resave: false,
@@ -61,3 +62,7 @@ massive({
     console.log('DB Ready')
     app.listen(SERVER_PORT, () => console.log(`Running on ${SERVER_PORT}`))
 })
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+  })
