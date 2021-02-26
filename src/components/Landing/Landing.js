@@ -17,15 +17,9 @@ require("dotenv").config();
 function Landing(props) {
   const context = useContext(Context);
 
-  // //About Project Modal State and Functions//
-  // const [modal, setModal] = useState(false);
+  const allAirports = context.allAirports;
 
-  // const selectModal = (info) => {
-  //   setModal(!modal);
-  // };
-
-  const allAirports = context.allAirports
-
+  console.log(context.places);
   // Find Flights based off of your airport location
   const flights = context.quotes
     .map((quote) => {
@@ -43,13 +37,13 @@ function Landing(props) {
     })
     .map((flight) => {
       let airportId = allAirports.findIndex(
-        (airport) => airport.code.toLowerCase === flight.IataCode.toLowerCase
+        (airport) =>
+          airport.code.toLowerCase() === flight.IataCode.toLowerCase()
       );
       return { ...flight, ...allAirports[airportId] };
     });
 
-  // console.log(context.carriers);
-
+  console.log(flights);
   return (
     <div className="landing">
       <Header />
