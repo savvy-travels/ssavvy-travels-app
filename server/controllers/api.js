@@ -29,7 +29,7 @@ module.exports = {
     const fetch_city = await fetch(city_url, {
       headers: {
         "x-rapidapi-key": REACT_APP_GEODB_KEY,
-        Content_Type: "application/json",
+        "Content_Type": "application/json",
       },
     });
     const myCityJson = await fetch_city.json();
