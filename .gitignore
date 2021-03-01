@@ -7,6 +7,8 @@
 .env
 .eslintcache
 
+build.zip
+
 # testing
 /coverage
 
