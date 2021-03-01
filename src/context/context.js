@@ -37,7 +37,7 @@ export function LatProvider(props) {
               .get(`/api/landing/airport/${city}`)
               .then((res) => {
                 const { items } = res.data;
-                console.log(res.data)
+                console.log(items)
                 const airport = items[0].iata;
                 setAirport(airport);
                 setAirports(items);
