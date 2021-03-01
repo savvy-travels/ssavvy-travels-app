@@ -50,9 +50,11 @@ export function LatProvider(props) {
               
               const major = airports.filter(airport => Object.keys(airport).length !== 0)
 
+              console.log(major)
+
               const airport = major[0].code
                 setAirport(airport)
-                setAirports(items)
+                setAirports(major)
                 axios
                   .get(
                     `/api/skyscanner/${airport}/anywhere/anytime/anytime`
