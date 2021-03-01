@@ -2,6 +2,8 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 const { REACT_APP_GOOGLEMAPS_KEY } = process.env;
 
+const airportsJson = require('../components/airports.json')
+
 export const Context = createContext(null);
 
 export function LatProvider(props) {
@@ -36,36 +38,43 @@ export function LatProvider(props) {
             axios
               .get(`/api/landing/airport/${city}`)
               .then((res) => {
-                const { items } = res.data;
-                console.log(items);
-                // const airport = items[0].iata;
-                const airport = items.filter(
-                  (airport) => !airport.shortName.includes("Regional")
-                );
-                setAirport(airport);
-                setAirports(items);
+                const { items } = res.data
+                const airports = items.map((airport) => {
+                  let airportId = airportsJson.findIndex(
+                    (airportJson) => airport.iata === airportJson.code
+                  )
+                  console.log(airportId)
+                return {...airportsJson[airportId]}
+              })
+
+              
+              const major = airports.filter(airport => Object.keys(airport).length !== 0)
+
+              const airport = major[0].code
+                setAirport(airport)
+                setAirports(items)
                 axios
                   .get(
-                    `/api/skyscanner/${airport[0].iata}/anywhere/anytime/anytime`
+                    `/api/skyscanner/${airport}/anywhere/anytime/anytime`
                   )
                   .then((res) => {
-                    console.log(res);
-                    const { Quotes, Places, Carriers } = res.data;
-                    setQuotes(Quotes);
-                    setPlaces(Places);
-                    setCarriers(Carriers);
+                    console.log(res)
+                    const { Quotes, Places, Carriers } = res.data
+                    setQuotes(Quotes)
+                    setPlaces(Places)
+                    setCarriers(Carriers)
                     axios.get("airports.json").then((res) => {
-                      setLoading(false);
-                      setAllAirports(res.data);
-                    });
+                      setLoading(false)
+                      setAllAirports(res.data)
+                    })
                   })
                   .catch((err) => {
-                    console.log(err);
-                  });
+                    console.log(err)
+                  })
               })
               .catch((err) => {
-                console.log(err);
-              });
+                console.log(err)
+              })
           })
           .catch((err) => {
             console.log(err);
