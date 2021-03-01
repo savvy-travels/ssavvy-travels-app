@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
@@ -52,11 +53,14 @@ app.get("/api/auth/user", authMiddleware.isAuthenticated, userCtrl.getUser);
 app.get("/api/airports/:city", listCtrl.getLocalAirports);
 app.get("/api/airports", listCtrl.getAllAirports);
 
+
 app.post(
   "/api/saveLocation",
   authMiddleware.isAuthenticated,
   locationCtrl.saveLocation
 );
+
+
 app.get(
   "/api/locations",
   authMiddleware.isAuthenticated,
@@ -74,6 +78,7 @@ app.get(
   prefAirportCtrl.getPreferred
 );
 
+
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -81,6 +86,7 @@ const transporter = nodemailer.createTransport({
     pass: EMAIL_PASSWORD,
   },
 });
+
 
 massive({
   connectionString: CONNECTION_STRING,
