@@ -51,7 +51,9 @@ module.exports = {
       },
     });
     const myAirportJson = await fetch_airport.json();
-    res.send(myAirportJson);
+    const airportFilter = await myAirportJson.data
+          .filter((type) => type.shortName !== 'Regional' && type.shortName !== 'Municipal')
+    res.send(airportFilter);
   },
 
   //Uses the users airport to find all flights from that Airport
