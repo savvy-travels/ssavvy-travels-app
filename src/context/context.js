@@ -40,6 +40,7 @@ export function LatProvider(props) {
                 const airport = items[0].iata;
                 setAirport(airport);
                 setAirports(items);
+                console.log(airport)
                 axios
                   .get(`/api/skyscanner/${airport}/anywhere/anytime/anytime`)
                   .then((res) => {
