@@ -29,11 +29,11 @@ module.exports = {
     const fetch_city = await fetch(city_url, {
       headers: {
         "x-rapidapi-key": REACT_APP_GEODB_KEY,
-        "Content_Type": "application/json",
-        "Accept": "application/json",
+        Content_Type: "application/json",
       },
     });
     const myCityJson = await fetch_city.json();
+    console.log(myCityJson)
     const cityFilter = await myCityJson.data
       .filter((place) => place.type === "CITY")
       .map((city) => city.city);
