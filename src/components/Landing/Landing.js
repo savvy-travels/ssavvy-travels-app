@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import { airportSearch } from "../../Redux/searchReducer";
 import { connect } from "react-redux";
@@ -17,6 +17,9 @@ require("dotenv").config();
 function Landing(props) {
   const context = useContext(Context);
 
+  const allAirports = context.allAirports;
+
+  console.log(context.places);
   // Find Flights based off of your airport location
   const flights = context.quotes
     .map((quote) => {
@@ -33,14 +36,14 @@ function Landing(props) {
       };
     })
     .map((flight) => {
-      let airportId = context.allAirports.findIndex(
-        (airport) => airport.code == flight.IataCode
+      let airportId = allAirports.findIndex(
+        (airport) =>
+          airport.code.toLowerCase() === flight.IataCode.toLowerCase()
       );
-      return { ...flight, ...context.allAirports[airportId] };
+      return { ...flight, ...allAirports[airportId] };
     });
 
-  // console.log(context.carriers);
-
+  console.log(flights);
   return (
     <div className="landing">
       <Header />

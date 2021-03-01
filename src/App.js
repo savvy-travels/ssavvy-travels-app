@@ -1,15 +1,12 @@
-import logo from "./logo.svg";
 import "./App.css";
 import routes from "./routes";
-import Header from "./components/Landing/Header/Header";
-import { useContext } from "react";
-import { Context } from "./context/context";
+import About from "./components/About/About";
+import { useState } from "react";
 
 function App() {
-  const context = useContext(Context);
   return (
     <div className="App">
-      {/* <Header /> */}
+      <About />
       {routes}
     </div>
   );

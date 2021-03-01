@@ -61,7 +61,7 @@ function NewSearch(props) {
   const [budget, setBudget] = useState("");
   const [departureDate, setDepartureDate] = useState(undefined);
   const [returnDate, setReturnDate] = useState(undefined);
-  const [location, setLocation] = useState(context.airport.iata);
+  const [location, setLocation] = useState(context.airport);
   const [next, setNext] = useState(false);
   const [myAirportsFiltered, setMyAirportsFiltered] = useState([]);
 
@@ -123,6 +123,7 @@ function NewSearch(props) {
               isClearable={true}
               onInputChange={handleInputChange}
               placeholder={"From..."}
+              defaultValue={location}
               styles={customStyles}
               theme={(theme) => ({
                 ...theme,

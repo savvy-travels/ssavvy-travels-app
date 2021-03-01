@@ -8,16 +8,13 @@ const photos = require("../../../photos.json");
 
 function MiniMap(props) {
   const context = useContext(Context);
-
+  const { lat, long, flights } = props;
   const [suggestedCards, setSuggestedCards] = useState([]);
   //Map State
-  const { lat, long, flights } = props;
   const [selectedCity, setSelectedCity] = useState(null);
   const [viewport, setViewport] = useState({
     latitude: context.lat,
     longitude: context.long,
-    width: "100%",
-    height: "100%",
     zoom: 3,
   });
 
@@ -76,8 +73,8 @@ function MiniMap(props) {
           {city.lon ? (
             <Marker
               key={city.CityName}
-              longitude={+city.lon}
-              latitude={+city.lat}
+              longitude={parseFloat(city.lon)}
+              latitude={parseFloat(city.lat)}
               className="marker"
             >
               <div className="marker-container">
@@ -121,46 +118,44 @@ function MiniMap(props) {
     right: 10,
     top: 10,
   };
-
-
-  // console.log(selectedCity)
-
+  // console.log(flights);
   return (
     <div className="mini-map-container">
       <div className="mini-map-side-bar">
         <div className="suggestion-title">
           {selectedCity ? (
             <div>
-            <div className='sticky-marker'>
-              <div
-                key={selectedCity.QuoteId}
-                className="map-flight-card-selected">
-                <span className="map-image-container">
-                  <img
-                    className="map-flight-card-image"
-                    src="https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg"
-                  />
-                </span>
-                <span className="map-info-container">
-                  <div className="selected-map-info-div">
-                    <h1>{selectedCity.CityName}</h1>
-                    <h4>
-                      {moment(
-                        selectedCity.OutboundLeg.DepartureDate
-                      ).format("MMM Do YYYY")}
-                    </h4>
-                    <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
-                      selectedCity.name
-                    }`}</h4>
-                  </div>
-                  <h1>
-                    <h6>From</h6> ${selectedCity.MinPrice}
-                  </h1>
-                </span>
+              <div className="sticky-marker">
+                <div
+                  key={selectedCity.QuoteId}
+                  className="map-flight-card-selected"
+                >
+                  <span className="map-image-container">
+                    <img
+                      className="map-flight-card-image"
+                      src="https://i.pinimg.com/originals/08/1f/0a/081f0a864808d6efc0883014e802bc25.jpg"
+                    />
+                  </span>
+                  <span className="map-info-container">
+                    <div className="selected-map-info-div">
+                      <h1>{selectedCity.CityName}</h1>
+                      <h4>
+                        {moment(selectedCity.OutboundLeg.DepartureDate).format(
+                          "MMM Do YYYY"
+                        )}
+                      </h4>
+                      <h4>{`${selectedCity.Direct ? "Direct - " : ""}${
+                        selectedCity.name
+                      }`}</h4>
+                    </div>
+                    <h1>
+                      <h6>From</h6> ${selectedCity.MinPrice}
+                    </h1>
+                  </span>
+                </div>
               </div>
+              <div className="mini-map-line"></div>
             </div>
-            <div className="mini-map-line"></div>
-          </div>
           ) : null}
           <h1 className="suggested-header">Suggested Trips</h1>
           {<div>{suggestedCards}</div>}
@@ -170,6 +165,8 @@ function MiniMap(props) {
       <div className="mini-map">
         <ReactMapGL
           {...viewport}
+          width="100%"
+          height="100%"
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           mapStyle="mapbox://styles/nickloverde/ckkew55if03e817o5o2je6rkp"
           //allows us to drag map around and zoom in/out
@@ -177,8 +174,12 @@ function MiniMap(props) {
             setViewport({ ...viewport });
           }}
         >
-          {/* Markers */}
           {markers}
+          {/* {flights.map((flight, index) => (
+            <Marker latitude={+flight.lat} longitude={+flight.lon}>
+              <h1>{flight.CityName}</h1>
+            </Marker>
+          ))} */}
 
           <GeolocateControl
             style={geolocateControlStyle}

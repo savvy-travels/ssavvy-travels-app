@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../Redux/userReducer";
 import "./header.css";
 import axios from "axios";
+import { Context } from "../../../context/context";
 
 function Header(props) {
+  const context = useContext(Context);
   const [open, setOpen] = useState(false);
 
   function userLogout() {
@@ -14,6 +16,11 @@ function Header(props) {
       props.logout();
       props.history.push("/");
     });
+  }
+
+  function closeModal(e) {
+    e.stopPropagation();
+    context.selectModal();
   }
   return (
     <>
@@ -27,7 +34,11 @@ function Header(props) {
           <img
             className="header-name"
             src="https://colab-image-assets.s3-us-west-1.amazonaws.com/Logo-text.png"
+            alt="logo name"
           />
+          <button onClick={closeModal} className="auth-button">
+            About
+          </button>
         </Link>
         {props.isLoggedIn ? (
           <div className="user-nav">

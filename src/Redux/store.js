@@ -5,4 +5,4 @@ import rootReducer from './root-reducers'
 export const store = createStore(rootReducer)
 export const persistor = persistStore(store)
 
-export default { store, persistor}
+export default (store, persistor)

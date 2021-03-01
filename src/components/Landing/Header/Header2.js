@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../../../Redux/userReducer";
 import "./header2.css";
 import axios from "axios";
+import { Context } from "../../../context/context";
 
 function Header2(props) {
+  const context = useContext(Context);
   // console.log(props);
   const [open, setOpen] = useState(false);
 
@@ -16,6 +18,11 @@ function Header2(props) {
       props.history.push("/");
     });
   };
+
+  function closeModal(e) {
+    e.stopPropagation();
+    context.selectModal();
+  }
   return (
     <>
       <header className="header-two">
@@ -28,6 +35,7 @@ function Header2(props) {
           <img
             className="header-name"
             src="https://colab-image-assets.s3-us-west-1.amazonaws.com/Logo-text.png"
+            alt="logo-name"
           />
         </Link>
         {props.isLoggedIn ? (
