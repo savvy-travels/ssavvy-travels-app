@@ -37,12 +37,17 @@ export function LatProvider(props) {
               .get(`/api/landing/airport/${city}`)
               .then((res) => {
                 const { items } = res.data;
-                console.log(items)
-                const airport = items[0].iata;
+                console.log(items);
+                // const airport = items[0].iata;
+                const airport = items.filter(
+                  (airport) => !airport.shortName.includes("Regional")
+                );
                 setAirport(airport);
                 setAirports(items);
                 axios
-                  .get(`/api/skyscanner/${airport}/anywhere/anytime/anytime`)
+                  .get(
+                    `/api/skyscanner/${airport[0].iata}/anywhere/anytime/anytime`
+                  )
                   .then((res) => {
                     console.log(res);
                     const { Quotes, Places, Carriers } = res.data;

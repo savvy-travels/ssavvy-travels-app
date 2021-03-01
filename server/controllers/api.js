@@ -33,7 +33,6 @@ module.exports = {
       },
     });
     const myCityJson = await fetch_city.json();
-    console.log(myCityJson)
     const cityFilter = await myCityJson.data
       .filter((place) => place.type === "CITY")
       .map((city) => city.city);
@@ -51,7 +50,6 @@ module.exports = {
       },
     });
     const myAirportJson = await fetch_airport.json();
-    console.log(myAirportJson)
     res.send(myAirportJson);
   },
 
