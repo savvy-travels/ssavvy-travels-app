@@ -16,10 +16,8 @@ require("dotenv").config();
 
 function Landing(props) {
   const context = useContext(Context);
-
   const allAirports = context.allAirports;
 
-  console.log(context.places);
   // Find Flights based off of your airport location
   const flights = context.quotes
     .map((quote) => {
@@ -43,7 +41,6 @@ function Landing(props) {
       return { ...flight, ...allAirports[airportId] };
     });
 
-  console.log(flights);
   return (
     <div className="landing">
       <Header />
