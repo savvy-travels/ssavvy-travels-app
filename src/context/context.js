@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+const { REACT_APP_GOOGLEMAPS_KEY } = process.env;
 
 export const Context = createContext(null);
 
@@ -16,7 +17,9 @@ export function LatProvider(props) {
 
   useEffect(() => {
     axios
-      .post("/api/location")
+      .post(
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=${REACT_APP_GOOGLEMAPS_KEY}`
+      )
       .then((res) => {
         console.log(res.data);
         const { lat } = res.data.location;
