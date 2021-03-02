@@ -92,7 +92,6 @@ function NewSearch(props) {
       });
     });
   }, []);
-  console.log(myAirportsFiltered);
 
   const myOptions = myAirportsFiltered.map((airport) => {
     return {
@@ -122,7 +121,7 @@ function NewSearch(props) {
         {next ? (
           <div className="where-when-inputs">
             <AsyncSelect
-              onChange={(e) => (!e ? null : handleLocation(e))}
+              onChange={(e) => (!e ? null : setLocation(e.value))}
               className="airport-select"
               loadOptions={loadOptions}
               isClearable={true}
@@ -179,10 +178,6 @@ function NewSearch(props) {
       </div>
     </span>
   );
-
-  function handleLocation(e) {
-    console.log(e);
-  }
 
   function handleSearch(e) {
     newSearch({ budget, location, departureDate, returnDate });
