@@ -32,7 +32,7 @@ export function LatProvider(props) {
         `https://www.googleapis.com/geolocation/v1/geolocate?key=${REACT_APP_GOOGLEMAPS_KEY}`
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const { lat } = res.data.location;
         const { lng } = res.data.location;
         setLatLong({ lat: lat, long: lng });
@@ -41,7 +41,7 @@ export function LatProvider(props) {
         axios
           .get(`/api/city/${lat},${lng}`)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             const city = res.data[0];
             setCities(res.data);
             axios
@@ -52,7 +52,7 @@ export function LatProvider(props) {
                   let airportId = airportsJson.findIndex(
                     (airportJson) => airport.iata === airportJson.code
                   );
-                  console.log(airportId);
+                  // console.log(airportId);
                   return { ...airportsJson[airportId] };
                 });
 
@@ -60,7 +60,7 @@ export function LatProvider(props) {
                   (airport) => Object.keys(airport).length !== 0
                 );
 
-                console.log(major);
+                // console.log(major);
 
                 const airport = major[0].code;
                 setAirport(airport);
@@ -69,7 +69,7 @@ export function LatProvider(props) {
                 axios
                   .get(`/api/skyscanner/${airport}/anywhere/anytime/anytime`)
                   .then((res) => {
-                    console.log(res);
+                    // console.log(res);
                     const { Quotes, Places, Carriers } = res.data;
                     setQuotes(Quotes);
                     setPlaces(Places);
@@ -209,7 +209,7 @@ export function LatProvider(props) {
   const selectModal = (info) => {
     setModal(!modal);
   };
-  console.log(departureDate, returnDate);
+
   return (
     <Context.Provider
       value={{
