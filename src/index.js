@@ -6,19 +6,17 @@ import reportWebVitals from "./reportWebVitals";
 import { HashRouter } from "react-router-dom";
 import { LatProvider } from "./context/context";
 import { Provider } from "react-redux";
-import { store } from './Redux/store'
+import { store } from "./Redux/store";
 // import { PersistGate } from "redux-persist/integration/react";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      {/* <PersistGate persistor={persistor}> */}
       <HashRouter>
         <LatProvider>
           <App />
         </LatProvider>
       </HashRouter>
-      {/* </PersistGate> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import { airportSearch } from "../../Redux/searchReducer";
 import { connect } from "react-redux";
 import "./landing.css";
 import { Context } from "../../context/context";
@@ -106,4 +105,4 @@ function mapStateToProps(reduxState) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { airportSearch })(Landing));
+export default withRouter(connect(mapStateToProps)(Landing));
