@@ -209,7 +209,7 @@ export function LatProvider(props) {
   const selectModal = (info) => {
     setModal(!modal);
   };
-  console.log(location);
+  console.log(departureDate, returnDate);
   return (
     <Context.Provider
       value={{
