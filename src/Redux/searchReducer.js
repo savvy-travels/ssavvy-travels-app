@@ -10,7 +10,6 @@ const NEW_SEARCH = "NEW_SEARCH";
 const AIRPORT_SEARCH = "AIRPORT_SEARCH";
 
 export function airportSearch(search) {
-  console.log(search);
   return {
     type: AIRPORT_SEARCH,
     payload: search,
@@ -18,6 +17,7 @@ export function airportSearch(search) {
 }
 
 export function newSearch(search) {
+  console.log(search);
   return {
     type: NEW_SEARCH,
     payload: search,

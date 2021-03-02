@@ -55,14 +55,20 @@ const customStyles = {
 };
 
 function NewSearch(props) {
-  const context = useContext(Context);
-  const { newSearch } = props;
+  const {
+    airports,
+    budget,
+    location,
+    departureDate,
+    returnDate,
+    setBudget,
+    setLocation,
+    setDepartureDate,
+    setReturnDate,
+    newSearch,
+  } = useContext(Context);
 
   const [input, setInput] = useState("");
-  const [budget, setBudget] = useState("");
-  const [departureDate, setDepartureDate] = useState(undefined);
-  const [returnDate, setReturnDate] = useState(undefined);
-  const [location, setLocation] = useState(context.airport);
   const [next, setNext] = useState(false);
   const [myAirportsFiltered, setMyAirportsFiltered] = useState([]);
 
@@ -71,12 +77,8 @@ function NewSearch(props) {
     const inputValue = newValue.replace(/\W/g, "");
     setInput(inputValue);
   }
-  // function search() {
-  //   newSearch({ budget, location, departureDate, returnDate });
-  //   props.history.push("/map");
-  // }
 
-  const myAirports = context.airports.map((airport) => {
+  const myAirports = airports.map((airport) => {
     let airportId = allAirports.findIndex((ap) => ap.code == airport.iata);
     return { ...airport, ...allAirports[airportId] };
   });
@@ -90,11 +92,12 @@ function NewSearch(props) {
       });
     });
   }, []);
+  console.log(myAirportsFiltered);
 
   const myOptions = myAirportsFiltered.map((airport) => {
     return {
-      value: airport.iata,
-      label: `${airport.name} ${airport.iata}-${airport.city}`,
+      value: airport.code,
+      label: `${airport.name} ${airport.code}-${airport.city}`,
     };
   });
 
@@ -119,12 +122,12 @@ function NewSearch(props) {
         {next ? (
           <div className="where-when-inputs">
             <AsyncSelect
-              onChange={(e) => (!e ? null : setLocation(e.value))}
+              onChange={(e) => (!e ? null : handleLocation(e))}
               className="airport-select"
               loadOptions={loadOptions}
               isClearable={true}
               onInputChange={handleInputChange}
-              placeholder={"From..."}
+              placeholder={myOptions.label}
               defaultValue={location}
               styles={customStyles}
               theme={(theme) => ({
@@ -177,8 +180,11 @@ function NewSearch(props) {
     </span>
   );
 
+  function handleLocation(e) {
+    console.log(e);
+  }
+
   function handleSearch(e) {
-    e.preventDefault();
     newSearch({ budget, location, departureDate, returnDate });
     props.history.push("/map");
   }
