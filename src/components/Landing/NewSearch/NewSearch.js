@@ -180,7 +180,6 @@ function NewSearch(props) {
   );
 
   function handleSearch(e) {
-    newSearch({ budget, location, departureDate, returnDate });
     props.history.push("/map");
   }
 }

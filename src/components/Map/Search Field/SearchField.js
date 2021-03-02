@@ -69,17 +69,27 @@ const customStyles = {
 
 const SearchField = (props) => {
   //Global Context and Props//
-  const context = useContext(Context);
+  const {
+    airports,
+    budget,
+    location,
+    departureDate,
+    returnDate,
+    setBudget,
+    setLocation,
+    setDepartureDate,
+    setReturnDate,
+  } = useContext(Context);
   const { filterNonStop, setFilterNonStop } = props;
 
   //Todays Date//
   const today = moment().format().replace(/T.*$/, "");
 
   //Search Fields//
-  const [budget, setBudget] = useState(props.budget);
-  const [location, setLocation] = useState(props.location);
-  const [departureDate, setDepartureDate] = useState(props.departureDate);
-  const [returnDate, setReturnDate] = useState(props.returnDate);
+  // const [budget, setBudget] = useState(props.budget);
+  // const [location, setLocation] = useState(props.location);
+  // const [departureDate, setDepartureDate] = useState(props.departureDate);
+  // const [returnDate, setReturnDate] = useState(props.returnDate);
 
   //Airport Filter//
   const [input, setInput] = useState("");
@@ -98,7 +108,7 @@ const SearchField = (props) => {
     props.newSearch({ budget, location, departureDate, returnDate });
   }
 
-  const myAirports = context.airports.map((airport) => {
+  const myAirports = airports.map((airport) => {
     let airportId = allAirports.findIndex((ap) => ap.code == airport.iata);
     return { ...airport, ...allAirports[airportId] };
   });

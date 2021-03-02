@@ -14,17 +14,20 @@ import MapKey from "./MapKey/MapKey";
 const photos = require("../../photos.json");
 
 function Map(props) {
-  const context = useContext(Context);
+  const {
+    quotes,
+    places,
+    carriers,
+    allAirports,
+    setAllAirports,
+    setQuotes,
+    setPlaces,
+    setCarriers,
+    goToCarrier,
+  } = useContext(Context);
 
-  const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY;
-  const [airports, setAirports] = useState([]);
-  const [quotes, setQuotes] = useState([]);
-  const [places, setPlaces] = useState([]);
-  const [allAirports, setAllAirports] = useState([]);
-  const [carriers, setCarriers] = useState([]);
   const [passengers, setPassengers] = useState(1);
   const [filterNonStop, setFilterNonStop] = useState(false);
-  // const [flightCards, setFlightCards] = useState([])
 
   const [loading, setLoading] = useState(true);
 
@@ -53,13 +56,12 @@ function Map(props) {
     top: 10,
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("resize", useSetViewport);
     return () => {
       window.removeEventListener("resize", useSetViewport);
     };
   }, []);
-  //Search State//
 
   const { budget, location, departureDate, returnDate } = props;
 
@@ -81,28 +83,27 @@ function Map(props) {
         setLoading(false);
         console.log(err);
       });
-    axios.get("/api/airports").then((res) => setAllAirports(res.data));
   }, [budget, location, departureDate, returnDate]);
 
-  const flights = context.quotes
+  const flights = quotes
     .map((quote) => {
-      let destinationId = context.places.findIndex(
+      let destinationId = places.findIndex(
         (place) => place.PlaceId === quote.OutboundLeg.DestinationId
       );
-      let carrierId = context.carriers.findIndex(
+      let carrierId = carriers.findIndex(
         (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]
       );
       return {
         ...quote,
-        ...context.places[destinationId],
-        ...context.carriers[carrierId],
+        ...places[destinationId],
+        ...carriers[carrierId],
       };
     })
     .map((flight) => {
-      let airportId = context.allAirports.findIndex(
+      let airportId = allAirports.findIndex(
         (airport) => airport.code == flight.IataCode
       );
-      return { ...flight, ...context.allAirports[airportId] };
+      return { ...flight, ...allAirports[airportId] };
     });
 
   const directFlights = flights.filter((flight) => flight.Direct);
@@ -125,7 +126,7 @@ function Map(props) {
               <h1>
                 {flight.CityName}{" "}
                 <button
-                  onClick={() => context.goToCarrier(flight.Name)}
+                  onClick={() => goToCarrier(flight.Name)}
                   className="book-button"
                 >
                   Book Flight
@@ -236,9 +237,7 @@ function Map(props) {
                           <h1>
                             {selectedCity.CityName}{" "}
                             <button
-                              onClick={() =>
-                                context.goToCarrier(selectedCity.Name)
-                              }
+                              onClick={() => goToCarrier(selectedCity.Name)}
                               className="book-button"
                             >
                               Book Flight
