@@ -56,6 +56,7 @@ const customStyles = {
 
 function NewSearch(props) {
   const context = useContext(Context);
+  const { newSearch } = props;
 
   const [input, setInput] = useState("");
   const [budget, setBudget] = useState("");
@@ -70,10 +71,10 @@ function NewSearch(props) {
     const inputValue = newValue.replace(/\W/g, "");
     setInput(inputValue);
   }
-  function search() {
-    props.newSearch({ budget, location, departureDate, returnDate });
-    props.history.push("/map");
-  }
+  // function search() {
+  //   newSearch({ budget, location, departureDate, returnDate });
+  //   props.history.push("/map");
+  // }
 
   const myAirports = context.airports.map((airport) => {
     let airportId = allAirports.findIndex((ap) => ap.code == airport.iata);
@@ -114,6 +115,7 @@ function NewSearch(props) {
           type="text"
           placeholder="Whats Your Budget?"
         />
+        <h1 className="dollar-sign">$</h1>
         {next ? (
           <div className="where-when-inputs">
             <AsyncSelect
@@ -161,7 +163,7 @@ function NewSearch(props) {
           </div>
         ) : null}
       </div>
-      <button onClick={() => search()} className="search-button">
+      <button onClick={handleSearch} className="search-button">
         Let's Go!
       </button>
       <div class="downArrow bounce">
@@ -174,6 +176,12 @@ function NewSearch(props) {
       </div>
     </span>
   );
+
+  function handleSearch(e) {
+    e.preventDefault();
+    newSearch({ budget, location, departureDate, returnDate });
+    props.history.push("/map");
+  }
 }
 
 export default withRouter(connect(null, { newSearch })(NewSearch));

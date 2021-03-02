@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+import moment from "moment";
 import { connect } from "react-redux";
 import { newSearch } from "../../../Redux/searchReducer";
 import { withRouter } from "react-router-dom";
@@ -67,7 +68,13 @@ const customStyles = {
 };
 
 const SearchField = (props) => {
-  console.log(props.location);
+  //Global Context and Props//
+  const context = useContext(Context);
+  const { filterNonStop, setFilterNonStop } = props;
+
+  //Todays Date//
+  const today = moment().format().replace(/T.*$/, "");
+
   //Search Fields//
   const [budget, setBudget] = useState(props.budget);
   const [location, setLocation] = useState(props.location);
@@ -79,10 +86,8 @@ const SearchField = (props) => {
   const [myAirportsFiltered, setMyAirportsFiltered] = useState([]);
   const [passengers, setPassengers] = useState(1);
 
-  const context = useContext(Context);
-
   const setNonStop = () => {
-    props.setFilterNonStop(!props.filterNonStop);
+    setFilterNonStop(!filterNonStop);
   };
   function handleInputChange(newValue) {
     const inputValue = newValue.replace(/\W/g, "");
@@ -148,6 +153,8 @@ const SearchField = (props) => {
         <input
           onChange={(e) => setDepartureDate(e.target.value)}
           value={departureDate}
+          min={today}
+          max={returnDate}
           id="depart-date-input"
           type="Date"
           placeholder="When"
@@ -156,6 +163,7 @@ const SearchField = (props) => {
         <input
           onChange={(e) => setReturnDate(e.target.value)}
           value={returnDate}
+          min={departureDate}
           id="arrive-date-input"
           type="Date"
           placeholder="When"
