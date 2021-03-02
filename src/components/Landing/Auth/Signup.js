@@ -227,10 +227,4 @@ function Signup(props) {
   );
 }
 
-function mapStateToProps(reduxState) {
-  return {
-    airports: reduxState.searchReducer.airports,
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { loginUser })(Signup));
+export default withRouter(connect(null, { loginUser })(Signup));
