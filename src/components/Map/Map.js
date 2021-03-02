@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { newSearch } from "../../Redux/searchReducer";
 import ReactMapGL, { Marker, GeolocateControl } from "react-map-gl";
 import { ClipLoader } from "react-spinners";
 import "./map.css";
@@ -20,15 +18,19 @@ function Map(props) {
     carriers,
     allAirports,
     setAllAirports,
+    budget,
+    location,
+    departureDate,
+    returnDate,
     setQuotes,
     setPlaces,
     setCarriers,
     goToCarrier,
   } = useContext(Context);
-
+  //Filters on the Search Results
   const [passengers, setPassengers] = useState(1);
   const [filterNonStop, setFilterNonStop] = useState(false);
-
+  //Loading state for spinner
   const [loading, setLoading] = useState(true);
 
   //Map State
@@ -39,8 +41,6 @@ function Map(props) {
     height: "100%",
     zoom: 4,
   });
-  const [selectedCity, setSelectedCity] = useState(null);
-
   const useSetViewport = () => {
     setViewport({
       latitude: +localStorage.getItem("lat"),
@@ -50,20 +50,21 @@ function Map(props) {
       zoom: 3,
     });
   };
-
-  const geolocateControlStyle = {
-    right: 10,
-    top: 10,
-  };
-
+  //Map Window event listener
   useEffect(() => {
     window.addEventListener("resize", useSetViewport);
     return () => {
       window.removeEventListener("resize", useSetViewport);
     };
   }, []);
+  //Flight cards state//
+  const [selectedCity, setSelectedCity] = useState(null);
 
-  const { budget, location, departureDate, returnDate } = props;
+  //Geolocate Controls//
+  const geolocateControlStyle = {
+    right: 10,
+    top: 10,
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -74,9 +75,10 @@ function Map(props) {
         }/${returnDate ? returnDate : "anytime"}`
       )
       .then((res) => {
-        setQuotes(res.data.Quotes);
-        setPlaces(res.data.Places);
-        setCarriers(res.data.Carriers);
+        const { Quotes, Places, Carriers } = res.data;
+        setQuotes(Quotes);
+        setPlaces(Places);
+        setCarriers(Carriers);
         setLoading(false);
       })
       .catch((err) => {
@@ -139,9 +141,10 @@ function Map(props) {
               <h4>{flight.Name}</h4>
             </div>
             <div className="mini-price">
-              <h1>
-                <h6>From</h6> ${totalPrice}
-              </h1>
+              <h2>
+                from
+                <strong>${totalPrice}</strong>
+              </h2>
             </div>
           </span>
         </div>
@@ -301,15 +304,4 @@ function Map(props) {
   );
 }
 
-function mapStateToProps(reduxState) {
-  return {
-    budget: reduxState.searchReducer.budget,
-    location: reduxState.searchReducer.location,
-    departureDate: reduxState.searchReducer.departureDate,
-    returnDate: reduxState.searchReducer.returnDate,
-    long: +reduxState.locationReducer.long,
-    lat: +reduxState.locationReducer.lat,
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { newSearch })(Map));
+export default withRouter(Map);

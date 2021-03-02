@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
-import { connect } from "react-redux";
-import { newSearch } from "../../../Redux/searchReducer";
 import { withRouter } from "react-router-dom";
 import { Context } from "../../../context/context";
 import AsyncSelect from "react-select/async";
@@ -80,7 +78,7 @@ const SearchField = (props) => {
     setDepartureDate,
     setReturnDate,
   } = useContext(Context);
-  const { filterNonStop, setFilterNonStop } = props;
+  const { filterNonStop, setFilterNonStop, passengers, setPassengers } = props;
 
   //Todays Date//
   const today = moment().format().replace(/T.*$/, "");
@@ -94,7 +92,6 @@ const SearchField = (props) => {
   //Airport Filter//
   const [input, setInput] = useState("");
   const [myAirportsFiltered, setMyAirportsFiltered] = useState([]);
-  const [passengers, setPassengers] = useState(1);
 
   const setNonStop = () => {
     setFilterNonStop(!filterNonStop);
@@ -194,26 +191,16 @@ const SearchField = (props) => {
         <div className="round-oneWay">
           <p>passengers</p>
           <input
-            onChange={(e) => props.setPassengers(e.target.value)}
-            value={props.passengers}
+            onChange={(e) => setPassengers(e.target.value)}
+            value={passengers}
             type="number"
             min="1"
             max="10"
           />
         </div>
       </div>
-      <button onClick={() => searchUpdate()}>Search</button>
     </form>
   );
 };
 
-function mapStateToProps(reduxState) {
-  return {
-    budget: reduxState.searchReducer.budget,
-    location: reduxState.searchReducer.location,
-    departureDate: reduxState.searchReducer.departureDate,
-    returnDate: reduxState.searchReducer.returnDate,
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { newSearch })(SearchField));
+export default withRouter(SearchField);
