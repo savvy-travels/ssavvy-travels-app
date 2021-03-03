@@ -55,13 +55,20 @@ const customStyles = {
 };
 
 function NewSearch(props) {
-  const context = useContext(Context);
+  const {
+    airports,
+    budget,
+    location,
+    departureDate,
+    returnDate,
+    setBudget,
+    setLocation,
+    setDepartureDate,
+    setReturnDate,
+    newSearch,
+  } = useContext(Context);
 
   const [input, setInput] = useState("");
-  const [budget, setBudget] = useState("");
-  const [departureDate, setDepartureDate] = useState(undefined);
-  const [returnDate, setReturnDate] = useState(undefined);
-  const [location, setLocation] = useState(context.airport);
   const [next, setNext] = useState(false);
   const [myAirportsFiltered, setMyAirportsFiltered] = useState([]);
 
@@ -70,12 +77,8 @@ function NewSearch(props) {
     const inputValue = newValue.replace(/\W/g, "");
     setInput(inputValue);
   }
-  function search() {
-    props.newSearch({ budget, location, departureDate, returnDate });
-    props.history.push("/map");
-  }
 
-  const myAirports = context.airports.map((airport) => {
+  const myAirports = airports.map((airport) => {
     let airportId = allAirports.findIndex((ap) => ap.code == airport.iata);
     return { ...airport, ...allAirports[airportId] };
   });
@@ -92,8 +95,8 @@ function NewSearch(props) {
 
   const myOptions = myAirportsFiltered.map((airport) => {
     return {
-      value: airport.iata,
-      label: `${airport.name} ${airport.iata}-${airport.city}`,
+      value: airport.code,
+      label: `${airport.name} ${airport.code}-${airport.city}`,
     };
   });
 
@@ -114,6 +117,7 @@ function NewSearch(props) {
           type="text"
           placeholder="Whats Your Budget?"
         />
+        <h1 className="dollar-sign">$</h1>
         {next ? (
           <div className="where-when-inputs">
             <AsyncSelect
@@ -122,7 +126,7 @@ function NewSearch(props) {
               loadOptions={loadOptions}
               isClearable={true}
               onInputChange={handleInputChange}
-              placeholder={"From..."}
+              placeholder={myOptions.label}
               defaultValue={location}
               styles={customStyles}
               theme={(theme) => ({
@@ -161,7 +165,7 @@ function NewSearch(props) {
           </div>
         ) : null}
       </div>
-      <button onClick={() => search()} className="search-button">
+      <button onClick={handleSearch} className="search-button">
         Let's Go!
       </button>
       <div class="downArrow bounce">
@@ -174,6 +178,10 @@ function NewSearch(props) {
       </div>
     </span>
   );
+
+  function handleSearch(e) {
+    props.history.push("/map");
+  }
 }
 
 export default withRouter(connect(null, { newSearch })(NewSearch));

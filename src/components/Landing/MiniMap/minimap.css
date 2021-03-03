@@ -214,18 +214,19 @@ button.marker-btn img:hover {
   align-items: center;
   justify-content: flex-end;
 }
-.mini-price > h1 {
+.mini-price > h2 {
   margin-left: 0px;
   text-align: right;
-  font-weight: 600;
+  font-weight: 200;
   color: #0b3840;
   display: flex;
   align-items: center;
 }
 
-.mini-price > h1 > h6 {
+.mini-price > h2 > strong {
   margin-right: 0px;
-  font-weight: 300;
+  font-size: 1.25em;
+  font-weight: 600;
   color: #0b3840;
   margin-right: 3px;
 }

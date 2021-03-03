@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { connect } from "react-redux";
-import { newSearch } from "../../../Redux/searchReducer";
+import moment from "moment";
 import { withRouter } from "react-router-dom";
 import { Context } from "../../../context/context";
 import AsyncSelect from "react-select/async";
@@ -67,22 +66,35 @@ const customStyles = {
 };
 
 const SearchField = (props) => {
-  console.log(props.location);
+  //Global Context and Props//
+  const {
+    airports,
+    budget,
+    location,
+    departureDate,
+    returnDate,
+    setBudget,
+    setLocation,
+    setDepartureDate,
+    setReturnDate,
+  } = useContext(Context);
+  const { filterNonStop, setFilterNonStop, passengers, setPassengers } = props;
+
+  //Todays Date//
+  const today = moment().format().replace(/T.*$/, "");
+
   //Search Fields//
-  const [budget, setBudget] = useState(props.budget);
-  const [location, setLocation] = useState(props.location);
-  const [departureDate, setDepartureDate] = useState(props.departureDate);
-  const [returnDate, setReturnDate] = useState(props.returnDate);
+  // const [budget, setBudget] = useState(props.budget);
+  // const [location, setLocation] = useState(props.location);
+  // const [departureDate, setDepartureDate] = useState(props.departureDate);
+  // const [returnDate, setReturnDate] = useState(props.returnDate);
 
   //Airport Filter//
   const [input, setInput] = useState("");
   const [myAirportsFiltered, setMyAirportsFiltered] = useState([]);
-  const [passengers, setPassengers] = useState(1);
-
-  const context = useContext(Context);
 
   const setNonStop = () => {
-    props.setFilterNonStop(!props.filterNonStop);
+    setFilterNonStop(!filterNonStop);
   };
   function handleInputChange(newValue) {
     const inputValue = newValue.replace(/\W/g, "");
@@ -93,7 +105,7 @@ const SearchField = (props) => {
     props.newSearch({ budget, location, departureDate, returnDate });
   }
 
-  const myAirports = context.airports.map((airport) => {
+  const myAirports = airports.map((airport) => {
     let airportId = allAirports.findIndex((ap) => ap.code == airport.iata);
     return { ...airport, ...allAirports[airportId] };
   });
@@ -148,6 +160,8 @@ const SearchField = (props) => {
         <input
           onChange={(e) => setDepartureDate(e.target.value)}
           value={departureDate}
+          min={today}
+          max={returnDate}
           id="depart-date-input"
           type="Date"
           placeholder="When"
@@ -156,6 +170,7 @@ const SearchField = (props) => {
         <input
           onChange={(e) => setReturnDate(e.target.value)}
           value={returnDate}
+          min={departureDate}
           id="arrive-date-input"
           type="Date"
           placeholder="When"
@@ -176,26 +191,16 @@ const SearchField = (props) => {
         <div className="round-oneWay">
           <p>passengers</p>
           <input
-            onChange={(e) => props.setPassengers(e.target.value)}
-            value={props.passengers}
+            onChange={(e) => setPassengers(e.target.value)}
+            value={passengers}
             type="number"
             min="1"
             max="10"
           />
         </div>
       </div>
-      <button onClick={() => searchUpdate()}>Search</button>
     </form>
   );
 };
 
-function mapStateToProps(reduxState) {
-  return {
-    budget: reduxState.searchReducer.budget,
-    location: reduxState.searchReducer.location,
-    departureDate: reduxState.searchReducer.departureDate,
-    returnDate: reduxState.searchReducer.returnDate,
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { newSearch })(SearchField));
+export default withRouter(SearchField);

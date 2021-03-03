@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
-import { airportSearch } from "../../Redux/searchReducer";
 import { connect } from "react-redux";
 import "./landing.css";
 import { Context } from "../../context/context";
@@ -15,22 +14,29 @@ import Header from "./Header/Header";
 require("dotenv").config();
 
 function Landing(props) {
-  const context = useContext(Context);
-  const allAirports = context.allAirports;
+  const {
+    quotes,
+    places,
+    loading,
+    carriers,
+    lat,
+    long,
+    allAirports,
+  } = useContext(Context);
 
   // Find Flights based off of your airport location
-  const flights = context.quotes
+  const flights = quotes
     .map((quote) => {
-      let destinationId = context.places.findIndex(
+      let destinationId = places.findIndex(
         (place) => place.PlaceId === quote.OutboundLeg.DestinationId
       );
-      let carrierId = context.carriers.findIndex(
+      let carrierId = carriers.findIndex(
         (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]
       );
       return {
         ...quote,
-        ...context.places[destinationId],
-        ...context.carriers[carrierId],
+        ...places[destinationId],
+        ...carriers[carrierId],
       };
     })
     .map((flight) => {
@@ -55,7 +61,7 @@ function Landing(props) {
         {" "}
       </video>
 
-      {!context.loading ? (
+      {!loading ? (
         <Switch>
           <Route exact path="/" component={NewSearch} />
           <Route exact path="/login" component={Login} />
@@ -74,13 +80,8 @@ function Landing(props) {
       {/* <div className='triangle'></div> */}
 
       <div className="mini-map-div">
-        {!context.loading ? (
-          <MiniMap
-            wait={8000}
-            long={context.long}
-            lat={context.lat}
-            flights={flights}
-          />
+        {!loading ? (
+          <MiniMap wait={8000} long={long} lat={lat} flights={flights} />
         ) : (
           <>
             <ClipLoader color={"#cae00d"} />
@@ -104,4 +105,4 @@ function mapStateToProps(reduxState) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { airportSearch })(Landing));
+export default withRouter(connect(mapStateToProps)(Landing));

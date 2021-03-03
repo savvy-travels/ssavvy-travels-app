@@ -1,7 +1,5 @@
 import React, { useContext, useEffect, useState, useMemo } from "react";
 import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { newSearch } from "../../Redux/searchReducer";
 import ReactMapGL, { Marker, GeolocateControl } from "react-map-gl";
 import { ClipLoader } from "react-spinners";
 import "./map.css";
@@ -14,18 +12,25 @@ import MapKey from "./MapKey/MapKey";
 const photos = require("../../photos.json");
 
 function Map(props) {
-  const context = useContext(Context);
-
-  const skyscannerKey = process.env.REACT_APP_SKYSCANNER_KEY;
-  const [airports, setAirports] = useState([]);
-  const [quotes, setQuotes] = useState([]);
-  const [places, setPlaces] = useState([]);
-  const [allAirports, setAllAirports] = useState([]);
-  const [carriers, setCarriers] = useState([]);
+  const {
+    quotes,
+    places,
+    carriers,
+    allAirports,
+    setAllAirports,
+    budget,
+    location,
+    departureDate,
+    returnDate,
+    setQuotes,
+    setPlaces,
+    setCarriers,
+    goToCarrier,
+  } = useContext(Context);
+  //Filters on the Search Results
   const [passengers, setPassengers] = useState(1);
   const [filterNonStop, setFilterNonStop] = useState(false);
-  // const [flightCards, setFlightCards] = useState([])
-
+  //Loading state for spinner
   const [loading, setLoading] = useState(true);
 
   //Map State
@@ -36,8 +41,6 @@ function Map(props) {
     height: "100%",
     zoom: 4,
   });
-  const [selectedCity, setSelectedCity] = useState(null);
-
   const useSetViewport = () => {
     setViewport({
       latitude: +localStorage.getItem("lat"),
@@ -47,21 +50,21 @@ function Map(props) {
       zoom: 3,
     });
   };
-
-  const geolocateControlStyle = {
-    right: 10,
-    top: 10,
-  };
-
-  React.useEffect(() => {
+  //Map Window event listener
+  useEffect(() => {
     window.addEventListener("resize", useSetViewport);
     return () => {
       window.removeEventListener("resize", useSetViewport);
     };
   }, []);
-  //Search State//
+  //Flight cards state//
+  const [selectedCity, setSelectedCity] = useState(null);
 
-  const { budget, location, departureDate, returnDate } = props;
+  //Geolocate Controls//
+  const geolocateControlStyle = {
+    right: 10,
+    top: 10,
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -72,39 +75,37 @@ function Map(props) {
         }/${returnDate ? returnDate : "anytime"}`
       )
       .then((res) => {
-        console.log(res);
-        setQuotes(res.data.Quotes);
-        setPlaces(res.data.Places);
-        setCarriers(res.data.Carriers);
+        const { Quotes, Places, Carriers } = res.data;
+        setQuotes(Quotes);
+        setPlaces(Places);
+        setCarriers(Carriers);
         setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
         console.log(err);
       });
-    axios.get("/api/airports").then((res) => setAllAirports(res.data));
   }, [budget, location, departureDate, returnDate]);
 
-  const flights = context.quotes
+  const flights = quotes
     .map((quote) => {
-      console.log(quote);
-      let destinationId = context.places.findIndex(
+      let destinationId = places.findIndex(
         (place) => place.PlaceId === quote.OutboundLeg.DestinationId
       );
-      let carrierId = context.carriers.findIndex(
+      let carrierId = carriers.findIndex(
         (carrier) => carrier.CarrierId === quote.OutboundLeg.CarrierIds[0]
       );
       return {
         ...quote,
-        ...context.places[destinationId],
-        ...context.carriers[carrierId],
+        ...places[destinationId],
+        ...carriers[carrierId],
       };
     })
     .map((flight) => {
-      let airportId = context.allAirports.findIndex(
+      let airportId = allAirports.findIndex(
         (airport) => airport.code == flight.IataCode
       );
-      return { ...flight, ...context.allAirports[airportId] };
+      return { ...flight, ...allAirports[airportId] };
     });
 
   const directFlights = flights.filter((flight) => flight.Direct);
@@ -127,7 +128,7 @@ function Map(props) {
               <h1>
                 {flight.CityName}{" "}
                 <button
-                  onClick={() => context.goToCarrier(flight.Name)}
+                  onClick={() => goToCarrier(flight.Name)}
                   className="book-button"
                 >
                   Book Flight
@@ -140,9 +141,10 @@ function Map(props) {
               <h4>{flight.Name}</h4>
             </div>
             <div className="mini-price">
-              <h1>
-                <h6>From</h6> ${totalPrice}
-              </h1>
+              <h2>
+                from
+                <strong>${totalPrice}</strong>
+              </h2>
             </div>
           </span>
         </div>
@@ -203,8 +205,6 @@ function Map(props) {
     [flights]
   );
 
-  // console.log(selectedCity)
-
   return (
     <div className="map-view">
       <Header2 />
@@ -240,9 +240,7 @@ function Map(props) {
                           <h1>
                             {selectedCity.CityName}{" "}
                             <button
-                              onClick={() =>
-                                context.goToCarrier(selectedCity.Name)
-                              }
+                              onClick={() => goToCarrier(selectedCity.Name)}
                               className="book-button"
                             >
                               Book Flight
@@ -306,15 +304,4 @@ function Map(props) {
   );
 }
 
-function mapStateToProps(reduxState) {
-  return {
-    budget: reduxState.searchReducer.budget,
-    location: reduxState.searchReducer.location,
-    departureDate: reduxState.searchReducer.departureDate,
-    returnDate: reduxState.searchReducer.returnDate,
-    long: +reduxState.locationReducer.long,
-    lat: +reduxState.locationReducer.lat,
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { newSearch })(Map));
+export default withRouter(Map);

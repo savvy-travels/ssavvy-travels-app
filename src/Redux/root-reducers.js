@@ -1,19 +1,10 @@
-import { combineReducers } from 'redux'
-
-import userReducer from './userReducer'
-import searchReducer from './searchReducer'
-import locationReducer from './locationReducer'
-
-// const persistConfig = {
-//     key: 'state',
-//     storage,
-//     whitelist: ['locationReducer']
-// }
+import { combineReducers } from "redux";
+import userReducer from "./userReducer";
+import locationReducer from "./locationReducer";
 
 const rootReducer = combineReducers({
-    locationReducer: locationReducer,
-    userReducer: userReducer,
-    searchReducer: searchReducer
-})
+  locationReducer: locationReducer,
+  userReducer: userReducer,
+});
 
-export default rootReducer
+export default rootReducer;

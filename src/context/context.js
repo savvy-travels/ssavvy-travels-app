@@ -2,11 +2,12 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 const { REACT_APP_GOOGLEMAPS_KEY } = process.env;
 
-const airportsJson = require('../components/airports.json')
+const airportsJson = require("../components/airports.json");
 
 export const Context = createContext(null);
 
 export function LatProvider(props) {
+  //Api State//
   const [latLong, setLatLong] = useState({ lat: undefined, long: undefined });
   const [cities, setCities] = useState([]);
   const [airports, setAirports] = useState([]);
@@ -14,16 +15,24 @@ export function LatProvider(props) {
   const [places, setPlaces] = useState([]);
   const [carriers, setCarriers] = useState([]);
   const [airport, setAirport] = useState("");
+  //Airports JSON list//
   const [allAirports, setAllAirports] = useState([]);
+  //Loading//
   const [loading, setLoading] = useState(true);
+  //Flight Search State//
+  const [budget, setBudget] = useState(0);
+  const [location, setLocation] = useState("");
+  const [departureDate, setDepartureDate] = useState("");
+  const [returnDate, setReturnDate] = useState("");
 
+  //API Calls//
   useEffect(() => {
     axios
       .post(
         `https://www.googleapis.com/geolocation/v1/geolocate?key=${REACT_APP_GOOGLEMAPS_KEY}`
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         const { lat } = res.data.location;
         const { lng } = res.data.location;
         setLatLong({ lat: lat, long: lng });
@@ -32,51 +41,51 @@ export function LatProvider(props) {
         axios
           .get(`/api/city/${lat},${lng}`)
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
             const city = res.data[0];
             setCities(res.data);
             axios
               .get(`/api/landing/airport/${city}`)
               .then((res) => {
-                const { items } = res.data
+                const { items } = res.data;
                 const airports = items.map((airport) => {
                   let airportId = airportsJson.findIndex(
                     (airportJson) => airport.iata === airportJson.code
-                  )
-                  console.log(airportId)
-                return {...airportsJson[airportId]}
-              })
+                  );
+                  // console.log(airportId);
+                  return { ...airportsJson[airportId] };
+                });
 
-              
-              const major = airports.filter(airport => Object.keys(airport).length !== 0)
+                const major = airports.filter(
+                  (airport) => Object.keys(airport).length !== 0
+                );
 
-              console.log(major)
+                // console.log(major);
 
-              const airport = major[0].code
-                setAirport(airport)
-                setAirports(major)
+                const airport = major[0].code;
+                setAirport(airport);
+                setAirports(major);
+                setLocation(airport);
                 axios
-                  .get(
-                    `/api/skyscanner/${airport}/anywhere/anytime/anytime`
-                  )
+                  .get(`/api/skyscanner/${airport}/anywhere/anytime/anytime`)
                   .then((res) => {
-                    console.log(res)
-                    const { Quotes, Places, Carriers } = res.data
-                    setQuotes(Quotes)
-                    setPlaces(Places)
-                    setCarriers(Carriers)
+                    // console.log(res);
+                    const { Quotes, Places, Carriers } = res.data;
+                    setQuotes(Quotes);
+                    setPlaces(Places);
+                    setCarriers(Carriers);
                     axios.get("airports.json").then((res) => {
-                      setLoading(false)
-                      setAllAirports(res.data)
-                    })
+                      setLoading(false);
+                      setAllAirports(res.data);
+                    });
                   })
                   .catch((err) => {
-                    console.log(err)
-                  })
+                    console.log(err);
+                  });
               })
               .catch((err) => {
-                console.log(err)
-              })
+                console.log(err);
+              });
           })
           .catch((err) => {
             console.log(err);
@@ -86,7 +95,7 @@ export function LatProvider(props) {
         console.log(err);
       });
   }, []);
-
+  //Links to Carrier Sites//
   const goToCarrier = (carrier) => {
     switch (carrier) {
       case "Gulf Air":
@@ -197,10 +206,10 @@ export function LatProvider(props) {
 
   //Modal Logic and state//
   const [modal, setModal] = useState(false);
-
   const selectModal = (info) => {
     setModal(!modal);
   };
+
   return (
     <Context.Provider
       value={{
@@ -213,8 +222,19 @@ export function LatProvider(props) {
         airport,
         cities,
         loading,
-        goToCarrier,
+        budget,
+        location,
+        departureDate,
+        returnDate,
         modal,
+        setQuotes,
+        setPlaces,
+        setCarriers,
+        setBudget,
+        setLocation,
+        setDepartureDate,
+        setReturnDate,
+        goToCarrier,
         selectModal,
       }}
     >

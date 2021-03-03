@@ -76,8 +76,7 @@ function Signup(props) {
   const [preferred, setPreferred] = useState("");
   const [myAirportsFiltered, setMyAirportsFiltered] = useState([]);
 
-  const context = useContext(Context);
-
+  const { airports, allAirports } = useContext(Context);
   function handleInputChange(newValue) {
     const inputValue = newValue.replace(/\W/g, "");
     setInput(inputValue);
@@ -125,9 +124,9 @@ function Signup(props) {
   }
 
   ///Airport Filter functions////
-  const myAirports = context.airports.map((airport) => {
+  const myAirports = airports.map((airport) => {
     let airportId = allAirports.findIndex(
-      (ap) => ap.code.toLocaleLowerCase === airport.iata.toLowerCase
+      (ap) => ap.code.toLocaleLowerCase() === airport.code.toLowerCase()
     );
     return { ...airport, ...allAirports[airportId] };
   });
@@ -140,12 +139,12 @@ function Signup(props) {
         }
       });
     });
-  });
+  }, []);
 
   const myOptions = myAirportsFiltered.map((airport) => {
     return {
-      value: airport.iata,
-      label: `${airport.name} ${airport.iata}-${airport.city}`,
+      value: airport.code,
+      label: `${airport.name} ${airport.code}-${airport.city}`,
     };
   });
   //////////
@@ -228,10 +227,4 @@ function Signup(props) {
   );
 }
 
-function mapStateToProps(reduxState) {
-  return {
-    airports: reduxState.searchReducer.airports,
-  };
-}
-
-export default withRouter(connect(mapStateToProps, { loginUser })(Signup));
+export default withRouter(connect(null, { loginUser })(Signup));

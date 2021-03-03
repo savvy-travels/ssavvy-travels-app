@@ -55,9 +55,9 @@ function MiniMap(props) {
                 <h4>{flight.Name}</h4>
               </div>
               <div className="mini-price">
-                <h1>
-                  <h6>From</h6> ${flight.MinPrice}
-                </h1>
+                <h2>
+                  From <strong>${flight.MinPrice}</strong>
+                </h2>
               </div>
             </span>
           </div>
